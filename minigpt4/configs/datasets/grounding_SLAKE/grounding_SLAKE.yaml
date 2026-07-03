@@ -1,0 +1,7 @@
+datasets:
+  grounding_SLAKE:
+    data_type: images
+    build_info:
+      image_path: data/slake/imgs
+      ann_path: data/annotations/grounding_train_SLAKE.json
+      # val_ann_path: data/annotations/grounding_val_SLAKE.json  # ← uncomment after downloading + split

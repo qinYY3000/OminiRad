@@ -1,0 +1,7 @@
+datasets:
+  group_thyroid_us:
+    data_type: images
+    build_info:
+      image_path: data/group_thyroid
+      ann_path: data/annotations/group_thyroid_train.json
+      val_ann_path: data/annotations/group_thyroid_val.json

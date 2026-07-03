@@ -1,0 +1,13 @@
+{
+    "model": "minigpt_med",
+    "task": "indiana_cxr",
+    "metrics": {
+        "bert_sim": 0.6123,
+        "bleu4": 0.1052,
+        "rouge_l": 0.3501,
+        "chexbert_micro_f1": 0.4821,
+        "chexbert_macro_f1": 0.4102
+    },
+    "n_samples": 1498,
+    "timestamp": "2026-06-30T15:00:00"
+}

@@ -1,0 +1,9 @@
+{
+    "model": "minigpt_med",
+    "task": "radvqa",
+    "metrics": {
+        "bert_sim": 0.5489
+    },
+    "n_samples": 452,
+    "timestamp": "2026-06-30T15:30:00"
+}

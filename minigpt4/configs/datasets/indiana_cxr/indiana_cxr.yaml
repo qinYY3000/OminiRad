@@ -1,0 +1,7 @@
+datasets:
+  indiana_cxr:
+    data_type: images
+    build_info:
+      image_path: data/Chest X/images
+      ann_path: data/annotations/indiana_train.json
+      val_ann_path: data/annotations/indiana_val.json

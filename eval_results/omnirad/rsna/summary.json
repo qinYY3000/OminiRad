@@ -1,0 +1,9 @@
+{
+    "model": "omnirad",
+    "task": "rsna",
+    "metrics": {
+        "iou": 0.5891
+    },
+    "n_samples": 244,
+    "timestamp": "2026-06-30T16:20:00"
+}

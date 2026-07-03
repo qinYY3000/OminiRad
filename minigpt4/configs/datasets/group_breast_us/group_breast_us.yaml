@@ -1,0 +1,7 @@
+datasets:
+  group_breast_us:
+    data_type: images
+    build_info:
+      image_path: data/group_breast
+      ann_path: data/annotations/group_breast_train.json
+      val_ann_path: data/annotations/group_breast_val.json

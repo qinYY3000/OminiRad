@@ -1,0 +1,2 @@
+Model,indiana_cxr_bert_sim,indiana_cxr_iou,indiana_cxr_segmentation_dice,rsna_bert_sim,rsna_iou,rsna_segmentation_dice,group_breast_us_bert_sim,group_breast_us_iou,group_breast_us_segmentation_dice
+omnirad,0.6712,-,-,-,0.5891,-,-,-,-

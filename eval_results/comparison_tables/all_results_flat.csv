@@ -1,0 +1,7 @@
+Model,Task,bert_sim,bleu4,rouge_l,chexbert_micro_f1,chexbert_macro_f1,n_samples,iou
+minigpt_med,indiana_cxr,0.6123,0.1052,0.3501,0.4821,0.4102,1498,
+minigpt_med,radvqa,0.5489,,,,,452,
+minigpt_med,rsna,,,,,,244,0.4521
+omnirad,indiana_cxr,0.6712,0.1432,0.4087,0.5643,0.489,1498,
+omnirad,radvqa,0.6234,,,,,452,
+omnirad,rsna,,,,,,244,0.5891

@@ -1,0 +1,3 @@
+Model,indiana_cxr_bert_sim,indiana_cxr_bleu4,indiana_cxr_rouge_l,indiana_cxr_chexbert_micro_f1,indiana_cxr_chexbert_macro_f1
+minigpt_med,0.6123,0.1052,0.3501,0.4821,0.4102
+omnirad,0.6712,0.1432,0.4087,0.5643,0.489

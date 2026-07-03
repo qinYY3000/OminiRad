@@ -1,0 +1,3 @@
+Model,group_breast_us_report,group_breast_us_segmentation,group_breast_us_detection,group_breast_us_refer,group_breast_us_identify,group_thyroid_us_report,group_thyroid_us_segmentation,group_thyroid_us_detection,group_thyroid_us_refer,group_thyroid_us_identify
+minigpt_med,-,-,-,-,-,-,-,-,-,-
+omnirad,-,-,-,-,-,-,-,-,-,-

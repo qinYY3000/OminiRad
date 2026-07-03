@@ -1,0 +1,79 @@
+model:
+  arch: omnirad
+  model_type: pretrain
+
+  # vision encoder
+  vit_model: eva_clip_g
+  image_size: 448
+  drop_path_rate: 0
+  use_grad_checkpoint: False
+  vit_precision: "fp16"
+  freeze_vit: True
+
+  # language model
+  llama_model: "weights/llama-2-7b-chat-hf"
+  prompt_template: '[INST] {} [/INST]'
+  max_txt_len: 512
+  max_context_len: 3800
+  end_sym: "</s>"
+  low_resource: False
+  device_8bit: 0
+
+  # MiniGPT-Med / LoRA defaults
+  chat_template: True
+  lora_r: 64
+  lora_alpha: 16
+  lora_target_modules: ["q_proj", "v_proj"]
+  lora_dropout: 0.05
+  use_grad_checkpoint_llm: False
+  ckpt: ""
+
+  # OmniRad-specific fields
+  expand_vocab: ["<SEG>", "<BOX_S>", "<BOX_M>", "<BOX_L>", "<LOC>"]
+
+  dense_encoder:
+    name: "sam_vit_h"
+    weights: ""
+    freeze: True
+    no_grad_forward: True
+
+  mask_decoder:
+    type: "skeleton"
+    hidden_dim: 512
+    out_dim: 256
+    predict_uncertainty: True
+
+  loc_heads:
+    box_s: {in_dim: 4096, hidden_dim: 512, n_class: 64}
+    box_m: {in_dim: 4096, hidden_dim: 512, n_class: 64}
+    box_l: {in_dim: 4096, hidden_dim: 512, n_class: 64}
+    loc: {in_dim: 4096, hidden_dim: 512, n_anatomy: 30}
+
+  loss_weights:
+    text: 1.0
+    det: 1.0
+    loc: 1.0
+    seg_bce: 2.0
+    seg_dice: 0.5
+    cardinality: 0.5
+    cons_mb: 0.3
+    cons_rd: 0.2
+    cons_gs: 0.2
+    align_anat: 0.5
+    scale_w_s: 3.0
+    scale_w_m: 1.5
+    scale_w_l: 1.0
+
+preprocess:
+  vis_processor:
+    train:
+      name: "blip2_image_train"
+      image_size: 448
+    eval:
+      name: "blip2_image_eval"
+      image_size: 448
+  text_processor:
+    train:
+      name: "blip_caption"
+    eval:
+      name: "blip_caption"

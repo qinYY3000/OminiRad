@@ -1,0 +1,13 @@
+{
+    "model": "omnirad",
+    "task": "indiana_cxr",
+    "metrics": {
+        "bert_sim": 0.6712,
+        "bleu4": 0.1432,
+        "rouge_l": 0.4087,
+        "chexbert_micro_f1": 0.5643,
+        "chexbert_macro_f1": 0.4890
+    },
+    "n_samples": 1498,
+    "timestamp": "2026-06-30T16:00:00"
+}

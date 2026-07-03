@@ -1,0 +1,9 @@
+{
+    "model": "minigpt_med",
+    "task": "rsna",
+    "metrics": {
+        "iou": 0.4521
+    },
+    "n_samples": 244,
+    "timestamp": "2026-06-30T15:45:00"
+}

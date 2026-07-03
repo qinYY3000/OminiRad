@@ -1,0 +1,7 @@
+datasets:
+  radvqa:
+    data_type: images
+    build_info:
+      image_path: data/radvqa/imgs
+      ann_path: data/annotations/vqa_train.json
+      val_ann_path: data/annotations/vqa_val.json
