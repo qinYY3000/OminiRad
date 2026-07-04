@@ -4,7 +4,7 @@ Two modes:
 
 1. **Patient-level split** (default): groups records by ``patient_id`` so that
    all frames of the same patient stay together.  Used for self-owned datasets
-   (Indiana, Group-Breast/Thyroid US).
+   (Indiana, Group-Breast US, Kvasir).
 
 2. **Random split** (``--no-patient-id``): simple random shuffle.  Used for
    public datasets (VQA-RAD, SLAKE) that don't have a ``patient_id`` field.
@@ -49,7 +49,7 @@ PUBLIC_TRAIN_JSONS = [
 SELF_OWNED_TRAIN_JSONS = [
     "data/annotations/indiana_train.json",
     "data/annotations/group_breast_train.json",
-    "data/annotations/group_thyroid_train.json",
+    "data/annotations/kvasir_train.json",
 ]
 
 
@@ -138,6 +138,8 @@ def main():
     p.add_argument("--seed", type=int, default=DEFAULT_SEED)
     p.add_argument("--patient-id-field", type=str, default="patient_id",
                    help="Field name for patient-level grouping (default: patient_id).")
+    p.add_argument("--random", action="store_true",
+                   help="Use random split (ignore patient_id_field).")
     args = p.parse_args()
 
     if not args.ann and not args.all_public and not args.all_self_owned:
@@ -147,13 +149,13 @@ def main():
     targets: list[tuple[str, str | None]] = []
     if args.all_self_owned:
         for t in SELF_OWNED_TRAIN_JSONS:
-            targets.append((t, args.patient_id_field))
+            targets.append((t, args.patient_id_field if not args.random else None))
     if args.all_public:
         for t in PUBLIC_TRAIN_JSONS:
             targets.append((t, None))
     if args.ann:
-        # If --ann is passed, auto-detect patient_id presence.
-        targets.append((args.ann, args.patient_id_field))
+        pid_field = None if args.random else args.patient_id_field
+        targets.append((args.ann, pid_field))
 
     print(f"Splitting val (fraction={args.val_fraction}, seed={args.seed}):")
     for path, pid_field in targets:

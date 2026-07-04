@@ -12,11 +12,11 @@ OmniRad is a unified multimodal medical framework that extends LLM-based vision-
 - **SAR-Loc** — Scale-Adaptive, Anatomy-Referenced Localization
 - **Cross-task Consistency** — Geometric and semantic regularization across tasks
 
-OmniRad supports **7 medical tasks** in a single model: report generation, VQA, detection, grounding, referring, identification, and segmentation — across **3 modalities** (X-ray, MRI/CT in SLAKE, ultrasound).
+OmniRad supports **7 medical tasks** in a single model: report generation, VQA, detection, grounding, referring, identification, and segmentation — across **4 modalities** (X-ray, MRI/CT, ultrasound, endoscopy).
 
 > **Datasets used in this project (6):**
-> Indiana CXR (Open-i), VQA-RAD, SLAKE VQA, SLAKE Grounding, Group-Breast US, Group-Thyroid US.
-> MIMIC-CXR and NLST were removed (replaced by Indiana CXR + Group-Breast/Thyroid US).
+> Indiana CXR (Open-i), VQA-RAD, SLAKE VQA, SLAKE Grounding, Group-Breast US, Kvasir (colonoscopy polyps).
+> MIMIC-CXR and NLST were removed (replaced by Indiana CXR + Group-Breast US + Kvasir).
 
 ---
 
@@ -135,7 +135,7 @@ OmniRad/
 ### Datasets in use
 
 The training mixture and evaluation pipeline cover **6 datasets** spanning
-**3 modalities** (chest X-ray, mixed X-ray/CT/MRI, ultrasound) and **7
+**4 modalities** (chest X-ray, mixed X-ray/CT/MRI, ultrasound, endoscopy) and **7
 task types**. Each dataset's exact task coverage is listed below:
 
 | Dataset | Modality | Tasks (task tag) | Train / Val / Test | Source |
@@ -146,7 +146,7 @@ task types**. Each dataset's exact task coverage is listed below:
 | **SLAKE Grounding**      | X-ray / CT / MRI | Grounded caption `[grounding]` | 440 / 23 / 116 | same as above |
 | **RSNA**                 | Chest X-ray | Pneumonia detection `[detection]` | 9,077 / 478 / 244 | [RSNA 2018](https://www.rsna.org/rsnai/ai-image-challenge/rsna-pneumonia-detection-challenge-2018) |
 | **Group-Breast US**      | Ultrasound | Segmentation • Detection • Report • Refer • Identify | ~4,875 / ~243 / ~488 | Internal |
-| **Group-Thyroid US**     | Ultrasound | Segmentation • Detection • Report • Refer • Identify | ~8,465 / ~423 / ~846 | Internal |
+| **Kvasir**              | Endoscopy (colonoscopy) | Segmentation • Detection • Refer • Identify | ~760 / ~40 / ~200 | [Kvasir-SEG](https://datasets.simula.no/kvasir-seg/) |
 
 > Every dataset ships `train/val/test` three-way splits.  The **val** split feeds best-checkpoint selection during training (`valid_splits: ["val"]`).  Public datasets use a random 95/5 split from their original train set; self-owned datasets use a patient-level 76/4/20 split.
 
@@ -162,13 +162,13 @@ task types**. Each dataset's exact task coverage is listed below:
 
 | Task tag | Datasets contributing supervision |
 |----------|-----------------------------------|
-| `[report]` (report generation) | Indiana CXR, Group-Breast US, Group-Thyroid US |
+| `[report]` (report generation) | Indiana CXR, Group-Breast US |
 | `[vqa]` (visual question answering) | VQA-RAD, SLAKE VQA |
 | `[grounding]` (grounded caption with bbox) | SLAKE Grounding |
-| `[detection]` (bbox prediction, `<BOX_S/M/L>`) | RSNA, Group-Breast US, Group-Thyroid US |
-| `[refer]` (NL query → location, `<LOC>`) | Group-Breast US, Group-Thyroid US |
-| `[identify]` (location → object label) | Group-Breast US, Group-Thyroid US |
-| `[segmentation]` (pixel mask, `<SEG>`) | Group-Breast US, Group-Thyroid US |
+| `[detection]` (bbox prediction, `<BOX_S/M/L>`) | RSNA, Group-Breast US, Kvasir |
+| `[refer]` (NL query → location, `<LOC>`) | Group-Breast US, Kvasir |
+| `[identify]` (location → object label) | Group-Breast US, Kvasir |
+| `[segmentation]` (pixel mask, `<SEG>`) | Group-Breast US, Kvasir |
 
 ### Task Prompt Templates
 
@@ -182,13 +182,13 @@ The active task prompts in this repository are:
 
 | Task | Current prompt template(s) | Main dataset(s) | Expected output style |
 |------|----------------------------|-----------------|-----------------------|
-| Report | `[report] Describe this ultrasound image in detail.` | Group-Breast US, Group-Thyroid US | free-text report |
+| Report | `[report] Describe this ultrasound image in detail.` | Group-Breast US | free-text report |
 | VQA | `[vqa] {question}` | VQA-RAD, SLAKE VQA | short free-text answer |
 | Grounding | `[grounding] please describe this image in details` / `[grounding] describe this image as detailed as possible` / `[grounding] summarize this image in details` / `[grounding] give a thorough description of what you see in this image` | SLAKE Grounding | grounded caption |
-| Detection | `[detection] pneumonia` (RSNA) / `[detection] Locate all visible lesions or nodules.` (ultrasound) | RSNA, Group-Breast US, Group-Thyroid US | `<BOX_S>`, `<BOX_M>`, `<BOX_L>` tokens or bbox text |
-| Refer | `[refer] Where is the lesion or nodule located?` | Group-Breast US, Group-Thyroid US | location token / bbox answer |
-| Identify | `[identify] what is at location {bbox}` / related paraphrases | Group-Breast US, Group-Thyroid US | class label plus optional bbox / region |
-| Segmentation | `[segmentation] Segment all visible lesions or nodules.` | Group-Breast US, Group-Thyroid US | `<SEG>` token sequence |
+| Detection | `[detection] pneumonia` (RSNA) / `[detection] Locate all visible lesions or nodules.` (US) / `[detection] Locate all visible polyps.` (Kvasir) | RSNA, Group-Breast US, Kvasir | `<BOX_S>`, `<BOX_M>`, `<BOX_L>` tokens or bbox text |
+| Refer | `[refer] Where is the lesion or nodule located?` / `[refer] Where is the polyp located?` | Group-Breast US, Kvasir | location token / bbox answer |
+| Identify | `[identify] what is at location {bbox}` / related paraphrases | Group-Breast US, Kvasir | class label plus optional bbox / region |
+| Segmentation | `[segmentation] Segment all visible lesions or nodules.` / `[segmentation] Segment all visible polyps.` | Group-Breast US, Kvasir | `<SEG>` token sequence |
 
 Design rule:
 - **Task identity comes from the task tag**, not from the lesion word itself.
@@ -224,24 +224,26 @@ The converter:
 
 ### Private Ultrasound Data (Group Internal)
 
-Place private US data under `data/group_breast/` and `data/group_thyroid/`,
+Place private US data under `data/group_breast/` and Kvasir images under `data/kvasir/imgs/`,
 then run the conversion script:
 
 ```bash
-python tools/build_unified_dataset.py --datasets group_breast group_thyroid
+python tools/build_unified_dataset.py --datasets group_breast kvasir
 ```
 
 This generates:
 - `data/annotations/group_breast_{train,test}.json`
-- `data/annotations/group_thyroid_{train,test}.json`
+- `data/annotations/kvasir_{train,test}.json`
 
 Each ultrasound frame is supervised on **5 tasks**: segmentation, detection,
-report generation, referring, identification.  Tasks are sampled at random
+report generation, referring, identification.  Kvasir frames are supervised on
+**4 tasks** (no segmentation / report).  Tasks are sampled at random
 each `__getitem__`; the loader provides instance masks for segmentation and
-box-level supervision for detection.  Patient-level **80 / 20** split is used
+box-level supervision for detection.  Patient-level **76 / 4 / 20** split is used
 (same convention as Indiana CXR).
 
-> Private datasets are for internal use only and are not released with the paper.
+> Private Group-Breast US dataset is for internal use only and is not released with the paper.
+> Kvasir-SEG is a public dataset — images must be downloaded separately from [Simula](https://datasets.simula.no/kvasir-seg/).
 
 ---
 
@@ -251,7 +253,7 @@ box-level supervision for detection.  Patient-level **80 / 20** split is used
 
 ```bash
 # 1. Activate environment
-conda activate llama
+conda activate miniGPT-Med
 
 # 2. (Optional) Login to Weights & Biases
 wandb login
@@ -286,7 +288,7 @@ The default configuration (`train_configs/omnirad_finetune.yaml`) includes:
 | `slake_vqa` | 10 | Larger English VQA corpus |
 | `grounding_SLAKE` | 10 | Grounded caption |
 | `group_breast_us` | 17 | Covers 5 tasks |
-| `group_thyroid_us` | 23 | Covers 5 tasks; multi-instance K≥2 emphasis |
+| `kvasir` | 23 | Covers 5 tasks; multi-polyp K≥2 emphasis |
 
 ### WandB Logging
 
@@ -332,10 +334,15 @@ python eval_scripts/model_evaluation.py \
     --cfg-path eval_configs/omnirad_evaluation.yaml \
     --dataset indiana_cxr
 
-# Evaluate the private ultrasound datasets — runs all 5 tasks per dataset
+# Evaluate the private ultrasound dataset — runs all 5 tasks
 python eval_scripts/model_evaluation.py \
     --cfg-path eval_configs/omnirad_evaluation.yaml \
-    --dataset group_breast_us,group_thyroid_us
+    --dataset group_breast_us
+
+# Evaluate the Kvasir polyp dataset — runs 3 tasks (det/refer/identify)
+python eval_scripts/model_evaluation.py \
+    --cfg-path eval_configs/omnirad_evaluation.yaml \
+    --dataset kvasir
 ```
 
 #### Baseline models (comparison)
@@ -405,7 +412,7 @@ See `eval_results/README.md` for the full directory structure.
 | RSNA | Detection `[detection]` (pneumonia) | 9,077 | 478 | 244 |
 | SLAKE Grounding | Grounded caption `[grounding]` | 440 | 23 | 116 |
 | Group-Breast US | Seg / Det / Report / Refer / Identify | ~4,875 | ~243 | ~488 |
-| Group-Thyroid US | Seg / Det / Report / Refer / Identify | ~8,465 | ~423 | ~846 |
+| Kvasir | Seg / Det / Refer / Identify | ~760 | ~40 | ~200 |
 
 For ultrasound, the segmentation task triggers OmniRad's mask-decoder hook (`generate(..., return_masks=True)`); predicted masks are written to `experiments/eval/<dataset>_segmentation_pred_masks/<image_id>_seg<k>.png` and Dice is computed against the ground-truth instance masks listed in the unified-schema JSON.
 
@@ -496,22 +503,22 @@ python demo_v2.py --cfg-path eval_configs/omnirad_evaluation.yaml --gpu-id 0
 | Detection (IoU) | RSNA (zero-shot) | TBD | TBD |
 | Grounding (IoU) | SLAKE | TBD | TBD |
 
-### Private Ultrasound Datasets
+### Private Ultrasound & Endoscopy Datasets
 
-Each ultrasound dataset is supervised on **5 tasks**: Segmentation / Detection / Report Generation / Referring / Identification.
+Group-Breast US is supervised on **5 tasks**: Segmentation / Detection / Report Generation / Referring / Identification.
+Kvasir is supervised on **5 tasks**: Segmentation / Detection / Referring / Identification / VQA.
 
 | Task | Dataset | MiniGPT-Med | OmniRad |
 |------|---------|-------------|---------|
 | Segmentation (Dice) | Group-Breast US | N/A | TBD |
-| Segmentation (Dice) | Group-Thyroid US | N/A | TBD |
+| Segmentation (Dice) | Kvasir | N/A | TBD |
 | Detection (IoU) | Group-Breast US | N/A | TBD |
-| Detection (IoU) | Group-Thyroid US | N/A | TBD |
+| Detection (IoU) | Kvasir | N/A | TBD |
 | Report (BERT-Sim) | Group-Breast US | N/A | TBD |
-| Report (BERT-Sim) | Group-Thyroid US | N/A | TBD |
 | Refer (IoU) | Group-Breast US | N/A | TBD |
-| Refer (IoU) | Group-Thyroid US | N/A | TBD |
+| Refer (IoU) | Kvasir | N/A | TBD |
 | Identify (Acc) | Group-Breast US | N/A | TBD |
-| Identify (Acc) | Group-Thyroid US | N/A | TBD |
+| Identify (Acc) | Kvasir | N/A | TBD |
 
 ---
 
@@ -564,6 +571,7 @@ Data sources used in this project:
 - [VQA-RAD](https://osf.io/89kps/)
 - [SLAKE](https://www.med-vqa.com/slake/)
 - [RSNA Pneumonia Detection Challenge](https://www.rsna.org/rsnai/ai-image-challenge/rsna-pneumonia-detection-challenge-2018)
+- [Kvasir-SEG](https://datasets.simula.no/kvasir-seg/) — colonoscopy polyp dataset with bounding-box annotations
 
 ---
 

@@ -14,9 +14,11 @@ model:
   expand_vocab: ["<SEG>", "<BOX_S>", "<BOX_M>", "<BOX_L>", "<LOC>"]
 
   dense_encoder:
-    name: "sam_vit_h"
-    weights: "weights/sam_vit_h_4b8939.pth"
+    name: "medsam_vit_b"      # default: MedSAM-finetuned SAM ViT-B
+    weights: "weights/medsam_vit_b.pth"  # baseline fallback: weights/sam_vit_b_01ec64.pth
+
     freeze: True
+
     no_grad_forward: True
 
   mask_decoder:
@@ -89,7 +91,6 @@ evaluation_datasets:
     img_path: data/group_breast
     anatomy: breast
     tasks: [report, segmentation, detection, refer, identify]
-    # Defaults (used unless overridden in tasks_cfg below)
     batch_size: 4
     max_new_tokens: 200
     tasks_cfg:
@@ -109,22 +110,20 @@ evaluation_datasets:
         max_new_tokens: 60
         batch_size: 4
 
-  group_thyroid_us:
-    eval_file_path: data/annotations/group_thyroid_test.json
-    img_path: data/group_thyroid
-    anatomy: thyroid
-    tasks: [report, segmentation, detection, refer, identify]
+  # ---------- Endoscopy polyp dataset — multi-task ----------
+  kvasir:
+    eval_file_path: data/annotations/kvasir_test.json
+    img_path: data/kvasir
+    anatomy: colon
+    tasks: [segmentation, detection, refer, identify]
     batch_size: 4
-    max_new_tokens: 200
+    max_new_tokens: 120
     tasks_cfg:
-      report:
-        max_new_tokens: 300
-        batch_size: 4
       segmentation:
         max_new_tokens: 80
         batch_size: 4
       detection:
-        max_new_tokens: 120     # thyroid frames may have K>=2 → longer output
+        max_new_tokens: 120     # K>=2 polyp cases → longer output
         batch_size: 4
       refer:
         max_new_tokens: 80

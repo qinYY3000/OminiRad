@@ -11,7 +11,8 @@ from minigpt4.datasets.datasets.nlst_dataset import NlstDataset,ReferNLSTDataset
 from minigpt4.datasets.datasets.indiana_dataset import IndianaCXRDataset
 
 from minigpt4.datasets.datasets.SLAKE_dataset import GroundingSLAKEDatase, SlakeVQADataset
-from minigpt4.datasets.datasets.unified_us_dataset import UnifiedUSDataset, GroupBreastUSDataset, GroupThyroidUSDataset
+from minigpt4.datasets.datasets.unified_us_dataset import UnifiedUSDataset, GroupBreastUSDataset
+from minigpt4.datasets.datasets.kvasir_dataset import KvasirDataset
 
 
 def _resolve_path(path: str) -> str:
@@ -187,11 +188,11 @@ class GroupBreastUSBuilder(_PathResolvingBuilder):
     }
 
 
-@registry.register_builder("group_thyroid_us")
-class GroupThyroidUSBuilder(_PathResolvingBuilder):
-    train_dataset_cls = GroupThyroidUSDataset
+@registry.register_builder("kvasir")
+class KvasirBuilder(_PathResolvingBuilder):
+    train_dataset_cls = KvasirDataset
     DATASET_CONFIG_DICT = {
-        "default": "configs/datasets/group_thyroid_us/group_thyroid_us.yaml",
+        "default": "configs/datasets/kvasir/kvasir.yaml",
     }
 
 

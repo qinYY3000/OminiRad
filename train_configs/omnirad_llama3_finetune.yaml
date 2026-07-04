@@ -94,7 +94,7 @@ model:
 #   - SLAKE Grounding          : grounded caption
 #   - SLAKE VQA                : visual question answering
 #   - Group-Breast US (5 tasks): seg / det / report / refer / identify
-#   - Group-Thyroid US (5 tasks): same as above; provides natural K>=2 cases
+#   - Kvasir (5 tasks)          : seg / det / refer / identify / vqa (endoscopy)
 #
 # Disabled:
 #   - MIMIC-CXR (removed in this run)
@@ -167,10 +167,10 @@ datasets:
       train:
         name: "blip_caption"
 
-  # Group-Thyroid Ultrasound — image + report + multi-instance lesion mask
-  # Tasks (5): segmentation / detection / report / refer / identify
-  # Provides natural K>=2 supervision for AMU-Seg Innovation I
-  group_thyroid_us:
+  # Kvasir-SEG colonoscopy polyps — mask + bbox endoscopy dataset
+  # Tasks (5): segmentation / detection / refer / identify / vqa
+  # Provides natural multi-polyp (K>=2) supervision for AMU-Seg Innovation I
+  kvasir:
     batch_size: 2
     sample_ratio: 23
     vis_processor:

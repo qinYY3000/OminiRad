@@ -54,8 +54,8 @@ TABLES = {
         "metric_labels": {"iou": "IoU"},
     },
     "table4_ultrasound_multitask": {
-        "title": "Table 4: Ultrasound Multi-task (Group-Breast / Group-Thyroid US)",
-        "datasets": ["group_breast_us", "group_thyroid_us"],
+        "title": "Table 4: Ultrasound & Endoscopy Multi-task (Group-Breast US / Kvasir)",
+        "datasets": ["group_breast_us", "kvasir"],
         "metrics": [
             "segmentation_dice", "detection_iou", "report_bert_sim",
             "refer_iou", "identify_accuracy",
@@ -177,15 +177,16 @@ def build_table(table_config: dict, all_results: dict) -> pd.DataFrame:
 
 
 def build_ultrasound_table(all_results: dict) -> pd.DataFrame:
-    """Special table for ultrasound multi-task results.
+    """Special table for ultrasound + endoscopy multi-task results.
 
     Ultrasound models have sub-task summaries stored as:
       group_breast_us/report/summary.json
       group_breast_us/segmentation/summary.json
       ...
+    Kvasir has only detection/refer/identify.
     """
     rows = []
-    us_datasets = ["group_breast_us", "group_thyroid_us"]
+    us_datasets = ["group_breast_us", "kvasir"]
     sub_tasks = ["report", "segmentation", "detection", "refer", "identify"]
     metric_map = {
         "report": "bert_sim",

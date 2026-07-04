@@ -20,9 +20,9 @@ model:
   max_txt_len: 512                # Down from 1024 (CXR reports avg ~250 tokens)
   image_size: 448                 # Same as MiniGPT-Med
   end_sym: "</s>"
-  llama_model: "./weights/llama-2-7b-chat-hf"
+  llama_model: "weights/llama-2-7b-chat-hf"
   # Initialize from MiniGPT-Med's released checkpoint (stage-3 of MiniGPT-v2 + medical FT)
-  ckpt: "./weights/minigpt_med_pretrained.pth"
+  ckpt: "weights/minigpt_med_pretrained.pth"
 
   # Memory-saving switches (critical for 3090's 24G)
   use_grad_checkpoint:      True   # EVA-ViT-G gradient checkpoint
@@ -46,9 +46,11 @@ model:
 
   # Second vision encoder for dense mask decoding (innovation.md §3.3.3)
   dense_encoder:
-    name: "sam_vit_h"             # alt: "medsam_vit_b" (smaller, ~1 GB less VRAM)
-    weights: "./weights/sam_vit_h_4b8939.pth"
-    freeze: True                  # SAM frozen (LISA-confirmed best practice)
+    name: "medsam_vit_b"         # default: MedSAM-finetuned SAM ViT-B for medical segmentation
+    weights: "weights/medsam_vit_b.pth"  # fallback baseline: weights/sam_vit_b_01ec64.pth
+
+    freeze: True                  # keep MedSAM/SAM frozen at first; fine-tune only if ablation demands it
+
     no_grad_forward: True         # ★ wrap forward in torch.no_grad() to skip activation graph
 
   # Mask decoder (innovation.md §3.3 AMU-Seg)
@@ -97,7 +99,7 @@ model:
 #   - SLAKE Grounding          : grounded caption
 #   - RSNA                     : detection (pneumonia)
 #   - Group-Breast US (5 tasks): seg / det / report / refer / identify
-#   - Group-Thyroid US (5 tasks): same as above; provides natural K>=2 cases
+#   - Kvasir (5 tasks)         : seg / det / refer / identify / vqa (endoscopy)
 #
 # Disabled:
 #   - MIMIC-CXR (removed in this run)
@@ -181,18 +183,20 @@ datasets:
       train:
         name: "blip_caption"
 
-  # Group-Thyroid Ultrasound — image + report + multi-instance lesion mask
-  # Tasks (5): segmentation / detection / report / refer / identify
-#  group_thyroid_us:
-#    batch_size: 2
-#    sample_ratio: 22
-#    vis_processor:
-#      train:
-#        name: "blip2_image_train"
-#        image_size: 448
-#    text_processor:
-#      train:
-#        name: "blip_caption"
+  # Kvasir-SEG colonoscopy polyps — mask + bbox endoscopy dataset
+  # Tasks (5): segmentation / detection / refer / identify / vqa
+  # No reports → no report generation task.
+  # Provides natural multi-polyp (K>=2) cases for AMU-Seg Innovation I supervision.
+  kvasir:
+    batch_size: 2
+    sample_ratio: 22
+    vis_processor:
+      train:
+        name: "blip2_image_train"
+        image_size: 448
+    text_processor:
+      train:
+        name: "blip_caption"
 
 
 # ============================================================================
@@ -233,6 +237,7 @@ run:
   train_splits: ["train"]
   valid_splits: ["val"]               # ← enabled: each dataset's build_info.val_ann_path feeds the val split
   max_keep_ckpts: 3                   # ← P2-17: 最多保留 3 个 checkpoint，旧的自动删除
+  iters_per_epoch: null               # ← null = 自动从 dataloader 长度推导
 
   # Logging
   wandb_log: True

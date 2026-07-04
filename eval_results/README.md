@@ -31,9 +31,7 @@ eval_results/
 │   │   ├── detection/
 │   │   ├── refer/
 │   │   └── identify/
-│   └── group_thyroid_us/             ← Task: Group-Thyroid US (5 sub-tasks)
-│       ├── report/
-│       ├── segmentation/
+│   └── kvasir/                       ← Task: Kvasir polyp (3 sub-tasks)
 │       ├── detection/
 │       ├── refer/
 │       └── identify/
@@ -116,7 +114,7 @@ For ultrasound multi-task:
 ```bash
 python eval_scripts/model_evaluation.py \
     --cfg-path eval_configs/omnirad_evaluation.yaml \
-    --dataset indiana_cxr,radvqa,slake_vqa,rsna,SLAKE,group_breast_us,group_thyroid_us
+    --dataset indiana_cxr,radvqa,slake_vqa,rsna,SLAKE,group_breast_us,kvasir
 ```
 
 ### Baseline models

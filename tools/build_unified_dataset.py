@@ -6,7 +6,10 @@ Usage examples
 python tools/build_unified_dataset.py --all
 
 # Convert only the private US datasets
-python tools/build_unified_dataset.py --datasets group_breast group_thyroid
+python tools/build_unified_dataset.py --datasets group_breast
+
+# Convert the Kvasir polyp dataset
+python tools/build_unified_dataset.py --datasets kvasir
 
 # Convert the Indiana University Open-i Chest-Xray dataset
 python tools/build_unified_dataset.py --datasets indiana
@@ -29,7 +32,7 @@ from pathlib import Path
 # Allow `python tools/build_unified_dataset.py` to import tools.*
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from tools.converters import group_us, public, indiana   # noqa: E402
+from tools.converters import group_us, public, indiana, kvasir  # noqa: E402
 
 
 # -----------------------------------------------------------------------------
@@ -39,7 +42,7 @@ from tools.converters import group_us, public, indiana   # noqa: E402
 # -----------------------------------------------------------------------------
 ALL_DATASETS = [
     "radvqa", "slake", "rsna",
-    "group_breast", "group_thyroid",
+    "group_breast", "kvasir",
     "indiana",
 ]
 
@@ -69,7 +72,9 @@ def parse_args():
 
     # Root paths for private US datasets
     p.add_argument("--breast-root",  type=str, default="data/group_breast")
-    p.add_argument("--thyroid-root", type=str, default="data/group_thyroid")
+
+    # Root path for the Kvasir polyp dataset
+    p.add_argument("--kvasir-raw", type=str, default="data/kvasir/kavsir_bboxes.json")
 
     # Root path for the Indiana University Open-i dataset
     p.add_argument("--indiana-root", type=str, default="data/Chest X")
@@ -95,8 +100,8 @@ def maybe_run(name: str, args, todo: set):
             public.convert_rsna(args.rsna_src, args.rsna_img_root)
         elif name == "group_breast":
             group_us.convert_breast(args.breast_root)
-        elif name == "group_thyroid":
-            group_us.convert_thyroid(args.thyroid_root)
+        elif name == "kvasir":
+            kvasir.convert(args.kvasir_raw)
         elif name == "indiana":
             indiana.convert_indiana(args.indiana_root)
         else:

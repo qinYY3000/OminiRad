@@ -5,7 +5,7 @@ Example usage (single GPU)::
     torchrun --master-port 8888 --nproc_per_node 1 \\
         eval_scripts/model_evaluation.py \\
         --cfg-path eval_configs/omnirad_evaluation.yaml \\
-        --dataset indiana_cxr,radvqa,slake_vqa,rsna,SLAKE,group_breast_us,group_thyroid_us
+        --dataset indiana_cxr,radvqa,slake_vqa,rsna,SLAKE,group_breast_us,kvasir
 """
 
 import sys
@@ -29,6 +29,7 @@ from minigpt4.datasets.datasets.radvqa_dataset import evalRadVQADataset
 from minigpt4.datasets.datasets.rsna_dataset import evalRSNADataset
 from minigpt4.datasets.datasets.SLAKE_dataset import evalSLAKEDataset
 from minigpt4.datasets.datasets.unified_us_dataset import evalGroupUSDataset
+from minigpt4.datasets.datasets.kvasir_dataset import evalKvasirDataset
 from minigpt4.datasets.datasets.indiana_dataset import evalIndianaCXRDataset
 # NLST eval is disabled at the YAML level (raw images unavailable in this run).
 # Re-enable by uncommenting the relevant block in eval_configs/omnirad_evaluation.yaml
@@ -210,7 +211,7 @@ def process_SLAKE_dataset():
 
 
 # ----------------------------------------------------------------------------
-# Group-Breast US / Group-Thyroid US — multi-task evaluation
+# Group-Breast US / Kvasir — multi-task evaluation
 # ----------------------------------------------------------------------------
 def _us_collate(batch):
     """Custom collate that keeps the variable-length / non-tensor ``ground_truth``
@@ -242,13 +243,13 @@ def _save_pred_masks(masks, out_dir: str, image_id: str,
 
 def process_group_us_dataset():
     """Run all 5 tasks (report / segmentation / detection / refer / identify)
-    on a Group-Breast or Group-Thyroid US test split.
+    on a Group-Breast US test split.
 
     Per-dataset YAML must contain:
 
         eval_file_path : path to the unified-schema test JSON
         img_path       : root directory used for path resolution
-        anatomy        : "breast" | "thyroid"  (drives prompt fall-backs)
+        anatomy        : "breast"  (drives prompt fall-backs)
         tasks          : list of task names to run (default: all five)
         batch_size, max_new_tokens (per-task overrides under ``tasks_cfg`` allowed)
     """
@@ -431,6 +432,83 @@ def _us_bbox_iou(gts, preds, csv_path, dataset_name):
     return avg
 
 
+# ---------------------------------------------------------------------------
+# Kvasir — polyp bbox-only evaluation (detection / refer / identify)
+# ---------------------------------------------------------------------------
+def process_kvasir_dataset():
+    """Run multi-task evaluation on Kvasir colonoscopy polyp test split.
+
+    Supported tasks: segmentation, detection, refer, identify.
+    """
+    cfg_block = cfg.evaluation_datasets_cfg[dataset]
+    eval_file_path = cfg_block["eval_file_path"]
+    img_path = cfg_block["img_path"]
+    tasks_to_run = cfg_block.get("tasks", ["detection", "refer", "identify"])
+    default_bs = cfg_block.get("batch_size", 4)
+    default_mnt = cfg_block.get("max_new_tokens", 120)
+
+    with open(eval_file_path, "r") as f:
+        ann = json.load(f)
+    if isinstance(ann, dict):
+        ann = ann.get("annotations", ann.get("data", []))
+
+    summary = {}
+    for task in tasks_to_run:
+        print(f"\n========== [{dataset}] task = {task} ==========")
+        task_cfg = (cfg_block.get("tasks_cfg") or {}).get(task, {}) or {}
+        batch_size = task_cfg.get("batch_size", default_bs)
+        max_new_tokens = task_cfg.get("max_new_tokens", default_mnt)
+
+        eval_set = evalKvasirDataset(
+            loaded_data=ann,
+            vis_processor=vis_processor,
+            root_path=img_path,
+            task=task,
+        )
+        loader = DataLoader(eval_set, batch_size=batch_size, shuffle=False,
+                            collate_fn=_us_collate)
+
+        predictions: list = []
+        gts_compact: list = []
+
+        for images, questions, img_ids, gts in tqdm(loader):
+            texts = prepare_texts(list(questions), conv_temp)
+            gen_kwargs = {"max_new_tokens": max_new_tokens, "do_sample": False}
+            outputs = model.generate(images, texts, **gen_kwargs)
+
+            for out, iid, q, gt in zip(outputs, img_ids, questions, gts):
+                ans_text = out.get("text", "") if isinstance(out, dict) else str(out)
+                pred_record = {"image_id": iid, "answer": ans_text, "question": q}
+                predictions.append(pred_record)
+                gts_compact.append({"image_id": iid, "answer": gt})
+
+        pred_path = os.path.join(save_path, f"{dataset}_{task}_inference_result.json")
+        with open(pred_path, "w") as f:
+            json.dump(predictions, f)
+        gt_path = os.path.join(save_path, f"{dataset}_{task}_gt.json")
+        with open(gt_path, "w") as f:
+            json.dump(gts_compact, f)
+
+        csv_path = os.path.join(save_path, f"{dataset}_{task}_metric.csv")
+
+        if task in ("detection", "refer"):
+            score = _us_bbox_iou(gts_compact, predictions, csv_path,
+                                 dataset_name=f"{dataset}_{task}")
+            summary[task] = score
+            print(f"[{dataset}/{task}] avg-IoU = {score:.4f}")
+        elif task == "identify":
+            score = identify_accuracy(gt_path, pred_path,
+                                      f"{dataset}_{task}", csv_path)
+            summary[task] = score
+            print(f"[{dataset}/{task}] accuracy = {score:.4f}")
+        else:
+            print(f"  [warn] unknown task '{task}' — skipped.")
+
+    print(f"\n========== [{dataset}] summary ==========")
+    for k, v in summary.items():
+        print(f"  {k:<14}: {v}")
+
+
 ############################################################################
 # Dispatch
 ############################################################################
@@ -447,8 +525,11 @@ for dataset in args.dataset:
     elif dataset == 'SLAKE':
         process_SLAKE_dataset()
 
-    elif dataset in ('group_breast_us', 'group_thyroid_us'):
+    elif dataset == 'group_breast_us':
         process_group_us_dataset()
+
+    elif dataset == 'kvasir':
+        process_kvasir_dataset()
 
     else:
         print(f"Dataset '{dataset}' is not supported.")

@@ -171,6 +171,9 @@ def derive_vqa(report: str | None,
     elif anatomy == "thyroid":
         qa.append({"question": "What imaging modality is this?",
                    "answer": "thyroid ultrasound"})
+    elif anatomy == "colon":
+        qa.append({"question": "What imaging modality is this?",
+                   "answer": "colonoscopy"})
 
     # Side question (left/right) — derivable from anatomy_region
     if K >= 1:
