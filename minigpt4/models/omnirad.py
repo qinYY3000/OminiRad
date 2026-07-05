@@ -87,13 +87,27 @@ class SamDenseEncoder(nn.Module):
 
 
         self.image_encoder = sam.image_encoder
+        # Free memory: delete unused SAM components we don't need
+        del sam.mask_decoder
+        del sam.prompt_encoder
+        del sam
         self.pixel_mean = nn.Parameter(
             torch.tensor([123.675, 116.28, 103.53]).view(1, 3, 1, 1), requires_grad=False
         )
         self.pixel_std = nn.Parameter(
             torch.tensor([58.395, 57.12, 57.375]).view(1, 3, 1, 1), requires_grad=False
         )
-        self.target_size = 1024
+        self.target_size = 512   # Reduced from 1024 to save VRAM (relative pos bias is O(n²))
+        # Interpolate positional embedding to match new target_size
+        if hasattr(self.image_encoder, 'pos_embed') and self.image_encoder.pos_embed is not None:
+            old_grid = int(self.image_encoder.pos_embed.shape[1] ** 0.5)  # 64
+            new_grid = self.target_size // 16  # 512/16 = 32
+            if old_grid != new_grid:
+                pe = self.image_encoder.pos_embed  # (1, H, W, C)
+                pe = pe.permute(0, 3, 1, 2)  # (1, C, H, W)
+                pe = F.interpolate(pe, size=(new_grid, new_grid), mode="bicubic", align_corners=False)
+                pe = pe.permute(0, 2, 3, 1)  # (1, H, W, C)
+                self.image_encoder.pos_embed = nn.Parameter(pe, requires_grad=False)
 
         if freeze:
             for param in self.image_encoder.parameters():
@@ -147,12 +161,14 @@ class SamMaskDecoder(nn.Module):
 
         self.mask_decoder = self._sam.mask_decoder
         self.prompt_encoder = self._sam.prompt_encoder
+        # Free memory: delete unused SAM image_encoder
+        del self._sam.image_encoder
         self.predict_uncertainty = predict_uncertainty
 
         # Uncertainty head (parallel to mask head)
         if predict_uncertainty:
             self.uncertainty_head = nn.Sequential(
-                nn.Conv2d(256, 128, kernel_size=3, padding=1),
+                nn.Conv2d(1, 128, kernel_size=3, padding=1),
                 nn.GELU(),
                 nn.Conv2d(128, 1, kernel_size=1),
             )
@@ -489,10 +505,13 @@ class OmniRad(MiniGPTv2):
             {"additional_special_tokens": list(special_tokens)}
         )
         if added > 0:
-            # ★ Unwrap CastOutputToFloat wrapper on lm_head (it lacks .weight,
-            # breaking resize_token_embeddings).  The wrapper only casts output
-            # from fp16→fp32, which AMP handles automatically during training.
-            self._unwrap_lm_head_cast(self.llama_model)
+            # Unwrap CastOutputToFloat so resize_token_embeddings can access .weight
+            target = self.llama_model
+            while hasattr(target, "base_model") and hasattr(target.base_model, "model"):
+                target = target.base_model.model
+            if hasattr(target, "lm_head") and \
+               type(target.lm_head).__name__ == "CastOutputToFloat":
+                target.lm_head = next(target.lm_head.children())
 
             self.llama_model.resize_token_embeddings(len(self.llama_tokenizer))
             self._set_output_embeddings_trainable()
@@ -509,16 +528,26 @@ class OmniRad(MiniGPTv2):
             input_embeddings.weight.requires_grad = True
 
         output_embeddings = self.llama_model.get_output_embeddings()
-        if output_embeddings is not None and hasattr(output_embeddings, "weight"):
-            output_embeddings.weight.data = output_embeddings.weight.data.float()
-            output_embeddings.weight.requires_grad = True
+        if output_embeddings is not None:
+            # Handle Sequential wrapper around lm_head (CastOutputToFloat)
+            lm = output_embeddings
+            if isinstance(lm, nn.Sequential) and len(lm) > 0:
+                lm = lm[0]  # unwrap to get the inner Linear
+            if hasattr(lm, "weight"):
+                lm.weight.data = lm.weight.data.float()
+                lm.weight.requires_grad = True
 
     def encode_dense_image(self, image: torch.Tensor) -> torch.Tensor:
         """Hook point for the future SAM-backed dense branch."""
         if self.dense_encoder_cfg.get("no_grad_forward", True):
             with torch.no_grad():
-                return self.dense_encoder(image)
-        return self.dense_encoder(image)
+                emb = self.dense_encoder(image)
+        else:
+            emb = self.dense_encoder(image)
+        # Upsample to 64x64 if using reduced target_size (512→32x32 instead of 1024→64x64)
+        if emb.shape[-1] != 64:
+            emb = F.interpolate(emb, size=(64, 64), mode="bilinear", align_corners=False)
+        return emb
 
     @torch.no_grad()
     def generate(
@@ -842,6 +871,19 @@ class OmniRad(MiniGPTv2):
 
         # ---- Consistency loss (mask-box geometric) ----
         cons_loss = self._compute_cons_loss(special_hidden_states, structured_targets, samples, text_loss)
+
+        # NaN guard: if any auxiliary loss is NaN, zero them out to let text_loss dominate
+        for key, val in [("det", det_loss), ("loc", loc_loss), ("seg", seg_loss), ("cons", cons_loss)]:
+            if torch.isnan(val) or torch.isinf(val):
+                logging.warning("NaN/Inf in %s loss, zeroing out", key)
+                if key == "det":
+                    det_loss = zero
+                elif key == "loc":
+                    loc_loss = zero
+                elif key == "seg":
+                    seg_loss = zero
+                elif key == "cons":
+                    cons_loss = zero
 
         return {"det": det_loss, "loc": loc_loss, "seg": seg_loss, "cons": cons_loss}
 
@@ -1187,11 +1229,18 @@ class OmniRad(MiniGPTv2):
                 inputs_embeds=inputs_embeds,
                 attention_mask=attention_mask,
                 return_dict=True,
-                labels=targets,
-                reduction=reduction,
+                labels=None,  # compute loss manually in FP32 to avoid NaN
                 output_hidden_states=True,
             )
-        text_loss = outputs.loss
+        # Manually compute cross-entropy in FP32 to prevent NaN
+        logits = outputs.logits.float()  # (B, seq_len, vocab_size)
+        shift_logits = logits[..., :-1, :].contiguous()
+        shift_labels = targets[..., 1:].contiguous()
+        shift_logits = shift_logits.view(-1, shift_logits.size(-1))
+        shift_labels = shift_labels.view(-1)
+        shift_labels = shift_labels.to(shift_logits.device)
+        loss_fct = torch.nn.CrossEntropyLoss(ignore_index=-100, reduction=reduction)
+        text_loss = loss_fct(shift_logits, shift_labels)
 
         # ---- Step 3: Extract special token hidden states ----
         special_hidden_states: dict[str, list[torch.Tensor]] = {}
@@ -1211,6 +1260,13 @@ class OmniRad(MiniGPTv2):
         total_loss = total_loss + aux_losses["loc"] * self.loss_weights.get("loc", 1.0)
         total_loss = total_loss + aux_losses["seg"]
         total_loss = total_loss + aux_losses["cons"] * self.loss_weights.get("cons_mb", 0.3)
+
+        # Fallback: if total loss is NaN, use text_loss only
+        if torch.isnan(total_loss) or torch.isinf(total_loss):
+            logging.warning("Total loss is NaN/Inf, falling back to text_loss only")
+            total_loss = text_loss * self.loss_weights.get("text", 1.0)
+            zero_t = text_loss.new_zeros(())
+            aux_losses = {"det": zero_t, "loc": zero_t, "seg": zero_t, "cons": zero_t}
 
         result = {
             "loss": total_loss,

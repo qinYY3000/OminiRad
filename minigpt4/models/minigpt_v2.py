@@ -70,7 +70,13 @@ class MiniGPTv2(MiniGPTBase):
         self.chat_template = chat_template
 
         if use_grad_checkpoint_llm:
-            self.llama_model.gradient_checkpointing_enable()
+            try:
+                self.llama_model.gradient_checkpointing_enable(
+                    gradient_checkpointing_kwargs={"use_reentrant": False}
+                )
+            except TypeError:
+                # Older transformers without use_reentrant kwarg
+                self.llama_model.gradient_checkpointing_enable()
 
     def encode_img(self, image):
         device = image.device

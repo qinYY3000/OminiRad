@@ -17,7 +17,7 @@
 model:
   arch: omnirad                   # Will register a new model class extending minigpt_v2
   model_type: pretrain
-  max_txt_len: 512                # Down from 1024 (CXR reports avg ~250 tokens)
+  max_txt_len: 128                # Min VRAM (CXR reports avg ~250 tokens, truncation acceptable)
   image_size: 448                 # Same as MiniGPT-Med
   end_sym: "</s>"
   llama_model: "weights/llama-2-7b-chat-hf"
@@ -25,12 +25,12 @@ model:
   ckpt: "weights/minigpt_med_pretrained.pth"
 
   # Memory-saving switches (critical for 3090's 24G)
-  use_grad_checkpoint:      True   # EVA-ViT-G gradient checkpoint
+  use_grad_checkpoint:      False  # EVA-ViT-G is frozen → no gradient checkpointing needed
   use_grad_checkpoint_llm:  True   # ★ LLaMA gradient checkpoint — needed on 24G
 
   # LLM LoRA settings (kept identical to MiniGPT-Med)
   chat_template: True
-  lora_r: 32
+  lora_r: 64
   lora_alpha: 16
   lora_target_modules: ["q_proj", "v_proj"]
   lora_dropout: 0.05
@@ -109,7 +109,7 @@ datasets:
 
   # ---------- Chest X-ray report generation ----------
   indiana_cxr:
-    batch_size: 2
+    batch_size: 1
     sample_ratio: 23             # primary report-generation supervisor
     vis_processor:
       train:
@@ -121,7 +121,7 @@ datasets:
 
   # ---------- Medical VQA ----------
   radvqa:
-    batch_size: 2
+    batch_size: 1
     sample_ratio: 7
     vis_processor:
       train:
@@ -132,7 +132,7 @@ datasets:
         name: "blip_caption"
 
   slake_vqa:
-    batch_size: 2
+    batch_size: 1
     sample_ratio: 10
     vis_processor:
       train:
@@ -144,7 +144,7 @@ datasets:
 
   # ---------- Grounded caption ----------
   grounding_SLAKE:
-    batch_size: 2
+    batch_size: 1
     sample_ratio: 10
     vis_processor:
       train:
@@ -159,7 +159,7 @@ datasets:
   # Task: ``[detection] pneumonia`` — model outputs <BOX_S/M/L> tokens.
   # JSON keys have been remapped to actual image filenames (UUID format).
   rsna:
-    batch_size: 2
+    batch_size: 1
     sample_ratio: 5
     vis_processor:
       train:
@@ -173,7 +173,7 @@ datasets:
   # Group-Breast Ultrasound — image + report + lesion mask
   # Tasks (5): segmentation / detection (mask→bbox) / report / refer / identify
   group_breast_us:
-    batch_size: 2
+    batch_size: 1
     sample_ratio: 16
     vis_processor:
       train:
@@ -188,7 +188,7 @@ datasets:
   # No reports → no report generation task.
   # Provides natural multi-polyp (K>=2) cases for AMU-Seg Innovation I supervision.
   kvasir:
-    batch_size: 2
+    batch_size: 1
     sample_ratio: 22
     vis_processor:
       train:
@@ -216,11 +216,12 @@ run:
   grad_clip: 1.0                  # ★ P1-13: gradient clipping for multi-task loss stability
 
   # Schedule
-  max_epoch: 100                  # Can be reduced to 50 if compute-limited
+  max_epoch: 20                  # 20 epochs ≈ 2-3 days, good for initial convergence check
   iters_per_epoch: null             # null = auto-derive from dataloader length
 
   # Memory / speed
   amp: True                       # Mixed precision — critical for 3090
+  accum_grad_iters: 2             # ★ batch_size=1 × accum=2 → effective batch=6 (same as before)
   num_workers: 4                  # Down from 6 (3 GPUs × 4 workers = 12 total)
   seed: 42
 

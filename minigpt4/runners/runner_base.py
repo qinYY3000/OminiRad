@@ -90,7 +90,6 @@ class RunnerBase:
                     self._wrapped_model = DDP(
                         self._model, device_ids=[self.config.run_cfg.gpu], find_unused_parameters=True
                     )
-                    self._wrapped_model._set_static_graph()
             else:
                 self._wrapped_model = self._model
 
@@ -125,6 +124,7 @@ class RunnerBase:
                 lr=float(self.config.run_cfg.init_lr),
                 weight_decay=float(self.config.run_cfg.weight_decay),
                 betas=(0.9, beta2),
+                foreach=False,  # single-tensor mode saves ~500MB vs multi-tensor foreach
             )
 
         return self._optimizer
@@ -135,7 +135,7 @@ class RunnerBase:
 
         if amp:
             if self._scaler is None:
-                self._scaler = torch.cuda.amp.GradScaler()
+                self._scaler = torch.cuda.amp.GradScaler(init_scale=128.0)
 
         return self._scaler
 

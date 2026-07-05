@@ -12,6 +12,20 @@ import random
 import numpy as np
 import torch
 import torch.backends.cudnn as cudnn
+import torch.utils.checkpoint as cp
+
+# Monkey-patch: force non-reentrant checkpoint for DDP compatibility
+_original_checkpoint = cp.checkpoint
+
+def _ddp_safe_checkpoint(function, *args, use_reentrant=None, **kwargs):
+    try:
+        return _original_checkpoint(function, *args, use_reentrant=False, **kwargs)
+    except TypeError:
+        # PyTorch < 1.11: use_reentrant not supported, fall back to original
+        return _original_checkpoint(function, *args, **kwargs)
+
+cp.checkpoint = _ddp_safe_checkpoint
+
 import wandb
 
 import minigpt4.tasks as tasks

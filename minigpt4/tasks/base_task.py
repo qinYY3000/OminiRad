@@ -237,12 +237,28 @@ class BaseTask:
                         model.parameters(), grad_clip
                     )
 
-                if use_amp:
-                    scaler.step(optimizer)
-                    scaler.update()
+                # Check for NaN/Inf gradients — skip optimizer step if found
+                grad_nan = False
+                for n, p in model.named_parameters():
+                    if p.grad is not None and (torch.isnan(p.grad).any() or torch.isinf(p.grad).any()):
+                        grad_nan = True
+                        logging.warning("NaN/Inf gradient in %s, skipping optimizer step", n)
+                        break
+
+                if grad_nan:
+                    optimizer.zero_grad()
+                    if use_amp:
+                        scaler.update()  # still update scaler to adjust scale
                 else:
-                    optimizer.step()
-                optimizer.zero_grad()
+                    # Free cached memory before optimizer step (helps with fragmentation)
+                    torch.cuda.empty_cache()
+
+                    if use_amp:
+                        scaler.step(optimizer)
+                        scaler.update()
+                    else:
+                        optimizer.step()
+                    optimizer.zero_grad()
                 if self.cfg.run_cfg.wandb_log:
                     log_dict = {
                         "epoch": inner_epoch,
