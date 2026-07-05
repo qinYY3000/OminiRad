@@ -30,7 +30,7 @@ model:
 
   # LLM LoRA settings (kept identical to MiniGPT-Med)
   chat_template: True
-  lora_r: 64
+  lora_r: 32
   lora_alpha: 16
   lora_target_modules: ["q_proj", "v_proj"]
   lora_dropout: 0.05

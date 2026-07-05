@@ -1,31 +1,29 @@
+import swanlab
 import random
 
-import wandb
-
-# Start a new wandb run to track this script.
-run = wandb.init(
-    # Set the wandb entity where your project will be logged (generally your team name).
-    entity="scholarccc184-shenzhen-university",
-    # Set the wandb project where this run will be logged.
-    project="omnirad",
-    # Track hyperparameters and run metadata.
-    config={
-        "learning_rate": 0.02,
-        "architecture": "CNN",
-        "dataset": "CIFAR-100",
-        "epochs": 10,
-    },
+# 初始化一个新的swanlab run类来跟踪这个脚本
+swanlab.init(
+  # 设置将记录此次运行的项目信息
+  project="ominirad",
+  workspace="qinYY3000",
+  # 跟踪超参数和运行元数据
+  config={
+    "learning_rate": 0.02,
+    "architecture": "CNN",
+    "dataset": "CIFAR-100",
+    "epochs": 10
+  }
 )
 
-# Simulate training.
+# 模拟训练
 epochs = 10
 offset = random.random() / 5
 for epoch in range(2, epochs):
-    acc = 1 - 2**-epoch - random.random() / epoch - offset
-    loss = 2**-epoch + random.random() / epoch + offset
+  acc = 1 - 2 ** -epoch - random.random() / epoch - offset
+  loss = 2 ** -epoch + random.random() / epoch + offset
 
-    # Log metrics to wandb.
-    run.log({"acc": acc, "loss": loss})
+  # 向swanlab上传训练指标
+  swanlab.log({"acc": acc, "loss": loss})
 
-# Finish the run and upload any remaining data.
-run.finish()
+# [可选] 完成训练，这在notebook环境中是必要的
+swanlab.finish()

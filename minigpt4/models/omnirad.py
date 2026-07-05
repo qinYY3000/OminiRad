@@ -142,10 +142,11 @@ class SamMaskDecoder(nn.Module):
     ):
         super().__init__()
         sam_type = _resolve_sam_model_type(name, default="vit_h")
-        sam = sam_model_registry[sam_type](checkpoint=weights or None)
+        self._sam = sam_model_registry[sam_type](checkpoint=weights or None)
 
 
-        self.mask_decoder = sam.mask_decoder
+        self.mask_decoder = self._sam.mask_decoder
+        self.prompt_encoder = self._sam.prompt_encoder
         self.predict_uncertainty = predict_uncertainty
 
         # Uncertainty head (parallel to mask head)
@@ -182,13 +183,10 @@ class SamMaskDecoder(nn.Module):
                                    device=image_embedding.device,
                                    dtype=image_embedding.dtype)
 
-        # Get positional encoding from SAM's mask decoder
+        # Get positional encoding from SAM's prompt encoder
         with torch.no_grad():
-            image_pe = self.mask_decoder.no_mask_weight(
-                torch.zeros(B, 256, 64, 64,
-                           device=image_embedding.device,
-                           dtype=image_embedding.dtype)
-            )
+            image_pe = self.prompt_encoder.get_dense_pe()  # (1, 256, 64, 64)
+            image_pe = image_pe.expand(B, -1, -1, -1)      # (B, 256, 64, 64)
 
         masks, iou_pred = self.mask_decoder(
             image_embeddings=image_embedding,
@@ -499,8 +497,6 @@ class OmniRad(MiniGPTv2):
             self.llama_model.resize_token_embeddings(len(self.llama_tokenizer))
             self._set_output_embeddings_trainable()
 
-            self._set_output_embeddings_trainable()
-
         self.special_token_ids = {
             token: self.llama_tokenizer.convert_tokens_to_ids(token)
             for token in special_tokens
@@ -509,10 +505,12 @@ class OmniRad(MiniGPTv2):
     def _set_output_embeddings_trainable(self):
         input_embeddings = self.llama_model.get_input_embeddings()
         if input_embeddings is not None and hasattr(input_embeddings, "weight"):
+            input_embeddings.weight.data = input_embeddings.weight.data.float()
             input_embeddings.weight.requires_grad = True
 
         output_embeddings = self.llama_model.get_output_embeddings()
         if output_embeddings is not None and hasattr(output_embeddings, "weight"):
+            output_embeddings.weight.data = output_embeddings.weight.data.float()
             output_embeddings.weight.requires_grad = True
 
     def encode_dense_image(self, image: torch.Tensor) -> torch.Tensor:

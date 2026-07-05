@@ -90,6 +90,7 @@ class RunnerBase:
                     self._wrapped_model = DDP(
                         self._model, device_ids=[self.config.run_cfg.gpu], find_unused_parameters=True
                     )
+                    self._wrapped_model._set_static_graph()
             else:
                 self._wrapped_model = self._model
 
@@ -555,14 +556,16 @@ class RunnerBase:
             datasets, batch_sizes, is_trains, collate_fns
         ):
             if isinstance(dataset, list) or isinstance(dataset, tuple):
-                if hasattr(dataset[0], 'sample_ratio') and dataset_ratios is None:
-                    dataset_ratios = [d.sample_ratio for d in dataset]
+                if hasattr(dataset[0], 'sample_ratio'):
+                    group_ratios = [d.sample_ratio for d in dataset]
+                else:
+                    group_ratios = dataset_ratios
                 loader = MultiIterLoader(
                     loaders=[
                         _create_loader(d, num_workers, bsz[i], is_train, collate_fn[i])
                         for i, d in enumerate(dataset)
                     ],
-                    ratios=dataset_ratios,
+                    ratios=group_ratios,
                 )
             else:
                 loader = _create_loader(dataset, num_workers, bsz, is_train, collate_fn)

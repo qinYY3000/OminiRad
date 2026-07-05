@@ -110,6 +110,8 @@ class UnifiedUSDataset(Dataset):
 
 
     def _resolve_path(self, path: str) -> str:
+        # Normalize Windows-style backslashes for cross-platform compatibility
+        path = path.replace("\\", "/")
         candidates = []
         raw = Path(path)
         if raw.is_absolute():
