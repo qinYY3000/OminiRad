@@ -237,10 +237,10 @@ run:
   train_splits: ["train"]
   valid_splits: ["val"]               # ← enabled: each dataset's build_info.val_ann_path feeds the val split
   max_keep_ckpts: 3                   # ← P2-17: 最多保留 3 个 checkpoint，旧的自动删除
-  iters_per_epoch: null               # ← null = 自动从 dataloader 长度推导
 
   # Logging
   wandb_log: True
+  wandb_mode: "offline"              # "online" / "offline" / "disabled"
   wandb_project: "omnirad"           # ← 改成你的 wandb 项目名
   wandb_entity: null                  # ← 改成你的 wandb 用户名/团队名 (null = 个人账户)
   wandb_tags: ["omnirad", "3x3090"]   # ← 自定义标签

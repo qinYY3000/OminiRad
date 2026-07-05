@@ -54,6 +54,7 @@ class PrefetchLoader(object):
     def __init__(self, loader):
         self.loader = loader
         self.stream = torch.cuda.Stream()
+        self._iterator = None
 
     def __iter__(self):
         loader_it = iter(self.loader)
@@ -69,6 +70,11 @@ class PrefetchLoader(object):
             else:
                 yield batch
             batch = self.next(loader_it)
+
+    def __next__(self):
+        if self._iterator is None:
+            self._iterator = self.__iter__()
+        return next(self._iterator)
 
     def __len__(self):
         return len(self.loader)

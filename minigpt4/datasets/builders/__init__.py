@@ -16,7 +16,7 @@ from minigpt4.datasets.builders.image_text_pair_builder import (
     ReferNLSTBuilder,
     IdentifyNLSTBuilder,
     GroupBreastUSBuilder,
-    GroupThyroidUSBuilder,
+    KvasirBuilder,
     GroundingSLAKEBuilder,
     SlakeVQABuilder,
 )
@@ -33,7 +33,7 @@ __all__ = [
     "ReferNLSTBuilder",
     "IdentifyNLSTBuilder",
     "GroupBreastUSBuilder",
-    "GroupThyroidUSBuilder",
+    "KvasirBuilder",
     "GroundingSLAKEBuilder",
     "SlakeVQABuilder",
 ]

@@ -428,6 +428,7 @@ class OmniRad(MiniGPTv2):
         # ---- Mask decoder: use SAM if available, else skeleton ----
         if self._use_real_sam:
             self.mask_decoder = SamMaskDecoder(
+                name=dense_name,
                 weights=dense_weights,
                 predict_uncertainty=mask_decoder.get("predict_uncertainty", True),
             )

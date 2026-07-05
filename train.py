@@ -90,13 +90,16 @@ def main():
     model = task.build_model(cfg)
 
     if cfg.run_cfg.wandb_log:
-        wandb.login()
+        wandb_mode = cfg.run_cfg.get("wandb_mode", "offline")
+        if wandb_mode == "online":
+            wandb.login()
         wandb.init(
             project=cfg.run_cfg.get("wandb_project", "omnirad"),
             entity=cfg.run_cfg.get("wandb_entity", None),
             name=cfg.run_cfg.job_name,
             tags=cfg.run_cfg.get("wandb_tags", []),
             config=cfg.to_dict(),
+            mode=wandb_mode,
         )
         wandb.watch(model)
 
