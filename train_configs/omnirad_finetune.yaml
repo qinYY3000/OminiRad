@@ -1,249 +1,141 @@
-# ============================================================================
-# OmniRad Fine-tuning Configuration
-# ----------------------------------------------------------------------------
-# Paper: "OmniRad: A Unified Vision-Language Model for Multi-task Radiology"
-# Hardware target : 3 × NVIDIA RTX 3090 (24 GB each)
-# Effective batch : 2 (per-GPU) × 3 (GPUs) × 1 (no grad accumulation) = 6
-#                   → matches the original MiniGPT-Med global batch of 6.
-#
-# Run command:
-#   torchrun --nproc-per-node 3 --master-port 8889 \
-#       train.py --cfg-path train_configs/omnirad_finetune.yaml
-#
-# Estimated training time: ~30-40 hours for 100 epochs.
-# Reference: see docs/innovation.md and docs/dataset_plan.md.
-# ============================================================================
-
 model:
-  arch: omnirad                   # Will register a new model class extending minigpt_v2
+  arch: omnirad
   model_type: pretrain
-  max_txt_len: 128                # Min VRAM (CXR reports avg ~250 tokens, truncation acceptable)
-  image_size: 448                 # Same as MiniGPT-Med
+  max_txt_len: 512
   end_sym: "</s>"
+  prompt_template: '[INST] {} [/INST]'
   llama_model: "weights/llama-2-7b-chat-hf"
-  # Initialize from MiniGPT-Med's released checkpoint (stage-3 of MiniGPT-v2 + medical FT)
-  ckpt: "weights/minigpt_med_pretrained.pth"
-
-  # Memory-saving switches (critical for 3090's 24G)
-  use_grad_checkpoint:      False  # EVA-ViT-G is frozen → no gradient checkpointing needed
-  use_grad_checkpoint_llm:  True   # ★ LLaMA gradient checkpoint — needed on 24G
-
-  # LLM LoRA settings (kept identical to MiniGPT-Med)
-  chat_template: True
+  ckpt: "experiments/omnirad/latest/checkpoint_best.pth"
   lora_r: 64
   lora_alpha: 16
-  lora_target_modules: ["q_proj", "v_proj"]
-  lora_dropout: 0.05
+  chat_template: True
+  low_resource: False
 
-  # ---------- NEW: OmniRad specific configuration ----------
-  # Vocabulary expansion for token-routed multi-task outputs (innovation.md §3.1/§4.3)
-  expand_vocab:
-    - "<SEG>"                     # AMU-Seg adaptive multi-query segmentation
-    - "<BOX_S>"                   # SAR-Loc small-scale detection (<1% area)
-    - "<BOX_M>"                   # SAR-Loc medium-scale detection (1-10%)
-    - "<BOX_L>"                   # SAR-Loc large-scale detection (>10%)
-    - "<LOC>"                     # SAR-Loc grounding/refer dual-coordinate token
+  expand_vocab: ["<SEG>", "<BOX_S>", "<BOX_M>", "<BOX_L>", "<LOC>"]
 
-  # Second vision encoder for dense mask decoding (innovation.md §3.3.3)
   dense_encoder:
-    name: "medsam_vit_b"         # default: MedSAM-finetuned SAM ViT-B for medical segmentation
-    weights: "weights/medsam_vit_b.pth"  # fallback baseline: weights/sam_vit_b_01ec64.pth
+    name: "medsam_vit_b"      # default: MedSAM-finetuned SAM ViT-B
+    weights: "weights/medsam_vit_b.pth"  # baseline fallback: weights/sam_vit_b_01ec64.pth
 
-    freeze: True                  # keep MedSAM/SAM frozen at first; fine-tune only if ablation demands it
+    freeze: True
 
-    no_grad_forward: True         # ★ wrap forward in torch.no_grad() to skip activation graph
+    no_grad_forward: True
 
-  # Mask decoder (innovation.md §3.3 AMU-Seg)
   mask_decoder:
-    type: "sam_style"             # two-way transformer + upsampling
+    hidden_dim: 512
     out_dim: 256
-    transformer_depth: 2
-    predict_uncertainty: True     # ★ heteroscedastic variance map (Innovation II)
+    predict_uncertainty: True
 
-  # SAR-Loc heads (innovation.md §3.4)
   loc_heads:
-    box_s: { in_dim: 4096, hidden_dim: 512, n_class: 64 }   # small-scale detection head
-    box_m: { in_dim: 4096, hidden_dim: 512, n_class: 64 }
-    box_l: { in_dim: 4096, hidden_dim: 512, n_class: 64 }
-    loc:   { in_dim: 4096, hidden_dim: 512, n_anatomy: 30 } # dual-output: pixel bbox + anatomy region
+    box_s: {in_dim: 4096, hidden_dim: 512, n_class: 64}
+    box_m: {in_dim: 4096, hidden_dim: 512, n_class: 64}
+    box_l: {in_dim: 4096, hidden_dim: 512, n_class: 64}
+    loc: {in_dim: 4096, hidden_dim: 512, n_anatomy: 30}
 
-  # Loss weights (innovation.md §4.5)
-  loss_weights:
-    text:    1.0
-    det:     1.0
-    loc:     1.0
-    seg_bce: 2.0                  # following LISA
-    seg_dice: 0.5
-    cardinality: 0.5              # AMU-Seg I — penalize spurious <SEG> on healthy images
-    cons_mb:   0.3                # mask-box consistency
-    cons_rd:   0.2                # report-detection consistency
-    cons_gs:   0.2                # grounding-segmentation consistency
-    align_anat: 0.5               # SAR-Loc II — pixel-anatomy alignment (LOC token only)
-    # Scale-aware reweighting for detection
-    scale_w_s: 3.0                # upweight tiny lesions
-    scale_w_m: 1.5
-    scale_w_l: 1.0
-
-
-# ============================================================================
-# Datasets
-# ----------------------------------------------------------------------------
-# Per-GPU batch_size = 2 across all datasets to fit 24G VRAM with SAM added.
-# `sample_ratio` implements temperature-2 task-balanced sampling
-# (see docs/dataset_plan.md §6.1 — total ratios sum to ~93).
-#
-# Active datasets (7):
-#   - Indiana CXR (Open-i)     : report generation
-#   - VQA-RAD                  : visual question answering
-#   - SLAKE VQA                : visual question answering
-#   - SLAKE Grounding          : grounded caption
-#   - RSNA                     : detection (pneumonia)
-#   - Group-Breast US (5 tasks): seg / det / report / refer / identify
-#   - Kvasir (5 tasks)         : seg / det / refer / identify / vqa (endoscopy)
-#
-# Disabled:
-#   - MIMIC-CXR (removed in this run)
-#   - NLST + refer/identify_nlst (raw images unavailable)
-# ============================================================================
 datasets:
-
-  # ---------- Chest X-ray report generation ----------
-  indiana_cxr:
-    batch_size: 1
-    sample_ratio: 23             # primary report-generation supervisor
+  cc_sbu_align:
     vis_processor:
       train:
-        name: "blip2_image_train"
+        name: "blip2_image_eval"
         image_size: 448
     text_processor:
       train:
         name: "blip_caption"
+
+evaluation_datasets:
+  # ---------- Chest X-ray report generation ----------
+  indiana_cxr:
+    # Indiana University Open-i — report generation.
+    # JSON is produced by `tools/build_unified_dataset.py --datasets indiana`.
+    eval_file_path: data/annotations/indiana_test.json
+    img_path: data/Chest X/images
+    max_new_tokens: 300
+    batch_size: 10
 
   # ---------- Medical VQA ----------
   radvqa:
-    batch_size: 1
-    sample_ratio: 7
-    vis_processor:
-      train:
-        name: "blip2_image_train"
-        image_size: 448
-    text_processor:
-      train:
-        name: "blip_caption"
+    eval_file_path: data/annotations/vqa_test.json
+    img_path: data/radvqa/imgs
+    max_new_tokens: 300
+    batch_size: 10
 
   slake_vqa:
-    batch_size: 1
-    sample_ratio: 10
-    vis_processor:
-      train:
-        name: "blip2_image_train"
-        image_size: 448
-    text_processor:
-      train:
-        name: "blip_caption"
+    eval_file_path: data/annotations/VQA_test_SLAKE.json
+    img_path: data/slake/imgs
+    max_new_tokens: 300
+    batch_size: 10
+
+  # ---------- Detection (zero-shot) ----------
+  rsna:
+    eval_file_path: data/annotations/RSNA_test.json
+    img_path: data/rsna/RSNA-bbox-1024
+    max_new_tokens: 100
+    batch_size: 10
 
   # ---------- Grounded caption ----------
-  grounding_SLAKE:
-    batch_size: 1
-    sample_ratio: 10
-    vis_processor:
-      train:
-        name: "blip2_image_train"
-        image_size: 448
-    text_processor:
-      train:
-        name: "blip_caption"
+  SLAKE:
+    eval_file_path: data/annotations/grounding_test_SLAKE.json
+    img_path: data/slake/imgs
+    max_new_tokens: 100
+    batch_size: 10
 
-  # ---------- Chest X-ray detection ----------
-  # RSNA Pneumonia Detection — 974 training images with bbox annotations.
-  # Task: ``[detection] pneumonia`` — model outputs <BOX_S/M/L> tokens.
-  # JSON keys have been remapped to actual image filenames (UUID format).
-  rsna:
-    batch_size: 1
-    sample_ratio: 5
-    vis_processor:
-      train:
-        name: "blip2_image_train"
-        image_size: 448
-    text_processor:
-      train:
-        name: "blip_caption"
-
-  # ---------- Private ultrasound datasets (group-internal) ----------
-  # Group-Breast Ultrasound — image + report + lesion mask
-  # Tasks (5): segmentation / detection (mask→bbox) / report / refer / identify
+  # ---------------------------------------------------------------------------
+  # Private ultrasound datasets — multi-task evaluation
+  # ---------------------------------------------------------------------------
+  # Each entry runs all 5 tasks below in one command:
+  #   report / segmentation / detection / refer / identify
+  # Per-task overrides can be specified under ``tasks_cfg`` (optional).
+  # ---------------------------------------------------------------------------
   group_breast_us:
-    batch_size: 1
-    sample_ratio: 16
-    vis_processor:
-      train:
-        name: "blip2_image_train"
-        image_size: 448
-    text_processor:
-      train:
-        name: "blip_caption"
+    eval_file_path: data/annotations/group_breast_test.json
+    img_path: data/group_breast
+    anatomy: breast
+    tasks: [report, segmentation, detection, refer, identify]
+    batch_size: 4
+    max_new_tokens: 200
+    tasks_cfg:
+      report:
+        max_new_tokens: 300
+        batch_size: 4
+      segmentation:
+        max_new_tokens: 80
+        batch_size: 4
+      detection:
+        max_new_tokens: 100
+        batch_size: 4
+      refer:
+        max_new_tokens: 80
+        batch_size: 4
+      identify:
+        max_new_tokens: 60
+        batch_size: 4
 
-  # Kvasir-SEG colonoscopy polyps — mask + bbox endoscopy dataset
-  # Tasks (5): segmentation / detection / refer / identify / vqa
-  # No reports → no report generation task.
-  # Provides natural multi-polyp (K>=2) cases for AMU-Seg Innovation I supervision.
+  # ---------- Endoscopy polyp dataset — multi-task ----------
   kvasir:
-    batch_size: 1
-    sample_ratio: 22
-    vis_processor:
-      train:
-        name: "blip2_image_train"
-        image_size: 448
-    text_processor:
-      train:
-        name: "blip_caption"
+    eval_file_path: data/annotations/kvasir_test.json
+    img_path: data/kvasir
+    anatomy: colon
+    tasks: [segmentation, detection, refer, identify, vqa]
+    batch_size: 4
+    max_new_tokens: 120
+    tasks_cfg:
+      segmentation:
+        max_new_tokens: 80
+        batch_size: 4
+      detection:
+        max_new_tokens: 120     # K>=2 polyp cases → longer output
+        batch_size: 4
+      refer:
+        max_new_tokens: 80
+        batch_size: 4
+      identify:
+        max_new_tokens: 60
+        batch_size: 4
+      vqa:
+        max_new_tokens: 20      # short answer
+        batch_size: 10
 
-
-# ============================================================================
-# Training schedule
-# ============================================================================
 run:
-  task: image_text_pretrain
-  runner: runner_base
-
-  # Optimization
-  lr_sched: "linear_warmup_cosine_lr"
-  init_lr:    1e-5                # Same as MiniGPT-Med
-  min_lr:     1e-6                # ★ Fixed: original config had 8e-5 which was likely a typo
-  warmup_lr:  1e-6
-  warmup_steps: 1000
-  weight_decay: 0.05
-  grad_clip: 1.0                  # ★ P1-13: gradient clipping for multi-task loss stability
-
-  # Schedule
-  max_epoch: 20                  # 20 epochs ≈ 2-3 days, good for initial convergence check
-  iters_per_epoch: null             # null = auto-derive from dataloader length
-
-  # Memory / speed
-  amp: True                       # Mixed precision — critical for 3090
-  accum_grad_iters: 2             # ★ batch_size=1 × accum=2 → effective batch=6 (same as before)
-  num_workers: 4                  # Down from 6 (3 GPUs × 4 workers = 12 total)
-  seed: 42
-
-  # Distributed setup for 3 × 3090
-  device: "cuda"
-  world_size: 3                   # ★ three GPUs
-  dist_url: "env://"
-  distributed: True
-
-  # Checkpointing
-  output_dir: "experiments/omnirad"
-  resume_ckpt_path: null
-  evaluate: False
-  train_splits: ["train"]
-  valid_splits: ["val"]               # ← enabled: each dataset's build_info.val_ann_path feeds the val split
-  max_keep_ckpts: 3                   # ← P2-17: 最多保留 3 个 checkpoint，旧的自动删除
-
-  # Logging
-  wandb_log: True
-  wandb_mode: "offline"              # "online" / "offline" / "disabled"
-  wandb_project: "omnirad"           # ← 改成你的 wandb 项目名
-  wandb_entity: null                  # ← 改成你的 wandb 用户名/团队名 (null = 个人账户)
-  wandb_tags: ["omnirad", "3x3090"]   # ← 自定义标签
-  job_name: omnirad_3x3090_full
-
+  task: omnirad_eval
+  name: omnirad_evaluation
+  save_path: experiments/eval

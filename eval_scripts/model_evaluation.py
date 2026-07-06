@@ -433,7 +433,7 @@ def _us_bbox_iou(gts, preds, csv_path, dataset_name):
 
 
 # ---------------------------------------------------------------------------
-# Kvasir — polyp bbox-only evaluation (detection / refer / identify)
+# Kvasir — polyp multi-task evaluation (segmentation / detection / refer / identify)
 # ---------------------------------------------------------------------------
 def process_kvasir_dataset():
     """Run multi-task evaluation on Kvasir colonoscopy polyp test split.
@@ -443,7 +443,7 @@ def process_kvasir_dataset():
     cfg_block = cfg.evaluation_datasets_cfg[dataset]
     eval_file_path = cfg_block["eval_file_path"]
     img_path = cfg_block["img_path"]
-    tasks_to_run = cfg_block.get("tasks", ["detection", "refer", "identify"])
+    tasks_to_run = cfg_block.get("tasks", ["segmentation", "detection", "refer", "identify"])
     default_bs = cfg_block.get("batch_size", 4)
     default_mnt = cfg_block.get("max_new_tokens", 120)
 
@@ -468,19 +468,44 @@ def process_kvasir_dataset():
         loader = DataLoader(eval_set, batch_size=batch_size, shuffle=False,
                             collate_fn=_us_collate)
 
+        pred_mask_dir = os.path.join(save_path, f"{dataset}_{task}_pred_masks")
+        if task == "segmentation":
+            os.makedirs(pred_mask_dir, exist_ok=True)
+
         predictions: list = []
         gts_compact: list = []
 
         for images, questions, img_ids, gts in tqdm(loader):
             texts = prepare_texts(list(questions), conv_temp)
             gen_kwargs = {"max_new_tokens": max_new_tokens, "do_sample": False}
+            if task == "segmentation":
+                gen_kwargs["return_masks"] = True
             outputs = model.generate(images, texts, **gen_kwargs)
 
             for out, iid, q, gt in zip(outputs, img_ids, questions, gts):
-                ans_text = out.get("text", "") if isinstance(out, dict) else str(out)
-                pred_record = {"image_id": iid, "answer": ans_text, "question": q}
+                if isinstance(out, dict):
+                    ans_text = out.get("text", "")
+                    raw_text = out.get("raw_text", ans_text)
+                    masks = out.get("masks", [])
+                else:
+                    ans_text = str(out)
+                    raw_text = ans_text
+                    masks = []
+
+                pred_record = {"image_id": iid, "answer": ans_text,
+                               "raw": raw_text, "question": q}
+
+                if task == "segmentation":
+                    saved_paths = _save_pred_masks(masks, pred_mask_dir, iid)
+                    pred_record["mask_paths"] = saved_paths
+                    gt_record = {"image_id": iid,
+                                 "tasks": {"masks": [{"mask_path": p}
+                                                     for p in gt]}}
+                else:
+                    gt_record = {"image_id": iid, "answer": gt}
+
                 predictions.append(pred_record)
-                gts_compact.append({"image_id": iid, "answer": gt})
+                gts_compact.append(gt_record)
 
         pred_path = os.path.join(save_path, f"{dataset}_{task}_inference_result.json")
         with open(pred_path, "w") as f:
@@ -496,11 +521,55 @@ def process_kvasir_dataset():
                                  dataset_name=f"{dataset}_{task}")
             summary[task] = score
             print(f"[{dataset}/{task}] avg-IoU = {score:.4f}")
+        elif task == "segmentation":
+            score = average_dice(gt_path, pred_path,
+                                 dataset_name=f"{dataset}_{task}",
+                                 csv_filename=csv_path)
+            summary[task] = score
+            print(f"[{dataset}/{task}] avg-Dice = {score:.4f}")
         elif task == "identify":
             score = identify_accuracy(gt_path, pred_path,
                                       f"{dataset}_{task}", csv_path)
             summary[task] = score
             print(f"[{dataset}/{task}] accuracy = {score:.4f}")
+        elif task == "vqa":
+            # Save GT and pred in format expected by VQA_BERT_Sim
+            gt_vqa_list = []
+            pred_dict = {}
+            for p in predictions:
+                iid = p["image_id"]
+                q_text = p["question"].replace("[vqa]", "").strip()
+                pred_dict.setdefault(iid, []).append({
+                    "key": iid,
+                    "question": q_text,
+                    "answer": p["answer"],
+                })
+            # Build GT list from the annotation file
+            kvasir_ann = json.load(open(eval_file_path, "r", encoding="utf-8"))
+            if isinstance(kvasir_ann, dict):
+                kvasir_ann = kvasir_ann.get("annotations", kvasir_ann.get("data", []))
+            for entry in kvasir_ann:
+                iid = entry.get("image_id", "")
+                vqa_pairs = entry.get("tasks", {}).get("vqa", [])
+                if vqa_pairs:
+                    qa = vqa_pairs[0]  # same first pair used in evalKvasirDataset
+                    gt_vqa_list.append({
+                        "image_name": iid,
+                        "question": qa["question"],
+                        "answer": qa["answer"],
+                    })
+            gt_vqa_path = os.path.join(save_path, f"{dataset}_{task}_gt.json")
+            with open(gt_vqa_path, "w") as f:
+                json.dump(gt_vqa_list, f, ensure_ascii=False, indent=2)
+            # Save predictions in the dict format VQA_BERT_Sim expects
+            with open(pred_path, "w") as f:
+                json.dump(pred_dict, f, ensure_ascii=False, indent=2)
+            clean_pred_path = os.path.join(save_path, f"{dataset}_{task}_cleaned_inference_result.json")
+            clean_vqa_json(pred_path, clean_pred_path)
+            bert_csv = os.path.join(save_path, f"{dataset}_{task}_bert_sim.csv")
+            score = VQA_BERT_Sim(gt_vqa_path, clean_pred_path, bert_csv)
+            summary[task] = score
+            print(f"[{dataset}/{task}] BERT-Sim = {score:.4f}")
         else:
             print(f"  [warn] unknown task '{task}' — skipped.")
 
