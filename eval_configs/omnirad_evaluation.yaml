@@ -115,7 +115,7 @@ evaluation_datasets:
     eval_file_path: data/annotations/kvasir_test.json
     img_path: data/kvasir
     anatomy: colon
-    tasks: [segmentation, detection, refer, identify]
+    tasks: [segmentation, detection, refer, identify, vqa]
     batch_size: 4
     max_new_tokens: 120
     tasks_cfg:
@@ -131,6 +131,9 @@ evaluation_datasets:
       identify:
         max_new_tokens: 60
         batch_size: 4
+      vqa:
+        max_new_tokens: 20      # short answer
+        batch_size: 10
 
 run:
   task: omnirad_eval
