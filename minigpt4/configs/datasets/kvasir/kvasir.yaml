@@ -1,0 +1,10 @@
+# Kvasir colonoscopy polyp dataset (bbox-only, endoscopy modality)
+# Unified-schema JSON produced by `tools/build_unified_dataset.py --datasets kvasir`
+
+datasets:
+  kvasir:
+    data_type: images
+    build_info:
+      image_path: .
+      ann_path: data/annotations/kvasir_train.json
+      val_ann_path: data/annotations/kvasir_val.json

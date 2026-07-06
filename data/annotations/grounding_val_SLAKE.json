@@ -1,0 +1,864 @@
+[
+  {
+    "folder_name": "xmlab417/source.jpg",
+    "detection": [
+      {
+        "Spinal Cord": [
+          45,
+          47,
+          48,
+          48
+        ]
+      },
+      {
+        "Left Mandible": [
+          46,
+          26,
+          56,
+          40
+        ]
+      },
+      {
+        "Right Mandible": [
+          35,
+          26,
+          45,
+          40
+        ]
+      }
+    ],
+    "image_size": {
+      "width": 100,
+      "height": 100
+    },
+    "grounded_caption": "a CT scan showing <p>Spinal Cord</p> {<45><47><48><48>} and <p>Left Mandible</p> {<46><26><56><40>} and <p>Right Mandible</p> {<35><26><45><40>}"
+  },
+  {
+    "folder_name": "xmlab527/source.jpg",
+    "detection": [
+      {
+        "Brain Edema": [
+          57,
+          39,
+          70,
+          56
+        ]
+      },
+      {
+        "Brain Non-enhancing Tumor": [
+          61,
+          40,
+          72,
+          54
+        ]
+      }
+    ],
+    "image_size": {
+      "width": 100,
+      "height": 100
+    },
+    "grounded_caption": "MRI scan showing <p>Brain Edema</p> {<57><39><70><56>} and <p>Brain Non-enhancing Tumor</p> {<61><40><72><54>}"
+  },
+  {
+    "folder_name": "xmlab432/source.jpg",
+    "detection": [
+      {
+        "Trachea": [
+          44,
+          37,
+          48,
+          42
+        ]
+      },
+      {
+        "Esophagus": [
+          44,
+          42,
+          48,
+          44
+        ]
+      },
+      {
+        "Spinal Cord": [
+          45,
+          49,
+          47,
+          51
+        ]
+      }
+    ],
+    "image_size": {
+      "width": 100,
+      "height": 100
+    },
+    "grounded_caption": "a CT scan showing <p>Trachea</p> {<44><37><48><42>} and <p>Esophagus</p> {<44><42><48><44>} and <p>Spinal Cord</p> {<45><49><47><51>}"
+  },
+  {
+    "folder_name": "xmlab605/source.jpg",
+    "detection": [
+      {
+        "Rectum": [
+          43,
+          57,
+          51,
+          60
+        ]
+      },
+      {
+        "Bladder": [
+          41,
+          42,
+          54,
+          56
+        ]
+      }
+    ],
+    "image_size": {
+      "width": 100,
+      "height": 100
+    },
+    "grounded_caption": "a CT scan showing <p>Rectum</p> {<43><57><51><60>} and <p>Bladder</p> {<41><42><54><56>}"
+  },
+  {
+    "folder_name": "xmlab158/source.jpg",
+    "detection": [
+      {
+        "Cardiomegaly": [
+          37,
+          25,
+          83,
+          65
+        ]
+      }
+    ],
+    "image_size": {
+      "width": 100,
+      "height": 100
+    },
+    "grounded_caption": "X-Ray image showing <p>Cardiomegaly</p> {<37><25><83><65>}"
+  },
+  {
+    "folder_name": "xmlab237/source.jpg",
+    "detection": [
+      {
+        "Liver": [
+          20,
+          34,
+          41,
+          55
+        ]
+      },
+      {
+        "Liver Cancer": [
+          24,
+          48,
+          36,
+          57
+        ]
+      }
+    ],
+    "image_size": {
+      "width": 100,
+      "height": 100
+    },
+    "grounded_caption": "a CT scan showing <p>Liver</p> {<20><34><41><55>} and <p>Liver Cancer</p> {<24><48><36><57>}"
+  },
+  {
+    "folder_name": "xmlab488/source.jpg",
+    "detection": [
+      {
+        "Brain Edema": [
+          28,
+          27,
+          53,
+          53
+        ]
+      },
+      {
+        "Brain Non-enhancing Tumor": [
+          31,
+          31,
+          48,
+          49
+        ]
+      },
+      {
+        "Brain Enhancing Tumor": [
+          30,
+          27,
+          40,
+          37
+        ]
+      }
+    ],
+    "image_size": {
+      "width": 100,
+      "height": 100
+    },
+    "grounded_caption": "MRI scan showing <p>Brain Edema</p> {<28><27><53><53>} and <p>Brain Non-enhancing Tumor</p> {<31><31><48><49>} and <p>Brain Enhancing Tumor</p> {<30><27><40><37>}"
+  },
+  {
+    "folder_name": "xmlab512/source.jpg",
+    "detection": [
+      {
+        "Brain Edema": [
+          50,
+          53,
+          70,
+          74
+        ]
+      },
+      {
+        "Brain Edema": [
+          49,
+          71,
+          53,
+          81
+        ]
+      },
+      {
+        "Brain Non-enhancing Tumor": [
+          52,
+          65,
+          62,
+          78
+        ]
+      },
+      {
+        "Brain Enhancing Tumor": [
+          51,
+          63,
+          64,
+          80
+        ]
+      }
+    ],
+    "image_size": {
+      "width": 100,
+      "height": 100
+    },
+    "grounded_caption": "MRI scan showing <p>Brain Edema</p> {<49><71><53><81>} and <p>Brain Edema</p> {<49><71><4><10>} and <p>Brain Non-enhancing Tumor</p> {<52><65><62><78>} and <p>Brain Enhancing Tumor</p> {<51><63><64><80>}"
+  },
+  {
+    "folder_name": "xmlab405/source.jpg",
+    "detection": [
+      {
+        "Brain Stem": [
+          42,
+          45,
+          49,
+          49
+        ]
+      },
+      {
+        "Left Ear": [
+          51,
+          42,
+          55,
+          45
+        ]
+      },
+      {
+        "Right Ear": [
+          36,
+          42,
+          40,
+          45
+        ]
+      },
+      {
+        "Left Mandible": [
+          55,
+          35,
+          56,
+          36
+        ]
+      },
+      {
+        "Left Mandible": [
+          55,
+          41,
+          59,
+          43
+        ]
+      },
+      {
+        "Right Mandible": [
+          35,
+          35,
+          36,
+          37
+        ]
+      },
+      {
+        "Right Mandible": [
+          32,
+          41,
+          36,
+          43
+        ]
+      }
+    ],
+    "image_size": {
+      "width": 100,
+      "height": 100
+    },
+    "grounded_caption": "a CT scan showing <p>Brain Stem</p> {<42><45><49><49>} and <p>Left Ear</p> {<51><42><55><45>} and <p>Right Ear</p> {<36><42><40><45>} and <p>Left Mandible</p> {<55><41><59><43>} and <p>Left Mandible</p> {<55><41><4><2>} and <p>Right Mandible</p> {<32><41><36><43>} and <p>Right Mandible</p> {<32><41><4><2>}"
+  },
+  {
+    "folder_name": "xmlab409/source.jpg",
+    "detection": [
+      {
+        "Tooth": [
+          39,
+          24,
+          52,
+          33
+        ]
+      },
+      {
+        "Spinal Cord": [
+          45,
+          46,
+          48,
+          48
+        ]
+      },
+      {
+        "Left Mandible": [
+          54,
+          35,
+          57,
+          42
+        ]
+      },
+      {
+        "Right Mandible": [
+          34,
+          35,
+          37,
+          41
+        ]
+      },
+      {
+        "Left Parotid": [
+          55,
+          39,
+          61,
+          46
+        ]
+      },
+      {
+        "Right Parotid": [
+          32,
+          40,
+          37,
+          47
+        ]
+      }
+    ],
+    "image_size": {
+      "width": 100,
+      "height": 100
+    },
+    "grounded_caption": "a CT scan showing <p>Tooth</p> {<39><24><52><33>} and <p>Spinal Cord</p> {<45><46><48><48>} and <p>Left Mandible</p> {<54><35><57><42>} and <p>Right Mandible</p> {<34><35><37><41>} and <p>Left Parotid</p> {<55><39><61><46>} and <p>Right Parotid</p> {<32><40><37><47>}"
+  },
+  {
+    "folder_name": "xmlab463/source.jpg",
+    "detection": [
+      {
+        "Brain Edema": [
+          48,
+          26,
+          62,
+          56
+        ]
+      },
+      {
+        "Brain Non-enhancing Tumor": [
+          50,
+          28,
+          58,
+          50
+        ]
+      },
+      {
+        "Brain Enhancing Tumor": [
+          52,
+          32,
+          56,
+          36
+        ]
+      },
+      {
+        "Brain Enhancing Tumor": [
+          50,
+          37,
+          56,
+          42
+        ]
+      },
+      {
+        "Brain Enhancing Tumor": [
+          52,
+          44,
+          56,
+          50
+        ]
+      }
+    ],
+    "image_size": {
+      "width": 100,
+      "height": 100
+    },
+    "grounded_caption": "MRI scan showing <p>Brain Edema</p> {<48><26><62><56>} and <p>Brain Non-enhancing Tumor</p> {<50><28><58><50>} and <p>Brain Enhancing Tumor</p> {<52><44><56><50>} and <p>Brain Enhancing Tumor</p> {<50><37><6><5>} and <p>Brain Enhancing Tumor</p> {<52><44><4><6>}"
+  },
+  {
+    "folder_name": "xmlab54/source.jpg",
+    "detection": [
+      {
+        "Brain Edema": [
+          51,
+          37,
+          68,
+          48
+        ]
+      },
+      {
+        "Brain Edema": [
+          51,
+          50,
+          69,
+          63
+        ]
+      },
+      {
+        "Brain Non-enhancing Tumor": [
+          52,
+          40,
+          74,
+          61
+        ]
+      },
+      {
+        "Brain Enhancing Tumor": [
+          63,
+          39,
+          73,
+          51
+        ]
+      },
+      {
+        "Brain Enhancing Tumor": [
+          70,
+          53,
+          74,
+          57
+        ]
+      },
+      {
+        "Brain Enhancing Tumor": [
+          62,
+          57,
+          67,
+          59
+        ]
+      }
+    ],
+    "image_size": {
+      "width": 100,
+      "height": 100
+    },
+    "grounded_caption": "MRI scan showing <p>Brain Edema</p> {<51><50><69><63>} and <p>Brain Edema</p> {<51><50><18><13>} and <p>Brain Non-enhancing Tumor</p> {<52><40><74><61>} and <p>Brain Enhancing Tumor</p> {<62><57><67><59>} and <p>Brain Enhancing Tumor</p> {<70><53><4><4>} and <p>Brain Enhancing Tumor</p> {<62><57><5><2>}"
+  },
+  {
+    "folder_name": "xmlab389/source.jpg",
+    "detection": [
+      {
+        "Effusion": [
+          14,
+          38,
+          41,
+          58
+        ]
+      }
+    ],
+    "image_size": {
+      "width": 100,
+      "height": 100
+    },
+    "grounded_caption": "X-Ray image showing <p>Effusion</p> {<14><38><41><58>}"
+  },
+  {
+    "folder_name": "xmlab476/source.jpg",
+    "detection": [
+      {
+        "Brain Edema": [
+          50,
+          21,
+          59,
+          39
+        ]
+      },
+      {
+        "Brain Edema": [
+          60,
+          24,
+          64,
+          34
+        ]
+      },
+      {
+        "Brain Non-enhancing Tumor": [
+          53,
+          22,
+          63,
+          39
+        ]
+      }
+    ],
+    "image_size": {
+      "width": 100,
+      "height": 100
+    },
+    "grounded_caption": "MRI scan showing <p>Brain Edema</p> {<60><24><64><34>} and <p>Brain Edema</p> {<60><24><4><10>} and <p>Brain Non-enhancing Tumor</p> {<53><22><63><39>}"
+  },
+  {
+    "folder_name": "xmlab303/source.jpg",
+    "detection": [
+      {
+        "Effusion": [
+          70,
+          58,
+          81,
+          72
+        ]
+      },
+      {
+        "Infiltrate": [
+          14,
+          70,
+          35,
+          84
+        ]
+      }
+    ],
+    "image_size": {
+      "width": 100,
+      "height": 100
+    },
+    "grounded_caption": "X-Ray image showing <p>Effusion</p> {<70><58><81><72>} and <p>Infiltrate</p> {<14><70><35><84>}"
+  },
+  {
+    "folder_name": "xmlab626/source.jpg",
+    "detection": [
+      {
+        "Rectum": [
+          46,
+          59,
+          48,
+          62
+        ]
+      },
+      {
+        "Small Bowel": [
+          34,
+          37,
+          60,
+          51
+        ]
+      },
+      {
+        "Small Bowel": [
+          49,
+          58,
+          54,
+          60
+        ]
+      },
+      {
+        "Colon": [
+          50,
+          47,
+          56,
+          58
+        ]
+      },
+      {
+        "Colon": [
+          40,
+          51,
+          45,
+          57
+        ]
+      }
+    ],
+    "image_size": {
+      "width": 100,
+      "height": 100
+    },
+    "grounded_caption": "a CT scan showing <p>Rectum</p> {<46><59><48><62>} and <p>Small Bowel</p> {<49><58><54><60>} and <p>Small Bowel</p> {<49><58><5><2>} and <p>Colon</p> {<40><51><45><57>} and <p>Colon</p> {<40><51><5><6>}"
+  },
+  {
+    "folder_name": "xmlab430/source.jpg",
+    "detection": [
+      {
+        "Trachea": [
+          44,
+          37,
+          48,
+          41
+        ]
+      },
+      {
+        "Esophagus": [
+          44,
+          41,
+          48,
+          43
+        ]
+      },
+      {
+        "Spinal Cord": [
+          45,
+          49,
+          47,
+          51
+        ]
+      }
+    ],
+    "image_size": {
+      "width": 100,
+      "height": 100
+    },
+    "grounded_caption": "a CT scan showing <p>Trachea</p> {<44><37><48><41>} and <p>Esophagus</p> {<44><41><48><43>} and <p>Spinal Cord</p> {<45><49><47><51>}"
+  },
+  {
+    "folder_name": "xmlab332/source.jpg",
+    "detection": [
+      {
+        "Nodule": [
+          22,
+          46,
+          27,
+          52
+        ]
+      }
+    ],
+    "image_size": {
+      "width": 100,
+      "height": 100
+    },
+    "grounded_caption": "X-Ray image showing <p>Nodule</p> {<22><46><27><52>}"
+  },
+  {
+    "folder_name": "xmlab72/source.jpg",
+    "detection": [
+      {
+        "Brain Edema": [
+          55,
+          62,
+          71,
+          78
+        ]
+      },
+      {
+        "Brain Enhancing Tumor": [
+          60,
+          67,
+          67,
+          74
+        ]
+      }
+    ],
+    "image_size": {
+      "width": 100,
+      "height": 100
+    },
+    "grounded_caption": "MRI scan showing <p>Brain Edema</p> {<55><62><71><78>} and <p>Brain Enhancing Tumor</p> {<60><67><67><74>}"
+  },
+  {
+    "folder_name": "xmlab520/source.jpg",
+    "detection": [
+      {
+        "Brain Edema": [
+          29,
+          25,
+          53,
+          45
+        ]
+      },
+      {
+        "Brain Non-enhancing Tumor": [
+          34,
+          18,
+          50,
+          24
+        ]
+      },
+      {
+        "Brain Non-enhancing Tumor": [
+          31,
+          25,
+          36,
+          28
+        ]
+      },
+      {
+        "Brain Non-enhancing Tumor": [
+          35,
+          32,
+          43,
+          39
+        ]
+      },
+      {
+        "Brain Enhancing Tumor": [
+          39,
+          18,
+          44,
+          20
+        ]
+      },
+      {
+        "Brain Enhancing Tumor": [
+          32,
+          20,
+          50,
+          36
+        ]
+      }
+    ],
+    "image_size": {
+      "width": 100,
+      "height": 100
+    },
+    "grounded_caption": "MRI scan showing <p>Brain Edema</p> {<29><25><53><45>} and <p>Brain Non-enhancing Tumor</p> {<35><32><43><39>} and <p>Brain Non-enhancing Tumor</p> {<31><25><5><3>} and <p>Brain Non-enhancing Tumor</p> {<35><32><8><7>} and <p>Brain Enhancing Tumor</p> {<32><20><50><36>} and <p>Brain Enhancing Tumor</p> {<32><20><18><16>}"
+  },
+  {
+    "folder_name": "xmlab426/source.jpg",
+    "detection": [
+      {
+        "Larynx": [
+          44,
+          36,
+          47,
+          41
+        ]
+      },
+      {
+        "Spinal Cord": [
+          45,
+          48,
+          48,
+          50
+        ]
+      }
+    ],
+    "image_size": {
+      "width": 100,
+      "height": 100
+    },
+    "grounded_caption": "a CT scan showing <p>Larynx</p> {<44><36><47><41>} and <p>Spinal Cord</p> {<45><48><48><50>}"
+  },
+  {
+    "folder_name": "xmlab23/source.jpg",
+    "detection": [
+      {
+        "Liver": [
+          19,
+          33,
+          39,
+          64
+        ]
+      },
+      {
+        "Left Kidney": [
+          52,
+          55,
+          62,
+          64
+        ]
+      },
+      {
+        "Right Kidney": [
+          32,
+          53,
+          40,
+          61
+        ]
+      },
+      {
+        "Spleen": [
+          64,
+          47,
+          78,
+          66
+        ]
+      }
+    ],
+    "image_size": {
+      "width": 100,
+      "height": 100
+    },
+    "grounded_caption": "MRI scan showing <p>Liver</p> {<19><33><39><64>} and <p>Left Kidney</p> {<52><55><62><64>} and <p>Right Kidney</p> {<32><53><40><61>} and <p>Spleen</p> {<64><47><78><66>}"
+  },
+  {
+    "folder_name": "xmlab635/source.jpg",
+    "detection": [
+      {
+        "Spinal Cord": [
+          45,
+          57,
+          49,
+          60
+        ]
+      },
+      {
+        "Small Bowel": [
+          52,
+          43,
+          67,
+          56
+        ]
+      },
+      {
+        "Small Bowel": [
+          40,
+          44,
+          47,
+          47
+        ]
+      },
+      {
+        "Colon": [
+          37,
+          40,
+          51,
+          45
+        ]
+      },
+      {
+        "Colon": [
+          27,
+          44,
+          36,
+          56
+        ]
+      },
+      {
+        "Colon": [
+          57,
+          53,
+          60,
+          56
+        ]
+      }
+    ],
+    "image_size": {
+      "width": 100,
+      "height": 100
+    },
+    "grounded_caption": "a CT scan showing <p>Spinal Cord</p> {<45><57><49><60>} and <p>Small Bowel</p> {<40><44><47><47>} and <p>Small Bowel</p> {<40><44><7><3>} and <p>Colon</p> {<57><53><60><56>} and <p>Colon</p> {<27><44><9><12>} and <p>Colon</p> {<57><53><3><3>}"
+  }
+]

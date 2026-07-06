@@ -1,0 +1,5430 @@
+[
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "809830cd-c757-4e81-abec-0d6d935ae0ce.jpg",
+    "bbox": [
+      [
+        573,
+        256,
+        762,
+        684
+      ],
+      [
+        303,
+        197,
+        510,
+        605
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray provides evidence of pneumonia with the lung's air sacs filled with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "0c248828-72e2-43cf-8622-b5775c421fb1.jpg",
+    "bbox": [
+      [
+        551,
+        207,
+        759,
+        480
+      ],
+      [
+        193,
+        418,
+        410,
+        570
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray reveals alveoli in the lungs, congested with fluid or pus, due to pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "78b8f6bc-96ba-4528-b6b7-39d1a140ce07.jpg",
+    "bbox": [
+      [
+        289,
+        536,
+        685,
+        671
+      ]
+    ],
+    "rephrased_caption": "The x-ray of the chest exposes pneumonia in the lungs, with the alveoli filled with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "57ecf732-8919-406a-a0d2-d74622cdf302.jpg",
+    "bbox": [
+      [
+        259,
+        570,
+        423,
+        666
+      ],
+      [
+        761,
+        532,
+        898,
+        721
+      ]
+    ],
+    "rephrased_caption": "The alveoli, critical air sacs in the lungs, are seen filled with fluid or pus in the chest x-ray, indicating pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "3b4a83a5-e755-4b20-b21c-0a0424095325.jpg",
+    "bbox": [
+      [
+        305,
+        525,
+        448,
+        655
+      ]
+    ],
+    "rephrased_caption": "The alveoli, or air sacs of the lungs, are observed to be filled with fluid or pus in the chest x-ray, indicative of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "a6c364d2-b2d6-4b0b-a439-40b992ff65c7.jpg",
+    "bbox": [
+      [
+        220,
+        191,
+        519,
+        777
+      ],
+      [
+        606,
+        203,
+        927,
+        780
+      ]
+    ],
+    "rephrased_caption": "pneumonia, causing fluid or pus in the alveoli, is diagnosed through this chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "bf3ef845-34ab-4b80-81e7-ac7a3b23485a.jpg",
+    "bbox": [
+      [
+        191,
+        433,
+        413,
+        620
+      ]
+    ],
+    "rephrased_caption": "The radiograph of the chest shows the lungs' air sacs, or alveoli, filled with fluid or pus, indicative of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "0f3ac29b-7682-4402-bbe5-89e4add87639.jpg",
+    "bbox": [
+      [
+        350,
+        572,
+        537,
+        816
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray reveals alveoli in the lungs, congested with fluid or pus, due to pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "03cd7a5b-d5d7-40a1-81b1-c4264920530a.jpg",
+    "bbox": [
+      [
+        667,
+        125,
+        922,
+        874
+      ],
+      [
+        284,
+        170,
+        499,
+        741
+      ]
+    ],
+    "rephrased_caption": "Fluid or pus in the lungs' air sacs, as seen in the chest x-ray, is a characteristic of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "b6138fc8-c652-4b7f-978d-895d10b0a0ea.jpg",
+    "bbox": [
+      [
+        319,
+        504,
+        435,
+        669
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray clearly shows the lung's alveoli, swollen with fluid or pus, a sign of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "3666d8e9-60ac-4d61-a527-a87a4fbe4459.jpg",
+    "bbox": [
+      [
+        308,
+        541,
+        406,
+        687
+      ]
+    ],
+    "rephrased_caption": "pneumonia is diagnosed in the chest x-ray by the accumulation of fluid or pus in the lung's alveoli."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "52ba9595-c55a-43d5-88f2-6ae572263e49.jpg",
+    "bbox": [
+      [
+        702,
+        261,
+        950,
+        891
+      ],
+      [
+        260,
+        206,
+        517,
+        718
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray depicts the lungs afflicted with pneumonia, with the alveoli congested with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "bf5b8e51-9dfe-4248-b38e-45a9f598b0c8.jpg",
+    "bbox": [
+      [
+        169,
+        508,
+        401,
+        734
+      ]
+    ],
+    "rephrased_caption": "pneumonia, causing fluid or pus in the alveoli, is diagnosed through this chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "363a77dc-eb92-45ec-9872-aaf32a4bc920.jpg",
+    "bbox": [
+      [
+        614,
+        418,
+        787,
+        719
+      ],
+      [
+        219,
+        272,
+        480,
+        581
+      ]
+    ],
+    "rephrased_caption": "pneumonia in the lungs, causing alveoli to fill with fluid or pus, is evident in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "345d1a85-8d32-4e43-8e9f-dfb0048da3fe.jpg",
+    "bbox": [
+      [
+        142,
+        434,
+        379,
+        633
+      ]
+    ],
+    "rephrased_caption": "pneumonia, as shown in the chest x-ray, causes the lungs' alveoli to accumulate fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "395738ff-53d2-42e6-aa6d-a01e4a07f01f.jpg",
+    "bbox": [
+      [
+        611,
+        475,
+        847,
+        907
+      ],
+      [
+        274,
+        468,
+        513,
+        882
+      ]
+    ],
+    "rephrased_caption": "pneumonia is evident from the chest x-ray, where the lung's air sacs are inundated with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "f77b0afe-0085-4ee0-afad-a1e9fda8fe65.jpg",
+    "bbox": [
+      [
+        327,
+        153,
+        513,
+        423
+      ],
+      [
+        702,
+        246,
+        841,
+        505
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray portrays pneumonia with the lungs' alveoli filled with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "091d75a8-e23e-4cb8-af67-10cb314077ec.jpg",
+    "bbox": [
+      [
+        118,
+        501,
+        346,
+        635
+      ],
+      [
+        579,
+        501,
+        859,
+        897
+      ]
+    ],
+    "rephrased_caption": "In this chest x-ray, the lung's alveoli are laden with fluid or pus, a symptom of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "b8a633b3-b2fa-4e17-be54-faf0aba4c903.jpg",
+    "bbox": [
+      [
+        157,
+        529,
+        413,
+        803
+      ]
+    ],
+    "rephrased_caption": "pneumonia is confirmed by the chest x-ray, which shows fluid or pus in the lungs' alveoli."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "dd6e599d-bba3-4a3e-968c-0dcba546099f.jpg",
+    "bbox": [
+      [
+        190,
+        376,
+        346,
+        506
+      ]
+    ],
+    "rephrased_caption": "A chest x-ray indicates pneumonia in the lungs, with alveoli engorged with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "085a25eb-1ebd-4bf1-b320-7833e7c37553.jpg",
+    "bbox": [
+      [
+        580,
+        365,
+        847,
+        670
+      ],
+      [
+        178,
+        276,
+        448,
+        624
+      ]
+    ],
+    "rephrased_caption": "The radiograph of the chest shows the lungs' air sacs, or alveoli, filled with fluid or pus, indicative of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "ed5ddfad-977d-4b5c-9584-ba676b156f2e.jpg",
+    "bbox": [
+      [
+        208,
+        470,
+        410,
+        604
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray shows pneumonia in the lungs, with the alveoli filled with either fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "3734dfbc-ce7c-478e-8160-53ea00b32c5c.jpg",
+    "bbox": [
+      [
+        171,
+        281,
+        368,
+        536
+      ],
+      [
+        491,
+        384,
+        710,
+        499
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray provides evidence of pneumonia with the lung's air sacs filled with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "719a4121-a78a-468d-b175-5b0f5fcc992b.jpg",
+    "bbox": [
+      [
+        167,
+        502,
+        306,
+        670
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray clearly shows the lung's alveoli, swollen with fluid or pus, a sign of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "5c516953-ec2d-4859-9334-3e6ed90d4ba6.jpg",
+    "bbox": [
+      [
+        608,
+        268,
+        876,
+        767
+      ]
+    ],
+    "rephrased_caption": "pneumonia's hallmark, fluid or pus in the lung's air sacs, is captured in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "6ad6525d-5225-4623-9f5a-65816cc3436f.jpg",
+    "bbox": [
+      [
+        615,
+        411,
+        843,
+        629
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray portrays pneumonia with the lungs' alveoli filled with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "c3985003-dd35-42c2-9a6d-c9372742eac2.jpg",
+    "bbox": [
+      [
+        112,
+        478,
+        325,
+        612
+      ]
+    ],
+    "rephrased_caption": "pneumonia is diagnosed in the chest x-ray by the accumulation of fluid or pus in the lung's alveoli."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "ae6a227c-27d7-48f1-b424-ba091d4c1c08.jpg",
+    "bbox": [
+      [
+        288,
+        297,
+        461,
+        575
+      ],
+      [
+        641,
+        286,
+        818,
+        676
+      ]
+    ],
+    "rephrased_caption": "pneumonia in the lungs, causing alveoli to fill with fluid or pus, is evident in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "a16c339d-0eb4-4010-87a0-f422a08a00bb.jpg",
+    "bbox": [
+      [
+        594,
+        448,
+        829,
+        751
+      ],
+      [
+        198,
+        427,
+        457,
+        798
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray shows pneumonia in the lungs, with the alveoli filled with either fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "26a1ecf7-b0ce-43a6-9893-14e8fb0e4704.jpg",
+    "bbox": [
+      [
+        622,
+        558,
+        789,
+        787
+      ],
+      [
+        571,
+        204,
+        707,
+        490
+      ]
+    ],
+    "rephrased_caption": "Fluid or pus in the lung's alveoli, a sign of pneumonia, is visible in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "ba0e4666-cf09-4ba1-a758-f4960ef162c9.jpg",
+    "bbox": [
+      [
+        649,
+        286,
+        908,
+        643
+      ],
+      [
+        295,
+        276,
+        481,
+        530
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray reveals alveoli in the lungs, congested with fluid or pus, due to pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "c203f4e6-0963-4543-a34c-48b9d62b3e27.jpg",
+    "bbox": [
+      [
+        258,
+        187,
+        478,
+        523
+      ],
+      [
+        611,
+        164,
+        759,
+        549
+      ]
+    ],
+    "rephrased_caption": "Fluid or pus in the lung's alveoli, a sign of pneumonia, is visible in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "515d7f97-f72a-4b82-aa13-c33c88f379e5.jpg",
+    "bbox": [
+      [
+        652,
+        369,
+        920,
+        732
+      ],
+      [
+        210,
+        286,
+        469,
+        718
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray illustrates pneumonia affecting the lungs, leading to fluid or pus in the alveoli."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "2fa75092-e364-4326-b5b0-f1d61df464c8.jpg",
+    "bbox": [
+      [
+        224,
+        295,
+        413,
+        562
+      ],
+      [
+        592,
+        259,
+        771,
+        490
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray indicates the presence of pneumonia, as evidenced by fluid or pus in the lungs' alveoli."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "816cef8f-cbf7-43c7-8386-609bd95c78e6.jpg",
+    "bbox": [
+      [
+        627,
+        304,
+        868,
+        599
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray provides evidence of pneumonia with the lung's air sacs filled with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "bb13f699-a024-4946-a481-8d2e91d3cf72.jpg",
+    "bbox": [
+      [
+        649,
+        125,
+        921,
+        753
+      ],
+      [
+        285,
+        82,
+        502,
+        673
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray shows pneumonia in the lungs, with the alveoli filled with either fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "35061124-9245-4434-b165-b89aef28bb75.jpg",
+    "bbox": [
+      [
+        327,
+        138,
+        435,
+        295
+      ]
+    ],
+    "rephrased_caption": "The radiograph of the chest shows the lungs' air sacs, or alveoli, filled with fluid or pus, indicative of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "a66d881d-c072-4ea0-a00c-74a62981a3e8.jpg",
+    "bbox": [
+      [
+        671,
+        260,
+        928,
+        621
+      ],
+      [
+        234,
+        116,
+        531,
+        583
+      ]
+    ],
+    "rephrased_caption": "In the x-ray of the chest, the lung's alveoli are observed to be engorged with fluid or pus, a symptom of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "6f5eb191-d7ee-472e-b08c-e6975896f5c4.jpg",
+    "bbox": [
+      [
+        192,
+        300,
+        382,
+        770
+      ],
+      [
+        543,
+        319,
+        744,
+        818
+      ]
+    ],
+    "rephrased_caption": "Fluid or pus in the lungs' air sacs, as seen in the chest x-ray, is a characteristic of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "e75caca3-22a7-48dc-9b2d-d6e19db6bb29.jpg",
+    "bbox": [
+      [
+        214,
+        230,
+        345,
+        487
+      ],
+      [
+        192,
+        598,
+        332,
+        726
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray provides evidence of pneumonia with the lung's air sacs filled with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "6b1c5aa9-639f-46c5-91c9-186952430ee7.jpg",
+    "bbox": [
+      [
+        741,
+        198,
+        1007,
+        628
+      ],
+      [
+        242,
+        331,
+        429,
+        496
+      ]
+    ],
+    "rephrased_caption": "pneumonia is confirmed by the chest x-ray, which shows fluid or pus in the lungs' alveoli."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "f759e4b7-21fe-4f3a-aaeb-0b8b99cb103c.jpg",
+    "bbox": [
+      [
+        217,
+        550,
+        367,
+        773
+      ]
+    ],
+    "rephrased_caption": "The alveoli of the lungs, filled with fluid or pus, signify pneumonia in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "99f7ad08-2189-452c-afab-6d7b1c62c049.jpg",
+    "bbox": [
+      [
+        144,
+        555,
+        405,
+        828
+      ]
+    ],
+    "rephrased_caption": "The alveoli, or air sacs of the lungs, are observed to be filled with fluid or pus in the chest x-ray, indicative of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "0862f2ff-7e56-4cd1-8c26-c3f25a86d257.jpg",
+    "bbox": [
+      [
+        622,
+        100,
+        891,
+        862
+      ],
+      [
+        279,
+        218,
+        532,
+        620
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray reveals alveoli in the lungs, congested with fluid or pus, due to pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "eddb7172-d147-448c-a8e2-fee8f9cfb449.jpg",
+    "bbox": [
+      [
+        216,
+        449,
+        402,
+        719
+      ]
+    ],
+    "rephrased_caption": "The x-ray of the chest exposes pneumonia in the lungs, with the alveoli filled with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "be033abc-95d1-4d7f-baa8-2bece16b67aa.jpg",
+    "bbox": [
+      [
+        179,
+        353,
+        415,
+        696
+      ]
+    ],
+    "rephrased_caption": "The lung's air sacs, or alveoli, are filled with fluid or pus due to pneumonia, as the chest x-ray shows."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "f1c0e838-08dd-4ec4-84a7-cedf9b87f592.jpg",
+    "bbox": [
+      [
+        189,
+        444,
+        401,
+        627
+      ],
+      [
+        637,
+        629,
+        831,
+        778
+      ]
+    ],
+    "rephrased_caption": "pneumonia's effect on the lungs, causing alveoli to be filled with fluid or pus, is visible in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "a1e46713-1cd9-4360-9a3f-5e57e418c5a2.jpg",
+    "bbox": [
+      [
+        169,
+        177,
+        435,
+        496
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray depicts the lungs afflicted with pneumonia, with the alveoli congested with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "6a3f2b9b-ae83-4561-8ad4-069e40152866.jpg",
+    "bbox": [
+      [
+        199,
+        618,
+        445,
+        787
+      ],
+      [
+        694,
+        448,
+        852,
+        584
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray indicates the presence of pneumonia, as evidenced by fluid or pus in the lungs' alveoli."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "363a0e1a-adec-4a04-9fc7-0ed505dbc4f8.jpg",
+    "bbox": [
+      [
+        188,
+        122,
+        454,
+        656
+      ],
+      [
+        568,
+        101,
+        845,
+        579
+      ]
+    ],
+    "rephrased_caption": "pneumonia, as shown in the chest x-ray, causes the lungs' alveoli to accumulate fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "ce6385e6-88c6-432a-b32f-c7018795bc32.jpg",
+    "bbox": [
+      [
+        565,
+        238,
+        866,
+        705
+      ]
+    ],
+    "rephrased_caption": "The x-ray of the chest exposes pneumonia in the lungs, with the alveoli filled with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "d373b335-d9d9-4594-b97e-03ec9aa8daa2.jpg",
+    "bbox": [
+      [
+        434,
+        246,
+        792,
+        688
+      ],
+      [
+        76,
+        342,
+        389,
+        754
+      ]
+    ],
+    "rephrased_caption": "In the chest x-ray, fluid or pus filling the alveoli is a clear indication of pneumonia in the lungs."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "433c5421-aff0-4b35-b520-1540c9efafe0.jpg",
+    "bbox": [
+      [
+        576,
+        462,
+        955,
+        780
+      ]
+    ],
+    "rephrased_caption": "pneumonia's hallmark, fluid or pus in the lung's air sacs, is captured in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "56a9a226-789b-428e-a1bd-303f4d7a2f1e.jpg",
+    "bbox": [
+      [
+        254,
+        366,
+        371,
+        687
+      ],
+      [
+        562,
+        356,
+        753,
+        704
+      ]
+    ],
+    "rephrased_caption": "In this chest x-ray, the lung's alveoli are laden with fluid or pus, a symptom of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "4878535b-ef11-4656-b44c-ed21d223e4d3.jpg",
+    "bbox": [
+      [
+        297,
+        334,
+        497,
+        560
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray illustrates pneumonia affecting the lungs, leading to fluid or pus in the alveoli."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "a0af1a60-0f1c-4d53-9a71-dd438aa06b70.jpg",
+    "bbox": [
+      [
+        161,
+        196,
+        461,
+        832
+      ],
+      [
+        584,
+        446,
+        871,
+        869
+      ]
+    ],
+    "rephrased_caption": "pneumonia, causing fluid or pus in the alveoli, is diagnosed through this chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "a3f77eaf-8e19-4ad8-84b2-9549f3dcbef8.jpg",
+    "bbox": [
+      [
+        614,
+        521,
+        851,
+        716
+      ],
+      [
+        141,
+        398,
+        336,
+        679
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray provides evidence of pneumonia with the lung's air sacs filled with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "c7e641a6-a80b-4314-961d-d63e4a54d5bc.jpg",
+    "bbox": [
+      [
+        569,
+        342,
+        855,
+        571
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray illustrates pneumonia affecting the lungs, leading to fluid or pus in the alveoli."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "3b636d43-b04f-4609-9af5-d987d3e12f98.jpg",
+    "bbox": [
+      [
+        189,
+        194,
+        428,
+        634
+      ],
+      [
+        565,
+        242,
+        769,
+        775
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray reveals alveoli in the lungs, congested with fluid or pus, due to pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "f02e36df-ac4d-43f1-8001-3e0494145b0a.jpg",
+    "bbox": [
+      [
+        554,
+        286,
+        756,
+        640
+      ],
+      [
+        121,
+        194,
+        349,
+        648
+      ]
+    ],
+    "rephrased_caption": "A clear sign of pneumonia, the lung's alveoli filled with fluid or pus, is visible in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "ac2dbd3f-3b25-4628-8b69-338d34cbf628.jpg",
+    "bbox": [
+      [
+        614,
+        429,
+        829,
+        743
+      ],
+      [
+        222,
+        545,
+        418,
+        723
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray portrays pneumonia with the lungs' alveoli filled with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "8fa2efa3-f8c8-4b89-9c22-e6468ec696d8.jpg",
+    "bbox": [
+      [
+        455,
+        295,
+        546,
+        496
+      ],
+      [
+        612,
+        360,
+        733,
+        587
+      ]
+    ],
+    "rephrased_caption": "pneumonia is diagnosed in the chest x-ray by the accumulation of fluid or pus in the lung's alveoli."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "dc5bd0b3-050a-42a3-b09e-bec480039d6f.jpg",
+    "bbox": [
+      [
+        181,
+        522,
+        384,
+        663
+      ]
+    ],
+    "rephrased_caption": "In the chest x-ray, fluid or pus filling the alveoli is a clear indication of pneumonia in the lungs."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "738524e2-9e98-43cb-8c56-b480a2a0ae2f.jpg",
+    "bbox": [
+      [
+        169,
+        652,
+        338,
+        754
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray indicates the presence of pneumonia, as evidenced by fluid or pus in the lungs' alveoli."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "d0eddd98-9377-475a-94d8-6c9663fa8396.jpg",
+    "bbox": [
+      [
+        228,
+        185,
+        520,
+        596
+      ],
+      [
+        593,
+        206,
+        832,
+        610
+      ]
+    ],
+    "rephrased_caption": "Fluid or pus in the lung's alveoli, a sign of pneumonia, is visible in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "90dc43af-fe27-4f49-92c3-969de5551b5a.jpg",
+    "bbox": [
+      [
+        628,
+        195,
+        868,
+        608
+      ],
+      [
+        294,
+        255,
+        494,
+        609
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray reveals pneumonia in the lungs, filling the alveoli with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "8005e8b9-ab58-45e2-b902-8057864630af.jpg",
+    "bbox": [
+      [
+        204,
+        641,
+        363,
+        757
+      ]
+    ],
+    "rephrased_caption": "A chest x-ray indicates pneumonia in the lungs, with alveoli engorged with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "b852bc3c-0de5-4448-aff8-f96b2cc13d51.jpg",
+    "bbox": [
+      [
+        146,
+        282,
+        351,
+        683
+      ],
+      [
+        506,
+        294,
+        739,
+        752
+      ]
+    ],
+    "rephrased_caption": "pneumonia's effect on the lungs, causing alveoli to be filled with fluid or pus, is visible in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "5dbb180e-0145-49a7-a6af-dffb8718fb96.jpg",
+    "bbox": [
+      [
+        203,
+        449,
+        370,
+        649
+      ],
+      [
+        651,
+        496,
+        761,
+        607
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray depicts the lungs afflicted with pneumonia, with the alveoli congested with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "ac4bf897-0752-4095-9404-1e6ff42a1dfb.jpg",
+    "bbox": [
+      [
+        153,
+        137,
+        396,
+        769
+      ],
+      [
+        542,
+        133,
+        655,
+        392
+      ],
+      [
+        552,
+        610,
+        741,
+        810
+      ]
+    ],
+    "rephrased_caption": "In the x-ray of the chest, the lung's alveoli are observed to be engorged with fluid or pus, a symptom of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "a058e58a-be32-4941-86ce-b01a36285658.jpg",
+    "bbox": [
+      [
+        617,
+        114,
+        837,
+        646
+      ],
+      [
+        133,
+        124,
+        469,
+        844
+      ]
+    ],
+    "rephrased_caption": "pneumonia's effect on the lungs, causing alveoli to be filled with fluid or pus, is visible in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "14df3d5a-f3fd-4a64-ae75-5a9610575e11.jpg",
+    "bbox": [
+      [
+        301,
+        294,
+        422,
+        723
+      ],
+      [
+        609,
+        362,
+        800,
+        750
+      ]
+    ],
+    "rephrased_caption": "The alveoli, or air sacs of the lungs, are observed to be filled with fluid or pus in the chest x-ray, indicative of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "d20eab1c-69ed-486e-826c-7c0b15dd61b3.jpg",
+    "bbox": [
+      [
+        152,
+        440,
+        408,
+        585
+      ]
+    ],
+    "rephrased_caption": "pneumonia, as shown in the chest x-ray, causes the lungs' alveoli to accumulate fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "3f750eed-bfad-4c3f-b268-8c9f4270cf05.jpg",
+    "bbox": [
+      [
+        561,
+        497,
+        850,
+        635
+      ]
+    ],
+    "rephrased_caption": "pneumonia, as shown in the chest x-ray, causes the lungs' alveoli to accumulate fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "5c1e55b7-e799-436f-a366-d7474c644e8a.jpg",
+    "bbox": [
+      [
+        389,
+        488,
+        471,
+        645
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray portrays pneumonia with the lungs' alveoli filled with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "3d48f4d3-7a90-4ead-8634-b2d394575284.jpg",
+    "bbox": [
+      [
+        132,
+        118,
+        386,
+        646
+      ],
+      [
+        523,
+        186,
+        722,
+        723
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray portrays pneumonia with the lungs' alveoli filled with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "8b2543f1-89e6-41d2-8ede-ab0f9b797f41.jpg",
+    "bbox": [
+      [
+        280,
+        379,
+        550,
+        748
+      ]
+    ],
+    "rephrased_caption": "The alveoli, critical air sacs in the lungs, are seen filled with fluid or pus in the chest x-ray, indicating pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "1aea68e3-a8b7-4402-92a5-16a1f23c6d4a.jpg",
+    "bbox": [
+      [
+        245,
+        183,
+        488,
+        630
+      ],
+      [
+        676,
+        262,
+        878,
+        715
+      ]
+    ],
+    "rephrased_caption": "In the chest x-ray, fluid or pus filling the alveoli is a clear indication of pneumonia in the lungs."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "b997fc0a-eb76-40c3-8924-4b2ecf0d49a6.jpg",
+    "bbox": [
+      [
+        132,
+        473,
+        413,
+        813
+      ],
+      [
+        605,
+        443,
+        869,
+        798
+      ]
+    ],
+    "rephrased_caption": "pneumonia's effect on the lungs, causing alveoli to be filled with fluid or pus, is visible in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "c98faad9-6dd2-45fe-87af-63bbb94eeb77.jpg",
+    "bbox": [
+      [
+        300,
+        296,
+        494,
+        707
+      ],
+      [
+        593,
+        322,
+        785,
+        768
+      ]
+    ],
+    "rephrased_caption": "A chest x-ray indicates pneumonia in the lungs, with alveoli engorged with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "4e0296ae-1440-4c05-957e-3177134ee108.jpg",
+    "bbox": [
+      [
+        281,
+        288,
+        550,
+        686
+      ],
+      [
+        667,
+        290,
+        925,
+        750
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray depicts the lungs afflicted with pneumonia, with the alveoli congested with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "f743c21e-5876-460b-bbd6-2e2dcca41baa.jpg",
+    "bbox": [
+      [
+        204,
+        523,
+        411,
+        851
+      ],
+      [
+        756,
+        662,
+        930,
+        935
+      ],
+      [
+        245,
+        318,
+        379,
+        448
+      ]
+    ],
+    "rephrased_caption": "pneumonia is confirmed by the chest x-ray, which shows fluid or pus in the lungs' alveoli."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "06fc2885-127a-4274-b20c-554d352ea21b.jpg",
+    "bbox": [
+      [
+        197,
+        129,
+        494,
+        650
+      ],
+      [
+        612,
+        292,
+        886,
+        710
+      ]
+    ],
+    "rephrased_caption": "Fluid or pus in the lung's alveoli, a sign of pneumonia, is visible in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "b407bfac-f351-4129-9e55-53e825f7ab16.jpg",
+    "bbox": [
+      [
+        388,
+        297,
+        670,
+        715
+      ],
+      [
+        6,
+        355,
+        253,
+        634
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray reveals alveoli in the lungs, congested with fluid or pus, due to pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "46b861c5-844c-40be-b390-63008b567261.jpg",
+    "bbox": [
+      [
+        159,
+        216,
+        428,
+        751
+      ],
+      [
+        539,
+        273,
+        796,
+        836
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray reveals pneumonia in the lungs, filling the alveoli with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "60670c26-f00c-4139-973e-280d02a2d74d.jpg",
+    "bbox": [
+      [
+        235,
+        513,
+        456,
+        639
+      ],
+      [
+        310,
+        669,
+        444,
+        757
+      ]
+    ],
+    "rephrased_caption": "pneumonia is evident from the chest x-ray, where the lung's air sacs are inundated with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "aff2efe8-0cf0-4789-8ec9-b15d10f32c69.jpg",
+    "bbox": [
+      [
+        311,
+        373,
+        445,
+        585
+      ],
+      [
+        651,
+        376,
+        918,
+        596
+      ]
+    ],
+    "rephrased_caption": "A clear sign of pneumonia, the lung's alveoli filled with fluid or pus, is visible in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "ab6619ee-546c-4245-be8d-6e0eece3581a.jpg",
+    "bbox": [
+      [
+        608,
+        283,
+        822,
+        857
+      ],
+      [
+        249,
+        203,
+        465,
+        805
+      ]
+    ],
+    "rephrased_caption": "pneumonia, causing fluid or pus in the alveoli, is diagnosed through this chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "e140e6e5-cdf1-47d6-b2f1-602aa8a1a69c.jpg",
+    "bbox": [
+      [
+        725,
+        485,
+        845,
+        712
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray reveals pneumonia in the lungs, filling the alveoli with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "18bff0c2-16fa-4681-845a-c9a8f019ceaf.jpg",
+    "bbox": [
+      [
+        93,
+        310,
+        287,
+        456
+      ]
+    ],
+    "rephrased_caption": "The alveoli, critical air sacs in the lungs, are seen filled with fluid or pus in the chest x-ray, indicating pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "aec5b2e5-ceff-4e21-a089-19efcd0c3d45.jpg",
+    "bbox": [
+      [
+        205,
+        606,
+        410,
+        808
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray reveals alveoli in the lungs, congested with fluid or pus, due to pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "25300d70-86f1-4be6-83a9-f6ae31a0b451.jpg",
+    "bbox": [
+      [
+        577,
+        511,
+        772,
+        597
+      ]
+    ],
+    "rephrased_caption": "The alveoli of the lungs, filled with fluid or pus, signify pneumonia in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "1b2fcebf-3743-40ef-92e7-e0802c77a5c2.jpg",
+    "bbox": [
+      [
+        632,
+        193,
+        860,
+        821
+      ],
+      [
+        275,
+        236,
+        468,
+        754
+      ]
+    ],
+    "rephrased_caption": "pneumonia is evident from the chest x-ray, where the lung's air sacs are inundated with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "3c1fdc6b-2e9a-46f7-8dbd-28d4155f9b93.jpg",
+    "bbox": [
+      [
+        655,
+        281,
+        789,
+        492
+      ],
+      [
+        333,
+        507,
+        512,
+        623
+      ],
+      [
+        639,
+        492,
+        858,
+        617
+      ]
+    ],
+    "rephrased_caption": "pneumonia, causing fluid or pus in the alveoli, is diagnosed through this chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "57efac0d-fe0d-4fd1-a986-8642a0a0fe6a.jpg",
+    "bbox": [
+      [
+        259,
+        505,
+        473,
+        660
+      ],
+      [
+        657,
+        161,
+        834,
+        475
+      ]
+    ],
+    "rephrased_caption": "The alveoli, or air sacs of the lungs, are observed to be filled with fluid or pus in the chest x-ray, indicative of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "5904aef8-6b8c-4e45-a8b2-8ed4a369079f.jpg",
+    "bbox": [
+      [
+        628,
+        245,
+        906,
+        773
+      ],
+      [
+        247,
+        278,
+        501,
+        709
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray reveals pneumonia in the lungs, filling the alveoli with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "38314ee1-b525-43aa-af34-8e1dd877395e.jpg",
+    "bbox": [
+      [
+        308,
+        475,
+        450,
+        643
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray indicates the presence of pneumonia, as evidenced by fluid or pus in the lungs' alveoli."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "b17cb86b-e90c-4a31-926a-2e5b022c6275.jpg",
+    "bbox": [
+      [
+        529,
+        479,
+        849,
+        868
+      ]
+    ],
+    "rephrased_caption": "pneumonia is confirmed by the chest x-ray, which shows fluid or pus in the lungs' alveoli."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "8ce28cb3-1184-4792-b774-229fa7dd633e.jpg",
+    "bbox": [
+      [
+        675,
+        378,
+        867,
+        805
+      ]
+    ],
+    "rephrased_caption": "In the x-ray of the chest, the lung's alveoli are observed to be engorged with fluid or pus, a symptom of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "bfd8ef59-552b-479a-888c-1444384b828b.jpg",
+    "bbox": [
+      [
+        604,
+        284,
+        954,
+        629
+      ]
+    ],
+    "rephrased_caption": "pneumonia in the lungs, causing alveoli to fill with fluid or pus, is evident in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "bc9bd81f-13cb-4fb1-acb8-2f79d4d58954.jpg",
+    "bbox": [
+      [
+        596,
+        428,
+        863,
+        648
+      ],
+      [
+        157,
+        403,
+        387,
+        603
+      ]
+    ],
+    "rephrased_caption": "pneumonia is evident from the chest x-ray, where the lung's air sacs are inundated with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "a228d0c7-b6aa-409d-98df-569809daa353.jpg",
+    "bbox": [
+      [
+        667,
+        454,
+        923,
+        813
+      ]
+    ],
+    "rephrased_caption": "pneumonia is diagnosed in the chest x-ray by the accumulation of fluid or pus in the lung's alveoli."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "ee3d45f9-5a4c-421d-a171-be0d8129e43d.jpg",
+    "bbox": [
+      [
+        277,
+        479,
+        402,
+        581
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray provides evidence of pneumonia with the lung's air sacs filled with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "d4b3478b-d430-4c89-95b5-1c1c27c8eb71.jpg",
+    "bbox": [
+      [
+        298,
+        380,
+        468,
+        534
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray shows pneumonia in the lungs, with the alveoli filled with either fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "a408f2c1-9ec2-49fc-8dd6-617dd540d512.jpg",
+    "bbox": [
+      [
+        186,
+        354,
+        373,
+        615
+      ]
+    ],
+    "rephrased_caption": "The alveoli, or air sacs of the lungs, are observed to be filled with fluid or pus in the chest x-ray, indicative of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "4a2fec02-fe01-42cc-a1fb-a1588b147f60.jpg",
+    "bbox": [
+      [
+        633,
+        243,
+        881,
+        701
+      ],
+      [
+        267,
+        182,
+        493,
+        654
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray indicates the presence of pneumonia, as evidenced by fluid or pus in the lungs' alveoli."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "6ba9800e-ebf3-4fd4-9fa7-1022883c4f21.jpg",
+    "bbox": [
+      [
+        598,
+        270,
+        859,
+        775
+      ],
+      [
+        266,
+        308,
+        490,
+        581
+      ]
+    ],
+    "rephrased_caption": "pneumonia, causing fluid or pus in the alveoli, is diagnosed through this chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "166088ea-38d0-4881-8a1a-7e6d5fc442dd.jpg",
+    "bbox": [
+      [
+        582,
+        156,
+        914,
+        763
+      ],
+      [
+        243,
+        174,
+        502,
+        795
+      ]
+    ],
+    "rephrased_caption": "In the chest x-ray, fluid or pus filling the alveoli is a clear indication of pneumonia in the lungs."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "49b95513-daab-49bb-bc6e-c5254ab1bc07.jpg",
+    "bbox": [
+      [
+        314,
+        161,
+        505,
+        593
+      ],
+      [
+        599,
+        202,
+        815,
+        739
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray reveals pneumonia in the lungs, filling the alveoli with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "db5399f8-e0cb-4208-8694-a7136f9ac574.jpg",
+    "bbox": [
+      [
+        378,
+        310,
+        489,
+        440
+      ]
+    ],
+    "rephrased_caption": "pneumonia, causing fluid or pus in the alveoli, is diagnosed through this chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "df10aee9-878c-4782-8aea-de4369355fd6.jpg",
+    "bbox": [
+      [
+        296,
+        329,
+        459,
+        607
+      ],
+      [
+        562,
+        463,
+        703,
+        636
+      ]
+    ],
+    "rephrased_caption": "The alveoli of the lungs, filled with fluid or pus, signify pneumonia in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "0e4f5b45-1fa4-406b-8ed8-d5ced6374c0d.jpg",
+    "bbox": [
+      [
+        245,
+        518,
+        416,
+        602
+      ],
+      [
+        681,
+        441,
+        803,
+        572
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray shows pneumonia in the lungs, with the alveoli filled with either fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "fdfc11cc-75d9-4ab7-a40c-e3576cec8883.jpg",
+    "bbox": [
+      [
+        503,
+        474,
+        773,
+        669
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray provides evidence of pneumonia with the lung's air sacs filled with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "778cae69-d2ce-4217-be96-e2dcc699969c.jpg",
+    "bbox": [
+      [
+        703,
+        313,
+        866,
+        458
+      ],
+      [
+        201,
+        379,
+        357,
+        531
+      ]
+    ],
+    "rephrased_caption": "Fluid or pus in the lungs' air sacs, as seen in the chest x-ray, is a characteristic of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "bacb9e6d-ad87-4841-99e0-685aa0249bbe.jpg",
+    "bbox": [
+      [
+        260,
+        383,
+        467,
+        613
+      ],
+      [
+        628,
+        297,
+        862,
+        586
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray provides evidence of pneumonia with the lung's air sacs filled with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "380c4bec-022e-4b0e-b96b-40be0dddfd52.jpg",
+    "bbox": [
+      [
+        535,
+        216,
+        783,
+        867
+      ],
+      [
+        108,
+        225,
+        385,
+        876
+      ]
+    ],
+    "rephrased_caption": "In this chest x-ray, the lung's alveoli are laden with fluid or pus, a symptom of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "391589be-c014-4862-ae43-84f42b030f30.jpg",
+    "bbox": [
+      [
+        598,
+        366,
+        848,
+        816
+      ],
+      [
+        216,
+        296,
+        466,
+        619
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray portrays pneumonia with the lungs' alveoli filled with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "9cbf0728-d245-4782-8aca-c25c5e8e158f.jpg",
+    "bbox": [
+      [
+        614,
+        378,
+        878,
+        684
+      ]
+    ],
+    "rephrased_caption": "pneumonia, causing fluid or pus in the alveoli, is diagnosed through this chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "9a30433a-c79c-4f15-8be7-26adfa92943c.jpg",
+    "bbox": [
+      [
+        640,
+        507,
+        898,
+        724
+      ],
+      [
+        243,
+        102,
+        504,
+        441
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray provides evidence of pneumonia with the lung's air sacs filled with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "6a778bf7-2bbd-4804-9d81-38eca7019ffe.jpg",
+    "bbox": [
+      [
+        219,
+        327,
+        422,
+        677
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray reveals pneumonia in the lungs, filling the alveoli with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "1c184066-163f-4941-9794-43e8ca7fe77b.jpg",
+    "bbox": [
+      [
+        704,
+        450,
+        832,
+        681
+      ],
+      [
+        381,
+        274,
+        492,
+        368
+      ],
+      [
+        379,
+        469,
+        531,
+        698
+      ]
+    ],
+    "rephrased_caption": "A clear sign of pneumonia, the lung's alveoli filled with fluid or pus, is visible in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "e72b1ec4-c97b-4328-99c3-54f518823c2b.jpg",
+    "bbox": [
+      [
+        346,
+        497,
+        504,
+        791
+      ],
+      [
+        730,
+        491,
+        944,
+        881
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray indicates the presence of pneumonia, as evidenced by fluid or pus in the lungs' alveoli."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "6d1efe52-1513-43c8-947f-158a33c0ad81.jpg",
+    "bbox": [
+      [
+        188,
+        132,
+        400,
+        636
+      ],
+      [
+        580,
+        184,
+        795,
+        643
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray reveals pneumonia in the lungs, filling the alveoli with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "a29d2f91-e135-4810-b896-ee443666df54.jpg",
+    "bbox": [
+      [
+        113,
+        358,
+        372,
+        642
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray shows pneumonia in the lungs, with the alveoli filled with either fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "904070bc-c210-47ef-b886-abb6b0dd7ee3.jpg",
+    "bbox": [
+      [
+        297,
+        404,
+        439,
+        739
+      ],
+      [
+        587,
+        479,
+        774,
+        792
+      ]
+    ],
+    "rephrased_caption": "pneumonia is diagnosed in the chest x-ray by the accumulation of fluid or pus in the lung's alveoli."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "3374e3a8-2156-4553-b434-805405e67264.jpg",
+    "bbox": [
+      [
+        337,
+        402,
+        523,
+        751
+      ]
+    ],
+    "rephrased_caption": "In the x-ray of the chest, the lung's alveoli are observed to be engorged with fluid or pus, a symptom of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "65f2119b-0e72-4f6e-9ec6-194f56b5b07d.jpg",
+    "bbox": [
+      [
+        223,
+        520,
+        463,
+        676
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray provides evidence of pneumonia with the lung's air sacs filled with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "a684b3b1-3d9f-4288-9095-cb5b28aa2eda.jpg",
+    "bbox": [
+      [
+        475,
+        252,
+        770,
+        618
+      ],
+      [
+        111,
+        370,
+        333,
+        626
+      ]
+    ],
+    "rephrased_caption": "Fluid or pus in the lungs' air sacs, as seen in the chest x-ray, is a characteristic of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "d0a82689-3088-4fc2-a348-7d3cc19c6ffa.jpg",
+    "bbox": [
+      [
+        244,
+        437,
+        492,
+        789
+      ]
+    ],
+    "rephrased_caption": "The lung's air sacs, or alveoli, are filled with fluid or pus due to pneumonia, as the chest x-ray shows."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "ba8319df-f8e3-45cc-95a5-68f9d0624bf5.jpg",
+    "bbox": [
+      [
+        395,
+        491,
+        557,
+        737
+      ],
+      [
+        656,
+        503,
+        854,
+        776
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray reveals alveoli in the lungs, congested with fluid or pus, due to pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "ed55f8dc-45a7-4416-ae94-847bb41a35c3.jpg",
+    "bbox": [
+      [
+        543,
+        398,
+        762,
+        783
+      ],
+      [
+        184,
+        468,
+        387,
+        832
+      ]
+    ],
+    "rephrased_caption": "The alveoli of the lungs, filled with fluid or pus, signify pneumonia in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "a679589b-9b88-4010-825a-cb3653587e78.jpg",
+    "bbox": [
+      [
+        548,
+        365,
+        818,
+        564
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray indicates the presence of pneumonia, as evidenced by fluid or pus in the lungs' alveoli."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "3a7cb9dd-169c-467e-a5f7-c179a6459d80.jpg",
+    "bbox": [
+      [
+        711,
+        148,
+        981,
+        910
+      ],
+      [
+        250,
+        135,
+        539,
+        763
+      ]
+    ],
+    "rephrased_caption": "In this chest x-ray, the lung's alveoli are laden with fluid or pus, a symptom of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "5871bd61-108b-4c53-bc24-c20522d56061.jpg",
+    "bbox": [
+      [
+        606,
+        449,
+        790,
+        746
+      ],
+      [
+        264,
+        460,
+        414,
+        723
+      ]
+    ],
+    "rephrased_caption": "pneumonia's effect on the lungs, causing alveoli to be filled with fluid or pus, is visible in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "8ae822ae-a656-47ba-ac5b-848ce2256575.jpg",
+    "bbox": [
+      [
+        189,
+        351,
+        466,
+        686
+      ],
+      [
+        602,
+        367,
+        833,
+        723
+      ]
+    ],
+    "rephrased_caption": "The alveoli of the lungs, filled with fluid or pus, signify pneumonia in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "1b874f35-21ac-4e21-a292-c96165ad870b.jpg",
+    "bbox": [
+      [
+        600,
+        445,
+        777,
+        691
+      ],
+      [
+        253,
+        425,
+        421,
+        683
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray reveals pneumonia in the lungs, filling the alveoli with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "b19a9422-a790-4a43-b59f-65a3bf0f16be.jpg",
+    "bbox": [
+      [
+        284,
+        534,
+        429,
+        746
+      ],
+      [
+        589,
+        507,
+        868,
+        678
+      ],
+      [
+        610,
+        262,
+        724,
+        368
+      ]
+    ],
+    "rephrased_caption": "In the chest x-ray, fluid or pus filling the alveoli is a clear indication of pneumonia in the lungs."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "9e6bd994-d868-4805-8511-08ddcbe33c14.jpg",
+    "bbox": [
+      [
+        506,
+        181,
+        872,
+        890
+      ]
+    ],
+    "rephrased_caption": "Fluid or pus in the lung's alveoli, a sign of pneumonia, is visible in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "4fabf46a-ceec-421c-bb64-8527b44aa576.jpg",
+    "bbox": [
+      [
+        375,
+        134,
+        616,
+        550
+      ]
+    ],
+    "rephrased_caption": "The x-ray of the chest exposes pneumonia in the lungs, with the alveoli filled with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "17dc4e24-2228-4cdb-8052-9259a907f9c2.jpg",
+    "bbox": [
+      [
+        191,
+        309,
+        455,
+        798
+      ],
+      [
+        557,
+        350,
+        850,
+        828
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray depicts the lungs afflicted with pneumonia, with the alveoli congested with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "ad50d85f-8915-4dc4-b048-74de08e2059b.jpg",
+    "bbox": [
+      [
+        708,
+        290,
+        903,
+        765
+      ]
+    ],
+    "rephrased_caption": "Fluid or pus in the lung's alveoli, a sign of pneumonia, is visible in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "e678a93a-0519-420a-9b4b-4f9ae4e0a006.jpg",
+    "bbox": [
+      [
+        100,
+        460,
+        220,
+        687
+      ]
+    ],
+    "rephrased_caption": "The alveoli of the lungs, filled with fluid or pus, signify pneumonia in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "54539347-4e0a-4b42-af9a-420d5f0c95e7.jpg",
+    "bbox": [
+      [
+        663,
+        487,
+        844,
+        764
+      ]
+    ],
+    "rephrased_caption": "A clear sign of pneumonia, the lung's alveoli filled with fluid or pus, is visible in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "47ec2841-0ef0-4fa0-8678-732fb8d23db6.jpg",
+    "bbox": [
+      [
+        104,
+        296,
+        366,
+        642
+      ],
+      [
+        417,
+        269,
+        708,
+        655
+      ]
+    ],
+    "rephrased_caption": "The alveoli, critical air sacs in the lungs, are seen filled with fluid or pus in the chest x-ray, indicating pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "eb5be562-36b3-44b9-a7ef-68a49d4b03ac.jpg",
+    "bbox": [
+      [
+        153,
+        462,
+        303,
+        723
+      ],
+      [
+        476,
+        323,
+        646,
+        682
+      ]
+    ],
+    "rephrased_caption": "A clear sign of pneumonia, the lung's alveoli filled with fluid or pus, is visible in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "38b147a7-352b-4adb-88b5-2449d362acae.jpg",
+    "bbox": [
+      [
+        187,
+        565,
+        379,
+        897
+      ],
+      [
+        567,
+        556,
+        787,
+        961
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray reveals pneumonia in the lungs, filling the alveoli with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "07d1a89d-351c-4a75-993a-ba315142b419.jpg",
+    "bbox": [
+      [
+        69,
+        496,
+        417,
+        889
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray clearly shows the lung's alveoli, swollen with fluid or pus, a sign of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "9f9e7267-220a-43f8-b222-9a330b08957a.jpg",
+    "bbox": [
+      [
+        209,
+        329,
+        449,
+        730
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray illustrates pneumonia affecting the lungs, leading to fluid or pus in the alveoli."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "db3c8b2a-797b-4178-9b68-09863e1a45a3.jpg",
+    "bbox": [
+      [
+        230,
+        445,
+        463,
+        568
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray reveals alveoli in the lungs, congested with fluid or pus, due to pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "bca2c151-2431-4595-80c7-75480a196c6e.jpg",
+    "bbox": [
+      [
+        328,
+        415,
+        457,
+        641
+      ]
+    ],
+    "rephrased_caption": "Fluid or pus in the lung's alveoli, a sign of pneumonia, is visible in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "ab7d4c3c-d22d-4d21-a0c1-c78e26a2cca6.jpg",
+    "bbox": [
+      [
+        757,
+        587,
+        1003,
+        769
+      ]
+    ],
+    "rephrased_caption": "pneumonia is confirmed by the chest x-ray, which shows fluid or pus in the lungs' alveoli."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "53d4697b-98ba-4dbc-892e-a602baec576b.jpg",
+    "bbox": [
+      [
+        544,
+        247,
+        817,
+        743
+      ],
+      [
+        240,
+        265,
+        472,
+        685
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray depicts the lungs afflicted with pneumonia, with the alveoli congested with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "a3a98509-171f-4c00-8d47-b6a0957907c3.jpg",
+    "bbox": [
+      [
+        538,
+        531,
+        703,
+        835
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray reveals pneumonia in the lungs, filling the alveoli with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "6821b958-8b00-40f0-8ec2-8912d21acfaa.jpg",
+    "bbox": [
+      [
+        241,
+        504,
+        495,
+        634
+      ]
+    ],
+    "rephrased_caption": "A chest x-ray indicates pneumonia in the lungs, with alveoli engorged with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "8cf9fffd-08ef-448b-b9ec-1074d9e5691e.jpg",
+    "bbox": [
+      [
+        141,
+        428,
+        397,
+        730
+      ],
+      [
+        552,
+        490,
+        863,
+        769
+      ]
+    ],
+    "rephrased_caption": "The x-ray of the chest exposes pneumonia in the lungs, with the alveoli filled with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "05212f46-32b5-4350-812b-2bab7509d93f.jpg",
+    "bbox": [
+      [
+        605,
+        423,
+        849,
+        646
+      ],
+      [
+        139,
+        488,
+        368,
+        873
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray portrays pneumonia with the lungs' alveoli filled with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "2178c094-b206-4fe5-a9ef-d84540996b89.jpg",
+    "bbox": [
+      [
+        231,
+        589,
+        420,
+        817
+      ]
+    ],
+    "rephrased_caption": "The alveoli, critical air sacs in the lungs, are seen filled with fluid or pus in the chest x-ray, indicating pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "1c20a2ed-7081-4e30-b5f8-a329c51d14f1.jpg",
+    "bbox": [
+      [
+        308,
+        286,
+        460,
+        362
+      ]
+    ],
+    "rephrased_caption": "The radiograph of the chest shows the lungs' air sacs, or alveoli, filled with fluid or pus, indicative of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "3d62329f-40d2-41e5-bcdd-c7eabc33f516.jpg",
+    "bbox": [
+      [
+        581,
+        315,
+        760,
+        605
+      ],
+      [
+        178,
+        449,
+        377,
+        793
+      ]
+    ],
+    "rephrased_caption": "pneumonia is diagnosed in the chest x-ray by the accumulation of fluid or pus in the lung's alveoli."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "3b9bcca1-0ca9-4e93-ba0c-0a6ae1342726.jpg",
+    "bbox": [
+      [
+        672,
+        328,
+        992,
+        773
+      ],
+      [
+        288,
+        419,
+        471,
+        734
+      ]
+    ],
+    "rephrased_caption": "In the x-ray of the chest, the lung's alveoli are observed to be engorged with fluid or pus, a symptom of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "e17e53a5-916f-40c8-9c9c-dcc01031aa46.jpg",
+    "bbox": [
+      [
+        314,
+        92,
+        498,
+        367
+      ],
+      [
+        241,
+        445,
+        434,
+        631
+      ],
+      [
+        677,
+        339,
+        866,
+        537
+      ]
+    ],
+    "rephrased_caption": "In the x-ray of the chest, the lung's alveoli are observed to be engorged with fluid or pus, a symptom of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "f59ae80d-d98e-465f-963a-1064764211f8.jpg",
+    "bbox": [
+      [
+        266,
+        254,
+        398,
+        540
+      ],
+      [
+        593,
+        407,
+        753,
+        602
+      ]
+    ],
+    "rephrased_caption": "pneumonia, causing fluid or pus in the alveoli, is diagnosed through this chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "4c30e2c4-f7f6-451d-8ce9-d065ff7c4b36.jpg",
+    "bbox": [
+      [
+        141,
+        332,
+        403,
+        716
+      ],
+      [
+        566,
+        293,
+        863,
+        785
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray provides evidence of pneumonia with the lung's air sacs filled with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "d5523ffc-1c8a-4250-939a-3f5215397ff2.jpg",
+    "bbox": [
+      [
+        266,
+        202,
+        542,
+        777
+      ],
+      [
+        604,
+        109,
+        932,
+        619
+      ]
+    ],
+    "rephrased_caption": "pneumonia, as shown in the chest x-ray, causes the lungs' alveoli to accumulate fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "3e439e6d-97d9-40b8-b201-794a5ce5ff1e.jpg",
+    "bbox": [
+      [
+        453,
+        342,
+        727,
+        810
+      ],
+      [
+        80,
+        304,
+        360,
+        671
+      ]
+    ],
+    "rephrased_caption": "The radiograph of the chest shows the lungs' air sacs, or alveoli, filled with fluid or pus, indicative of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "3d643bc7-85ea-4684-88f6-4e2ee36ff46d.jpg",
+    "bbox": [
+      [
+        585,
+        366,
+        823,
+        884
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray provides evidence of pneumonia with the lung's air sacs filled with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "bc45556d-61f2-43c6-b886-21bdc59542e7.jpg",
+    "bbox": [
+      [
+        224,
+        470,
+        449,
+        748
+      ],
+      [
+        572,
+        399,
+        773,
+        632
+      ]
+    ],
+    "rephrased_caption": "pneumonia, as shown in the chest x-ray, causes the lungs' alveoli to accumulate fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "584dfe20-9b9c-476f-80a5-90204394360e.jpg",
+    "bbox": [
+      [
+        217,
+        467,
+        413,
+        780
+      ],
+      [
+        582,
+        641,
+        676,
+        868
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray shows pneumonia in the lungs, with the alveoli filled with either fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "1acc13bc-a199-49bf-8360-c20314fd85fd.jpg",
+    "bbox": [
+      [
+        599,
+        415,
+        808,
+        767
+      ],
+      [
+        247,
+        450,
+        470,
+        791
+      ]
+    ],
+    "rephrased_caption": "In the x-ray of the chest, the lung's alveoli are observed to be engorged with fluid or pus, a symptom of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "001916b8-3d30-4935-a5d1-8eaddb1646cd.jpg",
+    "bbox": [
+      [
+        198,
+        375,
+        312,
+        581
+      ]
+    ],
+    "rephrased_caption": "The radiograph of the chest shows the lungs' air sacs, or alveoli, filled with fluid or pus, indicative of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "980c366b-becd-4652-8934-682a2961081f.jpg",
+    "bbox": [
+      [
+        85,
+        273,
+        452,
+        618
+      ]
+    ],
+    "rephrased_caption": "pneumonia, as shown in the chest x-ray, causes the lungs' alveoli to accumulate fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "4b7d10d8-97b4-4d5b-9a74-01c7c8a13b10.jpg",
+    "bbox": [
+      [
+        610,
+        164,
+        872,
+        484
+      ],
+      [
+        337,
+        167,
+        544,
+        521
+      ]
+    ],
+    "rephrased_caption": "The alveoli, or air sacs of the lungs, are observed to be filled with fluid or pus in the chest x-ray, indicative of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "467e09de-b9b2-4d84-81af-c7b88314b08c.jpg",
+    "bbox": [
+      [
+        190,
+        571,
+        407,
+        843
+      ]
+    ],
+    "rephrased_caption": "A clear sign of pneumonia, the lung's alveoli filled with fluid or pus, is visible in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "374b2ddb-10f8-4fb7-a745-3ecf886af10c.jpg",
+    "bbox": [
+      [
+        134,
+        412,
+        367,
+        791
+      ],
+      [
+        552,
+        238,
+        815,
+        790
+      ]
+    ],
+    "rephrased_caption": "pneumonia is evident from the chest x-ray, where the lung's air sacs are inundated with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "bc88fe07-10a9-4032-9a0b-21f57f10d555.jpg",
+    "bbox": [
+      [
+        205,
+        702,
+        432,
+        928
+      ],
+      [
+        589,
+        787,
+        859,
+        1013
+      ]
+    ],
+    "rephrased_caption": "In this chest x-ray, the lung's alveoli are laden with fluid or pus, a symptom of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "290e32e9-3632-4642-a1d4-70c975d376b7.jpg",
+    "bbox": [
+      [
+        543,
+        275,
+        716,
+        608
+      ],
+      [
+        261,
+        300,
+        411,
+        600
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray clearly shows the lung's alveoli, swollen with fluid or pus, a sign of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "89e4a086-64bd-4111-8aaa-e7954129b38a.jpg",
+    "bbox": [
+      [
+        541,
+        188,
+        795,
+        930
+      ],
+      [
+        165,
+        205,
+        437,
+        793
+      ]
+    ],
+    "rephrased_caption": "The radiograph of the chest shows the lungs' air sacs, or alveoli, filled with fluid or pus, indicative of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "8bc6dd29-efc9-4ffc-9562-2f35b815390f.jpg",
+    "bbox": [
+      [
+        499,
+        65,
+        752,
+        335
+      ]
+    ],
+    "rephrased_caption": "In this chest x-ray, the lung's alveoli are laden with fluid or pus, a symptom of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "6a078738-03df-4e3f-adb3-d203baef1e1c.jpg",
+    "bbox": [
+      [
+        198,
+        577,
+        367,
+        653
+      ]
+    ],
+    "rephrased_caption": "pneumonia is evident from the chest x-ray, where the lung's air sacs are inundated with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "a2c7baa7-e6f5-4409-bf23-d96c54d6843b.jpg",
+    "bbox": [
+      [
+        616,
+        498,
+        835,
+        755
+      ],
+      [
+        183,
+        544,
+        420,
+        803
+      ]
+    ],
+    "rephrased_caption": "pneumonia is evident from the chest x-ray, where the lung's air sacs are inundated with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "b1b9f018-bc87-4f21-af0e-d56a58eb27fb.jpg",
+    "bbox": [
+      [
+        382,
+        468,
+        575,
+        626
+      ],
+      [
+        704,
+        410,
+        891,
+        637
+      ]
+    ],
+    "rephrased_caption": "pneumonia in the lungs, causing alveoli to fill with fluid or pus, is evident in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "2a37f773-2855-4765-989e-0991de60bd0c.jpg",
+    "bbox": [
+      [
+        554,
+        280,
+        853,
+        735
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray clearly shows the lung's alveoli, swollen with fluid or pus, a sign of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "a4146511-3e5e-4663-a79a-d0b578aca940.jpg",
+    "bbox": [
+      [
+        636,
+        590,
+        933,
+        845
+      ],
+      [
+        246,
+        323,
+        470,
+        825
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray indicates the presence of pneumonia, as evidenced by fluid or pus in the lungs' alveoli."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "1b3bc37d-dfa7-4dee-a7dc-18008b346586.jpg",
+    "bbox": [
+      [
+        256,
+        408,
+        359,
+        665
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray indicates the presence of pneumonia, as evidenced by fluid or pus in the lungs' alveoli."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "5039abb8-29f6-4e8a-92e6-fbcb74804a7e.jpg",
+    "bbox": [
+      [
+        250,
+        364,
+        489,
+        652
+      ]
+    ],
+    "rephrased_caption": "pneumonia's hallmark, fluid or pus in the lung's air sacs, is captured in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "94399962-8f89-4dfa-a93f-7a3df88feca5.jpg",
+    "bbox": [
+      [
+        305,
+        156,
+        509,
+        652
+      ],
+      [
+        606,
+        403,
+        908,
+        720
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray illustrates pneumonia affecting the lungs, leading to fluid or pus in the alveoli."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "e7d62adc-e492-475c-9fc9-11cc9b3654da.jpg",
+    "bbox": [
+      [
+        221,
+        566,
+        396,
+        705
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray depicts the lungs afflicted with pneumonia, with the alveoli congested with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "33d21874-f7b1-413c-8013-0b4a98d12fb9.jpg",
+    "bbox": [
+      [
+        180,
+        371,
+        420,
+        791
+      ],
+      [
+        627,
+        595,
+        821,
+        823
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray depicts the lungs afflicted with pneumonia, with the alveoli congested with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "9922146d-a19f-4889-80ca-d6f802118fdb.jpg",
+    "bbox": [
+      [
+        661,
+        250,
+        851,
+        688
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray illustrates pneumonia affecting the lungs, leading to fluid or pus in the alveoli."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "1c5435c1-431c-4815-a50e-6c20dc2d929e.jpg",
+    "bbox": [
+      [
+        206,
+        513,
+        379,
+        652
+      ],
+      [
+        643,
+        268,
+        735,
+        418
+      ]
+    ],
+    "rephrased_caption": "In the chest x-ray, fluid or pus filling the alveoli is a clear indication of pneumonia in the lungs."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "ae909ea7-5fde-4d40-8295-337f5fe62d29.jpg",
+    "bbox": [
+      [
+        109,
+        471,
+        313,
+        603
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray reveals pneumonia in the lungs, filling the alveoli with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "dcb6a72b-1d92-4cdb-aabc-86b408d50d4e.jpg",
+    "bbox": [
+      [
+        232,
+        560,
+        372,
+        690
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray depicts the lungs afflicted with pneumonia, with the alveoli congested with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "01a6eaa6-222f-4ea8-9874-bbd89dc1a1ce.jpg",
+    "bbox": [
+      [
+        141,
+        306,
+        366,
+        633
+      ],
+      [
+        609,
+        285,
+        845,
+        640
+      ]
+    ],
+    "rephrased_caption": "pneumonia's effect on the lungs, causing alveoli to be filled with fluid or pus, is visible in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "a94ec882-bcc3-4c59-8c6b-2d690595a04d.jpg",
+    "bbox": [
+      [
+        574,
+        146,
+        789,
+        540
+      ],
+      [
+        224,
+        219,
+        448,
+        527
+      ]
+    ],
+    "rephrased_caption": "The x-ray of the chest exposes pneumonia in the lungs, with the alveoli filled with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "47a15caf-d139-4fa3-956d-6f8afa5ac376.jpg",
+    "bbox": [
+      [
+        162,
+        176,
+        460,
+        524
+      ]
+    ],
+    "rephrased_caption": "Fluid or pus in the lung's alveoli, a sign of pneumonia, is visible in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "f0e0c65f-bef1-467b-a4e8-e5e46cb25fa8.jpg",
+    "bbox": [
+      [
+        241,
+        343,
+        415,
+        782
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray indicates the presence of pneumonia, as evidenced by fluid or pus in the lungs' alveoli."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "58c76b9b-8d86-49b2-8fb1-101e7c6af075.jpg",
+    "bbox": [
+      [
+        307,
+        378,
+        442,
+        547
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray portrays pneumonia with the lungs' alveoli filled with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "3d7cde16-cbce-4a84-997c-11b9befe3f23.jpg",
+    "bbox": [
+      [
+        324,
+        271,
+        464,
+        427
+      ],
+      [
+        634,
+        455,
+        813,
+        608
+      ]
+    ],
+    "rephrased_caption": "pneumonia's effect on the lungs, causing alveoli to be filled with fluid or pus, is visible in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "e6295ee0-bb33-49e3-9376-8b78f5a3fc52.jpg",
+    "bbox": [
+      [
+        162,
+        539,
+        361,
+        676
+      ]
+    ],
+    "rephrased_caption": "In the x-ray of the chest, the lung's alveoli are observed to be engorged with fluid or pus, a symptom of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "c4beaa39-4902-43c5-a7e0-179e6e8bbe28.jpg",
+    "bbox": [
+      [
+        214,
+        469,
+        396,
+        570
+      ]
+    ],
+    "rephrased_caption": "pneumonia in the lungs, causing alveoli to fill with fluid or pus, is evident in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "091cc2b7-8ba6-4fce-8ae2-7547117dbddf.jpg",
+    "bbox": [
+      [
+        131,
+        200,
+        386,
+        855
+      ],
+      [
+        559,
+        239,
+        856,
+        974
+      ]
+    ],
+    "rephrased_caption": "pneumonia's effect on the lungs, causing alveoli to be filled with fluid or pus, is visible in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "09a22f6d-5717-4c48-bf4c-531db698aaac.jpg",
+    "bbox": [
+      [
+        556,
+        344,
+        830,
+        807
+      ],
+      [
+        192,
+        286,
+        463,
+        781
+      ]
+    ],
+    "rephrased_caption": "A clear sign of pneumonia, the lung's alveoli filled with fluid or pus, is visible in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "bd4fa84d-813d-4ed5-b68f-c88127ed2f80.jpg",
+    "bbox": [
+      [
+        192,
+        210,
+        403,
+        702
+      ],
+      [
+        583,
+        142,
+        833,
+        719
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray reveals pneumonia in the lungs, filling the alveoli with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "b9689b98-97cd-4ffb-8c25-4d3b686f62f1.jpg",
+    "bbox": [
+      [
+        548,
+        414,
+        750,
+        633
+      ],
+      [
+        273,
+        365,
+        436,
+        600
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray reveals alveoli in the lungs, congested with fluid or pus, due to pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "908a9eb7-dc6d-4113-ba9a-28a50140563f.jpg",
+    "bbox": [
+      [
+        512,
+        354,
+        700,
+        929
+      ],
+      [
+        211,
+        399,
+        385,
+        715
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray illustrates pneumonia affecting the lungs, leading to fluid or pus in the alveoli."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "2bb1db95-73ad-46b0-8567-8a03d9a83def.jpg",
+    "bbox": [
+      [
+        598,
+        592,
+        819,
+        761
+      ]
+    ],
+    "rephrased_caption": "pneumonia is diagnosed in the chest x-ray by the accumulation of fluid or pus in the lung's alveoli."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "dcc879b2-a7f1-4526-95af-e87539dc4925.jpg",
+    "bbox": [
+      [
+        199,
+        176,
+        469,
+        570
+      ]
+    ],
+    "rephrased_caption": "pneumonia in the lungs, causing alveoli to fill with fluid or pus, is evident in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "48eb6bcf-ddda-49f3-9f80-5a7a11b5bccc.jpg",
+    "bbox": [
+      [
+        181,
+        445,
+        426,
+        928
+      ],
+      [
+        607,
+        349,
+        917,
+        958
+      ]
+    ],
+    "rephrased_caption": "pneumonia is evident from the chest x-ray, where the lung's air sacs are inundated with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "99a1a344-cb16-44ea-9d2a-a9daddbddd26.jpg",
+    "bbox": [
+      [
+        164,
+        552,
+        407,
+        746
+      ],
+      [
+        568,
+        561,
+        847,
+        777
+      ]
+    ],
+    "rephrased_caption": "In the chest x-ray, fluid or pus filling the alveoli is a clear indication of pneumonia in the lungs."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "d783664a-fef1-4959-8d09-79c25870dfe7.jpg",
+    "bbox": [
+      [
+        289,
+        616,
+        519,
+        929
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray clearly shows the lung's alveoli, swollen with fluid or pus, a sign of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "3f21e402-4cf3-451e-bb19-f28bfbd1796a.jpg",
+    "bbox": [
+      [
+        76,
+        343,
+        352,
+        830
+      ],
+      [
+        584,
+        293,
+        814,
+        880
+      ]
+    ],
+    "rephrased_caption": "In the x-ray of the chest, the lung's alveoli are observed to be engorged with fluid or pus, a symptom of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "7508399d-307f-450d-8f47-f24930ad6fb6.jpg",
+    "bbox": [
+      [
+        578,
+        389,
+        733,
+        724
+      ],
+      [
+        238,
+        331,
+        400,
+        610
+      ]
+    ],
+    "rephrased_caption": "A chest x-ray indicates pneumonia in the lungs, with alveoli engorged with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "a8b5a123-6dbd-412e-a871-12f4f65a6a05.jpg",
+    "bbox": [
+      [
+        549,
+        287,
+        789,
+        568
+      ],
+      [
+        216,
+        259,
+        406,
+        538
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray shows pneumonia in the lungs, with the alveoli filled with either fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "ac6b782f-206e-4cd2-8002-427c2843f90b.jpg",
+    "bbox": [
+      [
+        602,
+        522,
+        807,
+        696
+      ],
+      [
+        288,
+        525,
+        462,
+        619
+      ]
+    ],
+    "rephrased_caption": "The alveoli of the lungs, filled with fluid or pus, signify pneumonia in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "ab877686-52ee-4476-8613-a6e4ca3959a2.jpg",
+    "bbox": [
+      [
+        740,
+        213,
+        852,
+        380
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray shows pneumonia in the lungs, with the alveoli filled with either fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "b6fa6fc8-812c-4110-9881-5a5f8f2fea65.jpg",
+    "bbox": [
+      [
+        298,
+        211,
+        449,
+        535
+      ]
+    ],
+    "rephrased_caption": "In the chest x-ray, fluid or pus filling the alveoli is a clear indication of pneumonia in the lungs."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "3e75ff4a-a15d-4451-850f-605c3244cb17.jpg",
+    "bbox": [
+      [
+        315,
+        142,
+        441,
+        287
+      ],
+      [
+        541,
+        228,
+        759,
+        601
+      ]
+    ],
+    "rephrased_caption": "Fluid or pus in the lungs' air sacs, as seen in the chest x-ray, is a characteristic of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "0572881e-d1dd-4757-a54e-b240b30da946.jpg",
+    "bbox": [
+      [
+        538,
+        387,
+        705,
+        800
+      ],
+      [
+        160,
+        463,
+        339,
+        725
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray depicts the lungs afflicted with pneumonia, with the alveoli congested with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "2f55c07d-beb7-4b5f-9e9d-18d4fed5ae27.jpg",
+    "bbox": [
+      [
+        613,
+        427,
+        709,
+        548
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray illustrates pneumonia affecting the lungs, leading to fluid or pus in the alveoli."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "1565fd6c-9432-454a-87e4-937fd5ad5b60.jpg",
+    "bbox": [
+      [
+        267,
+        537,
+        445,
+        772
+      ],
+      [
+        159,
+        295,
+        319,
+        479
+      ],
+      [
+        655,
+        308,
+        785,
+        446
+      ]
+    ],
+    "rephrased_caption": "In the x-ray of the chest, the lung's alveoli are observed to be engorged with fluid or pus, a symptom of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "2090a3aa-9ba3-42a2-baa3-f0bfa4f783f8.jpg",
+    "bbox": [
+      [
+        588,
+        253,
+        856,
+        714
+      ],
+      [
+        202,
+        328,
+        408,
+        715
+      ]
+    ],
+    "rephrased_caption": "pneumonia, as shown in the chest x-ray, causes the lungs' alveoli to accumulate fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "30363e8f-2955-4a45-b6e5-8e7146d6c243.jpg",
+    "bbox": [
+      [
+        571,
+        549,
+        849,
+        639
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray depicts the lungs afflicted with pneumonia, with the alveoli congested with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "55bf30ae-819a-4d20-816c-d45615df0688.jpg",
+    "bbox": [
+      [
+        162,
+        503,
+        272,
+        577
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray reveals alveoli in the lungs, congested with fluid or pus, due to pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "73286fe9-2e42-4a75-b071-a4c2173672a4.jpg",
+    "bbox": [
+      [
+        264,
+        350,
+        461,
+        787
+      ],
+      [
+        631,
+        403,
+        843,
+        836
+      ]
+    ],
+    "rephrased_caption": "A chest x-ray indicates pneumonia in the lungs, with alveoli engorged with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "be03b6e9-e030-4491-b23e-ac1d7efc73bb.jpg",
+    "bbox": [
+      [
+        254,
+        150,
+        544,
+        422
+      ],
+      [
+        684,
+        461,
+        919,
+        736
+      ]
+    ],
+    "rephrased_caption": "The alveoli, critical air sacs in the lungs, are seen filled with fluid or pus in the chest x-ray, indicating pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "5bfdc9ee-e21d-46e5-bbfc-20cea10c3175.jpg",
+    "bbox": [
+      [
+        489,
+        203,
+        845,
+        740
+      ],
+      [
+        157,
+        281,
+        358,
+        719
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray portrays pneumonia with the lungs' alveoli filled with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "19a2b39a-60ac-4412-8e17-c69d1336538e.jpg",
+    "bbox": [
+      [
+        233,
+        582,
+        445,
+        813
+      ],
+      [
+        654,
+        565,
+        892,
+        799
+      ]
+    ],
+    "rephrased_caption": "pneumonia's hallmark, fluid or pus in the lung's air sacs, is captured in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "4bfc4e8c-ee7b-4997-bcdd-e0734cba30b9.jpg",
+    "bbox": [
+      [
+        229,
+        393,
+        488,
+        794
+      ],
+      [
+        644,
+        431,
+        901,
+        841
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray clearly shows the lung's alveoli, swollen with fluid or pus, a sign of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "5ca7b965-3241-4b44-b6cb-32ad06bcca84.jpg",
+    "bbox": [
+      [
+        318,
+        255,
+        438,
+        367
+      ]
+    ],
+    "rephrased_caption": "The alveoli of the lungs, filled with fluid or pus, signify pneumonia in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "cb510a17-89c1-4fad-9a47-89952abd7aae.jpg",
+    "bbox": [
+      [
+        110,
+        217,
+        366,
+        700
+      ],
+      [
+        480,
+        183,
+        789,
+        757
+      ]
+    ],
+    "rephrased_caption": "A clear sign of pneumonia, the lung's alveoli filled with fluid or pus, is visible in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "a58b8dca-87bc-4461-be69-11acd06067d3.jpg",
+    "bbox": [
+      [
+        528,
+        358,
+        728,
+        655
+      ],
+      [
+        228,
+        383,
+        392,
+        631
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray shows pneumonia in the lungs, with the alveoli filled with either fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "3b0e8d0a-230a-4483-96c9-d91bb17be632.jpg",
+    "bbox": [
+      [
+        511,
+        373,
+        726,
+        768
+      ],
+      [
+        139,
+        100,
+        335,
+        689
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray indicates the presence of pneumonia, as evidenced by fluid or pus in the lungs' alveoli."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "77823cf2-2603-4db9-9c50-ec8ae13674e3.jpg",
+    "bbox": [
+      [
+        658,
+        278,
+        805,
+        544
+      ],
+      [
+        251,
+        383,
+        397,
+        562
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray depicts the lungs afflicted with pneumonia, with the alveoli congested with fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "dde16ef3-48de-4371-8d7a-2748b20a73e3.jpg",
+    "bbox": [
+      [
+        152,
+        463,
+        355,
+        887
+      ],
+      [
+        675,
+        502,
+        826,
+        916
+      ]
+    ],
+    "rephrased_caption": "The radiograph of the chest shows the lungs' air sacs, or alveoli, filled with fluid or pus, indicative of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "9a61bc75-01c7-496c-b5a9-b4ad264b7885.jpg",
+    "bbox": [
+      [
+        175,
+        354,
+        421,
+        708
+      ]
+    ],
+    "rephrased_caption": "pneumonia, causing fluid or pus in the alveoli, is diagnosed through this chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "3642d117-1150-46a2-9e21-1cc388f1db2f.jpg",
+    "bbox": [
+      [
+        193,
+        100,
+        458,
+        753
+      ],
+      [
+        583,
+        110,
+        885,
+        790
+      ]
+    ],
+    "rephrased_caption": "The alveoli, or air sacs of the lungs, are observed to be filled with fluid or pus in the chest x-ray, indicative of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "ba38bcd7-f0bd-4ebf-9f5e-c63c8cb612c6.jpg",
+    "bbox": [
+      [
+        232,
+        477,
+        451,
+        815
+      ]
+    ],
+    "rephrased_caption": "pneumonia's hallmark, fluid or pus in the lung's air sacs, is captured in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "9e8bd81f-b091-4c02-9ea4-1927c896dfc2.jpg",
+    "bbox": [
+      [
+        529,
+        279,
+        742,
+        554
+      ]
+    ],
+    "rephrased_caption": "The alveoli of the lungs, filled with fluid or pus, signify pneumonia in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "dbc5db8f-3ec9-4906-8afe-2969e096b6a6.jpg",
+    "bbox": [
+      [
+        552,
+        448,
+        773,
+        719
+      ]
+    ],
+    "rephrased_caption": "The alveoli, or air sacs of the lungs, are observed to be filled with fluid or pus in the chest x-ray, indicative of pneumonia."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "3485bc68-5c84-479c-8ec6-17fa1b6d7a2c.jpg",
+    "bbox": [
+      [
+        598,
+        398,
+        754,
+        576
+      ]
+    ],
+    "rephrased_caption": "A clear sign of pneumonia, the lung's alveoli filled with fluid or pus, is visible in the chest x-ray."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "b5af2b65-8cab-43a3-b2bb-587b3df3045d.jpg",
+    "bbox": [
+      [
+        428,
+        442,
+        570,
+        592
+      ]
+    ],
+    "rephrased_caption": "pneumonia, as shown in the chest x-ray, causes the lungs' alveoli to accumulate fluid or pus."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "9305cf44-0565-4dc8-8e45-103cede2b3f9.jpg",
+    "bbox": [
+      [
+        212,
+        143,
+        428,
+        393
+      ]
+    ],
+    "rephrased_caption": "The lung's air sacs, or alveoli, are filled with fluid or pus due to pneumonia, as the chest x-ray shows."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "41e4abf6-897e-464d-9cec-ed3c51d8809e.jpg",
+    "bbox": [
+      [
+        149,
+        283,
+        376,
+        573
+      ]
+    ],
+    "rephrased_caption": "The chest x-ray illustrates pneumonia affecting the lungs, leading to fluid or pus in the alveoli."
+  },
+  {
+    "caption": "The chest x-ray shows lung with pneumonia which causes the air sacs, or alveoli, of the lungs to fill up with fluid or pus.",
+    "objects": [
+      "pneumonia",
+      "pneumonia"
+    ],
+    "width": 1024,
+    "height": 1024,
+    "key": "220e0278-363d-431b-8094-1e28085ddb0f.jpg",
+    "bbox": [
+      [
+        644,
+        345,
+        836,
+        682
+      ],
+      [
+        334,
+        234,
+        504,
+        645
+      ]
+    ],
+    "rephrased_caption": "pneumonia in the lungs, causing alveoli to fill with fluid or pus, is evident in the chest x-ray."
+  }
+]

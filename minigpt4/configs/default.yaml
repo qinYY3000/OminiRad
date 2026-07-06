@@ -1,0 +1,3 @@
+env:
+  # Relative to repo_root; resolved at runtime by registry
+  cache_root: "cache"

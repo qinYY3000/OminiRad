@@ -1,0 +1,7 @@
+datasets:
+  rsna:
+    data_type: images
+    build_info:
+      image_path: data/rsna/RSNA-bbox-1024
+      ann_path: data/annotations/RSNA_train.json
+      val_ann_path: data/annotations/RSNA_val.json

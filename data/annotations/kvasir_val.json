@@ -1,0 +1,3584 @@
+[
+  {
+    "image_id": "cju0qkwl35piu0993l0dewei2",
+    "image_path": "data/kvasir/imgs/cju0qkwl35piu0993l0dewei2.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      622,
+      529
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "yes"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "large"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "upper-center"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            38,
+            5,
+            430,
+            338
+          ],
+          "scale": "L",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju0qkwl35piu0993l0dewei2.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "cju0qkwl35piu0993l0dewei2",
+    "split": "val"
+  },
+  {
+    "image_id": "cju14hjh2ob2o0835ouz3r5aa",
+    "image_path": "data/kvasir/imgs/cju14hjh2ob2o0835ouz3r5aa.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      609,
+      546
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "yes"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "large"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "lower-right"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            360,
+            247,
+            597,
+            501
+          ],
+          "scale": "L",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju14hjh2ob2o0835ouz3r5aa.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "cju14hjh2ob2o0835ouz3r5aa",
+    "split": "val"
+  },
+  {
+    "image_id": "cju1bm8063nmh07996rsjjemq",
+    "image_path": "data/kvasir/imgs/cju1bm8063nmh07996rsjjemq.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      607,
+      530
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "yes"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "large"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "center"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            206,
+            15,
+            526,
+            366
+          ],
+          "scale": "L",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju1bm8063nmh07996rsjjemq.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "cju1bm8063nmh07996rsjjemq",
+    "split": "val"
+  },
+  {
+    "image_id": "cju1cnnziug1l0835yh4ropyg",
+    "image_path": "data/kvasir/imgs/cju1cnnziug1l0835yh4ropyg.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      570,
+      531
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "yes"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "large"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "center"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            190,
+            158,
+            530,
+            432
+          ],
+          "scale": "L",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju1cnnziug1l0835yh4ropyg.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "cju1cnnziug1l0835yh4ropyg",
+    "split": "val"
+  },
+  {
+    "image_id": "cju1drnhbrb9409935wi7vkhg",
+    "image_path": "data/kvasir/imgs/cju1drnhbrb9409935wi7vkhg.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      619,
+      529
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "yes"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "large"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "center"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            107,
+            48,
+            610,
+            529
+          ],
+          "scale": "L",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju1drnhbrb9409935wi7vkhg.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "cju1drnhbrb9409935wi7vkhg",
+    "split": "val"
+  },
+  {
+    "image_id": "cju1fr4etsmrr09933u4t4aql",
+    "image_path": "data/kvasir/imgs/cju1fr4etsmrr09933u4t4aql.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      570,
+      521
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "yes"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "large"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "right"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            228,
+            166,
+            543,
+            521
+          ],
+          "scale": "L",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju1fr4etsmrr09933u4t4aql.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "cju1fr4etsmrr09933u4t4aql",
+    "split": "val"
+  },
+  {
+    "image_id": "cju2hewssldzx0835ep795xu0",
+    "image_path": "data/kvasir/imgs/cju2hewssldzx0835ep795xu0.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      576,
+      530
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "no"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "medium"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "right"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            345,
+            201,
+            465,
+            351
+          ],
+          "scale": "M",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju2hewssldzx0835ep795xu0.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "cju2hewssldzx0835ep795xu0",
+    "split": "val"
+  },
+  {
+    "image_id": "cju2hjrqcvi2j0801bx1i6gxg",
+    "image_path": "data/kvasir/imgs/cju2hjrqcvi2j0801bx1i6gxg.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      599,
+      531
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "2"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "2"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "no"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "polyp 1: small; polyp 2: medium"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "upper-center; lower-center"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            261,
+            61,
+            308,
+            108
+          ],
+          "scale": "S",
+          "anatomy_region": "colon"
+        },
+        {
+          "class": "polyp",
+          "bbox": [
+            312,
+            372,
+            388,
+            435
+          ],
+          "scale": "M",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju2hjrqcvi2j0801bx1i6gxg.jpg"
+        }
+      ],
+      "K": 2
+    },
+    "patient_id": "cju2hjrqcvi2j0801bx1i6gxg",
+    "split": "val"
+  },
+  {
+    "image_id": "cju2nyc5f02m40801ojqbtiea",
+    "image_path": "data/kvasir/imgs/cju2nyc5f02m40801ojqbtiea.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      622,
+      531
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "yes"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "large"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "lower-center"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            228,
+            326,
+            441,
+            531
+          ],
+          "scale": "L",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju2nyc5f02m40801ojqbtiea.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "cju2nyc5f02m40801ojqbtiea",
+    "split": "val"
+  },
+  {
+    "image_id": "cju2qdj95ru8g09886gfi9rsz",
+    "image_path": "data/kvasir/imgs/cju2qdj95ru8g09886gfi9rsz.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      571,
+      531
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "yes"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "large"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "center"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            59,
+            132,
+            557,
+            531
+          ],
+          "scale": "L",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju2qdj95ru8g09886gfi9rsz.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "cju2qdj95ru8g09886gfi9rsz",
+    "split": "val"
+  },
+  {
+    "image_id": "cju2uokeg5jm20799xwgsyz89",
+    "image_path": "data/kvasir/imgs/cju2uokeg5jm20799xwgsyz89.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      570,
+      530
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "yes"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "large"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "center"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            122,
+            183,
+            545,
+            506
+          ],
+          "scale": "L",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju2uokeg5jm20799xwgsyz89.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "cju2uokeg5jm20799xwgsyz89",
+    "split": "val"
+  },
+  {
+    "image_id": "cju2upu4evw7g08358guwozxv",
+    "image_path": "data/kvasir/imgs/cju2upu4evw7g08358guwozxv.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      616,
+      528
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "no"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "medium"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "center"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            238,
+            175,
+            404,
+            318
+          ],
+          "scale": "M",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju2upu4evw7g08358guwozxv.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "cju2upu4evw7g08358guwozxv",
+    "split": "val"
+  },
+  {
+    "image_id": "cju30525w04r10835ygp257sb",
+    "image_path": "data/kvasir/imgs/cju30525w04r10835ygp257sb.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      622,
+      530
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "yes"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "large"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "center"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            274,
+            263,
+            522,
+            441
+          ],
+          "scale": "L",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju30525w04r10835ygp257sb.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "cju30525w04r10835ygp257sb",
+    "split": "val"
+  },
+  {
+    "image_id": "cju30k2z40ds308353kdew70n",
+    "image_path": "data/kvasir/imgs/cju30k2z40ds308353kdew70n.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      618,
+      528
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "yes"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "large"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "center"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            202,
+            246,
+            389,
+            448
+          ],
+          "scale": "L",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju30k2z40ds308353kdew70n.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "cju30k2z40ds308353kdew70n",
+    "split": "val"
+  },
+  {
+    "image_id": "cju323ypb1fbb0988gx5rzudb",
+    "image_path": "data/kvasir/imgs/cju323ypb1fbb0988gx5rzudb.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      604,
+      530
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "yes"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "large"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "center"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            0,
+            0,
+            495,
+            529
+          ],
+          "scale": "L",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju323ypb1fbb0988gx5rzudb.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "cju323ypb1fbb0988gx5rzudb",
+    "split": "val"
+  },
+  {
+    "image_id": "cju34repocy5208780gswillm",
+    "image_path": "data/kvasir/imgs/cju34repocy5208780gswillm.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      622,
+      529
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "yes"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "large"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "lower-center"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            45,
+            281,
+            458,
+            529
+          ],
+          "scale": "L",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju34repocy5208780gswillm.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "cju34repocy5208780gswillm",
+    "split": "val"
+  },
+  {
+    "image_id": "cju358pwtdby20878cg7nm0np",
+    "image_path": "data/kvasir/imgs/cju358pwtdby20878cg7nm0np.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      581,
+      528
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "no"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "medium"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "left"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            114,
+            162,
+            234,
+            327
+          ],
+          "scale": "M",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju358pwtdby20878cg7nm0np.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "cju358pwtdby20878cg7nm0np",
+    "split": "val"
+  },
+  {
+    "image_id": "cju43mkj9m8wb0871qiadahub",
+    "image_path": "data/kvasir/imgs/cju43mkj9m8wb0871qiadahub.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      626,
+      547
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "yes"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "large"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "left"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            108,
+            123,
+            302,
+            357
+          ],
+          "scale": "L",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju43mkj9m8wb0871qiadahub.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "cju43mkj9m8wb0871qiadahub",
+    "split": "val"
+  },
+  {
+    "image_id": "cju45v0pungu40871acnwtmu5",
+    "image_path": "data/kvasir/imgs/cju45v0pungu40871acnwtmu5.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      606,
+      530
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "yes"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "large"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "center"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            90,
+            83,
+            370,
+            377
+          ],
+          "scale": "L",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju45v0pungu40871acnwtmu5.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "cju45v0pungu40871acnwtmu5",
+    "split": "val"
+  },
+  {
+    "image_id": "cju5bdwa3aatx0818b79i18zf",
+    "image_path": "data/kvasir/imgs/cju5bdwa3aatx0818b79i18zf.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      622,
+      530
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "yes"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "large"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "lower-right"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            359,
+            293,
+            538,
+            478
+          ],
+          "scale": "L",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju5bdwa3aatx0818b79i18zf.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "cju5bdwa3aatx0818b79i18zf",
+    "split": "val"
+  },
+  {
+    "image_id": "cju5ccpvqash50850kb4bs22k",
+    "image_path": "data/kvasir/imgs/cju5ccpvqash50850kb4bs22k.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      592,
+      482
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "yes"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "large"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "center"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            178,
+            157,
+            409,
+            419
+          ],
+          "scale": "L",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju5ccpvqash50850kb4bs22k.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "cju5ccpvqash50850kb4bs22k",
+    "split": "val"
+  },
+  {
+    "image_id": "cju5ddda9bkkt0850enzwatb1",
+    "image_path": "data/kvasir/imgs/cju5ddda9bkkt0850enzwatb1.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      618,
+      530
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "no"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "medium"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "upper-center"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            232,
+            74,
+            417,
+            166
+          ],
+          "scale": "M",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju5ddda9bkkt0850enzwatb1.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "cju5ddda9bkkt0850enzwatb1",
+    "split": "val"
+  },
+  {
+    "image_id": "cju5hqz50e7o90850e0prlpa0",
+    "image_path": "data/kvasir/imgs/cju5hqz50e7o90850e0prlpa0.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      595,
+      528
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "yes"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "large"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "center"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            136,
+            119,
+            423,
+            468
+          ],
+          "scale": "L",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju5hqz50e7o90850e0prlpa0.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "cju5hqz50e7o90850e0prlpa0",
+    "split": "val"
+  },
+  {
+    "image_id": "cju5huurrecm70801y680y13m",
+    "image_path": "data/kvasir/imgs/cju5huurrecm70801y680y13m.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      603,
+      520
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "yes"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "large"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "lower-center"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            284,
+            273,
+            511,
+            483
+          ],
+          "scale": "L",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju5huurrecm70801y680y13m.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "cju5huurrecm70801y680y13m",
+    "split": "val"
+  },
+  {
+    "image_id": "cju5k3j3uf6de0817hszzfr7n",
+    "image_path": "data/kvasir/imgs/cju5k3j3uf6de0817hszzfr7n.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      547,
+      530
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "no"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "medium"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "center"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            288,
+            157,
+            401,
+            281
+          ],
+          "scale": "M",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju5k3j3uf6de0817hszzfr7n.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "cju5k3j3uf6de0817hszzfr7n",
+    "split": "val"
+  },
+  {
+    "image_id": "cju5o4pk9h0720755lgp9jq8m",
+    "image_path": "data/kvasir/imgs/cju5o4pk9h0720755lgp9jq8m.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      622,
+      530
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "yes"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "large"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "right"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            350,
+            132,
+            622,
+            515
+          ],
+          "scale": "L",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju5o4pk9h0720755lgp9jq8m.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "cju5o4pk9h0720755lgp9jq8m",
+    "split": "val"
+  },
+  {
+    "image_id": "cju5yeqiwmkgl0801fzv2douc",
+    "image_path": "data/kvasir/imgs/cju5yeqiwmkgl0801fzv2douc.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      570,
+      531
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "2"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "2"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "yes"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "polyp 1: large; polyp 2: medium"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "upper-center; lower-right"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            238,
+            0,
+            496,
+            277
+          ],
+          "scale": "L",
+          "anatomy_region": "colon"
+        },
+        {
+          "class": "polyp",
+          "bbox": [
+            401,
+            308,
+            530,
+            494
+          ],
+          "scale": "M",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju5yeqiwmkgl0801fzv2douc.jpg"
+        }
+      ],
+      "K": 2
+    },
+    "patient_id": "cju5yeqiwmkgl0801fzv2douc",
+    "split": "val"
+  },
+  {
+    "image_id": "cju6wll7wvo3y08502pagos8m",
+    "image_path": "data/kvasir/imgs/cju6wll7wvo3y08502pagos8m.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      568,
+      497
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "yes"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "large"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "center"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            78,
+            59,
+            411,
+            371
+          ],
+          "scale": "L",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju6wll7wvo3y08502pagos8m.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "cju6wll7wvo3y08502pagos8m",
+    "split": "val"
+  },
+  {
+    "image_id": "cju77k828z46w0871r0avuoo9",
+    "image_path": "data/kvasir/imgs/cju77k828z46w0871r0avuoo9.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      622,
+      530
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "yes"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "large"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "center"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            143,
+            92,
+            375,
+            278
+          ],
+          "scale": "L",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju77k828z46w0871r0avuoo9.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "cju77k828z46w0871r0avuoo9",
+    "split": "val"
+  },
+  {
+    "image_id": "cju7dn24o296i09871qfxb8s2",
+    "image_path": "data/kvasir/imgs/cju7dn24o296i09871qfxb8s2.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      626,
+      547
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "yes"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "large"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "right"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            340,
+            171,
+            623,
+            455
+          ],
+          "scale": "L",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju7dn24o296i09871qfxb8s2.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "cju7dn24o296i09871qfxb8s2",
+    "split": "val"
+  },
+  {
+    "image_id": "cju7evxt12m730987rxivne3x",
+    "image_path": "data/kvasir/imgs/cju7evxt12m730987rxivne3x.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      510,
+      528
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "yes"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "large"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "center"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            133,
+            60,
+            421,
+            528
+          ],
+          "scale": "L",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju7evxt12m730987rxivne3x.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "cju7evxt12m730987rxivne3x",
+    "split": "val"
+  },
+  {
+    "image_id": "cju7flevb2wii08188otgs9p2",
+    "image_path": "data/kvasir/imgs/cju7flevb2wii08188otgs9p2.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      600,
+      528
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "yes"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "large"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "center"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            0,
+            0,
+            541,
+            527
+          ],
+          "scale": "L",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju7flevb2wii08188otgs9p2.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "cju7flevb2wii08188otgs9p2",
+    "split": "val"
+  },
+  {
+    "image_id": "cju7fnfv02tt90801djnix9m8",
+    "image_path": "data/kvasir/imgs/cju7fnfv02tt90801djnix9m8.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      622,
+      528
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "no"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "medium"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "center"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            220,
+            191,
+            308,
+            291
+          ],
+          "scale": "M",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju7fnfv02tt90801djnix9m8.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "cju7fnfv02tt90801djnix9m8",
+    "split": "val"
+  },
+  {
+    "image_id": "cju83mki1jv5w0817kubxm31r",
+    "image_path": "data/kvasir/imgs/cju83mki1jv5w0817kubxm31r.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      625,
+      547
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "yes"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "large"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "right"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            233,
+            185,
+            625,
+            547
+          ],
+          "scale": "L",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju83mki1jv5w0817kubxm31r.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "cju83mki1jv5w0817kubxm31r",
+    "split": "val"
+  },
+  {
+    "image_id": "cju858eswlepn0871pzvdrhj1",
+    "image_path": "data/kvasir/imgs/cju858eswlepn0871pzvdrhj1.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      570,
+      530
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "yes"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "large"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "lower-right"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            275,
+            216,
+            570,
+            530
+          ],
+          "scale": "L",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju858eswlepn0871pzvdrhj1.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "cju858eswlepn0871pzvdrhj1",
+    "split": "val"
+  },
+  {
+    "image_id": "cju885ikhnmkn09878s2lqtuh",
+    "image_path": "data/kvasir/imgs/cju885ikhnmkn09878s2lqtuh.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      570,
+      530
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "yes"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "large"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "center"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            180,
+            105,
+            370,
+            322
+          ],
+          "scale": "L",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju885ikhnmkn09878s2lqtuh.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "cju885ikhnmkn09878s2lqtuh",
+    "split": "val"
+  },
+  {
+    "image_id": "cju8a1jtvpt9m081712iwkca7",
+    "image_path": "data/kvasir/imgs/cju8a1jtvpt9m081712iwkca7.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      1348,
+      1070
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "yes"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "large"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "right"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            937,
+            97,
+            1348,
+            880
+          ],
+          "scale": "L",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju8a1jtvpt9m081712iwkca7.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "cju8a1jtvpt9m081712iwkca7",
+    "split": "val"
+  },
+  {
+    "image_id": "cju8bk8oirjhw0817hgkua2w8",
+    "image_path": "data/kvasir/imgs/cju8bk8oirjhw0817hgkua2w8.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      575,
+      509
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "yes"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "large"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "center"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            62,
+            44,
+            380,
+            479
+          ],
+          "scale": "L",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju8bk8oirjhw0817hgkua2w8.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "cju8bk8oirjhw0817hgkua2w8",
+    "split": "val"
+  },
+  {
+    "image_id": "cju8dn0c3u2v50801k8rvq02f",
+    "image_path": "data/kvasir/imgs/cju8dn0c3u2v50801k8rvq02f.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      1348,
+      1070
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "yes"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "large"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "center"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            166,
+            263,
+            957,
+            1058
+          ],
+          "scale": "L",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/cju8dn0c3u2v50801k8rvq02f.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "cju8dn0c3u2v50801k8rvq02f",
+    "split": "val"
+  },
+  {
+    "image_id": "ck2da7fwcjfis07218r1rvm95",
+    "image_path": "data/kvasir/imgs/ck2da7fwcjfis07218r1rvm95.jpg",
+    "modality": "endoscopy",
+    "anatomy": "colon",
+    "image_size": [
+      720,
+      576
+    ],
+    "tasks": {
+      "report": null,
+      "vqa": [
+        {
+          "question": "How many polyps are in the image?",
+          "answer": "1"
+        },
+        {
+          "question": "How many findings are present?",
+          "answer": "1"
+        },
+        {
+          "question": "Are there any abnormalities in the image? Check all that are present.",
+          "answer": "polyp"
+        },
+        {
+          "question": "Does this image contain any finding?",
+          "answer": "yes"
+        },
+        {
+          "question": "Have all polyps been removed?",
+          "answer": "no"
+        },
+        {
+          "question": "What type of polyp is present?",
+          "answer": "polyp"
+        },
+        {
+          "question": "What type of procedure is the image taken from?",
+          "answer": "colonoscopy"
+        },
+        {
+          "question": "Is this finding easy to detect?",
+          "answer": "no"
+        },
+        {
+          "question": "What is the size of the polyp?",
+          "answer": "medium"
+        },
+        {
+          "question": "Where in the image is the abnormality?",
+          "answer": "center"
+        },
+        {
+          "question": "How many instruments are in the image?",
+          "answer": "0"
+        },
+        {
+          "question": "Are there any instruments in the image? Check all that are present.",
+          "answer": "none"
+        },
+        {
+          "question": "How many instrumnets are in the image?",
+          "answer": "0"
+        }
+      ],
+      "boxes": [
+        {
+          "class": "polyp",
+          "bbox": [
+            320,
+            205,
+            490,
+            338
+          ],
+          "scale": "M",
+          "anatomy_region": "colon"
+        }
+      ],
+      "masks": [
+        {
+          "class": "polyp",
+          "mask_path": "data/kvasir/masks/ck2da7fwcjfis07218r1rvm95.jpg"
+        }
+      ],
+      "K": 1
+    },
+    "patient_id": "ck2da7fwcjfis07218r1rvm95",
+    "split": "val"
+  }
+]

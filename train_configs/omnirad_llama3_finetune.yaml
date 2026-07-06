@@ -1,0 +1,231 @@
+# ============================================================================
+# OmniRad Fine-tuning Configuration — LLaMA-3-8B variant
+# ----------------------------------------------------------------------------
+# Paper: "OmniRad: A Unified Vision-Language Model for Multi-task Radiology"
+# Hardware target : 3 × NVIDIA RTX 3090 (24 GB each)
+# Effective batch : 2 (per-GPU) × 3 (GPUs) = 6
+#
+# Run command:
+#   torchrun --nproc-per-node 3 --master-port 8889 \
+#       train.py --cfg-path train_configs/omnirad_llama3_finetune.yaml
+#
+# WARNING: This config uses LLaMA-3-8B as the LLM backbone.  The MiniGPT-Med
+# pretrained checkpoint (minigpt_med_pretrained.pth) is NOT compatible with
+# LLaMA-3 — the projection layer must be retrained from scratch (Stage 1-2).
+# Leave ``ckpt: ""`` below for a fresh run.
+#
+# Estimated training time: ~40-50 hours for 100 epochs (LLaMA-3 is slightly
+# slower than LLaMA-2 due to larger vocab and context).
+# ============================================================================
+
+model:
+  arch: omnirad                   # Same model class — auto-detects LLaMA version
+  model_type: pretrain
+  max_txt_len: 512                # CXR reports avg ~250 tokens
+  image_size: 448                 # Same as MiniGPT-Med
+  end_sym: "<|eot_id|>"           # ★ LLaMA-3 end-of-turn token (was "</s>" for LLaMA-2)
+  llama_model: "weights/llama-3-8b"   # ★ LLaMA-3-8B path (was llama-2-7b-chat-hf)
+  ckpt: ""                        # ★ Empty: no MiniGPT-Med checkpoint (incompatible with LLaMA-3)
+  max_context_len: 7800           # ★ LLaMA-3 has 8K context (was 3800 for LLaMA-2)
+
+  # Memory-saving switches (critical for 3090's 24G)
+  use_grad_checkpoint:      True   # EVA-ViT-G gradient checkpoint
+  use_grad_checkpoint_llm:  True   # LLaMA-3 gradient checkpoint — needed on 24G
+
+  # LLM LoRA settings
+  chat_template: True
+  lora_r: 64
+  lora_alpha: 16
+  lora_target_modules: ["q_proj", "v_proj"]   # Same module names in LLaMA-3
+  lora_dropout: 0.05
+
+  # ---------- OmniRad specific configuration (identical to LLaMA-2 variant) ----------
+  expand_vocab:
+    - "<SEG>"
+    - "<BOX_S>"
+    - "<BOX_M>"
+    - "<BOX_L>"
+    - "<LOC>"
+
+  dense_encoder:
+    name: "sam_vit_h"
+    weights: "weights/sam_vit_h_4b8939.pth"
+    freeze: True
+    no_grad_forward: True
+
+  mask_decoder:
+    type: "sam_style"
+    out_dim: 256
+    transformer_depth: 2
+    predict_uncertainty: True
+
+  loc_heads:
+    box_s: { in_dim: 4096, hidden_dim: 512, n_class: 64 }
+    box_m: { in_dim: 4096, hidden_dim: 512, n_class: 64 }
+    box_l: { in_dim: 4096, hidden_dim: 512, n_class: 64 }
+    loc:   { in_dim: 4096, hidden_dim: 512, n_anatomy: 30 }
+
+  loss_weights:
+    text:    1.0
+    det:     1.0
+    loc:     1.0
+    seg_bce: 2.0
+    seg_dice: 0.5
+    cardinality: 0.5
+    cons_mb:   0.3
+    cons_rd:   0.2
+    cons_gs:   0.2
+    align_anat: 0.5
+    scale_w_s: 3.0
+    scale_w_m: 1.5
+    scale_w_l: 1.0
+
+
+# ============================================================================
+# Datasets
+# ----------------------------------------------------------------------------
+# Per-GPU batch_size = 2 across all datasets to fit 24G VRAM with SAM added.
+# `sample_ratio` implements temperature-2 task-balanced sampling
+# (see docs/dataset_plan.md §6.1 — total ratios sum to ~93).
+#
+# Active datasets (6):
+#   - Indiana CXR (Open-i)     : report generation
+#   - VQA-RAD                  : visual question answering
+#   - SLAKE Grounding          : grounded caption
+#   - SLAKE VQA                : visual question answering
+#   - Group-Breast US (5 tasks): seg / det / report / refer / identify
+#   - Kvasir (5 tasks)          : seg / det / refer / identify / vqa (endoscopy)
+#
+# Disabled:
+#   - MIMIC-CXR (removed in this run)
+#   - NLST + refer/identify_nlst (raw images unavailable)
+# ============================================================================
+datasets:
+
+  # ---------- Chest X-ray report generation ----------
+  # Indiana University Open-i — converted from CSV via
+  #   ``python tools/build_unified_dataset.py --datasets indiana``
+  # Single image-text pair task (caption = findings + impression).
+  indiana_cxr:
+    batch_size: 2
+    sample_ratio: 25             # primary report-generation supervisor
+    vis_processor:
+      train:
+        name: "blip2_image_train"
+        image_size: 448
+    text_processor:
+      train:
+        name: "blip_caption"
+
+  # ---------- Medical VQA ----------
+  radvqa:
+    batch_size: 2
+    sample_ratio: 8
+    vis_processor:
+      train:
+        name: "blip2_image_train"
+        image_size: 448
+    text_processor:
+      train:
+        name: "blip_caption"
+
+  # SLAKE VQA — 8,165 QA pairs (English), shares images with grounding_SLAKE
+  slake_vqa:
+    batch_size: 2
+    sample_ratio: 10             # larger VQA corpus than RadVQA
+    vis_processor:
+      train:
+        name: "blip2_image_train"
+        image_size: 448
+    text_processor:
+      train:
+        name: "blip_caption"
+
+  # ---------- Grounded caption ----------
+  grounding_SLAKE:
+    batch_size: 2
+    sample_ratio: 10
+    vis_processor:
+      train:
+        name: "blip2_image_train"
+        image_size: 448
+    text_processor:
+      train:
+        name: "blip_caption"
+
+  # ---------- Private ultrasound datasets (group-internal) ----------
+  # Group-Breast Ultrasound — image + report + lesion mask
+  # Tasks (5): segmentation / detection (mask→bbox) / report / refer / identify
+  group_breast_us:
+    batch_size: 2
+    sample_ratio: 17
+    vis_processor:
+      train:
+        name: "blip2_image_train"
+        image_size: 448
+    text_processor:
+      train:
+        name: "blip_caption"
+
+  # Kvasir-SEG colonoscopy polyps — mask + bbox endoscopy dataset
+  # Tasks (5): segmentation / detection / refer / identify / vqa
+  # Provides natural multi-polyp (K>=2) supervision for AMU-Seg Innovation I
+  kvasir:
+    batch_size: 2
+    sample_ratio: 23
+    vis_processor:
+      train:
+        name: "blip2_image_train"
+        image_size: 448
+    text_processor:
+      train:
+        name: "blip_caption"
+
+
+# ============================================================================
+# Training schedule
+# ============================================================================
+run:
+  task: image_text_pretrain
+  runner: runner_base
+
+  # Optimization
+  lr_sched: "linear_warmup_cosine_lr"
+  init_lr:    1e-5                # Same as MiniGPT-Med
+  min_lr:     1e-6                # ★ Fixed: original config had 8e-5 which was likely a typo
+  warmup_lr:  1e-6
+  warmup_steps: 1000
+  weight_decay: 0.05
+  grad_clip: 1.0                  # ★ P1-13: gradient clipping for multi-task loss stability
+
+  # Schedule
+  max_epoch: 100                  # Can be reduced to 50 if compute-limited
+  iters_per_epoch: null             # null = auto-derive from dataloader length
+
+  # Memory / speed
+  amp: True                       # Mixed precision — critical for 3090
+  num_workers: 4                  # Down from 6 (3 GPUs × 4 workers = 12 total)
+  seed: 42
+
+  # Distributed setup for 3 × 3090
+  device: "cuda"
+  world_size: 3                   # ★ three GPUs
+  dist_url: "env://"
+  distributed: True
+
+  # Checkpointing
+  output_dir: "experiments/omnirad_llama3"   # ★ Separate dir from LLaMA-2 runs
+  resume_ckpt_path: null
+  evaluate: False
+  train_splits: ["train"]
+  valid_splits: ["val"]
+  max_keep_ckpts: 3
+  iters_per_epoch: null
+
+  # Logging
+  wandb_log: True
+  wandb_project: "omnirad"
+  wandb_entity: null
+  wandb_tags: ["omnirad", "3x3090", "llama3"]   # ★ llama3 tag
+  job_name: omnirad_llama3_3x3090
+

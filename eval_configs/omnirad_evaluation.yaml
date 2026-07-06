@@ -1,0 +1,138 @@
+model:
+  arch: omnirad
+  model_type: pretrain
+  max_txt_len: 512
+  end_sym: "</s>"
+  prompt_template: '[INST] {} [/INST]'
+  llama_model: "weights/llama-2-7b-chat-hf"
+  ckpt: "experiments/omnirad/latest/checkpoint_best.pth"
+  lora_r: 64
+  lora_alpha: 16
+  chat_template: True
+  low_resource: False
+
+  expand_vocab: ["<SEG>", "<BOX_S>", "<BOX_M>", "<BOX_L>", "<LOC>"]
+
+  dense_encoder:
+    name: "medsam_vit_b"      # default: MedSAM-finetuned SAM ViT-B
+    weights: "weights/medsam_vit_b.pth"  # baseline fallback: weights/sam_vit_b_01ec64.pth
+
+    freeze: True
+
+    no_grad_forward: True
+
+  mask_decoder:
+    hidden_dim: 512
+    out_dim: 256
+    predict_uncertainty: True
+
+  loc_heads:
+    box_s: {in_dim: 4096, hidden_dim: 512, n_class: 64}
+    box_m: {in_dim: 4096, hidden_dim: 512, n_class: 64}
+    box_l: {in_dim: 4096, hidden_dim: 512, n_class: 64}
+    loc: {in_dim: 4096, hidden_dim: 512, n_anatomy: 30}
+
+datasets:
+  cc_sbu_align:
+    vis_processor:
+      train:
+        name: "blip2_image_eval"
+        image_size: 448
+    text_processor:
+      train:
+        name: "blip_caption"
+
+evaluation_datasets:
+  # ---------- Chest X-ray report generation ----------
+  indiana_cxr:
+    # Indiana University Open-i — report generation.
+    # JSON is produced by `tools/build_unified_dataset.py --datasets indiana`.
+    eval_file_path: data/annotations/indiana_test.json
+    img_path: data/Chest X/images
+    max_new_tokens: 300
+    batch_size: 10
+
+  # ---------- Medical VQA ----------
+  radvqa:
+    eval_file_path: data/annotations/vqa_test.json
+    img_path: data/radvqa/imgs
+    max_new_tokens: 300
+    batch_size: 10
+
+  slake_vqa:
+    eval_file_path: data/annotations/VQA_test_SLAKE.json
+    img_path: data/slake/imgs
+    max_new_tokens: 300
+    batch_size: 10
+
+  # ---------- Detection (zero-shot) ----------
+  rsna:
+    eval_file_path: data/annotations/RSNA_test.json
+    img_path: data/rsna/RSNA-bbox-1024
+    max_new_tokens: 100
+    batch_size: 10
+
+  # ---------- Grounded caption ----------
+  SLAKE:
+    eval_file_path: data/annotations/grounding_test_SLAKE.json
+    img_path: data/slake/imgs
+    max_new_tokens: 100
+    batch_size: 10
+
+  # ---------------------------------------------------------------------------
+  # Private ultrasound datasets — multi-task evaluation
+  # ---------------------------------------------------------------------------
+  # Each entry runs all 5 tasks below in one command:
+  #   report / segmentation / detection / refer / identify
+  # Per-task overrides can be specified under ``tasks_cfg`` (optional).
+  # ---------------------------------------------------------------------------
+  group_breast_us:
+    eval_file_path: data/annotations/group_breast_test.json
+    img_path: data/group_breast
+    anatomy: breast
+    tasks: [report, segmentation, detection, refer, identify]
+    batch_size: 4
+    max_new_tokens: 200
+    tasks_cfg:
+      report:
+        max_new_tokens: 300
+        batch_size: 4
+      segmentation:
+        max_new_tokens: 80
+        batch_size: 4
+      detection:
+        max_new_tokens: 100
+        batch_size: 4
+      refer:
+        max_new_tokens: 80
+        batch_size: 4
+      identify:
+        max_new_tokens: 60
+        batch_size: 4
+
+  # ---------- Endoscopy polyp dataset — multi-task ----------
+  kvasir:
+    eval_file_path: data/annotations/kvasir_test.json
+    img_path: data/kvasir
+    anatomy: colon
+    tasks: [segmentation, detection, refer, identify]
+    batch_size: 4
+    max_new_tokens: 120
+    tasks_cfg:
+      segmentation:
+        max_new_tokens: 80
+        batch_size: 4
+      detection:
+        max_new_tokens: 120     # K>=2 polyp cases → longer output
+        batch_size: 4
+      refer:
+        max_new_tokens: 80
+        batch_size: 4
+      identify:
+        max_new_tokens: 60
+        batch_size: 4
+
+run:
+  task: omnirad_eval
+  name: omnirad_evaluation
+  save_path: experiments/eval

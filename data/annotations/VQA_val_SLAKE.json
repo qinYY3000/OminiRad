@@ -1,0 +1,7346 @@
+[
+  {
+    "img_id": 100,
+    "img_name": "xmlab100/source.jpg",
+    "question": "What is the largest organ in the picture?",
+    "answer": "Liver",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Size",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 10
+  },
+  {
+    "img_id": 107,
+    "img_name": "xmlab107/source.jpg",
+    "question": "What is the largest organ in the picture?",
+    "answer": "Lung",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Size",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 35
+  },
+  {
+    "img_id": 107,
+    "img_name": "xmlab107/source.jpg",
+    "question": "Which is the bigger in this image,lung or heart?",
+    "answer": "Lung",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Size",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 41
+  },
+  {
+    "img_id": 109,
+    "img_name": "xmlab109/source.jpg",
+    "question": "Where is/are the abnormality located?",
+    "answer": "Left Lung, Lower Right",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 61
+  },
+  {
+    "img_id": 111,
+    "img_name": "xmlab111/source.jpg",
+    "question": "Does the picture contain liver?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 87
+  },
+  {
+    "img_id": 111,
+    "img_name": "xmlab111/source.jpg",
+    "question": "Is the lung healthy?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 90
+  },
+  {
+    "img_id": 113,
+    "img_name": "xmlab113/source.jpg",
+    "question": "Does the picture contain liver?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 96
+  },
+  {
+    "img_id": 114,
+    "img_name": "xmlab114/source.jpg",
+    "question": "What modality is used to take this image?",
+    "answer": "CT",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Modality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 102
+  },
+  {
+    "img_id": 114,
+    "img_name": "xmlab114/source.jpg",
+    "question": "Does the picture contain lung?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 107
+  },
+  {
+    "img_id": 115,
+    "img_name": "xmlab115/source.jpg",
+    "question": "Which part of the body does this image belong to?",
+    "answer": "Chest",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 113
+  },
+  {
+    "img_id": 120,
+    "img_name": "xmlab120/source.jpg",
+    "question": "Where is/are the abnormality located?",
+    "answer": "Right Lung, Lower Left",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 156
+  },
+  {
+    "img_id": 123,
+    "img_name": "xmlab123/source.jpg",
+    "question": "Are there abnormalities in this image?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 167
+  },
+  {
+    "img_id": 123,
+    "img_name": "xmlab123/source.jpg",
+    "question": "What is the largest organ in the picture?",
+    "answer": "Lung",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Size",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 168
+  },
+  {
+    "img_id": 137,
+    "img_name": "xmlab137/source.jpg",
+    "question": "What modality is used to take this image?",
+    "answer": "X-Ray",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Modality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 224
+  },
+  {
+    "img_id": 137,
+    "img_name": "xmlab137/source.jpg",
+    "question": "Which part of the body does this image belong to?",
+    "answer": "Chest",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 225
+  },
+  {
+    "img_id": 137,
+    "img_name": "xmlab137/source.jpg",
+    "question": "What diseases are included in the picture?",
+    "answer": "Mass, Atelectasis",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 228
+  },
+  {
+    "img_id": 138,
+    "img_name": "xmlab138/source.jpg",
+    "question": "What is the largest organ in the picture?",
+    "answer": "Lung",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Size",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 234
+  },
+  {
+    "img_id": 143,
+    "img_name": "xmlab143/source.jpg",
+    "question": "What diseases are included in the picture?",
+    "answer": "Effusion",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 266
+  },
+  {
+    "img_id": 144,
+    "img_name": "xmlab144/source.jpg",
+    "question": "What modality is used to take this image?",
+    "answer": "X-Ray",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Modality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 271
+  },
+  {
+    "img_id": 144,
+    "img_name": "xmlab144/source.jpg",
+    "question": "Which part of the body does this image belong to?",
+    "answer": "Chest",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 272
+  },
+  {
+    "img_id": 145,
+    "img_name": "xmlab145/source.jpg",
+    "question": "Which organ is abnormal, heart or lung?",
+    "answer": "Lung",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 286
+  },
+  {
+    "img_id": 146,
+    "img_name": "xmlab146/source.jpg",
+    "question": "Where is/are the abnormality located?",
+    "answer": "Left Lung, Right",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 292
+  },
+  {
+    "img_id": 150,
+    "img_name": "xmlab150/source.jpg",
+    "question": "What is the largest organ in the picture?",
+    "answer": "Lung",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Size",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 314
+  },
+  {
+    "img_id": 155,
+    "img_name": "xmlab155/source.jpg",
+    "question": "Is the lung healthy?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 345
+  },
+  {
+    "img_id": 165,
+    "img_name": "xmlab165/source.jpg",
+    "question": "Which part of the body does this image belong to?",
+    "answer": "Chest",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 404
+  },
+  {
+    "img_id": 17,
+    "img_name": "xmlab17/source.jpg",
+    "question": "Does the picture contain kidney?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "MRI",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 440
+  },
+  {
+    "img_id": 171,
+    "img_name": "xmlab171/source.jpg",
+    "question": "Are there abnormalities in this image?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 449
+  },
+  {
+    "img_id": 179,
+    "img_name": "xmlab179/source.jpg",
+    "question": "Does this image look abnormal?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 502
+  },
+  {
+    "img_id": 181,
+    "img_name": "xmlab181/source.jpg",
+    "question": "What is the largest organ in the picture?",
+    "answer": "Lung",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Size",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 519
+  },
+  {
+    "img_id": 187,
+    "img_name": "xmlab187/source.jpg",
+    "question": "Which organ is abnormal, heart or lung?",
+    "answer": "Lung",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 567,
+    "content_type": "Abnormality"
+  },
+  {
+    "img_id": 194,
+    "img_name": "xmlab194/source.jpg",
+    "question": "Which organ is abnormal, heart or lung?",
+    "answer": "Lung",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 635,
+    "content_type": "Abnormality"
+  },
+  {
+    "img_id": 2,
+    "img_name": "xmlab2/source.jpg",
+    "question": "Which part of the body does this image belong to?",
+    "answer": "Abdomen",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 673,
+    "content_type": "Position"
+  },
+  {
+    "img_id": 2,
+    "img_name": "xmlab2/source.jpg",
+    "question": "What diseases are included in the picture?",
+    "answer": "None",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 680
+  },
+  {
+    "img_id": 20,
+    "img_name": "xmlab20/source.jpg",
+    "question": "Which part of the body does this image belong to?",
+    "answer": "Abdomen",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 682,
+    "content_type": "Position"
+  },
+  {
+    "img_id": 200,
+    "img_name": "xmlab200/source.jpg",
+    "question": "Which part of the body does this image belong to?",
+    "answer": "Abdomen",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 689,
+    "content_type": "Position"
+  },
+  {
+    "img_id": 202,
+    "img_name": "xmlab202/source.jpg",
+    "question": "Does the picture contain liver?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 714
+  },
+  {
+    "img_id": 205,
+    "img_name": "xmlab205/source.jpg",
+    "question": "Does the picture contain liver?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Chest_heart",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 754
+  },
+  {
+    "img_id": 205,
+    "img_name": "xmlab205/source.jpg",
+    "question": "Does the picture contain heart?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Chest_heart",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 758
+  },
+  {
+    "img_id": 206,
+    "img_name": "xmlab206/source.jpg",
+    "question": "Does the picture contain heart?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 770
+  },
+  {
+    "img_id": 209,
+    "img_name": "xmlab209/source.jpg",
+    "question": "Where is the liver?",
+    "answer": "Left",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 784,
+    "content_type": "Position"
+  },
+  {
+    "img_id": 209,
+    "img_name": "xmlab209/source.jpg",
+    "question": "What is the rightmost organ in this image?",
+    "answer": "Spleen",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 787
+  },
+  {
+    "img_id": 212,
+    "img_name": "xmlab212/source.jpg",
+    "question": "Does the picture contain spleen?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 832
+  },
+  {
+    "img_id": 214,
+    "img_name": "xmlab214/source.jpg",
+    "question": "Which is bigger in this image, kidney or liver?",
+    "answer": "Liver",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Size",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 855
+  },
+  {
+    "img_id": 215,
+    "img_name": "xmlab215/source.jpg",
+    "question": "What is the largest organ in the picture?",
+    "answer": "Liver",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 861,
+    "content_type": "Size"
+  },
+  {
+    "img_id": 215,
+    "img_name": "xmlab215/source.jpg",
+    "question": "Which is bigger in this image, kidney or liver?",
+    "answer": "Liver",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Size",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 870
+  },
+  {
+    "img_id": 216,
+    "img_name": "xmlab216/source.jpg",
+    "question": "How many kidneys in this image?",
+    "answer": "0",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Quantity",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 882
+  },
+  {
+    "img_id": 221,
+    "img_name": "xmlab221/source.jpg",
+    "question": "Which part of the body does this image belong to?",
+    "answer": "Abdomen",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 930,
+    "content_type": "Position"
+  },
+  {
+    "img_id": 222,
+    "img_name": "xmlab222/source.jpg",
+    "question": "Is the liver healthy?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 954,
+    "content_type": "Abnormality"
+  },
+  {
+    "img_id": 223,
+    "img_name": "xmlab223/source.jpg",
+    "question": "Where is the liver?",
+    "answer": "Upper Left",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 966,
+    "content_type": "Position"
+  },
+  {
+    "img_id": 225,
+    "img_name": "xmlab225/source.jpg",
+    "question": "Does the picture contain lung?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 980
+  },
+  {
+    "img_id": 225,
+    "img_name": "xmlab225/source.jpg",
+    "question": "Does the picture contain heart?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 981
+  },
+  {
+    "img_id": 226,
+    "img_name": "xmlab226/source.jpg",
+    "question": "How many kidneys in this image?",
+    "answer": "2",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Quantity",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 995
+  },
+  {
+    "img_id": 226,
+    "img_name": "xmlab226/source.jpg",
+    "question": "What is the rightmost organ in this image?",
+    "answer": "Spleen",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 997
+  },
+  {
+    "img_id": 227,
+    "img_name": "xmlab227/source.jpg",
+    "question": "Does the picture contain kidney?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1005
+  },
+  {
+    "img_id": 227,
+    "img_name": "xmlab227/source.jpg",
+    "question": "Which is bigger in this image, kidney or spleen?",
+    "answer": "Kidney",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Size",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1011
+  },
+  {
+    "img_id": 237,
+    "img_name": "xmlab237/source.jpg",
+    "question": "What organ is the black part on the left of the image?",
+    "answer": "Right Lung",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1114
+  },
+  {
+    "img_id": 239,
+    "img_name": "xmlab239/source.jpg",
+    "question": "Does the picture contain kidney?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Chest_heart",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1121
+  },
+  {
+    "img_id": 241,
+    "img_name": "xmlab241/source.jpg",
+    "question": "What organ is the gray part on the left of the image?",
+    "answer": "Liver",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1152
+  },
+  {
+    "img_id": 243,
+    "img_name": "xmlab243/source.jpg",
+    "question": "Where is the liver?",
+    "answer": "Left",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1175,
+    "content_type": "Position"
+  },
+  {
+    "img_id": 243,
+    "img_name": "xmlab243/source.jpg",
+    "question": "Which is bigger in this image, liver, spleen or kidney?",
+    "answer": "Liver",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Size",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1177
+  },
+  {
+    "img_id": 244,
+    "img_name": "xmlab244/source.jpg",
+    "question": "Does the picture contain spleen?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1186
+  },
+  {
+    "img_id": 244,
+    "img_name": "xmlab244/source.jpg",
+    "question": "Does the picture contain heart?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1188
+  },
+  {
+    "img_id": 248,
+    "img_name": "xmlab248/source.jpg",
+    "question": "What diseases are included in the picture?",
+    "answer": "Liver Cancer",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1232
+  },
+  {
+    "img_id": 249,
+    "img_name": "xmlab249/source.jpg",
+    "question": "What is the largest organ in the picture?",
+    "answer": "Liver",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1243,
+    "content_type": "Size"
+  },
+  {
+    "img_id": 251,
+    "img_name": "xmlab251/source.jpg",
+    "question": "Does the picture contain kidney?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1259
+  },
+  {
+    "img_id": 254,
+    "img_name": "xmlab254/source.jpg",
+    "question": "What is the organ on the top of the body in this image?",
+    "answer": "Heart",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1284
+  },
+  {
+    "img_id": 26,
+    "img_name": "xmlab26/source.jpg",
+    "question": "What is the mr weighting in this image?",
+    "answer": "T1",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Modality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1333
+  },
+  {
+    "img_id": 260,
+    "img_name": "xmlab260/source.jpg",
+    "question": "Does the picture contain spleen?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1350
+  },
+  {
+    "img_id": 261,
+    "img_name": "xmlab261/source.jpg",
+    "question": "Which part of the body does this image belong to?",
+    "answer": "Abdomen",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1361,
+    "content_type": "Position"
+  },
+  {
+    "img_id": 261,
+    "img_name": "xmlab261/source.jpg",
+    "question": "Which is bigger in this image, spleen or kidney?",
+    "answer": "Spleen",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Size",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1373
+  },
+  {
+    "img_id": 262,
+    "img_name": "xmlab262/source.jpg",
+    "question": "What diseases are included in the picture?",
+    "answer": "Liver Cancer",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1387
+  },
+  {
+    "img_id": 262,
+    "img_name": "xmlab262/source.jpg",
+    "question": "What is the scanning plane of this image?",
+    "answer": "Transverse  Plane",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Plane",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1394
+  },
+  {
+    "img_id": 265,
+    "img_name": "xmlab265/source.jpg",
+    "question": "What modality is used to take this image?",
+    "answer": "CT",
+    "q_lang": "en",
+    "location": "Chest_lung",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1397,
+    "content_type": "Modality"
+  },
+  {
+    "img_id": 268,
+    "img_name": "xmlab268/source.jpg",
+    "question": "What is the largest organ in the picture?",
+    "answer": "Lung",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1443,
+    "content_type": "Size"
+  },
+  {
+    "img_id": 268,
+    "img_name": "xmlab268/source.jpg",
+    "question": "What organ is the black part on the left of the image?",
+    "answer": "Right Lung",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1456
+  },
+  {
+    "img_id": 272,
+    "img_name": "xmlab272/source.jpg",
+    "question": "What is the scanning plane of this image?",
+    "answer": "Transverse  Plane",
+    "q_lang": "en",
+    "location": "Chest_heart",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Plane",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1500
+  },
+  {
+    "img_id": 275,
+    "img_name": "xmlab275/source.jpg",
+    "question": "What is the largest organ in the picture?",
+    "answer": "Liver",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1514,
+    "content_type": "Size"
+  },
+  {
+    "img_id": 275,
+    "img_name": "xmlab275/source.jpg",
+    "question": "Does the picture contain liver?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1515
+  },
+  {
+    "img_id": 276,
+    "img_name": "xmlab276/source.jpg",
+    "question": "What is the leftmost organ in this image?",
+    "answer": "Liver",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1540
+  },
+  {
+    "img_id": 278,
+    "img_name": "xmlab278/source.jpg",
+    "question": "Does the picture contain liver?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1564
+  },
+  {
+    "img_id": 279,
+    "img_name": "xmlab279/source.jpg",
+    "question": "What is the largest organ in the picture?",
+    "answer": "Large Bowel",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1581,
+    "content_type": "Size"
+  },
+  {
+    "img_id": 28,
+    "img_name": "xmlab28/source.jpg",
+    "question": "Does the picture contain kidney?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "MRI",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1597
+  },
+  {
+    "img_id": 280,
+    "img_name": "xmlab280/source.jpg",
+    "question": "What modality is used to take this image?",
+    "answer": "CT",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1602,
+    "content_type": "Modality"
+  },
+  {
+    "img_id": 280,
+    "img_name": "xmlab280/source.jpg",
+    "question": "Does the picture contain stomach?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1610
+  },
+  {
+    "img_id": 282,
+    "img_name": "xmlab282/source.jpg",
+    "question": "Does the picture contain lung?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Chest_lung",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1632
+  },
+  {
+    "img_id": 286,
+    "img_name": "xmlab286/source.jpg",
+    "question": "Does the picture contain kidney?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1679
+  },
+  {
+    "img_id": 286,
+    "img_name": "xmlab286/source.jpg",
+    "question": "Does the patient have liver cancer?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1691
+  },
+  {
+    "img_id": 287,
+    "img_name": "xmlab287/source.jpg",
+    "question": "What does the black hole located at the top of the body represent?",
+    "answer": "Esophagus",
+    "q_lang": "en",
+    "location": "Chest_lung",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1701
+  },
+  {
+    "img_id": 288,
+    "img_name": "xmlab288/source.jpg",
+    "question": "What is the organ on the top of the body in this image?",
+    "answer": "Liver, Stomach",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1712
+  },
+  {
+    "img_id": 292,
+    "img_name": "xmlab292/source.jpg",
+    "question": "Does the picture contain liver?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1760
+  },
+  {
+    "img_id": 292,
+    "img_name": "xmlab292/source.jpg",
+    "question": "What is the organ located in the lower left corner?",
+    "answer": "Right Kidney",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1764
+  },
+  {
+    "img_id": 293,
+    "img_name": "xmlab293/source.jpg",
+    "question": "Which is bigger in this image, liver, heart or lung?",
+    "answer": "Lung",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Size",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1775
+  },
+  {
+    "img_id": 294,
+    "img_name": "xmlab294/source.jpg",
+    "question": "Does the picture contain spleen?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1787
+  },
+  {
+    "img_id": 296,
+    "img_name": "xmlab296/source.jpg",
+    "question": "Is this image taken via CT?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Modality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1807
+  },
+  {
+    "img_id": 296,
+    "img_name": "xmlab296/source.jpg",
+    "question": "Where is/are the mass located?",
+    "answer": "Lower Left Lung",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1811
+  },
+  {
+    "img_id": 297,
+    "img_name": "xmlab297/source.jpg",
+    "question": "Is/Are there abnormalities in the patient's right lung?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1830
+  },
+  {
+    "img_id": 297,
+    "img_name": "xmlab297/source.jpg",
+    "question": "What color does the right lung show in the picture?",
+    "answer": "Black",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Color",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1832
+  },
+  {
+    "img_id": 297,
+    "img_name": "xmlab297/source.jpg",
+    "question": "What is the function of the main organ in this picture?",
+    "answer": "Breathe",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "function",
+      "ktail"
+    ],
+    "qid": 1834
+  },
+  {
+    "img_id": 30,
+    "img_name": "xmlab30/source.jpg",
+    "question": "Where is the liver?",
+    "answer": "Upper left",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1865,
+    "content_type": "Position"
+  },
+  {
+    "img_id": 301,
+    "img_name": "xmlab301/source.jpg",
+    "question": "Is this a coronal plane?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Plane",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1883
+  },
+  {
+    "img_id": 301,
+    "img_name": "xmlab301/source.jpg",
+    "question": "What diseases are included in the picture?",
+    "answer": "Atelectasis",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1890
+  },
+  {
+    "img_id": 302,
+    "img_name": "xmlab302/source.jpg",
+    "question": "What is the effect of the main organ in this picture?",
+    "answer": "Breathe",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "effect",
+      "ktail"
+    ],
+    "qid": 1909
+  },
+  {
+    "img_id": 305,
+    "img_name": "xmlab305/source.jpg",
+    "question": "Where does the picture show?",
+    "answer": "Chest",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1914
+  },
+  {
+    "img_id": 306,
+    "img_name": "xmlab306/source.jpg",
+    "question": "How many lungs are shown in this image?",
+    "answer": "2",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Quantity",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 1938
+  },
+  {
+    "img_id": 315,
+    "img_name": "xmlab315/source.jpg",
+    "question": "Which organs/organ in the picture belong to the respiratory system?",
+    "answer": "Lung",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "belong to",
+      "respiratory system"
+    ],
+    "qid": 2012
+  },
+  {
+    "img_id": 316,
+    "img_name": "xmlab316/source.jpg",
+    "question": "In what plane is this image scanned?",
+    "answer": "Coronal Plane",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Plane",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2014
+  },
+  {
+    "img_id": 317,
+    "img_name": "xmlab317/source.jpg",
+    "question": "Is this a CT scan?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Modality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2028
+  },
+  {
+    "img_id": 317,
+    "img_name": "xmlab317/source.jpg",
+    "question": "Which side of lung is abnormal in this image,left or right?",
+    "answer": "Right",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2031
+  },
+  {
+    "img_id": 317,
+    "img_name": "xmlab317/source.jpg",
+    "question": "Is this image normal?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2035
+  },
+  {
+    "img_id": 32,
+    "img_name": "xmlab32/source.jpg",
+    "question": "Where is the liver?",
+    "answer": "Left",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2079,
+    "content_type": "Position"
+  },
+  {
+    "img_id": 321,
+    "img_name": "xmlab321/source.jpg",
+    "question": "In what plane is this image scanned?",
+    "answer": "Coronal Plane",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Plane",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2085
+  },
+  {
+    "img_id": 321,
+    "img_name": "xmlab321/source.jpg",
+    "question": "Which lobe is abnormal in this image?",
+    "answer": "Right",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2087
+  },
+  {
+    "img_id": 321,
+    "img_name": "xmlab321/source.jpg",
+    "question": "How to treat the disease located on the right of lung in this image?",
+    "answer": "Medical treatment, surgical treatment",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "treat",
+      "ktail"
+    ],
+    "qid": 2097
+  },
+  {
+    "img_id": 325,
+    "img_name": "xmlab325/source.jpg",
+    "question": "What color does the left lung show in the picture?",
+    "answer": "Black",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Color",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2124
+  },
+  {
+    "img_id": 325,
+    "img_name": "xmlab325/source.jpg",
+    "question": "How many lungs are shown in this image?",
+    "answer": "2",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Quantity",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2125
+  },
+  {
+    "img_id": 326,
+    "img_name": "xmlab326/source.jpg",
+    "question": "Is this image taken via X-Ray?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Modality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2129
+  },
+  {
+    "img_id": 326,
+    "img_name": "xmlab326/source.jpg",
+    "question": "Where is the mass in this image?",
+    "answer": "Upper Right Lung",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2133
+  },
+  {
+    "img_id": 326,
+    "img_name": "xmlab326/source.jpg",
+    "question": "Is/Are there abnormalities in the patient's right lung?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2137
+  },
+  {
+    "img_id": 327,
+    "img_name": "xmlab327/source.jpg",
+    "question": "What organ system is pictured?",
+    "answer": "Chest",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2150
+  },
+  {
+    "img_id": 33,
+    "img_name": "xmlab33/source.jpg",
+    "question": "Does the picture contain liver?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "MRI",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2177
+  },
+  {
+    "img_id": 33,
+    "img_name": "xmlab33/source.jpg",
+    "question": "How many kidneys in this image?",
+    "answer": "2",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Quantity",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2180
+  },
+  {
+    "img_id": 331,
+    "img_name": "xmlab331/source.jpg",
+    "question": "What can the organ with black color in this image be used for?",
+    "answer": "Breathe",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "be used for",
+      "ktail"
+    ],
+    "qid": 2196
+  },
+  {
+    "img_id": 333,
+    "img_name": "xmlab333/source.jpg",
+    "question": "What part of the lung is the mass located in in this image?",
+    "answer": "Right Lung",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2218
+  },
+  {
+    "img_id": 333,
+    "img_name": "xmlab333/source.jpg",
+    "question": "Can mass be observed on the right lung in this picture?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2223
+  },
+  {
+    "img_id": 334,
+    "img_name": "xmlab334/source.jpg",
+    "question": "Where is the pleural effusion in this image?",
+    "answer": "Lower Left Chest",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2233
+  },
+  {
+    "img_id": 335,
+    "img_name": "xmlab335/source.jpg",
+    "question": "How to treat the disease located in the center of this image?",
+    "answer": "Physical therapy, medication",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "treat",
+      "ktail"
+    ],
+    "qid": 2257
+  },
+  {
+    "img_id": 336,
+    "img_name": "xmlab336/source.jpg",
+    "question": "Which lobe is abnormal in this image?",
+    "answer": "Left",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2262
+  },
+  {
+    "img_id": 336,
+    "img_name": "xmlab336/source.jpg",
+    "question": "What kind of symptoms will the disease on the lower left of lung bring to the patient?",
+    "answer": "Chest pain, cough, expectoration",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "symptom",
+      "ktail"
+    ],
+    "qid": 2272
+  },
+  {
+    "img_id": 339,
+    "img_name": "xmlab339/source.jpg",
+    "question": "How many organs are there in this image?",
+    "answer": "2",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Quantity",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2300
+  },
+  {
+    "img_id": 342,
+    "img_name": "xmlab342/source.jpg",
+    "question": "Is the lung abnormal?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2342
+  },
+  {
+    "img_id": 346,
+    "img_name": "xmlab346/source.jpg",
+    "question": "Which lobe is normal in this image?",
+    "answer": "Right",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2382
+  },
+  {
+    "img_id": 35,
+    "img_name": "xmlab35/source.jpg",
+    "question": "Which part of the body does this image belong to?",
+    "answer": "Abdomen",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2395,
+    "content_type": "Position"
+  },
+  {
+    "img_id": 352,
+    "img_name": "xmlab352/source.jpg",
+    "question": "Which side of lung is abnormal in this image?",
+    "answer": "Both",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2409
+  },
+  {
+    "img_id": 354,
+    "img_name": "xmlab354/source.jpg",
+    "question": "Which side of lung is abnormal in this image?",
+    "answer": "Left",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2424
+  },
+  {
+    "img_id": 355,
+    "img_name": "xmlab355/source.jpg",
+    "question": "What kind of symptoms will the disease on the lower right of lung bring to the patient?",
+    "answer": "Chest tightness, shortness of breath, difficulty breathing, dry cough",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "symptom",
+      "ktail"
+    ],
+    "qid": 2449
+  },
+  {
+    "img_id": 362,
+    "img_name": "xmlab362/source.jpg",
+    "question": "What is the effect of the center organ in this picture?",
+    "answer": "Promote blood flow",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "effect",
+      "ktail"
+    ],
+    "qid": 2505
+  },
+  {
+    "img_id": 362,
+    "img_name": "xmlab362/source.jpg",
+    "question": "How to prevent the occurrence of the disease on the left lobe of lung in this image?",
+    "answer": "Pay attention to prevent cold and keep warm, enhance physical fitness",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "prevent",
+      "ktail"
+    ],
+    "qid": 2506
+  },
+  {
+    "img_id": 363,
+    "img_name": "xmlab363/source.jpg",
+    "question": "What color does the right lung show in the picture?",
+    "answer": "Black",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Color",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2518
+  },
+  {
+    "img_id": 365,
+    "img_name": "xmlab365/source.jpg",
+    "question": "How many existing heart in this image?",
+    "answer": "1",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Quantity",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2549
+  },
+  {
+    "img_id": 368,
+    "img_name": "xmlab368/source.jpg",
+    "question": "Is this a study of the chest?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2558
+  },
+  {
+    "img_id": 369,
+    "img_name": "xmlab369/source.jpg",
+    "question": "Which organs/organ in the picture belong to the respiratory system?",
+    "answer": "Lung",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "belong to",
+      "respiratory system"
+    ],
+    "qid": 2582
+  },
+  {
+    "img_id": 370,
+    "img_name": "xmlab370/source.jpg",
+    "question": "Where is the pneumothorax in the lung?",
+    "answer": "Right Lung",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2596
+  },
+  {
+    "img_id": 370,
+    "img_name": "xmlab370/source.jpg",
+    "question": "How much damage will be caused to the body taking such an image?",
+    "answer": "A Little",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "damage",
+      "ktail"
+    ],
+    "qid": 2604
+  },
+  {
+    "img_id": 372,
+    "img_name": "xmlab372/source.jpg",
+    "question": "Which organ system is imaged?",
+    "answer": "Chest",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2628
+  },
+  {
+    "img_id": 373,
+    "img_name": "xmlab373/source.jpg",
+    "question": "Is this a study of the chest?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2642
+  },
+  {
+    "img_id": 373,
+    "img_name": "xmlab373/source.jpg",
+    "question": "What is the effect of the center organ in this picture?",
+    "answer": "Promote blood flow",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "effect",
+      "ktail"
+    ],
+    "qid": 2649
+  },
+  {
+    "img_id": 376,
+    "img_name": "xmlab376/source.jpg",
+    "question": "Which part of the human body is the organ located in the image?",
+    "answer": "Chest",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2654
+  },
+  {
+    "img_id": 376,
+    "img_name": "xmlab376/source.jpg",
+    "question": "How to treat the disease located on the left of lung in this image?",
+    "answer": "Medical therapy, supportive therapy",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "treat",
+      "ktail"
+    ],
+    "qid": 2665
+  },
+  {
+    "img_id": 377,
+    "img_name": "xmlab377/source.jpg",
+    "question": "What part of the lung is the nodule located in?",
+    "answer": "Left Lung",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2671
+  },
+  {
+    "img_id": 377,
+    "img_name": "xmlab377/source.jpg",
+    "question": "Does the patient have any abnormalities?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2675
+  },
+  {
+    "img_id": 382,
+    "img_name": "xmlab382/source.jpg",
+    "question": "How to prevent the occurrence of the disease on the lower left lobe of lung in this image?",
+    "answer": "Pay attention to prevent cold and keep warm, enhance physical fitness",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "prevent",
+      "ktail"
+    ],
+    "qid": 2722
+  },
+  {
+    "img_id": 387,
+    "img_name": "xmlab387/source.jpg",
+    "question": "Can cardiomegaly be observed in this picture?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2748
+  },
+  {
+    "img_id": 39,
+    "img_name": "xmlab39/source.jpg",
+    "question": "Does the picture contain spleen?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "MRI",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2789
+  },
+  {
+    "img_id": 390,
+    "img_name": "xmlab390/source.jpg",
+    "question": "What color is the lung in the picture?",
+    "answer": "Black",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Color",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2801
+  },
+  {
+    "img_id": 390,
+    "img_name": "xmlab390/source.jpg",
+    "question": "How many lungs are shown in this image?",
+    "answer": "2",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Quantity",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2802
+  },
+  {
+    "img_id": 400,
+    "img_name": "xmlab400/source.jpg",
+    "question": "What organ system is pictured?",
+    "answer": "Head",
+    "q_lang": "en",
+    "location": "Brain_Tissue",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2928
+  },
+  {
+    "img_id": 400,
+    "img_name": "xmlab400/source.jpg",
+    "question": "What is the largest organ in the picture?",
+    "answer": "Brain",
+    "q_lang": "en",
+    "location": "Brain_Tissue",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Size",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2933
+  },
+  {
+    "img_id": 402,
+    "img_name": "xmlab402/source.jpg",
+    "question": "How many ears are shown in this image?",
+    "answer": "2",
+    "q_lang": "en",
+    "location": "Brain_Tissue",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Quantity",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2949
+  },
+  {
+    "img_id": 403,
+    "img_name": "xmlab403/source.jpg",
+    "question": "Does the parotid appear in the image?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Brain_Face",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2960
+  },
+  {
+    "img_id": 406,
+    "img_name": "xmlab406/source.jpg",
+    "question": "Which type of modality is shown about this image, MRI, CT or X-Ray?",
+    "answer": "CT",
+    "q_lang": "en",
+    "location": "Brain_Face",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Modality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2968
+  },
+  {
+    "img_id": 406,
+    "img_name": "xmlab406/source.jpg",
+    "question": "What is the organ system visualized?",
+    "answer": "Head",
+    "q_lang": "en",
+    "location": "Brain_Face",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2972
+  },
+  {
+    "img_id": 409,
+    "img_name": "xmlab409/source.jpg",
+    "question": "Where does the picture show?",
+    "answer": "Head",
+    "q_lang": "en",
+    "location": "Brain_Face",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 2982
+  },
+  {
+    "img_id": 410,
+    "img_name": "xmlab410/source.jpg",
+    "question": "Which is larynx in this image?",
+    "answer": "Black Hollow",
+    "q_lang": "en",
+    "location": "Neck",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 3008
+  },
+  {
+    "img_id": 411,
+    "img_name": "xmlab411/source.jpg",
+    "question": "How many parotids are shown in this image?",
+    "answer": "2",
+    "q_lang": "en",
+    "location": "Brain_Face",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Quantity",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 3028
+  },
+  {
+    "img_id": 416,
+    "img_name": "xmlab416/source.jpg",
+    "question": "Which organs/organ in the picture belong to the digestive system?",
+    "answer": "Parotid",
+    "q_lang": "en",
+    "location": "Brain_Face",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "belong to",
+      "digestive system"
+    ],
+    "qid": 3096
+  },
+  {
+    "img_id": 416,
+    "img_name": "xmlab416/source.jpg",
+    "question": "Do any of the organs in the picture belong to the digestive system?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Brain_Face",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "belong to",
+      "digestive system"
+    ],
+    "qid": 3097
+  },
+  {
+    "img_id": 422,
+    "img_name": "xmlab422/source.jpg",
+    "question": "Where is the spinal cord in this image?",
+    "answer": "Bottom",
+    "q_lang": "en",
+    "location": "Neck",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 3134
+  },
+  {
+    "img_id": 423,
+    "img_name": "xmlab423/source.jpg",
+    "question": "What is the shape of larynx about this patient?",
+    "answer": "Irregular",
+    "q_lang": "en",
+    "location": "Neck",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Shape",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 3154
+  },
+  {
+    "img_id": 43,
+    "img_name": "xmlab43/source.jpg",
+    "question": "What diseases are included in the picture?",
+    "answer": "Brian Edema",
+    "q_lang": "en",
+    "location": "Brain",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 3177
+  },
+  {
+    "img_id": 431,
+    "img_name": "xmlab431/source.jpg",
+    "question": "What is the shape of trachea about this patient?",
+    "answer": "Circular",
+    "q_lang": "en",
+    "location": "Neck",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Shape",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 3199
+  },
+  {
+    "img_id": 435,
+    "img_name": "xmlab435/source.jpg",
+    "question": "Where is the brain edema?",
+    "answer": "Lower Right Lobe",
+    "q_lang": "en",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 3245
+  },
+  {
+    "img_id": 440,
+    "img_name": "xmlab440/source.jpg",
+    "question": "Which hemisphere is abnormal,left or right?",
+    "answer": "Left",
+    "q_lang": "en",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 3289
+  },
+  {
+    "img_id": 443,
+    "img_name": "xmlab443/source.jpg",
+    "question": "Is the brain normal appearing?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 3308
+  },
+  {
+    "img_id": 445,
+    "img_name": "xmlab445/source.jpg",
+    "question": "What scanning plane does this image belong to?",
+    "answer": "Transverse Plane",
+    "q_lang": "en",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Plane",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 3322
+  },
+  {
+    "img_id": 446,
+    "img_name": "xmlab446/source.jpg",
+    "question": "How to treat the most severe disease in this image?",
+    "answer": "Pharmacotherapy, rehabilitation",
+    "q_lang": "en",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "treat",
+      "ktail"
+    ],
+    "qid": 3338
+  },
+  {
+    "img_id": 450,
+    "img_name": "xmlab450/source.jpg",
+    "question": "How many kinds of abnormalities are there in this image?",
+    "answer": "1",
+    "q_lang": "en",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Quantity",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 3363
+  },
+  {
+    "img_id": 451,
+    "img_name": "xmlab451/source.jpg",
+    "question": "Is this an MRI image with T2 weighted?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Modality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 3366
+  },
+  {
+    "img_id": 454,
+    "img_name": "xmlab454/source.jpg",
+    "question": "Is this an MRI?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Modality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 3391
+  },
+  {
+    "img_id": 467,
+    "img_name": "xmlab467/source.jpg",
+    "question": "Is this a CT?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Modality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 3455
+  },
+  {
+    "img_id": 47,
+    "img_name": "xmlab47/source.jpg",
+    "question": "Where is/are the abnormality located?",
+    "answer": "Left",
+    "q_lang": "en",
+    "location": "Brain",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 3472,
+    "content_type": "Position"
+  },
+  {
+    "img_id": 477,
+    "img_name": "xmlab477/source.jpg",
+    "question": "Is the brain healthy?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 3506
+  },
+  {
+    "img_id": 480,
+    "img_name": "xmlab480/source.jpg",
+    "question": "Which part do the organs in this image locate from the aspect of the whole body?",
+    "answer": "Head",
+    "q_lang": "en",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 3529
+  },
+  {
+    "img_id": 481,
+    "img_name": "xmlab481/source.jpg",
+    "question": "Is this an MRI image with T2 weighted?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Modality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 3535
+  },
+  {
+    "img_id": 487,
+    "img_name": "xmlab487/source.jpg",
+    "question": "What is the main cause of the disease on the upper right lobe of brain in this picture?",
+    "answer": "Brain embryonic tissue dysplasia, genetic factors, chemical factors",
+    "q_lang": "en",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "cause",
+      "ktail"
+    ],
+    "qid": 3576
+  },
+  {
+    "img_id": 492,
+    "img_name": "xmlab492/source.jpg",
+    "question": "What kind of symptoms will the disease on the lower right lobe of brain in the picture bring to the patient?",
+    "answer": "Visual impairment, vomiting, tinnitus, increased intracranial pressure",
+    "q_lang": "en",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "symptom",
+      "ktail"
+    ],
+    "qid": 3613
+  },
+  {
+    "img_id": 497,
+    "img_name": "xmlab497/source.jpg",
+    "question": "Is this sagittal plane?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Plane",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 3641
+  },
+  {
+    "img_id": 500,
+    "img_name": "xmlab500/source.jpg",
+    "question": "Can brain edema be observed in the picture?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 3667
+  },
+  {
+    "img_id": 515,
+    "img_name": "xmlab515/source.jpg",
+    "question": "Which type of modality is shown about this image, MRI, CT or X-Ray?",
+    "answer": "MRI",
+    "q_lang": "en",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Modality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 3753
+  },
+  {
+    "img_id": 519,
+    "img_name": "xmlab519/source.jpg",
+    "question": "What modality is shown in this image?",
+    "answer": "MRI",
+    "q_lang": "en",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Modality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 3771
+  },
+  {
+    "img_id": 524,
+    "img_name": "xmlab524/source.jpg",
+    "question": "What kind of symptoms will the disease on the left lobe of brain in the picture bring to the patient?",
+    "answer": "Encephalomalacia, local edema, confusion, increased intracranial pressure",
+    "q_lang": "en",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "symptom",
+      "ktail"
+    ],
+    "qid": 3822
+  },
+  {
+    "img_id": 534,
+    "img_name": "xmlab534/source.jpg",
+    "question": "Is this an MRI scan?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Modality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 3877
+  },
+  {
+    "img_id": 541,
+    "img_name": "xmlab541/source.jpg",
+    "question": "What is the effect of the black organ on the left of this picture?",
+    "answer": "Breathe",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "effect",
+      "ktail"
+    ],
+    "qid": 3931
+  },
+  {
+    "img_id": 542,
+    "img_name": "xmlab542/source.jpg",
+    "question": "Where is the spleen in this image?",
+    "answer": "Lower Right",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 3937
+  },
+  {
+    "img_id": 542,
+    "img_name": "xmlab542/source.jpg",
+    "question": "Which is smaller in this image,kidney or liver?",
+    "answer": "Kidney",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Size",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 3941
+  },
+  {
+    "img_id": 547,
+    "img_name": "xmlab547/source.jpg",
+    "question": "Does the picture contain the organ that could receive sound?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "could",
+      "receive sound"
+    ],
+    "qid": 3972
+  },
+  {
+    "img_id": 549,
+    "img_name": "xmlab549/source.jpg",
+    "question": "Which organs/organ is part of the respiratory system in this image?",
+    "answer": "Lung",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "part of",
+      "respiratory system"
+    ],
+    "qid": 3984
+  },
+  {
+    "img_id": 551,
+    "img_name": "xmlab551/source.jpg",
+    "question": "Does the rectum appear in this picture?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 4010
+  },
+  {
+    "img_id": 553,
+    "img_name": "xmlab553/source.jpg",
+    "question": "What is the effect of the leftmost organ in this picture?",
+    "answer": "Absorb nutrients, secrete enzymes, digest food",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "effect",
+      "ktail"
+    ],
+    "qid": 4025
+  },
+  {
+    "img_id": 56,
+    "img_name": "xmlab56/source.jpg",
+    "question": "Does the picture contain brian?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Brain",
+    "modality": "MRI",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 4067
+  },
+  {
+    "img_id": 560,
+    "img_name": "xmlab560/source.jpg",
+    "question": "Is this a CT?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Modality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 4071
+  },
+  {
+    "img_id": 560,
+    "img_name": "xmlab560/source.jpg",
+    "question": "Which organs/organ is part of the nervous system in this image?",
+    "answer": "Spinal cord",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "part of",
+      "nervous system"
+    ],
+    "qid": 4080
+  },
+  {
+    "img_id": 564,
+    "img_name": "xmlab564/source.jpg",
+    "question": "Where is the spleen in this image?",
+    "answer": "Right",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 4095
+  },
+  {
+    "img_id": 565,
+    "img_name": "xmlab565/source.jpg",
+    "question": "Does the picture contain spinal cord?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 4105
+  },
+  {
+    "img_id": 567,
+    "img_name": "xmlab567/source.jpg",
+    "question": "Which is the smallest in this image,spleen,left kidney or liver?",
+    "answer": "Left Kidney",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Size",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 4120
+  },
+  {
+    "img_id": 568,
+    "img_name": "xmlab568/source.jpg",
+    "question": "Does the larynx appear in the image?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 4128
+  },
+  {
+    "img_id": 568,
+    "img_name": "xmlab568/source.jpg",
+    "question": "Does the picture contain spinal cord?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 4129
+  },
+  {
+    "img_id": 570,
+    "img_name": "xmlab570/source.jpg",
+    "question": "Where is the spleen in this image, right or lower right?",
+    "answer": "Right",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 4145
+  },
+  {
+    "img_id": 570,
+    "img_name": "xmlab570/source.jpg",
+    "question": "What is the rightmost organ in this image?",
+    "answer": "Spleen",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 4146
+  },
+  {
+    "img_id": 570,
+    "img_name": "xmlab570/source.jpg",
+    "question": "Does the picture contain spinal cord?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 4148
+  },
+  {
+    "img_id": 575,
+    "img_name": "xmlab575/source.jpg",
+    "question": "How many organs does the image have?",
+    "answer": "6",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Quantity",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 4199
+  },
+  {
+    "img_id": 583,
+    "img_name": "xmlab583/source.jpg",
+    "question": "Does the picture contain bladder?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 4264
+  },
+  {
+    "img_id": 583,
+    "img_name": "xmlab583/source.jpg",
+    "question": "Is there femoral head in this picture?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 4265
+  },
+  {
+    "img_id": 584,
+    "img_name": "xmlab584/source.jpg",
+    "question": "Are/Is there kidneys in the picture?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 4275
+  },
+  {
+    "img_id": 584,
+    "img_name": "xmlab584/source.jpg",
+    "question": "Which is bigger in this image,liver or heart?",
+    "answer": "Heart",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Size",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 4277
+  },
+  {
+    "img_id": 588,
+    "img_name": "xmlab588/source.jpg",
+    "question": "What is the effect of the leftmost organ in this picture?",
+    "answer": "Breathe",
+    "q_lang": "en",
+    "location": "Chest_lung",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "effect",
+      "ktail"
+    ],
+    "qid": 4301
+  },
+  {
+    "img_id": 589,
+    "img_name": "xmlab589/source.jpg",
+    "question": "What organ system is primarily present in this image?",
+    "answer": "Chest",
+    "q_lang": "en",
+    "location": "Chest_lung",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 4307
+  },
+  {
+    "img_id": 590,
+    "img_name": "xmlab590/source.jpg",
+    "question": "Do the organs in the image exist in the abdomen?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Chest_lung",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 4324
+  },
+  {
+    "img_id": 595,
+    "img_name": "xmlab595/source.jpg",
+    "question": "Is this a study of the head?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Chest_lung",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 4356
+  },
+  {
+    "img_id": 6,
+    "img_name": "xmlab6/source.jpg",
+    "question": "Does the picture contain kidney?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "MRI",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 4382
+  },
+  {
+    "img_id": 603,
+    "img_name": "xmlab603/source.jpg",
+    "question": "Does the bladder exist in this picture?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Pelvic Cavity",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 4422
+  },
+  {
+    "img_id": 603,
+    "img_name": "xmlab603/source.jpg",
+    "question": "Are there organs in the picture that can absorb nutrients?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Pelvic Cavity",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "can",
+      "absorb nutrients"
+    ],
+    "qid": 4426
+  },
+  {
+    "img_id": 608,
+    "img_name": "xmlab608/source.jpg",
+    "question": "What organ is the dark gray part on the center of the image?",
+    "answer": "Bladder",
+    "q_lang": "en",
+    "location": "Pelvic Cavity",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 4454
+  },
+  {
+    "img_id": 610,
+    "img_name": "xmlab610/source.jpg",
+    "question": "Where is the rectum in this image?",
+    "answer": "Bottom",
+    "q_lang": "en",
+    "location": "Pelvic Cavity",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 4462
+  },
+  {
+    "img_id": 611,
+    "img_name": "xmlab611/source.jpg",
+    "question": "What organ system is primarily present in this image?",
+    "answer": "Pelvic Cavity",
+    "q_lang": "en",
+    "location": "Pelvic Cavity",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 4474
+  },
+  {
+    "img_id": 612,
+    "img_name": "xmlab612/source.jpg",
+    "question": "Which organs/organ is part of the digestive system in this image?",
+    "answer": "Rectum, Small Bowel",
+    "q_lang": "en",
+    "location": "Pelvic Cavity",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "part of",
+      "digestive system"
+    ],
+    "qid": 4490
+  },
+  {
+    "img_id": 614,
+    "img_name": "xmlab614/source.jpg",
+    "question": "Do the organs in the image exist in the abdomen?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Pelvic Cavity",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 4493
+  },
+  {
+    "img_id": 626,
+    "img_name": "xmlab626/source.jpg",
+    "question": "Which organs/organ in the picture belong to the digestive system?",
+    "answer": "Small Bowel, Colon, Rectum",
+    "q_lang": "en",
+    "location": "Pelvic Cavity",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "belong to",
+      "digestive system"
+    ],
+    "qid": 4575
+  },
+  {
+    "img_id": 635,
+    "img_name": "xmlab635/source.jpg",
+    "question": "Does the parotid appear in the image?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Pelvic Cavity",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 4615
+  },
+  {
+    "img_id": 66,
+    "img_name": "xmlab66/source.jpg",
+    "question": "Is the brain healthy?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Brain",
+    "modality": "MRI",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 4665,
+    "content_type": "Abnormality"
+  },
+  {
+    "img_id": 68,
+    "img_name": "xmlab68/source.jpg",
+    "question": "What diseases are included in the picture?",
+    "answer": "Brain Tumor, Brain Edema",
+    "q_lang": "en",
+    "location": "Brain",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 4681
+  },
+  {
+    "img_id": 72,
+    "img_name": "xmlab72/source.jpg",
+    "question": "What is the main organ in the image?",
+    "answer": "Brain",
+    "q_lang": "en",
+    "location": "Brain",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 4711
+  },
+  {
+    "img_id": 74,
+    "img_name": "xmlab74/source.jpg",
+    "question": "What is the mr weighting in this image?",
+    "answer": "T2",
+    "q_lang": "en",
+    "location": "Brain",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Modality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 4728
+  },
+  {
+    "img_id": 75,
+    "img_name": "xmlab75/source.jpg",
+    "question": "Does the brain look healthy?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Brain",
+    "modality": "MRI",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 4741,
+    "content_type": "Abnormality"
+  },
+  {
+    "img_id": 83,
+    "img_name": "xmlab83/source.jpg",
+    "question": "Does the picture contain liver?",
+    "answer": "No",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 4800
+  },
+  {
+    "img_id": 89,
+    "img_name": "xmlab89/source.jpg",
+    "question": "Does the picture contain lung?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 4840
+  },
+  {
+    "img_id": 9,
+    "img_name": "xmlab9/source.jpg",
+    "question": "What modality is used to take this image?",
+    "answer": "MRI",
+    "q_lang": "en",
+    "location": "Abdomen",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 4845,
+    "content_type": "Modality"
+  },
+  {
+    "img_id": 94,
+    "img_name": "xmlab94/source.jpg",
+    "question": "What diseases are included in the picture?",
+    "answer": "None",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 4868
+  },
+  {
+    "img_id": 94,
+    "img_name": "xmlab94/source.jpg",
+    "question": "Is the lung healthy?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 4869,
+    "content_type": "Abnormality"
+  },
+  {
+    "img_id": 98,
+    "img_name": "xmlab98/source.jpg",
+    "question": "Does the picture contain heart?",
+    "answer": "Yes",
+    "q_lang": "en",
+    "location": "Lung",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 4908
+  },
+  {
+    "img_id": 169,
+    "img_name": "xmlab169/source.jpg",
+    "question": "异常病变在哪个位置?",
+    "answer": "右肺,左下",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 5410
+  },
+  {
+    "img_id": 179,
+    "img_name": "xmlab179/source.jpg",
+    "question": "肺或者心脏哪个是异常的?",
+    "answer": "肺",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 5458
+  },
+  {
+    "img_id": 18,
+    "img_name": "xmlab18/source.jpg",
+    "question": "图片中有多少个肾脏?",
+    "answer": "1",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Quantity",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 5462
+  },
+  {
+    "img_id": 186,
+    "img_name": "xmlab186/source.jpg",
+    "question": "这张图片看起来正常吗?",
+    "answer": "不是",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 5496
+  },
+  {
+    "img_id": 193,
+    "img_name": "xmlab193/source.jpg",
+    "question": "肺是异常的吗?",
+    "answer": "是的",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 5546,
+    "content_type": "Abnormality"
+  },
+  {
+    "img_id": 195,
+    "img_name": "xmlab195/source.jpg",
+    "question": "图像里包含的区域属于身体哪个部分?",
+    "answer": "胸腔",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 5557,
+    "content_type": "Position"
+  },
+  {
+    "img_id": 195,
+    "img_name": "xmlab195/source.jpg",
+    "question": "这张图片看起来正常吗?",
+    "answer": "不是",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 5558
+  },
+  {
+    "img_id": 199,
+    "img_name": "xmlab199/source.jpg",
+    "question": "图像里包含的区域属于身体哪个部分?",
+    "answer": "胸腔",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 5581,
+    "content_type": "Position"
+  },
+  {
+    "img_id": 202,
+    "img_name": "xmlab202/source.jpg",
+    "question": "这张图片看起来是否正常?",
+    "answer": "不是",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 5597
+  },
+  {
+    "img_id": 203,
+    "img_name": "xmlab203/source.jpg",
+    "question": "图片左侧的是什么器官?",
+    "answer": "肝脏",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 5618
+  },
+  {
+    "img_id": 204,
+    "img_name": "xmlab204/source.jpg",
+    "question": "异常病变在哪个位置?",
+    "answer": "肝脏,上方",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 5631,
+    "content_type": "Position"
+  },
+  {
+    "img_id": 211,
+    "img_name": "xmlab211/source.jpg",
+    "question": "图片中体积最大的器官是什么?",
+    "answer": "肝脏",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 5689,
+    "content_type": "Size"
+  },
+  {
+    "img_id": 211,
+    "img_name": "xmlab211/source.jpg",
+    "question": "位于图片右下角的是什么器官?",
+    "answer": "脾脏",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 5700
+  },
+  {
+    "img_id": 214,
+    "img_name": "xmlab214/source.jpg",
+    "question": "图片左侧的是什么器官?",
+    "answer": "肝脏",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 5717
+  },
+  {
+    "img_id": 221,
+    "img_name": "xmlab221/source.jpg",
+    "question": "图像里包含的区域属于身体哪个部分?",
+    "answer": "腹部",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 5790,
+    "content_type": "Position"
+  },
+  {
+    "img_id": 221,
+    "img_name": "xmlab221/source.jpg",
+    "question": "图像中身体顶部的器官是什么?",
+    "answer": "心脏",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 5803
+  },
+  {
+    "img_id": 224,
+    "img_name": "xmlab224/source.jpg",
+    "question": "这个图像的扫描平面是什么?",
+    "answer": "横断面",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 5830,
+    "content_type": "Plane"
+  },
+  {
+    "img_id": 227,
+    "img_name": "xmlab227/source.jpg",
+    "question": "图像里包含的区域属于身体哪个部分?",
+    "answer": "腹部",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 5848,
+    "content_type": "Position"
+  },
+  {
+    "img_id": 229,
+    "img_name": "xmlab229/source.jpg",
+    "question": "图中肾脏的形状是什么?",
+    "answer": "不规则",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Shape",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 5881
+  },
+  {
+    "img_id": 23,
+    "img_name": "xmlab23/source.jpg",
+    "question": "图片中有多少个肾脏?",
+    "answer": "2",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Quantity",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 5885
+  },
+  {
+    "img_id": 230,
+    "img_name": "xmlab230/source.jpg",
+    "question": "图中有多少个肾脏?",
+    "answer": "2",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 5903,
+    "content_type": "Quantity"
+  },
+  {
+    "img_id": 234,
+    "img_name": "xmlab234/source.jpg",
+    "question": "位于图片右下角的是什么器官?",
+    "answer": "脾脏",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 5954
+  },
+  {
+    "img_id": 236,
+    "img_name": "xmlab236/source.jpg",
+    "question": "肝脏在哪个位置?",
+    "answer": "顶部",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 5990,
+    "content_type": "Position"
+  },
+  {
+    "img_id": 237,
+    "img_name": "xmlab237/source.jpg",
+    "question": "这个图像的扫描平面是什么?",
+    "answer": "横断面",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6017,
+    "content_type": "Plane"
+  },
+  {
+    "img_id": 238,
+    "img_name": "xmlab238/source.jpg",
+    "question": "图片中包含肾脏吗?",
+    "answer": "不包含",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6023,
+    "content_type": "Organ"
+  },
+  {
+    "img_id": 238,
+    "img_name": "xmlab238/source.jpg",
+    "question": "哪一个是肝脏?",
+    "answer": "左侧灰色球体",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6027
+  },
+  {
+    "img_id": 241,
+    "img_name": "xmlab241/source.jpg",
+    "question": "这个图像的扫描平面是什么?",
+    "answer": "横断面",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6079,
+    "content_type": "Plane"
+  },
+  {
+    "img_id": 242,
+    "img_name": "xmlab242/source.jpg",
+    "question": "图片中包含脾脏吗?",
+    "answer": "不包含",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6084,
+    "content_type": "Organ"
+  },
+  {
+    "img_id": 242,
+    "img_name": "xmlab242/source.jpg",
+    "question": "图中右肾和肝脏哪个更大?",
+    "answer": "肝脏",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6090,
+    "content_type": "Size"
+  },
+  {
+    "img_id": 245,
+    "img_name": "xmlab245/source.jpg",
+    "question": "图片中存在肾脏吗?",
+    "answer": "不包含",
+    "q_lang": "zh",
+    "location": "Chest_heart",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6112
+  },
+  {
+    "img_id": 246,
+    "img_name": "xmlab246/source.jpg",
+    "question": "肝脏是健康的吗?",
+    "answer": "不是",
+    "q_lang": "zh",
+    "location": "Chest_heart",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6132,
+    "content_type": "Abnormality"
+  },
+  {
+    "img_id": 250,
+    "img_name": "xmlab250/source.jpg",
+    "question": "这张图片的成像方式是什么?",
+    "answer": "CT",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6166,
+    "content_type": "Modality"
+  },
+  {
+    "img_id": 250,
+    "img_name": "xmlab250/source.jpg",
+    "question": "这个图像的扫描平面是什么?",
+    "answer": "横断面",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6185,
+    "content_type": "Plane"
+  },
+  {
+    "img_id": 253,
+    "img_name": "xmlab253/source.jpg",
+    "question": "图片中包含脾脏吗?",
+    "answer": "不包含",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6193,
+    "content_type": "Organ"
+  },
+  {
+    "img_id": 255,
+    "img_name": "xmlab255/source.jpg",
+    "question": "图像中身体顶部的器官是什么?",
+    "answer": "心脏",
+    "q_lang": "zh",
+    "location": "Chest_heart",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6230,
+    "content_type": "Organ"
+  },
+  {
+    "img_id": 259,
+    "img_name": "xmlab259/source.jpg",
+    "question": "图片中体积最大的器官是什么?",
+    "answer": "肺",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6236,
+    "content_type": "Size"
+  },
+  {
+    "img_id": 26,
+    "img_name": "xmlab26/source.jpg",
+    "question": "图中有多少个肾脏?",
+    "answer": "0",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6257,
+    "content_type": "Quantity"
+  },
+  {
+    "img_id": 26,
+    "img_name": "xmlab26/source.jpg",
+    "question": "肾脏是健康的吗?",
+    "answer": "是的",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "MRI",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6259,
+    "content_type": "Abnormality"
+  },
+  {
+    "img_id": 261,
+    "img_name": "xmlab261/source.jpg",
+    "question": "这张图片看起来是否正常?",
+    "answer": "不正常",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6282,
+    "content_type": "Abnormality"
+  },
+  {
+    "img_id": 262,
+    "img_name": "xmlab262/source.jpg",
+    "question": "这张图片看起来是否正常?",
+    "answer": "不正常",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6300,
+    "content_type": "Abnormality"
+  },
+  {
+    "img_id": 262,
+    "img_name": "xmlab262/source.jpg",
+    "question": "图片中包含哪些疾病?",
+    "answer": "肝癌",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6307,
+    "content_type": "Abnormality"
+  },
+  {
+    "img_id": 263,
+    "img_name": "xmlab263/source.jpg",
+    "question": "这张图片的成像方式是什么?",
+    "answer": "CT",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6316,
+    "content_type": "Modality"
+  },
+  {
+    "img_id": 263,
+    "img_name": "xmlab263/source.jpg",
+    "question": "这个图像的扫描平面是什么?",
+    "answer": "横断面",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6331,
+    "content_type": "Plane"
+  },
+  {
+    "img_id": 265,
+    "img_name": "xmlab265/source.jpg",
+    "question": "位于图片最右侧的器官是什么?",
+    "answer": "左肺",
+    "q_lang": "zh",
+    "location": "Chest_lung",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6352,
+    "content_type": "Organ"
+  },
+  {
+    "img_id": 266,
+    "img_name": "xmlab266/source.jpg",
+    "question": "图像里包含的区域属于身体哪个部分?",
+    "answer": "胸腔",
+    "q_lang": "zh",
+    "location": "Chest_lung",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6358,
+    "content_type": "Position"
+  },
+  {
+    "img_id": 269,
+    "img_name": "xmlab269/source.jpg",
+    "question": "这个图像的扫描平面是什么?",
+    "answer": "横断面",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6404,
+    "content_type": "Plane"
+  },
+  {
+    "img_id": 270,
+    "img_name": "xmlab270/source.jpg",
+    "question": "图片中包含心脏吗?",
+    "answer": "不包含",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6423,
+    "content_type": "Organ"
+  },
+  {
+    "img_id": 272,
+    "img_name": "xmlab272/source.jpg",
+    "question": "这张图片看起来是否正常?",
+    "answer": "正常",
+    "q_lang": "zh",
+    "location": "Chest_heart",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6433,
+    "content_type": "Abnormality"
+  },
+  {
+    "img_id": 272,
+    "img_name": "xmlab272/source.jpg",
+    "question": "这个图像的扫描平面是什么?",
+    "answer": "横断面",
+    "q_lang": "zh",
+    "location": "Chest_heart",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6444,
+    "content_type": "Plane"
+  },
+  {
+    "img_id": 273,
+    "img_name": "xmlab273/source.jpg",
+    "question": "这张图片的成像方式是什么?",
+    "answer": "CT",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6446,
+    "content_type": "Modality"
+  },
+  {
+    "img_id": 276,
+    "img_name": "xmlab276/source.jpg",
+    "question": "位于图片右下角的是什么器官?",
+    "answer": "左肾",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6502,
+    "content_type": "Organ"
+  },
+  {
+    "img_id": 276,
+    "img_name": "xmlab276/source.jpg",
+    "question": "这个图像的扫描平面是什么?",
+    "answer": "横断面",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6505,
+    "content_type": "Plane"
+  },
+  {
+    "img_id": 278,
+    "img_name": "xmlab278/source.jpg",
+    "question": "位于图片最右侧的器官是什么?",
+    "answer": "大肠",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6535,
+    "content_type": "Organ"
+  },
+  {
+    "img_id": 285,
+    "img_name": "xmlab285/source.jpg",
+    "question": "图片中包含肺吗?",
+    "answer": "包含",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6627,
+    "content_type": "Organ"
+  },
+  {
+    "img_id": 289,
+    "img_name": "xmlab289/source.jpg",
+    "question": "图片中包含肾脏吗?",
+    "answer": "不包含",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6678,
+    "content_type": "Organ"
+  },
+  {
+    "img_id": 295,
+    "img_name": "xmlab295/source.jpg",
+    "question": "这张图像是关于胸腔吗?",
+    "answer": "是的",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6703
+  },
+  {
+    "img_id": 297,
+    "img_name": "xmlab297/source.jpg",
+    "question": "图片中包括哪些疾病?",
+    "answer": "心脏肥大",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6719
+  },
+  {
+    "img_id": 297,
+    "img_name": "xmlab297/source.jpg",
+    "question": "这张图片中黑色的器官可以被用来做什么?",
+    "answer": "呼吸",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "被用于",
+      "ktail"
+    ],
+    "qid": 6724
+  },
+  {
+    "img_id": 298,
+    "img_name": "xmlab298/source.jpg",
+    "question": "这是横断面吗?",
+    "answer": "不是",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Plane",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6728
+  },
+  {
+    "img_id": 302,
+    "img_name": "xmlab302/source.jpg",
+    "question": "什么样的成像方式被这张图片使用?",
+    "answer": "X光",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Modality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6779
+  },
+  {
+    "img_id": 305,
+    "img_name": "xmlab305/source.jpg",
+    "question": "从整个身体的角度看,这幅图像中的器官位于哪个部位?",
+    "answer": "胸腔",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6826
+  },
+  {
+    "img_id": 305,
+    "img_name": "xmlab305/source.jpg",
+    "question": "图中右肺显示什么颜色?",
+    "answer": "黑色",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Color",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6834
+  },
+  {
+    "img_id": 306,
+    "img_name": "xmlab306/source.jpg",
+    "question": "这张图片中黑色的器官可以被用来做什么?",
+    "answer": "呼吸",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "被用于",
+      "ktail"
+    ],
+    "qid": 6851
+  },
+  {
+    "img_id": 307,
+    "img_name": "xmlab307/source.jpg",
+    "question": "图中右下肺病变的主要病因是什么?",
+    "answer": "支气管腔内阻塞",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "病因",
+      "ktail"
+    ],
+    "qid": 6867
+  },
+  {
+    "img_id": 308,
+    "img_name": "xmlab308/source.jpg",
+    "question": "这张图片中黑色的器官可以被用来做什么?",
+    "answer": "呼吸",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "被用于",
+      "ktail"
+    ],
+    "qid": 6881
+  },
+  {
+    "img_id": 311,
+    "img_name": "xmlab311/source.jpg",
+    "question": "图中肺部左下角的主要病因是什么?",
+    "answer": "肺部感染、肺部肿瘤、肺结核等疾病导致",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "病因",
+      "ktail"
+    ],
+    "qid": 6923
+  },
+  {
+    "img_id": 313,
+    "img_name": "xmlab313/source.jpg",
+    "question": "肺结节位于图中肺的哪个部位?",
+    "answer": "右下肺",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6929
+  },
+  {
+    "img_id": 313,
+    "img_name": "xmlab313/source.jpg",
+    "question": "图中有多少个器官?",
+    "answer": "2",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Quantity",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6936
+  },
+  {
+    "img_id": 317,
+    "img_name": "xmlab317/source.jpg",
+    "question": "图中异常位置在哪里?",
+    "answer": "右肺",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6958
+  },
+  {
+    "img_id": 318,
+    "img_name": "xmlab318/source.jpg",
+    "question": "图中胸腔哪一侧是异常的,左侧还是右侧?",
+    "answer": "左侧",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6973
+  },
+  {
+    "img_id": 318,
+    "img_name": "xmlab318/source.jpg",
+    "question": "胸腔积液位于胸腔的哪个部位?",
+    "answer": "左侧",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6974
+  },
+  {
+    "img_id": 318,
+    "img_name": "xmlab318/source.jpg",
+    "question": "在这张图片中,左胸腔可以观察到胸腔积液吗?",
+    "answer": "是的",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6979
+  },
+  {
+    "img_id": 32,
+    "img_name": "xmlab32/source.jpg",
+    "question": "这张MRI图片用的什么加权方式?",
+    "answer": "T1",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6987,
+    "content_type": "Modality"
+  },
+  {
+    "img_id": 32,
+    "img_name": "xmlab32/source.jpg",
+    "question": "图片中包含肾脏吗?",
+    "answer": "包括",
+    "q_lang": "zh",
+    "location": "Abdomen",
+    "modality": "MRI",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 6989,
+    "content_type": "Organ"
+  },
+  {
+    "img_id": 325,
+    "img_name": "xmlab325/source.jpg",
+    "question": "在这张图片中,右上肺可以观察到肿块吗?",
+    "answer": "不可以",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7049
+  },
+  {
+    "img_id": 326,
+    "img_name": "xmlab326/source.jpg",
+    "question": "从整个身体的角度看,这幅图像中的器官位于哪个部位?",
+    "answer": "胸腔",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7057
+  },
+  {
+    "img_id": 326,
+    "img_name": "xmlab326/source.jpg",
+    "question": "图中存在多少个肺?",
+    "answer": "2",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Quantity",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7066
+  },
+  {
+    "img_id": 331,
+    "img_name": "xmlab331/source.jpg",
+    "question": "图中肺不张位于肺的哪个部位?",
+    "answer": "左下肺",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7114
+  },
+  {
+    "img_id": 335,
+    "img_name": "xmlab335/source.jpg",
+    "question": "图中心脏疾病的主要病因是什么?",
+    "answer": "高血压,扩张性心肌病",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "病因",
+      "ktail"
+    ],
+    "qid": 7168
+  },
+  {
+    "img_id": 340,
+    "img_name": "xmlab340/source.jpg",
+    "question": "图片中包括哪些疾病?",
+    "answer": "气胸",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7200
+  },
+  {
+    "img_id": 341,
+    "img_name": "xmlab341/source.jpg",
+    "question": "这个图像是在哪个平面扫描的?",
+    "answer": "冠状面",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Plane",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7208
+  },
+  {
+    "img_id": 341,
+    "img_name": "xmlab341/source.jpg",
+    "question": "病人的右肺有异常吗?",
+    "answer": "没有",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7215
+  },
+  {
+    "img_id": 341,
+    "img_name": "xmlab341/source.jpg",
+    "question": "图中左下肺的疾病会给病人带来什么样的症状?",
+    "answer": "胸闷,气急,呼吸困难,干咳",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "症状",
+      "ktail"
+    ],
+    "qid": 7220
+  },
+  {
+    "img_id": 344,
+    "img_name": "xmlab344/source.jpg",
+    "question": "图片中哪个器官属于呼吸系统?",
+    "answer": "肺",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "属于",
+      "呼吸系统"
+    ],
+    "qid": 7251
+  },
+  {
+    "img_id": 346,
+    "img_name": "xmlab346/source.jpg",
+    "question": "图中肿块位于肺的哪个部位?",
+    "answer": "左上肺",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7271
+  },
+  {
+    "img_id": 348,
+    "img_name": "xmlab348/source.jpg",
+    "question": "病人的左肺有异常吗?",
+    "answer": "是的",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7290
+  },
+  {
+    "img_id": 352,
+    "img_name": "xmlab352/source.jpg",
+    "question": "这张图片中黑色的器官可以被用来做什么?",
+    "answer": "呼吸",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "被用于",
+      "ktail"
+    ],
+    "qid": 7324
+  },
+  {
+    "img_id": 355,
+    "img_name": "xmlab355/source.jpg",
+    "question": "这张照片中主要器官的功能是什么?",
+    "answer": "呼吸",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "功能",
+      "ktail"
+    ],
+    "qid": 7369
+  },
+  {
+    "img_id": 355,
+    "img_name": "xmlab355/source.jpg",
+    "question": "图片中哪个器官属于呼吸系统?",
+    "answer": "肺",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "属于",
+      "呼吸系统"
+    ],
+    "qid": 7371
+  },
+  {
+    "img_id": 358,
+    "img_name": "xmlab358/source.jpg",
+    "question": "扫描的是图像的哪个平面,横断面还是冠状面?",
+    "answer": "冠状面",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Plane",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7373
+  },
+  {
+    "img_id": 359,
+    "img_name": "xmlab359/source.jpg",
+    "question": "从整个身体的角度看,这幅图像中的器官位于哪个部位?",
+    "answer": "胸腔",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7389
+  },
+  {
+    "img_id": 359,
+    "img_name": "xmlab359/source.jpg",
+    "question": "图中存在多少个肺?",
+    "answer": "2",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Quantity",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7398
+  },
+  {
+    "img_id": 361,
+    "img_name": "xmlab361/source.jpg",
+    "question": "图片中包括哪些疾病?",
+    "answer": "肺结节",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7410
+  },
+  {
+    "img_id": 369,
+    "img_name": "xmlab369/source.jpg",
+    "question": "这是冠状面吗?",
+    "answer": "是的",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Plane",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7493
+  },
+  {
+    "img_id": 369,
+    "img_name": "xmlab369/source.jpg",
+    "question": "如何预防肺部左侧病变的发生?",
+    "answer": "健康生活,保持身体健康",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "预防",
+      "ktail"
+    ],
+    "qid": 7505
+  },
+  {
+    "img_id": 371,
+    "img_name": "xmlab371/source.jpg",
+    "question": "从整个身体的角度看,这幅图像中的器官位于哪个部位?",
+    "answer": "胸腔",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7509
+  },
+  {
+    "img_id": 371,
+    "img_name": "xmlab371/source.jpg",
+    "question": "如何治疗位于图中肺部左下侧的疾病?",
+    "answer": "药物治疗,手术治疗",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "治疗",
+      "ktail"
+    ],
+    "qid": 7520
+  },
+  {
+    "img_id": 376,
+    "img_name": "xmlab376/source.jpg",
+    "question": "这是CT图像吗?",
+    "answer": "不是",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Modality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7537
+  },
+  {
+    "img_id": 381,
+    "img_name": "xmlab381/source.jpg",
+    "question": "在这张图片中,左下肺可以观察到肺不张吗?",
+    "answer": "可以",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7603
+  },
+  {
+    "img_id": 383,
+    "img_name": "xmlab383/source.jpg",
+    "question": "图片中哪个器官属于呼吸系统?",
+    "answer": "肺",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "属于",
+      "呼吸系统"
+    ],
+    "qid": 7623
+  },
+  {
+    "img_id": 385,
+    "img_name": "xmlab385/source.jpg",
+    "question": "图片中哪个器官属于呼吸系统?",
+    "answer": "肺",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "属于",
+      "呼吸系统"
+    ],
+    "qid": 7638
+  },
+  {
+    "img_id": 387,
+    "img_name": "xmlab387/source.jpg",
+    "question": "图中是什么器官系统?",
+    "answer": "胸腔",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7644
+  },
+  {
+    "img_id": 388,
+    "img_name": "xmlab388/source.jpg",
+    "question": "这张图像是关于盆腔吗?",
+    "answer": "不是",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7659
+  },
+  {
+    "img_id": 393,
+    "img_name": "xmlab393/source.jpg",
+    "question": "如何预防肺部左下叶病变的发生?",
+    "answer": "健康生活,保持身体健康",
+    "q_lang": "zh",
+    "location": "Lung",
+    "modality": "X-Ray",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "预防",
+      "ktail"
+    ],
+    "qid": 7712
+  },
+  {
+    "img_id": 394,
+    "img_name": "xmlab394/source.jpg",
+    "question": "这个病人的眼睛是什么形状?",
+    "answer": "圆形",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Shape",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7725
+  },
+  {
+    "img_id": 396,
+    "img_name": "xmlab396/source.jpg",
+    "question": "这个图像上方的器官的性质是什么?",
+    "answer": "视觉器官",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "性质",
+      "ktail"
+    ],
+    "qid": 7742
+  },
+  {
+    "img_id": 397,
+    "img_name": "xmlab397/source.jpg",
+    "question": "图像在身体里代表什么?",
+    "answer": "头部",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7748
+  },
+  {
+    "img_id": 400,
+    "img_name": "xmlab400/source.jpg",
+    "question": "颞叶出现在这张图上了吗?",
+    "answer": "是的",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7799
+  },
+  {
+    "img_id": 401,
+    "img_name": "xmlab401/source.jpg",
+    "question": "用什么样的成像方式拍摄这张照片?",
+    "answer": "CT",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Modality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7807
+  },
+  {
+    "img_id": 401,
+    "img_name": "xmlab401/source.jpg",
+    "question": "图像中的主要器官系统是什么?",
+    "answer": "头部",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7812
+  },
+  {
+    "img_id": 404,
+    "img_name": "xmlab404/source.jpg",
+    "question": "从整个身体的角度看,这幅图像中的器官位于哪个部位?",
+    "answer": "头部",
+    "q_lang": "zh",
+    "location": "Brain_Face",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7838
+  },
+  {
+    "img_id": 407,
+    "img_name": "xmlab407/source.jpg",
+    "question": "这是CT图像吗?",
+    "answer": "是的",
+    "q_lang": "zh",
+    "location": "Brain_Face",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Modality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7861
+  },
+  {
+    "img_id": 412,
+    "img_name": "xmlab412/source.jpg",
+    "question": "牙齿在照片中显示什么颜色?",
+    "answer": "白色",
+    "q_lang": "zh",
+    "location": "Brain_Face",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Color",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7891
+  },
+  {
+    "img_id": 412,
+    "img_name": "xmlab412/source.jpg",
+    "question": "图片中有属于泌尿系统的器官吗?",
+    "answer": "没有",
+    "q_lang": "zh",
+    "location": "Brain_Face",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "属于",
+      "泌尿系统"
+    ],
+    "qid": 7895
+  },
+  {
+    "img_id": 413,
+    "img_name": "xmlab413/source.jpg",
+    "question": "图中的器官位于身体的哪个部分?",
+    "answer": "头部",
+    "q_lang": "zh",
+    "location": "Brain_Face",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7898
+  },
+  {
+    "img_id": 415,
+    "img_name": "xmlab415/source.jpg",
+    "question": "这个图像属于哪一个扫描平面?",
+    "answer": "横断面",
+    "q_lang": "zh",
+    "location": "Brain_Face",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Plane",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7912
+  },
+  {
+    "img_id": 415,
+    "img_name": "xmlab415/source.jpg",
+    "question": "这幅图像里有腮腺吗?",
+    "answer": "有",
+    "q_lang": "zh",
+    "location": "Brain_Face",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7916
+  },
+  {
+    "img_id": 418,
+    "img_name": "xmlab418/source.jpg",
+    "question": "图像中的器官是否存在于盆腔?",
+    "answer": "不是",
+    "q_lang": "zh",
+    "location": "Brain_Face",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7925
+  },
+  {
+    "img_id": 419,
+    "img_name": "xmlab419/source.jpg",
+    "question": "这张图像是关于胸腔吗?",
+    "answer": "不是",
+    "q_lang": "zh",
+    "location": "Brain_Face",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7934
+  },
+  {
+    "img_id": 419,
+    "img_name": "xmlab419/source.jpg",
+    "question": "这幅图像里有喉吗?",
+    "answer": "有",
+    "q_lang": "zh",
+    "location": "Brain_Face",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7937
+  },
+  {
+    "img_id": 42,
+    "img_name": "xmlab42/source.jpg",
+    "question": "这张图片的成像方式是什么?",
+    "answer": "MRI",
+    "q_lang": "zh",
+    "location": "Brain",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7941,
+    "content_type": "Modality"
+  },
+  {
+    "img_id": 42,
+    "img_name": "xmlab42/source.jpg",
+    "question": "图中最大的器官是什么?",
+    "answer": "大脑",
+    "q_lang": "zh",
+    "location": "Brain",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7945,
+    "content_type": "Size"
+  },
+  {
+    "img_id": 42,
+    "img_name": "xmlab42/source.jpg",
+    "question": "异常病变在哪个位置?",
+    "answer": "左侧",
+    "q_lang": "zh",
+    "location": "Brain",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7949,
+    "content_type": "Position"
+  },
+  {
+    "img_id": 422,
+    "img_name": "xmlab422/source.jpg",
+    "question": "这张照片是怎么拍的?",
+    "answer": "CT",
+    "q_lang": "zh",
+    "location": "Neck",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Modality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7980
+  },
+  {
+    "img_id": 423,
+    "img_name": "xmlab423/source.jpg",
+    "question": "图中哪个是喉?",
+    "answer": "黑色空洞",
+    "q_lang": "zh",
+    "location": "Neck",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 7998
+  },
+  {
+    "img_id": 423,
+    "img_name": "xmlab423/source.jpg",
+    "question": "什么器官在图像底部?",
+    "answer": "脊髓",
+    "q_lang": "zh",
+    "location": "Neck",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8000
+  },
+  {
+    "img_id": 427,
+    "img_name": "xmlab427/source.jpg",
+    "question": "图中哪个是喉?",
+    "answer": "黑色空洞",
+    "q_lang": "zh",
+    "location": "Neck",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8038
+  },
+  {
+    "img_id": 429,
+    "img_name": "xmlab429/source.jpg",
+    "question": "图中气管是什么颜色的?",
+    "answer": "黑色",
+    "q_lang": "zh",
+    "location": "Neck",
+    "modality": "CT",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Color",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8054
+  },
+  {
+    "img_id": 429,
+    "img_name": "xmlab429/source.jpg",
+    "question": "图片中包含可以存储尿液的器官吗?",
+    "answer": "不包含",
+    "q_lang": "zh",
+    "location": "Neck",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "可以",
+      "存储尿液"
+    ],
+    "qid": 8058
+  },
+  {
+    "img_id": 433,
+    "img_name": "xmlab433/source.jpg",
+    "question": "图片中包含可以排出废物的器官吗?",
+    "answer": "不包含",
+    "q_lang": "zh",
+    "location": "Neck",
+    "modality": "CT",
+    "answer_type": "CLOSED",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "可以",
+      "排出废物"
+    ],
+    "qid": 8071
+  },
+  {
+    "img_id": 436,
+    "img_name": "xmlab436/source.jpg",
+    "question": "大脑是健康的吗?",
+    "answer": "不是",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8091
+  },
+  {
+    "img_id": 439,
+    "img_name": "xmlab439/source.jpg",
+    "question": "这个图像的扫描平面是什么?",
+    "answer": "横断面",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Plane",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8104
+  },
+  {
+    "img_id": 440,
+    "img_name": "xmlab440/source.jpg",
+    "question": "相对于其他组织,脑肿瘤是白色的还是灰色的?",
+    "answer": "白色",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Color",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8118
+  },
+  {
+    "img_id": 441,
+    "img_name": "xmlab441/source.jpg",
+    "question": "图中病人患有脑瘤吗?",
+    "answer": "是的",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8127
+  },
+  {
+    "img_id": 449,
+    "img_name": "xmlab449/source.jpg",
+    "question": "图中脑部增强型肿瘤在哪里?",
+    "answer": "右叶",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8160
+  },
+  {
+    "img_id": 450,
+    "img_name": "xmlab450/source.jpg",
+    "question": "图像中的器官是否存在于头部?",
+    "answer": "是的",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8168
+  },
+  {
+    "img_id": 455,
+    "img_name": "xmlab455/source.jpg",
+    "question": "用什么样的成像方式拍摄这张照片?",
+    "answer": "核磁共振",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Modality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8193
+  },
+  {
+    "img_id": 455,
+    "img_name": "xmlab455/source.jpg",
+    "question": "从整个身体的角度看,这幅图像中的器官位于哪个部位?",
+    "answer": "头部",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8196
+  },
+  {
+    "img_id": 468,
+    "img_name": "xmlab468/source.jpg",
+    "question": "扫描的是图像的哪个平面,横断面还是冠状面?",
+    "answer": "横断面",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Plane",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8276
+  },
+  {
+    "img_id": 469,
+    "img_name": "xmlab469/source.jpg",
+    "question": "图中异常位置在哪里?",
+    "answer": "左上叶",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8287
+  },
+  {
+    "img_id": 469,
+    "img_name": "xmlab469/source.jpg",
+    "question": "这张图像是关于头部吗?",
+    "answer": "是的",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8288
+  },
+  {
+    "img_id": 47,
+    "img_name": "xmlab47/source.jpg",
+    "question": "大脑是健康的吗?",
+    "answer": "不是",
+    "q_lang": "zh",
+    "location": "Brain",
+    "modality": "MRI",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8300,
+    "content_type": "Abnormality"
+  },
+  {
+    "img_id": 470,
+    "img_name": "xmlab470/source.jpg",
+    "question": "这是CT扫描吗?",
+    "answer": "不是",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Modality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8302
+  },
+  {
+    "img_id": 470,
+    "img_name": "xmlab470/source.jpg",
+    "question": "从整个身体的角度看,这幅图像中的器官位于哪个部位?",
+    "answer": "头部",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8305
+  },
+  {
+    "img_id": 471,
+    "img_name": "xmlab471/source.jpg",
+    "question": "这个图像是在哪个平面扫描的?",
+    "answer": "横断面",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Plane",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8313
+  },
+  {
+    "img_id": 475,
+    "img_name": "xmlab475/source.jpg",
+    "question": "这张图像是关于头部吗?",
+    "answer": "是的",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8334
+  },
+  {
+    "img_id": 475,
+    "img_name": "xmlab475/source.jpg",
+    "question": "该图像中有多少种异常?",
+    "answer": "2",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Quantity",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8337
+  },
+  {
+    "img_id": 476,
+    "img_name": "xmlab476/source.jpg",
+    "question": "如何治疗这张图片中脑左侧的疾病?",
+    "answer": "药物治疗,支持治疗,手术治疗",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "治疗",
+      "ktail"
+    ],
+    "qid": 8346
+  },
+  {
+    "img_id": 479,
+    "img_name": "xmlab479/source.jpg",
+    "question": "图中哪侧的脑半球是异常的,左侧还是右侧?",
+    "answer": "左侧",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8360
+  },
+  {
+    "img_id": 482,
+    "img_name": "xmlab482/source.jpg",
+    "question": "什么样的成像方式被这张图片使用?",
+    "answer": "核磁共振",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Modality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8390
+  },
+  {
+    "img_id": 488,
+    "img_name": "xmlab488/source.jpg",
+    "question": "图像中的主要器官系统是什么?",
+    "answer": "头部",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8449
+  },
+  {
+    "img_id": 49,
+    "img_name": "xmlab49/source.jpg",
+    "question": "图像里包含的区域属于身体哪个部分?",
+    "answer": "大脑",
+    "q_lang": "zh",
+    "location": "Brain",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8453,
+    "content_type": "Position"
+  },
+  {
+    "img_id": 492,
+    "img_name": "xmlab492/source.jpg",
+    "question": "这张核磁共振图像用的什么加权方式?",
+    "answer": "T1",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Modality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8462
+  },
+  {
+    "img_id": 492,
+    "img_name": "xmlab492/source.jpg",
+    "question": "图片中包含哪些疾病?",
+    "answer": "脑水肿,增强型脑肿瘤,非增强型脑肿瘤",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8467
+  },
+  {
+    "img_id": 494,
+    "img_name": "xmlab494/source.jpg",
+    "question": "该图像中有多少种异常?",
+    "answer": "3",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Quantity",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8487
+  },
+  {
+    "img_id": 497,
+    "img_name": "xmlab497/source.jpg",
+    "question": "这张图片的拍摄是通过核磁共振吗?",
+    "answer": "是的",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Modality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8504
+  },
+  {
+    "img_id": 497,
+    "img_name": "xmlab497/source.jpg",
+    "question": "这个图像属于哪一个扫描平面?",
+    "answer": "横断面",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Plane",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8506
+  },
+  {
+    "img_id": 497,
+    "img_name": "xmlab497/source.jpg",
+    "question": "图中是什么器官系统?",
+    "answer": "头部",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8508
+  },
+  {
+    "img_id": 502,
+    "img_name": "xmlab502/source.jpg",
+    "question": "图像中的主要器官系统是什么?",
+    "answer": "头部",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8533
+  },
+  {
+    "img_id": 502,
+    "img_name": "xmlab502/source.jpg",
+    "question": "图片中大脑左侧的疾病会给患者带来什么样的症状?",
+    "answer": "视力障碍,呕吐,耳鸣,颅内压增高",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "kvqa",
+    "content_type": "KG",
+    "triple": [
+      "vhead",
+      "症状",
+      "ktail"
+    ],
+    "qid": 8535
+  },
+  {
+    "img_id": 503,
+    "img_name": "xmlab503/source.jpg",
+    "question": "这张图像显示的是哪种类型的成像,核磁共振、CT还是X光?",
+    "answer": "核磁共振",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Modality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8536
+  },
+  {
+    "img_id": 505,
+    "img_name": "xmlab505/source.jpg",
+    "question": "这个图像的扫描平面是什么?",
+    "answer": "横断面",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Plane",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8548
+  },
+  {
+    "img_id": 505,
+    "img_name": "xmlab505/source.jpg",
+    "question": "这张图像是关于胸腔吗?",
+    "answer": "不是",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8551
+  },
+  {
+    "img_id": 506,
+    "img_name": "xmlab506/source.jpg",
+    "question": "图中的器官位于身体的哪个部分?",
+    "answer": "头部",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Position",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8557
+  },
+  {
+    "img_id": 509,
+    "img_name": "xmlab509/source.jpg",
+    "question": "这是T2加权的核磁共振图像吗?",
+    "answer": "不是",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Modality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8574
+  },
+  {
+    "img_id": 513,
+    "img_name": "xmlab513/source.jpg",
+    "question": "这张图像是关于胸腔吗?",
+    "answer": "不是",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Organ",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8602
+  },
+  {
+    "img_id": 52,
+    "img_name": "xmlab52/source.jpg",
+    "question": "图像里包含的区域属于身体哪个部分?",
+    "answer": "大脑",
+    "q_lang": "zh",
+    "location": "Brain",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8614,
+    "content_type": "Position"
+  },
+  {
+    "img_id": 522,
+    "img_name": "xmlab522/source.jpg",
+    "question": "图中脑部右上侧显示什么疾病?",
+    "answer": "脑水肿,增强型脑肿瘤,非增强型脑肿瘤",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "OPEN",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8644
+  },
+  {
+    "img_id": 523,
+    "img_name": "xmlab523/source.jpg",
+    "question": "大脑是正常的吗?",
+    "answer": "不是",
+    "q_lang": "zh",
+    "location": "Brain_Tissue",
+    "modality": "MRI",
+    "answer_type": "CLOSED",
+    "base_type": "vqa",
+    "content_type": "Abnormality",
+    "triple": [
+      "vhead",
+      "_",
+      "_"
+    ],
+    "qid": 8652
+  }
+]

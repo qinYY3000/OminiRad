@@ -1,0 +1,77 @@
+# OmniRad task prompt templates
+# This file is a human-readable prompt inventory for the datasets currently used by OmniRad.
+# It is not imported directly by the training code at the moment.
+
+[global_wrapper]
+[INST] <Img><ImageHere></Img> {task_prompt} [/INST]
+
+[report]
+- Indiana CXR:
+  - Describe this image in detail
+  - Take a look at this image and describe what you notice.
+  - Please provide a detailed description of the picture.
+  - Could you describe the contents of this image for me?
+- Group-Breast US / Group-Thyroid US:
+  - [report] Describe this ultrasound image in detail.
+
+[vqa]
+- VQA-RAD:
+  - [vqa] {question}
+- SLAKE VQA:
+  - [vqa] {question}
+- Ultrasound VQA (optional when a sample contains QA pairs):
+  - [vqa] {question}
+  - fallback: [vqa] Answer the question about this ultrasound image.
+
+[grounding]
+- SLAKE Grounding:
+  - [grounding] please describe this image in details
+  - [grounding] describe this image as detailed as possible
+  - [grounding] summarize this image in details
+  - [grounding] give a thorough description of what you see in this image
+
+[detection]
+- RSNA:
+  - [detection] pneumonia
+- Group-Breast US / Group-Thyroid US:
+  - [detection] Locate all visible lesions or nodules.
+
+[refer]
+- RSNA-style templates:
+  - [refer] pneumonia
+  - [refer] give me the location of pneumonia
+  - [refer] where is pneumonia ?
+  - [refer] from this image, tell me the location of pneumonia
+  - [refer] the location of pneumonia is
+  - [refer] could you tell me the location for pneumonia ?
+  - [refer] where can I locate the pneumonia ?
+- Group-Breast US / Group-Thyroid US:
+  - [refer] Where is the lesion or nodule located?
+
+[identify]
+- RSNA-style templates:
+  - [identify] {bbox}
+  - [identify] what object is in this location {bbox}
+  - [identify] identify the object present at this location {bbox}
+  - [identify] what is it in {bbox}
+  - [identify] describe this object in {bbox}
+  - [identify] this {bbox} is
+  - [identify] the object in {bbox} is
+- Group-Breast US / Group-Thyroid US:
+  - [identify] what is at location {bbox}
+  - [identify] identify the object present at location {bbox}
+  - [identify] this region {bbox} contains
+  - [identify] describe the object inside {bbox}
+  - [identify] the structure within {bbox} is
+  - fallback: [identify] what is the lesion in this image
+
+[segmentation]
+- Group-Breast US / Group-Thyroid US:
+  - [segmentation] Segment all visible lesions or nodules.
+
+[design_notes]
+- This inventory is restricted to the datasets currently enabled in `train_configs/omnirad_finetune.yaml` and `eval_configs/omnirad_evaluation.yaml`.
+- Task identity should remain explicit in the prompt tag: [report] / [vqa] / [grounding] / [detection] / [refer] / [identify] / [segmentation].
+- Detection and segmentation can share lesion words such as tumor / nodule / lesion, as long as the task tag is preserved.
+- For MedSAM-based segmentation, keep the current [segmentation] task prompt and use MedSAM only as the dense segmentation backbone.
+- If a future MedSAM3-style text-prompt segmentation experiment is added, prefer a format like [segmentation] segment the tumor boundary rather than using a bare concept prompt such as tumor.
