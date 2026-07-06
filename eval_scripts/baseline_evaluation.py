@@ -18,11 +18,11 @@ Supported baselines
 
 Usage
 -----
-    # MiniGPT-Med on all public datasets
+    # MiniGPT-Med on all public datasets (including Kvasir multi-task)
     python eval_scripts/baseline_evaluation.py \
         --model minigpt_med \
         --cfg-path eval_configs/minigptv2_benchmark_evaluation.yaml \
-        --dataset indiana_cxr,radvqa,slake_vqa,rsna,SLAKE \
+        --dataset indiana_cxr,radvqa,slake_vqa,rsna,SLAKE,kvasir \
         --output-dir eval_results/minigpt_med
 
     # Single dataset
@@ -30,6 +30,13 @@ Usage
         --model minigpt_med \
         --cfg-path eval_configs/minigptv2_benchmark_evaluation.yaml \
         --dataset indiana_cxr \
+        --output-dir eval_results/minigpt_med
+
+    # Kvasir multi-task evaluation only
+    python eval_scripts/baseline_evaluation.py \
+        --model minigpt_med \
+        --cfg-path eval_configs/minigptv2_benchmark_evaluation.yaml \
+        --dataset kvasir \
         --output-dir eval_results/minigpt_med
 
 Output
@@ -66,12 +73,15 @@ from minigpt4.datasets.datasets.radvqa_dataset import evalRadVQADataset
 from minigpt4.datasets.datasets.rsna_dataset import evalRSNADataset
 from minigpt4.datasets.datasets.SLAKE_dataset import evalSLAKEDataset
 from minigpt4.datasets.datasets.indiana_dataset import evalIndianaCXRDataset
+from minigpt4.datasets.datasets.kvasir_dataset import evalKvasirDataset
 
 from eval_scripts.clean_json import clean_report_json, clean_vqa_json, clean_detection_json
 from eval_scripts.metrics import (
     evaluate_report_generation,
     VQA_BERT_Sim,
     average_iou,
+    average_dice,
+    identify_accuracy,
 )
 
 
@@ -266,6 +276,221 @@ def eval_grounding(model, vis_processor, conv_temp, cfg_block,
 
 
 # ---------------------------------------------------------------------------
+# Shared helpers for multi-task evaluation (US / Kvasir)
+# ---------------------------------------------------------------------------
+def _us_collate(batch):
+    """Custom collate that keeps the variable-length / non-tensor ``ground_truth``
+    field as a Python list (DataLoader's default would try to stack)."""
+    images = torch.stack([b[0] for b in batch], dim=0)
+    questions = [b[1] for b in batch]
+    img_ids = [b[2] for b in batch]
+    gts = [b[3] for b in batch]
+    return images, questions, img_ids, gts
+
+
+def _save_pred_masks(masks, out_dir: str, image_id: str,
+                     threshold: float = 0.5) -> list:
+    """Persist a list of (H, W) sigmoid-prob tensors as 0/255 PNG files."""
+    if not masks:
+        return []
+    paths = []
+    for k, m in enumerate(masks):
+        try:
+            arr = m.detach().cpu().numpy() if hasattr(m, "detach") else np.asarray(m)
+        except Exception:
+            continue
+        binary = (arr >= threshold).astype("uint8") * 255
+        out_path = os.path.join(out_dir, f"{image_id}_seg{k}.png")
+        Image.fromarray(binary).save(out_path)
+        paths.append(out_path)
+    return paths
+
+
+def _us_bbox_iou(gts, preds, csv_path, dataset_name):
+    """Parse {<x1><y1><x2><y2>} tokens from predictions, IoU vs gold bboxes."""
+    bbox_pat = re.compile(r"\{<(\d+)><(\d+)><(\d+)><(\d+)>\}")
+    pred_index = {p["image_id"]: p["answer"] for p in preds}
+    rows = []
+    ious = []
+    for gt in gts:
+        iid = gt["image_id"]
+        gt_boxes = gt.get("answer") or []
+        pred_text = pred_index.get(iid, "") or ""
+        pred_boxes = [list(map(int, m)) for m in bbox_pat.findall(pred_text)]
+        if not gt_boxes or not pred_boxes:
+            rows.append({"image_id": iid, "IoU": 0.0})
+            ious.append(0.0)
+            continue
+        per_box = []
+        for gb in gt_boxes:
+            best = max((computeIoU(gb, pb) for pb in pred_boxes), default=0.0)
+            per_box.append(best)
+        frame_iou = sum(per_box) / len(per_box)
+        rows.append({"image_id": iid, "IoU": frame_iou})
+        ious.append(frame_iou)
+    avg = sum(ious) / len(ious) if ious else 0.0
+    pd.DataFrame(rows).to_csv(csv_path, index=False)
+    print(f"Average IoU for dataset {dataset_name}: {avg:.4f}")
+    return avg
+
+
+# ---------------------------------------------------------------------------
+# Kvasir — polyp multi-task evaluation
+# ---------------------------------------------------------------------------
+def eval_kvasir(model, vis_processor, conv_temp, cfg_block,
+                dataset_name, model_name, output_dir):
+    """Multi-task evaluation on Kvasir colonoscopy polyp test split.
+
+    Runs segmentation, detection, refer, identify, vqa tasks.
+    Note: segmentation requires mask generation (``return_masks=True``) which
+    is only available in OmniRad — baseline models will skip it gracefully.
+    """
+    eval_file_path = cfg_block["eval_file_path"]
+    img_path = cfg_block["img_path"]
+    tasks_to_run = cfg_block.get("tasks", ["segmentation", "detection", "refer", "identify", "vqa"])
+    default_bs = cfg_block.get("batch_size", 4)
+    default_mnt = cfg_block.get("max_new_tokens", 120)
+
+    with open(eval_file_path, "r") as f:
+        ann = json.load(f)
+    if isinstance(ann, dict):
+        ann = ann.get("annotations", ann.get("data", []))
+
+    summary = {}
+    for task in tasks_to_run:
+        print(f"\n========== [{model_name}/{dataset_name}] task = {task} ==========")
+
+        # Baseline MiniGPT-v2 cannot generate masks — skip segmentation.
+        if task == "segmentation" and model_name in ("minigpt_med", "minigpt_v2"):
+            print("  [skip] segmentation requires mask decoder (OmniRad only for baselines).")
+            continue
+
+        task_cfg = (cfg_block.get("tasks_cfg") or {}).get(task, {}) or {}
+        batch_size = task_cfg.get("batch_size", default_bs)
+        max_new_tokens = task_cfg.get("max_new_tokens", default_mnt)
+
+        eval_set = evalKvasirDataset(
+            loaded_data=ann,
+            vis_processor=vis_processor,
+            root_path=img_path,
+            task=task,
+        )
+        loader = DataLoader(eval_set, batch_size=batch_size, shuffle=False,
+                            collate_fn=_us_collate)
+
+        pred_mask_dir = os.path.join(output_dir, f"{task}_pred_masks")
+        if task == "segmentation":
+            os.makedirs(pred_mask_dir, exist_ok=True)
+
+        predictions: list = []
+        gts_compact: list = []
+
+        for images, questions, img_ids, gts in tqdm(loader, desc=f"[{model_name}/{dataset_name}] {task}"):
+            texts = prepare_texts(list(questions), conv_temp)
+            gen_kwargs = {"max_new_tokens": max_new_tokens, "do_sample": False}
+            if task == "segmentation":
+                gen_kwargs["return_masks"] = True
+            outputs = model.generate(images, texts, **gen_kwargs)
+
+            for out, iid, q, gt in zip(outputs, img_ids, questions, gts):
+                ans_text = _decode_answer(out)
+                # Also extract raw_text / masks when available (OmniRad dict output)
+                raw_text = ans_text
+                masks = []
+                if isinstance(out, dict):
+                    raw_text = out.get("raw_text", ans_text)
+                    masks = out.get("masks", [])
+
+                pred_record = {"image_id": iid, "answer": ans_text,
+                               "raw": raw_text, "question": q}
+
+                if task == "segmentation":
+                    saved_paths = _save_pred_masks(masks, pred_mask_dir, iid)
+                    pred_record["mask_paths"] = saved_paths
+                    gt_record = {"image_id": iid,
+                                 "tasks": {"masks": [{"mask_path": p}
+                                                     for p in gt]}}
+                else:
+                    gt_record = {"image_id": iid, "answer": gt}
+
+                predictions.append(pred_record)
+                gts_compact.append(gt_record)
+
+        pred_path = os.path.join(output_dir, f"{task}_inference_result.json")
+        with open(pred_path, "w") as f:
+            json.dump(predictions, f)
+        gt_path = os.path.join(output_dir, f"{task}_gt.json")
+        with open(gt_path, "w") as f:
+            json.dump(gts_compact, f)
+
+        csv_path = os.path.join(output_dir, f"{task}_metric.csv")
+
+        if task in ("detection", "refer"):
+            score = _us_bbox_iou(gts_compact, predictions, csv_path,
+                                 dataset_name=f"{model_name}_{dataset_name}_{task}")
+            summary[task] = score
+            print(f"[{dataset_name}/{task}] avg-IoU = {score:.4f}")
+        elif task == "segmentation":
+            score = average_dice(gt_path, pred_path,
+                                 dataset_name=f"{model_name}_{dataset_name}_{task}",
+                                 csv_filename=csv_path)
+            summary[task] = score
+            print(f"[{dataset_name}/{task}] avg-Dice = {score:.4f}")
+        elif task == "identify":
+            score = identify_accuracy(gt_path, pred_path,
+                                      f"{model_name}_{dataset_name}_{task}", csv_path)
+            summary[task] = score
+            print(f"[{dataset_name}/{task}] accuracy = {score:.4f}")
+        elif task == "vqa":
+            # Save GT and pred in format expected by VQA_BERT_Sim
+            gt_vqa_list = []
+            pred_dict = {}
+            for p in predictions:
+                iid = p["image_id"]
+                q_text = p["question"].replace("[vqa]", "").strip()
+                pred_dict.setdefault(iid, []).append({
+                    "key": iid,
+                    "question": q_text,
+                    "answer": p["answer"],
+                })
+            kvasir_ann = json.load(open(eval_file_path, "r", encoding="utf-8"))
+            if isinstance(kvasir_ann, dict):
+                kvasir_ann = kvasir_ann.get("annotations", kvasir_ann.get("data", []))
+            for entry in kvasir_ann:
+                iid = entry.get("image_id", "")
+                vqa_pairs = entry.get("tasks", {}).get("vqa", [])
+                if vqa_pairs:
+                    qa = vqa_pairs[0]
+                    gt_vqa_list.append({
+                        "image_name": iid,
+                        "question": qa["question"],
+                        "answer": qa["answer"],
+                    })
+            gt_vqa_path = os.path.join(output_dir, f"{task}_gt.json")
+            with open(gt_vqa_path, "w") as f:
+                json.dump(gt_vqa_list, f, ensure_ascii=False, indent=2)
+            with open(pred_path, "w") as f:
+                json.dump(pred_dict, f, ensure_ascii=False, indent=2)
+            clean_pred_path = os.path.join(output_dir, f"{task}_cleaned_inference_result.json")
+            clean_vqa_json(pred_path, clean_pred_path)
+            bert_csv = os.path.join(output_dir, f"{task}_bert_sim.csv")
+            score = VQA_BERT_Sim(gt_vqa_path, clean_pred_path, bert_csv)
+            summary[task] = score
+            print(f"[{dataset_name}/{task}] BERT-Sim = {score:.4f}")
+        else:
+            print(f"  [warn] unknown task '{task}' — skipped.")
+
+    print(f"\n========== [{model_name}/{dataset_name}] summary ==========")
+    metrics_for_summary = {}
+    for k, v in summary.items():
+        print(f"  {k:<14}: {v}")
+        metrics_for_summary[k] = v
+
+    _write_summary(output_dir, model_name, f"{dataset_name}_multi_task",
+                   metrics_for_summary, len(ann))
+
+
+# ---------------------------------------------------------------------------
 # Task dispatch
 # ---------------------------------------------------------------------------
 TASK_DISPATCH = {
@@ -275,6 +500,7 @@ TASK_DISPATCH = {
     "slake_vqa":     (eval_vqa, "vqa"),
     "rsna":          (eval_detection, "detection"),
     "SLAKE":         (eval_grounding, "grounding"),
+    "kvasir":        (eval_kvasir, "multi-task"),
 }
 
 

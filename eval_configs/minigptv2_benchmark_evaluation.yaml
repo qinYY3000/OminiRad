@@ -57,6 +57,30 @@ evaluation_datasets:
     max_new_tokens: 300
     batch_size: 10
 
+  # ---------- Endoscopy polyp dataset — multi-task ----------
+  kvasir:
+    eval_file_path: data/annotations/kvasir_test.json
+    img_path: data/kvasir
+    anatomy: colon
+    tasks: [segmentation, detection, refer, identify, vqa]
+    batch_size: 4
+    max_new_tokens: 120
+    tasks_cfg:
+      segmentation:
+        max_new_tokens: 80
+        batch_size: 4
+      detection:
+        max_new_tokens: 120     # K>=2 polyp cases → longer output
+        batch_size: 4
+      refer:
+        max_new_tokens: 80
+        batch_size: 4
+      identify:
+        max_new_tokens: 60
+        batch_size: 4
+      vqa:
+        max_new_tokens: 120
+        batch_size: 4
 
 run:
   task: image_text_pretrain
