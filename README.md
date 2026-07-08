@@ -42,7 +42,7 @@ OmniRad supports **7 medical tasks** in a single model: report generation, VQA, 
 git clone https://github.com/your-org/OmniRad.git
 cd OmniRad
 conda env create -f environment.yml
-conda activate miniGPT-Med
+conda activate llama
 ```
 
 ---
@@ -55,9 +55,8 @@ Download the following weights and place them under `weights/`:
 |--------|------|--------|-------------|
 | LLaMA-2-7B-Chat | LLM backbone | [HuggingFace](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf) | `weights/llama-2-7b-chat-hf/` |
 | MiniGPT-Med checkpoint | language-vision initialization | [Google Drive](https://drive.google.com/file/d/1kjGLk6s9LsBmXfLWQFCdlwF3aul08Cl8/view) | `weights/minigpt_med_pretrained.pth` |
-| **MedSAM ViT-B (default)** | medical segmentation backbone | Official MedSAM pretrained release | `weights/medsam_vit_b.pth` |
+| **MedSAM ViT-B (default)** | medical segmentation backbone | [Google Dirve](https://drive.google.com/file/d/1hu0cpKT96G9apYbTb85TREewpoDv-4Hb/view?usp=drive_link) | `weights/medsam_vit_b.pth` |
 | SAM ViT-B | raw SAM baseline (same backbone family as MedSAM) | [Meta](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_b_01ec64.pth) | `weights/sam_vit_b_01ec64.pth` |
-| SAM ViT-H | larger raw SAM baseline | [Meta](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth) | `weights/sam_vit_h_4b8939.pth` |
 
 ```bash
 mkdir -p weights
@@ -67,7 +66,6 @@ wget -O weights/minigpt_med_pretrained.pth "https://drive.google.com/uc?export=d
 # Download the MedSAM checkpoint to weights/medsam_vit_b.pth
 # Optional raw-SAM baselines
 wget -O weights/sam_vit_b_01ec64.pth https://dl.fbaipublicfiles.com/segment_anything/sam_vit_b_01ec64.pth
-wget -O weights/sam_vit_h_4b8939.pth https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth
 ```
 
 The default OmniRad configuration already points to **MedSAM**:
@@ -135,16 +133,17 @@ OmniRad/
 ### Datasets in use
 
 The training mixture and evaluation pipeline cover **6 datasets** spanning
-**4 modalities** (chest X-ray, mixed X-ray/CT/MRI, ultrasound, endoscopy) and **7
+**5 modalities** (chest X-ray, mixed X-ray/CT/MRI, ultrasound, endoscopy) and **7
 task types**. Each dataset's exact task coverage is listed below:
+[json path](https://drive.google.com/drive/folders/1-C_EjcF5bm9JHFbb704zKbt_o52Vl-WN?usp=drive_link)
 
 | Dataset | Modality | Tasks (task tag) | Train / Val / Test | Source |
 |---------|----------|------------------|-------------------|--------|
-| **Indiana CXR (Open-i)** | Chest X-ray | Report generation `[report]` | 5,635 / 293 / 1,498 | [NIH Open-i](https://openi.nlm.nih.gov/faq) |
-| **VQA-RAD**              | X-ray / CT / MRI | Visual QA `[vqa]` | 1,706 / 90 / 452 | [OSF](https://osf.io/89kps/) |
+| **Indiana CXR (Open-i)** | Chest X-ray | Report generation `[report]` | 5,635 / 293 / 1,498 | [IU-Rays](https://www.kaggle.com/datasets/raddar/chest-xrays-indiana-university?resource=download-directory) |
+| **VQA-RAD**              | X-ray / CT / MRI | Visual QA `[vqa]` | 1,706 / 90 / 452 | [VQA-RAD](https://www.modelscope.cn/datasets/ZEROCX/VQA-RAD) |
 | **SLAKE VQA**            | X-ray / CT / MRI | Visual QA `[vqa]` | 7,757 / 408 / 2,094 | [med-vqa.com](https://www.med-vqa.com/slake/) |
 | **SLAKE Grounding**      | X-ray / CT / MRI | Grounded caption `[grounding]` | 440 / 23 / 116 | same as above |
-| **RSNA**                 | Chest X-ray | Pneumonia detection `[detection]` | 9,077 / 478 / 244 | [RSNA 2018](https://www.rsna.org/rsnai/ai-image-challenge/rsna-pneumonia-detection-challenge-2018) |
+| **RSNA**                 | Chest X-ray | Pneumonia detection `[detection]` | 9,077 / 478 / 244 | [RSNA 2018](https://www.kaggle.com/datasets/sovitrath/rsna-pneumonia-detection-2018) |
 | **Group-Breast US**      | Ultrasound | Segmentation • Detection • Report • Refer • Identify | ~4,875 / ~243 / ~488 | Internal |
 | **Kvasir**              | Endoscopy (colonoscopy) | Segmentation • Detection • Refer • Identify • VQA | ~760 / ~40 / ~200 | [Kvasir-SEG](https://datasets.simula.no/kvasir-seg/) |
 
