@@ -943,9 +943,12 @@ class OmniRad(MiniGPTv2):
             grid_x = torch.arange(W, device=pred_prob.device, dtype=pred_prob.dtype) / W
 
             # Weighted mean → center
-            weight = pred_prob + 1e-8
-            cx = (grid_x.unsqueeze(0) * weight.sum(dim=0)).sum() / weight.sum()
-            cy = (grid_y.unsqueeze(1) * weight.sum(dim=1)).sum() / weight.sum()
+            weight = pred_prob + 1e-6
+            weight_sum_x = weight.sum(dim=0)  # (W,)
+            weight_sum_y = weight.sum(dim=1)  # (H,)
+            total_weight = weight.sum() + 1e-6
+            cx = (grid_x.unsqueeze(0) * weight_sum_x).sum() / total_weight
+            cy = (grid_y.unsqueeze(1) * weight_sum_y).sum() / total_weight
 
             # Weighted extent (approximate tight box)
             x_min = (pred_prob.sum(dim=0) > 0.1).float().argmax().float() / W
@@ -1166,8 +1169,11 @@ class OmniRad(MiniGPTv2):
                         log_variance = decoder_out["uncertainty"].squeeze()
                         # Heteroscedastic BCE: down-weight uncertain pixels
                         # L = (1 / 2σ²) × BCE + (1/2) × log(σ²)
-                        variance = torch.exp(log_variance.clamp(-10, 10))  # σ² = exp(log_var)
-                        weighted_bce = (bce_loss * (1.0 / (2.0 * variance + 1e-6))).mean()
+                        # ★ Clamp more aggressively to prevent numerical explosion
+                        log_variance = log_variance.clamp(-4, 4)
+                        variance = torch.exp(log_variance)  # σ² range: [0.018, 54.6]
+                        inv_variance = 1.0 / (2.0 * variance + 1.0)  # stable: range [0.009, 0.53]
+                        weighted_bce = (bce_loss * inv_variance).mean()
                         reg_term = 0.5 * log_variance.mean()
                         unc_loss = weighted_bce + reg_term
                         seg_loss = seg_loss + 0.1 * unc_loss  # small weight for uncertainty
@@ -1261,12 +1267,37 @@ class OmniRad(MiniGPTv2):
         total_loss = total_loss + aux_losses["seg"]
         total_loss = total_loss + aux_losses["cons"] * self.loss_weights.get("cons_mb", 0.3)
 
+        # ★ Guard: if text_loss itself is NaN (corrupted weights), return zero loss
+        if torch.isnan(text_loss) or torch.isinf(text_loss):
+            logging.error("text_loss is NaN/Inf — model weights may be corrupted. Returning zero loss.")
+            zero_t = text_loss.new_zeros(()).requires_grad_(True)
+            result = {
+                "loss": zero_t,
+                "loss_text": text_loss.detach() if torch.is_tensor(text_loss) else zero_t,
+                "loss_det": zero_t, "loss_loc": zero_t, "loss_seg": zero_t, "loss_cons": zero_t,
+                "structured_targets": structured_targets,
+                "special_token_ids": self.special_token_ids,
+                "n_seg_tokens": len(special_hidden_states.get("<SEG>", [])),
+                "n_box_tokens": sum(
+                    len(special_hidden_states.get(t, []))
+                    for t in ["<BOX_S>", "<BOX_M>", "<BOX_L>"]
+                ),
+                "n_loc_tokens": len(special_hidden_states.get("<LOC>", [])),
+            }
+            self._last_forward_outputs = result
+            return result
+
         # Fallback: if total loss is NaN, use text_loss only
         if torch.isnan(total_loss) or torch.isinf(total_loss):
             logging.warning("Total loss is NaN/Inf, falling back to text_loss only")
             total_loss = text_loss * self.loss_weights.get("text", 1.0)
             zero_t = text_loss.new_zeros(())
             aux_losses = {"det": zero_t, "loc": zero_t, "seg": zero_t, "cons": zero_t}
+
+        # ★ Clamp total loss to prevent gradient explosion (max 50.0)
+        if total_loss > 50.0:
+            logging.warning("total_loss=%.4f exceeds 50.0, clamping", total_loss.item())
+            total_loss = total_loss.clamp(max=50.0)
 
         result = {
             "loss": total_loss,

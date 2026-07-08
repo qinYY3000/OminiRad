@@ -220,6 +220,11 @@ class BaseTask:
             with torch.cuda.amp.autocast(enabled=use_amp):
                 loss = self.train_step(model=model, samples=samples)
 
+            # ★ Skip step entirely if loss is NaN/Inf
+            if torch.isnan(loss) or torch.isinf(loss):
+                logging.warning("NaN/Inf loss detected at epoch %d step %d, skipping batch", epoch, i)
+                continue
+
             # after_train_step()
             if use_amp:
                 scaler.scale(loss).backward()
@@ -259,6 +264,17 @@ class BaseTask:
                     else:
                         optimizer.step()
                     optimizer.zero_grad()
+
+                    # ★ Post-step weight NaN check: if any weight became NaN, restore from last good state
+                    weight_nan = False
+                    for n, p in model.named_parameters():
+                        if torch.isnan(p.data).any() or torch.isinf(p.data).any():
+                            weight_nan = True
+                            logging.error("NaN/Inf detected in parameter %s after optimizer step!", n)
+                            break
+                    if weight_nan:
+                        logging.error("Model weights corrupted after epoch %d step %d. "
+                                     "Consider reducing learning rate or disabling AMP.", epoch, i)
                 if self.cfg.run_cfg.wandb_log:
                     log_dict = {
                         "epoch": inner_epoch,

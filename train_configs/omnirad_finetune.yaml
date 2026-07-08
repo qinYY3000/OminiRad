@@ -109,7 +109,7 @@ datasets:
 
   # ---------- Chest X-ray report generation ----------
   indiana_cxr:
-    batch_size: 1
+    batch_size: 2
     sample_ratio: 23             # primary report-generation supervisor
     vis_processor:
       train:
@@ -121,7 +121,7 @@ datasets:
 
   # ---------- Medical VQA ----------
   radvqa:
-    batch_size: 1
+    batch_size: 2
     sample_ratio: 7
     vis_processor:
       train:
@@ -132,7 +132,7 @@ datasets:
         name: "blip_caption"
 
   slake_vqa:
-    batch_size: 1
+    batch_size: 2
     sample_ratio: 10
     vis_processor:
       train:
@@ -144,7 +144,7 @@ datasets:
 
   # ---------- Grounded caption ----------
   grounding_SLAKE:
-    batch_size: 1
+    batch_size: 2
     sample_ratio: 10
     vis_processor:
       train:
@@ -159,7 +159,7 @@ datasets:
   # Task: ``[detection] pneumonia`` — model outputs <BOX_S/M/L> tokens.
   # JSON keys have been remapped to actual image filenames (UUID format).
   rsna:
-    batch_size: 1
+    batch_size: 2
     sample_ratio: 5
     vis_processor:
       train:
@@ -173,7 +173,7 @@ datasets:
   # Group-Breast Ultrasound — image + report + lesion mask
   # Tasks (5): segmentation / detection (mask→bbox) / report / refer / identify
   group_breast_us:
-    batch_size: 1
+    batch_size: 2
     sample_ratio: 16
     vis_processor:
       train:
@@ -188,7 +188,7 @@ datasets:
   # No reports → no report generation task.
   # Provides natural multi-polyp (K>=2) cases for AMU-Seg Innovation I supervision.
   kvasir:
-    batch_size: 1
+    batch_size: 2
     sample_ratio: 22
     vis_processor:
       train:
@@ -216,12 +216,15 @@ run:
   grad_clip: 1.0                  # ★ P1-13: gradient clipping for multi-task loss stability
 
   # Schedule
-  max_epoch: 20                  # 20 epochs ≈ 2-3 days, good for initial convergence check
-  iters_per_epoch: null             # null = auto-derive from dataloader length
+  # With batch_size=2 per GPU × 3 GPUs = 6 samples/step:
+  #   total ~30,250 samples ÷ 6 ≈ 5,041 iters/epoch
+  # 20 epochs × 5,041 = ~100k iters (≈ 2-3 days on 3×3090)
+  max_epoch: 20
+  iters_per_epoch: 5042
 
   # Memory / speed
   amp: True                       # Mixed precision — critical for 3090
-  accum_grad_iters: 2             # ★ batch_size=1 × accum=2 → effective batch=6 (same as before)
+  accum_grad_iters: 1             # ★ batch_size=2 per GPU × 3 GPUs = 6 effective batch
   num_workers: 4                  # Down from 6 (3 GPUs × 4 workers = 12 total)
   seed: 42
 
