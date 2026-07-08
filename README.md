@@ -134,8 +134,7 @@ OmniRad/
 
 The training mixture and evaluation pipeline cover **6 datasets** spanning
 **5 modalities** (chest X-ray, mixed X-ray/CT/MRI, ultrasound, endoscopy) and **7
-task types**. Each dataset's exact task coverage is listed below:
-[json path](https://drive.google.com/drive/folders/1-C_EjcF5bm9JHFbb704zKbt_o52Vl-WN?usp=drive_link)
+task types**. [json file](https://drive.google.com/drive/folders/1-C_EjcF5bm9JHFbb704zKbt_o52Vl-WN?usp=drive_link). Each dataset's exact task coverage is listed below:
 
 | Dataset | Modality | Tasks (task tag) | Train / Val / Test | Source |
 |---------|----------|------------------|-------------------|--------|
