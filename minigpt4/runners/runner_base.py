@@ -401,6 +401,23 @@ class RunnerBase:
                             val_log.update({"best_epoch": best_epoch})
                             self.log_stats(val_log, split_name)
 
+                    # print validation summary to console
+                    if is_main_process():
+                        n = val_log.get("n_samples", 0)
+                        ca = val_log.get("cardinality_acc", -1)
+                        ns = val_log.get("n_structured", -1)
+                        print(f"\n{'='*60}")
+                        print(f"  [Epoch {cur_epoch}] Validation — {split_name}")
+                        print(f"  Samples           : {n}")
+                        print(f"  Cardinality Acc   : {ca:.4f}")
+                        print(f"  Structured        : {ns}")
+                        print(f"  Best epoch so far : {best_epoch} (agg={best_agg_metric:.4f})")
+                        print(f"{'='*60}\n")
+
+                # save checkpoint every epoch (not only on improvement)
+                if not self.evaluate_only:
+                    self._save_checkpoint(cur_epoch, is_best=False)
+
             else:
                 # if no validation split is provided, we just save the checkpoint at the end of each epoch.
                 if not self.evaluate_only:

@@ -1,8 +1,10 @@
-"""OmniRad evaluation task — supports multi-task validation during training.
+"""
+OmniRad evaluation task — supports multi-task validation during training.
 
 Extends ImageTextPretrainTask with:
 - valid_step: calls model.generate(), collects structured outputs
-- after_evaluation: computes per-task metrics (BERT-Sim for text, Dice for seg)
+- evaluation: runs valid_step over the full dataloader
+- after_evaluation: computes per-task metrics (cardinality accuracy)
 """
 
 from __future__ import annotations
@@ -12,7 +14,9 @@ import os
 
 import torch
 from minigpt4.common.registry import registry
+from minigpt4.common.dist_utils import get_rank
 from minigpt4.tasks.image_text_pretrain import ImageTextPretrainTask
+from tqdm import tqdm
 
 
 @registry.register_task("omnirad_eval")
@@ -57,6 +61,21 @@ class OmniRadTask(ImageTextPretrainTask):
             output.append(entry)
 
         return output
+
+    @torch.no_grad()
+    def evaluation(self, model, data_loader):
+        """Run validation over the entire dataloader, collecting structured results."""
+        model.eval()
+        all_results = []
+        for samples in tqdm(data_loader, desc="Validating", disable=get_rank() != 0):
+            # Move tensors to CUDA
+            if torch.cuda.is_available():
+                for k, v in samples.items():
+                    if isinstance(v, torch.Tensor):
+                        samples[k] = v.cuda()
+            batch_results = self.valid_step(model, samples)
+            all_results.extend(batch_results)
+        return all_results
 
     def after_evaluation(self, val_result, split_name, epoch, **kwargs):
         """Compute aggregate metrics from validation results."""
