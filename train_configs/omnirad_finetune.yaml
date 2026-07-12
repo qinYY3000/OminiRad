@@ -207,8 +207,8 @@ run:
   grad_clip: 1.0
 
   # Schedule
-  max_epoch: 20
-  iters_per_epoch: 1000       # 每个 epoch 固定 1000 步（batch_size=1 时也合理）
+  max_epoch: 30
+  iters_per_epoch: 5000       # 每个 epoch 固定 1000 步（batch_size=1 时也合理）
 
   # Memory / speed
   amp: True                   # Mixed precision
