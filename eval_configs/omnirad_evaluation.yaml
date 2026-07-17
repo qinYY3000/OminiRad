@@ -5,7 +5,7 @@ model:
   end_sym: "</s>"
   prompt_template: '[INST] {} [/INST]'
   llama_model: "weights/llama-2-7b-chat-hf"
-  ckpt: "experiments/omnirad/latest/checkpoint_best.pth"
+  ckpt: "/home/cwq/MedicalDP/OminiRad/minigpt4/experiments/omnirad/20260712095/checkpoint_best.pth"
   lora_r: 64
   lora_alpha: 16
   chat_template: True

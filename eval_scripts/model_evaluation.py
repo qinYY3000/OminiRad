@@ -2,9 +2,9 @@
 
 Example usage (single GPU)::
 
-    torchrun --master-port 8888 --nproc_per_node 1 \\
-        eval_scripts/model_evaluation.py \\
-        --cfg-path eval_configs/omnirad_evaluation.yaml \\
+    torchrun --master-port 8888 --nproc_per_node 1 \
+        eval_scripts/model_evaluation.py \
+        --cfg-path eval_configs/omnirad_evaluation.yaml \
         --dataset indiana_cxr,radvqa,slake_vqa,rsna,SLAKE,group_breast_us,kvasir
 """
 
@@ -27,7 +27,7 @@ from minigpt4.conversation.conversation import CONV_VISION_minigptv2
 
 from minigpt4.datasets.datasets.radvqa_dataset import evalRadVQADataset
 from minigpt4.datasets.datasets.rsna_dataset import evalRSNADataset
-from minigpt4.datasets.datasets.SLAKE_dataset import evalSLAKEDataset
+from minigpt4.datasets.datasets.SLAKE_dataset import evalSLAKEDataset, evalSlakeVQADataset
 from minigpt4.datasets.datasets.unified_us_dataset import evalGroupUSDataset
 from minigpt4.datasets.datasets.kvasir_dataset import evalKvasirDataset
 from minigpt4.datasets.datasets.indiana_dataset import evalIndianaCXRDataset
@@ -59,6 +59,7 @@ CONV_VISION = CONV_VISION_minigptv2
 conv_temp = CONV_VISION.copy()
 conv_temp.system = ""
 save_path = cfg.run_cfg.save_path
+os.makedirs(save_path, exist_ok=True)
 
 
 # ---------------------------------------------------------------------------
@@ -70,6 +71,34 @@ def _decode_answer(ans):
     if isinstance(ans, dict):
         return ans.get("text", "")
     return ans
+
+
+# Shared counter for debug prints (one-shot per evaluation run).
+_debug_counters: dict[str, int] = {}
+
+
+def _debug_structured_outputs(outputs, questions, task, max_samples: int = 3):
+    """Print first N model outputs for structured tasks to diagnose Dice/IoU=0."""
+    key = f"{task}_{id(questions)}"  # coarse per-call key
+    cnt = _debug_counters.get(key, 0)
+    if cnt >= max_samples:
+        return
+    for i, out in enumerate(outputs):
+        if cnt >= max_samples:
+            break
+        if not isinstance(out, dict):
+            continue
+        print(f"\n[DEBUG {task} sample #{cnt + 1}]")
+        q = questions[i] if i < len(questions) else "?"
+        print(f"  question:    {str(q)[:150]}")
+        print(f"  clean_text:  {out.get('text', '')[:200]}")
+        print(f"  raw_text:    {out.get('raw_text', '')[:300]}")
+        print(f"  seg_count:   {out.get('seg_count', '?')}")
+        print(f"  box_tokens:  {out.get('box_tokens', '?')}")
+        print(f"  has_loc:     {out.get('has_loc', '?')}")
+        cnt += 1
+    _debug_counters[key] = cnt
+    _debug_counters.clear()  # keep it small
 
 
 # ---------------------------------------------------------------------------
@@ -138,6 +167,42 @@ def process_vqa_dataset():
 
     file_save_path = os.path.join(save_path, "radVQA_inference_results.json")
     output_csv_path = os.path.join(save_path, "vqa_bert_similarity_scores.csv")
+
+    with open(file_save_path, "w") as f:
+        json.dump(minigpt4_predict, f)
+
+    clean_vqa_json(file_save_path, file_save_path)
+    VQA_BERT_Sim(eval_file_path, file_save_path, output_csv_path)
+
+
+# ---------------------------------------------------------------------------
+# SLAKE VQA — visual question answering (uses "img_name" schema)
+# ---------------------------------------------------------------------------
+def process_slake_vqa_dataset():
+    eval_file_path = cfg.evaluation_datasets_cfg[dataset]["eval_file_path"]
+    img_path = cfg.evaluation_datasets_cfg[dataset]["img_path"]
+    batch_size = cfg.evaluation_datasets_cfg[dataset]["batch_size"]
+    max_new_tokens = cfg.evaluation_datasets_cfg[dataset]["max_new_tokens"]
+
+    with open(eval_file_path, "r") as f:
+        slake = json.load(f)
+
+    data = evalSlakeVQADataset(slake, vis_processor, img_path)
+    eval_dataloader = DataLoader(data, batch_size=batch_size, shuffle=False)
+    minigpt4_predict = defaultdict(list)
+
+    for images, questions, img_ids in tqdm(eval_dataloader):
+        texts = prepare_texts(questions, conv_temp)
+        answers = model.generate(images, texts,
+                                 max_new_tokens=max_new_tokens, do_sample=False)
+        for answer, img_id, question in zip(answers, img_ids, questions):
+            minigpt4_predict[img_id].append({
+                "question": question.replace("[vqa]", "").strip(),
+                "answer": _decode_answer(answer),
+            })
+
+    file_save_path = os.path.join(save_path, "SLAKE_VQA_inference_results.json")
+    output_csv_path = os.path.join(save_path, "slake_vqa_bert_similarity_scores.csv")
 
     with open(file_save_path, "w") as f:
         json.dump(minigpt4_predict, f)
@@ -298,6 +363,10 @@ def process_group_us_dataset():
             if task == "segmentation":
                 gen_kwargs["return_masks"] = True
             outputs = model.generate(images, texts, **gen_kwargs)
+
+            # DEBUG: print first few structured-task outputs
+            if task in ("segmentation", "detection", "refer"):
+                _debug_structured_outputs(outputs, questions, task)
 
             for out, iid, q, gt in zip(outputs, img_ids, questions, gts):
                 if isinstance(out, dict):
@@ -482,6 +551,10 @@ def process_kvasir_dataset():
                 gen_kwargs["return_masks"] = True
             outputs = model.generate(images, texts, **gen_kwargs)
 
+            # DEBUG: print first few structured-task outputs
+            if task in ("segmentation", "detection", "refer"):
+                _debug_structured_outputs(outputs, questions, task)
+
             for out, iid, q, gt in zip(outputs, img_ids, questions, gts):
                 if isinstance(out, dict):
                     ans_text = out.get("text", "")
@@ -587,6 +660,9 @@ for dataset in args.dataset:
 
     elif dataset == 'radvqa':
         process_vqa_dataset()
+
+    elif dataset == 'slake_vqa':
+        process_slake_vqa_dataset()
 
     elif dataset == 'rsna':
         process_rsna_dataset()
