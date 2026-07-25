@@ -371,7 +371,26 @@ class RunnerBase:
         if not self.evaluate_only and self.resume_ckpt_path is not None:
             self._load_checkpoint(self.resume_ckpt_path)
 
+        # P2: Curriculum learning — check if model supports it
+        model_raw = self.unwrap_dist_model(self.model)
+        curriculum_epochs = getattr(model_raw, 'curriculum_epochs', 0)
+
         for cur_epoch in range(self.start_epoch, self.max_epoch):
+            # ---- P2 curriculum phase toggle ----
+            in_curriculum = curriculum_epochs > 0 and cur_epoch < curriculum_epochs
+            if hasattr(model_raw, 'set_curriculum_phase'):
+                model_raw.set_curriculum_phase(in_curriculum)
+                if in_curriculum:
+                    logging.info(
+                        "[Curriculum] Epoch %d/%d — LLM frozen, structured-heads only",
+                        cur_epoch, curriculum_epochs,
+                    )
+                elif cur_epoch == curriculum_epochs and curriculum_epochs > 0:
+                    logging.info(
+                        "[Curriculum] Epoch %d — unfreezing LLM for joint training",
+                        cur_epoch,
+                    )
+
             # training phase
             if not self.evaluate_only:
                 logging.info("Start training")

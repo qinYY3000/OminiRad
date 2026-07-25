@@ -34,6 +34,24 @@ model:
     box_l: {in_dim: 4096, hidden_dim: 512, n_class: 64}
     loc: {in_dim: 4096, hidden_dim: 512, n_anatomy: 30}
 
+  # P2: Curriculum learning — freeze LLM for first N epochs, train structured heads only.
+  # Set to 0 to disable.  Recommended: 5–10 epochs when training from MiniGPT-Med weights.
+  curriculum_epochs: 8
+
+  # P1: Increased structured loss weights to counteract text shortcut.
+  # The text_bbox_penalty penalises batches that emit zero special tokens
+  # despite having structured supervision.
+  loss_weights:
+    text: 1.0
+    det: 5.0
+    loc: 5.0
+    seg: 3.0
+    seg_bce: 2.0
+    seg_dice: 1.0
+    cardinality: 1.0
+    text_bbox_penalty: 3.0
+    cons_mb: 0.3
+
 # ============================================================================
 # Training datasets
 # ----------------------------------------------------------------------------

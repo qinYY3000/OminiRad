@@ -327,11 +327,11 @@ class OmniRad(MiniGPTv2):
 
     DEFAULT_LOSS_WEIGHTS = {
         "text": 1.0,
-        "det": 1.0,
-        "loc": 1.0,
+        "det": 5.0,              # P1: ↑ from 1.0 — strongly penalize missing <BOX> tokens
+        "loc": 5.0,              # P1: ↑ from 1.0 — strongly penalize missing <LOC> tokens
         "seg_bce": 2.0,
-        "seg_dice": 0.5,
-        "cardinality": 0.5,
+        "seg_dice": 1.0,        # P1: ↑ from 0.5
+        "cardinality": 1.0,     # P1: ↑ from 0.5 — stronger K-mismatch penalty
         "cons_mb": 0.3,
         "cons_rd": 0.2,
         "cons_gs": 0.2,
@@ -340,6 +340,8 @@ class OmniRad(MiniGPTv2):
         "scale_w_m": 1.5,
         "scale_w_l": 1.0,
         "uncertainty": 0.1,
+        "text_bbox_penalty": 3.0,  # P1: NEW — penalize text-format bbox shortcut
+        "seg": 3.0,                # P1: NEW — explicit seg loss weight in total_loss
     }
 
     def __init__(
@@ -368,6 +370,7 @@ class OmniRad(MiniGPTv2):
         mask_decoder: dict | None = None,
         loc_heads: dict | None = None,
         loss_weights: dict | None = None,
+        curriculum_epochs: int = 0,
     ):
         lora_target_modules = lora_target_modules or ["q_proj", "v_proj"]
         super().__init__(
@@ -393,6 +396,8 @@ class OmniRad(MiniGPTv2):
         )
 
         self.loss_weights = {**self.DEFAULT_LOSS_WEIGHTS, **(loss_weights or {})}
+        self.curriculum_epochs = curriculum_epochs
+        self._in_curriculum_phase = False  # P2: set by runner during curriculum epochs
         self.special_tokens = tuple(expand_vocab or [])
         self.special_token_ids: dict[str, int] = {}
         self._expand_output_vocabulary(self.special_tokens)
@@ -548,6 +553,28 @@ class OmniRad(MiniGPTv2):
         if emb.shape[-1] != 64:
             emb = F.interpolate(emb, size=(64, 64), mode="bilinear", align_corners=False)
         return emb
+
+    def set_curriculum_phase(self, phase: bool):
+        """P2: Enable/disable curriculum learning phase.
+
+        When ``True``, the LLM (including LoRA) is frozen and only the structured
+        heads (box_heads, loc_head, seg_projector, mask_decoder) receive gradients.
+        The LLM still runs forward to produce hidden states at teacher-forced
+        special-token positions.
+        """
+        self._in_curriculum_phase = phase
+        # Freeze / unfreeze LLM parameters
+        for n, p in self.llama_model.named_parameters():
+            p.requires_grad = not phase
+        # Always keep structured heads trainable
+        for head in [self.box_heads, self.loc_head, self.seg_projector]:
+            for p in head.parameters():
+                p.requires_grad = True
+        if hasattr(self, 'mask_decoder'):
+            for p in self.mask_decoder.parameters():
+                p.requires_grad = True
+        # LoRA weights are inside llama_model, so they are frozen too during curriculum.
+        # embed_tokens should stay frozen (we never train the embedding layer directly).
 
     @torch.no_grad()
     def generate(
@@ -793,6 +820,7 @@ class OmniRad(MiniGPTv2):
         k_targets = samples.get("K")
         anatomy_regions = samples.get("anatomy_regions")
         box_scales = samples.get("box_scales")
+        image_size = samples.get("image_size")  # (B, 2) tensor [w, h]
 
         if has_structured is None:
             batch_size = len(samples.get("answer", []))
@@ -806,6 +834,7 @@ class OmniRad(MiniGPTv2):
             "anatomy_regions": anatomy_regions,
             "mask_paths": mask_paths,
             "K": k_targets,
+            "image_size": image_size,
         }
 
     def _extract_special_token_hidden_states(
@@ -976,7 +1005,11 @@ class OmniRad(MiniGPTv2):
         structured_targets: dict[str, Any],
         ref_loss: torch.Tensor,
     ) -> torch.Tensor:
-        """Scale-aware detection loss for <BOX_S/M/L> tokens."""
+        """Scale-aware detection loss for <BOX_S/M/L> tokens.
+
+        P0 fix: GT bboxes are normalised per-image using ``image_size`` instead of
+        a hard-coded 448 that assumes all images are square.
+        """
         scale_tokens = {"<BOX_S>": "box_s", "<BOX_M>": "box_m", "<BOX_L>": "box_l"}
         scale_weights = {"box_s": self.loss_weights.get("scale_w_s", 3.0),
                          "box_m": self.loss_weights.get("scale_w_m", 1.5),
@@ -984,21 +1017,28 @@ class OmniRad(MiniGPTv2):
 
         boxes_gt = structured_targets.get("boxes")  # list[Tensor] per sample
         box_scales_gt = structured_targets.get("box_scales")  # list[list[str]]
+        image_sizes = structured_targets.get("image_size")  # Tensor (B, 2) [w, h]
         if boxes_gt is None:
             return ref_loss.new_zeros(())
 
         total_loss = ref_loss.new_zeros(())
         n_valid = 0
 
-        # Flatten GT boxes across batch with scale labels
+        # Flatten GT boxes across batch with scale labels and per-box image sizes
         gt_boxes_flat = []
         gt_scales_flat = []
+        gt_img_sizes_flat = []
         for b, (boxes_b, scales_b) in enumerate(zip(boxes_gt, box_scales_gt or [])):
             if not torch.is_tensor(boxes_b) or boxes_b.shape[0] == 0:
                 continue
+            # Per-sample image size [w, h]
+            w, h = (448.0, 448.0)
+            if image_sizes is not None and b < image_sizes.shape[0]:
+                w, h = image_sizes[b, 0].item(), image_sizes[b, 1].item()
             for idx in range(boxes_b.shape[0]):
                 gt_boxes_flat.append(boxes_b[idx])
                 gt_scales_flat.append(scales_b[idx] if idx < len(scales_b) else "M")
+                gt_img_sizes_flat.append((w, h))
 
         # Match predictions to GT by order
         pred_idx = 0
@@ -1011,14 +1051,13 @@ class OmniRad(MiniGPTv2):
                 out = head(pred_hidden.unsqueeze(0))
                 pred_bbox = out["bbox"].squeeze(0)  # (4,)
                 gt_bbox = gt_boxes_flat[pred_idx].to(pred_bbox.device).float()
-                # Normalize GT bbox to [0,1] if it looks like pixel coords
-                # (dataset returns pixel coords; we normalize by image size 448)
-                gt_bbox = gt_bbox / 448.0
+                # P0: normalise GT bbox by actual image size [w, h]
+                w, h = gt_img_sizes_flat[pred_idx]
+                scale = torch.tensor([w, h, w, h], device=pred_bbox.device, dtype=torch.float32)
+                gt_bbox = gt_bbox / scale
                 gt_bbox = gt_bbox.clamp(0.0, 1.0)
 
                 l1 = torch.nn.functional.l1_loss(pred_bbox, gt_bbox)
-                # Simple GIoU approximation (1D since we don't have full 2D GIoU here)
-                giou = 1.0 - l1  # simplified
                 scale_w = scale_weights[head_key]
                 total_loss = total_loss + scale_w * (
                     self.loss_weights.get("l1_det", 1.0) * l1
@@ -1036,36 +1075,50 @@ class OmniRad(MiniGPTv2):
         structured_targets: dict[str, Any],
         ref_loss: torch.Tensor,
     ) -> torch.Tensor:
-        """Localization loss for <LOC> token (pixel bbox + anatomy)."""
+        """Localization loss for <LOC> token (pixel bbox + anatomy).
+
+        P0 fix: GT bboxes are normalised per-image using ``image_size`` instead of
+        a hard-coded 448.
+        """
         loc_preds = special_hidden_states.get("<LOC>", [])
         if not loc_preds:
             return ref_loss.new_zeros(())
 
         boxes_gt = structured_targets.get("boxes")
         anatomy_regions_gt = structured_targets.get("anatomy_regions")
+        image_sizes = structured_targets.get("image_size")  # Tensor (B, 2) [w, h]
         if boxes_gt is None:
             return ref_loss.new_zeros(())
 
         total_loss = ref_loss.new_zeros(())
         n_valid = 0
 
-        # Flatten GT
+        # Flatten GT with per-box image sizes
         gt_boxes_flat = []
         gt_anatomy_flat = []
+        gt_img_sizes_flat = []
         for b, boxes_b in enumerate(boxes_gt):
             if not torch.is_tensor(boxes_b) or boxes_b.shape[0] == 0:
                 continue
+            w, h = (448.0, 448.0)
+            if image_sizes is not None and b < image_sizes.shape[0]:
+                w, h = image_sizes[b, 0].item(), image_sizes[b, 1].item()
             anatomy_b = (anatomy_regions_gt[b] if anatomy_regions_gt and b < len(anatomy_regions_gt) else [])
             for idx in range(boxes_b.shape[0]):
                 gt_boxes_flat.append(boxes_b[idx])
                 gt_anatomy_flat.append(anatomy_b[idx] if idx < len(anatomy_b) else None)
+                gt_img_sizes_flat.append((w, h))
 
         for pred_idx, pred_hidden in enumerate(loc_preds):
             if pred_idx >= len(gt_boxes_flat):
                 break
             out = self.loc_head(pred_hidden.unsqueeze(0))
             pred_bbox = out["bbox"].squeeze(0)
-            gt_bbox = gt_boxes_flat[pred_idx].to(pred_bbox.device).float() / 448.0
+            gt_bbox = gt_boxes_flat[pred_idx].to(pred_bbox.device).float()
+            # P0: normalise by actual image size
+            w, h = gt_img_sizes_flat[pred_idx]
+            scale = torch.tensor([w, h, w, h], device=pred_bbox.device, dtype=torch.float32)
+            gt_bbox = gt_bbox / scale
             gt_bbox = gt_bbox.clamp(0.0, 1.0)
 
             l1 = torch.nn.functional.l1_loss(pred_bbox, gt_bbox)
@@ -1255,11 +1308,37 @@ class OmniRad(MiniGPTv2):
             samples, text_loss, structured_targets, special_hidden_states
         )
 
+        # ---- Step 5: Text shortcut penalty (P1) ----
+        # When the LLM emits text-format bboxes instead of special <BOX>/<SEG> tokens,
+        # the structured heads get zero gradient.  Penalise this by detecting when a
+        # sample that *should* produce structured output produced zero special tokens.
+        shortcut_penalty = text_loss.new_zeros(())
+        has_supervision = structured_targets.get("has_structured_supervision")
+        if torch.is_tensor(has_supervision) and has_supervision.any():
+            n_seg = len(special_hidden_states.get("<SEG>", []))
+            n_box = sum(len(special_hidden_states.get(t, []))
+                        for t in ["<BOX_S>", "<BOX_M>", "<BOX_L>"])
+            n_str = has_supervision.sum().item()
+            # Penalise when structured samples emitted zero special tokens
+            if n_str > 0 and n_seg == 0 and n_box == 0:
+                shortcut_penalty = torch.tensor(
+                    self.loss_weights.get("text_bbox_penalty", 3.0) * n_str,
+                    device=text_loss.device, dtype=text_loss.dtype,
+                )
+
+        # ---- Step 6: Curriculum learning (P2) ----
+        # During curriculum phase, freeze LLM (no_grad) so only structured heads train.
+        # The forward() call still goes through the LLM to produce hidden states at
+        # special-token positions (teacher-forced), but LLM weights are not updated.
+        in_curriculum = getattr(self, '_in_curriculum_phase', False)
+
+        seg_weight = self.loss_weights.get("seg", 3.0)
         total_loss = text_loss * self.loss_weights.get("text", 1.0)
         total_loss = total_loss + aux_losses["det"] * self.loss_weights.get("det", 1.0)
         total_loss = total_loss + aux_losses["loc"] * self.loss_weights.get("loc", 1.0)
-        total_loss = total_loss + aux_losses["seg"]
+        total_loss = total_loss + aux_losses["seg"] * seg_weight
         total_loss = total_loss + aux_losses["cons"] * self.loss_weights.get("cons_mb", 0.3)
+        total_loss = total_loss + shortcut_penalty
 
         # Fallback: if total loss is NaN, use text_loss only
         if torch.isnan(total_loss) or torch.isinf(total_loss):
@@ -1267,6 +1346,7 @@ class OmniRad(MiniGPTv2):
             total_loss = text_loss * self.loss_weights.get("text", 1.0)
             zero_t = text_loss.new_zeros(())
             aux_losses = {"det": zero_t, "loc": zero_t, "seg": zero_t, "cons": zero_t}
+            shortcut_penalty = zero_t
 
         result = {
             "loss": total_loss,
@@ -1275,6 +1355,7 @@ class OmniRad(MiniGPTv2):
             "loss_loc": aux_losses["loc"],
             "loss_seg": aux_losses["seg"],
             "loss_cons": aux_losses["cons"],
+            "loss_shortcut": shortcut_penalty,
             "structured_targets": structured_targets,
             "special_token_ids": self.special_token_ids,
             "n_seg_tokens": len(special_hidden_states.get("<SEG>", [])),
@@ -1332,6 +1413,7 @@ class OmniRad(MiniGPTv2):
             mask_decoder=_to_plain_dict(cfg.get("mask_decoder")),
             loc_heads=_to_plain_dict(cfg.get("loc_heads")),
             loss_weights=_to_plain_dict(cfg.get("loss_weights")),
+            curriculum_epochs=cfg.get("curriculum_epochs", 0),
         )
 
         ckpt_path = _resolve(cfg.get("ckpt", ""))

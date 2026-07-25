@@ -273,7 +273,7 @@ class BaseTask:
                         _m = model
                     _last_outputs = getattr(_m, '_last_forward_outputs', None)
                     if _last_outputs and isinstance(_last_outputs, dict):
-                        for k in ["loss_text", "loss_det", "loss_loc", "loss_seg", "loss_cons"]:
+                        for k in ["loss_text", "loss_det", "loss_loc", "loss_seg", "loss_cons", "loss_shortcut"]:
                             v = _last_outputs.get(k)
                             if v is not None and hasattr(v, 'item'):
                                 log_dict[k] = v.item()

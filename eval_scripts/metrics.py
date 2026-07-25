@@ -176,6 +176,7 @@ def VQA_BERT_Sim(gt_pth, pred_pth, output_csv):
         df_sorted.to_csv(output_csv, index=False)
 
     print(f"Average BERT similarity score: {average_similarity}")
+    return average_similarity
 
 
 def _get_gt_key(gt_item):
