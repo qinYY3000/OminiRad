@@ -692,6 +692,9 @@ def process_kvasir_dataset():
 # Dispatch
 ############################################################################
 for dataset in args.dataset:
+    # ── free VRAM between datasets ──
+    torch.cuda.empty_cache()
+
     # ── per-dataset output directory ──
     save_path = os.path.join(RESULTS_BASE, dataset)
     os.makedirs(save_path, exist_ok=True)

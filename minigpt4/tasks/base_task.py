@@ -228,6 +228,22 @@ class BaseTask:
 
             # update gradients every accum_grad_iters iterations
             if (i + 1) % accum_grad_iters == 0:
+                # P2 curriculum guard: when LLM is frozen, pure-text batches may
+                # have zero trainable parameters with gradients.  Skip the
+                # optimizer + scaler step in that case — scaler.step() fails
+                # when no inf checks were recorded.
+                has_grad = any(
+                    p.grad is not None
+                    for group in optimizer.param_groups
+                    for p in group["params"]
+                )
+
+                if not has_grad:
+                    optimizer.zero_grad()
+                    metric_logger.update(loss=loss.item())
+                    metric_logger.update(lr=optimizer.param_groups[0]["lr"])
+                    continue
+
                 # Gradient clipping (before optimizer.step)
                 grad_clip = self.cfg.run_cfg.get("grad_clip", 1.0)
                 if grad_clip is not None and grad_clip > 0:
