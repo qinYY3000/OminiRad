@@ -46,7 +46,7 @@ class LlamaForCausalLM(LlamaForCausalLMOrig):
         output_hidden_states: Optional[bool] = None,
         return_dict: Optional[bool] = None,
         reduction: Optional[str] = "mean",
-    ) -> Union[Tuple, CausalLMOutputWithPast]:
+        **kwargs) -> Union[Tuple, CausalLMOutputWithPast]:
         r"""
         Args:
             labels (`torch.LongTensor` of shape `(batch_size, sequence_length)`, *optional*):

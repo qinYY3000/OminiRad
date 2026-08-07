@@ -6,3 +6,16 @@
 /docs
 /data
 /Med_examples_v2/*
+/weights/
+__pycache__/
+*.pyc
+*.pyo
+*.pth
+*.safetensors
+*.bin
+*.pt
+/results/
+/experiments/
+/eval_results/
+*.egg-info/
+.pytest_cache/

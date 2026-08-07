@@ -140,6 +140,18 @@ class MiniGPTv2(MiniGPTBase):
         if ckpt_path:
             print("Load Minigpt-4-LLM Checkpoint: {}".format(ckpt_path))
             ckpt = torch.load(ckpt_path, map_location="cpu")
-            msg = model.load_state_dict(ckpt['model'], strict=False)
+            # Diagnostic: log what keys ARE in the checkpoint
+            ckpt_state = ckpt['model'] if 'model' in ckpt else ckpt
+            ckpt_keys = list(ckpt_state.keys())
+            lora_keys = [k for k in ckpt_keys if 'lora' in k.lower()]
+            proj_keys = [k for k in ckpt_keys if 'llama_proj' in k]
+            qformer_keys = [k for k in ckpt_keys if 'Qformer' in k or 'qformer' in k]
+            print(f"[DIAG] checkpoint has {len(ckpt_keys)} keys:")
+            print(f"  - LoRA keys: {len(lora_keys)}  (need ~128 for r=64 on 32 layers)")
+            print(f"  - llama_proj keys: {len(proj_keys)}")
+            print(f"  - Qformer keys: {len(qformer_keys)}")
+            if len(lora_keys) == 0:
+                print("[WARNING] No LoRA weights in checkpoint! Model will NOT follow medical task format.")
+            msg = model.load_state_dict(ckpt_state, strict=False)
 
         return model

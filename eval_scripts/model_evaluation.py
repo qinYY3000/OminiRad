@@ -295,7 +295,7 @@ def process_group_us_dataset():
         for images, questions, img_ids, gts in tqdm(loader):
             texts = prepare_texts(list(questions), conv_temp)
             gen_kwargs = {"max_new_tokens": max_new_tokens, "do_sample": False}
-            if task == "segmentation":
+            if task == "segmentation" and hasattr(model, '_decode_dense_outputs_from_generation'):
                 gen_kwargs["return_masks"] = True
             outputs = model.generate(images, texts, **gen_kwargs)
 
@@ -478,7 +478,7 @@ def process_kvasir_dataset():
         for images, questions, img_ids, gts in tqdm(loader):
             texts = prepare_texts(list(questions), conv_temp)
             gen_kwargs = {"max_new_tokens": max_new_tokens, "do_sample": False}
-            if task == "segmentation":
+            if task == "segmentation" and hasattr(model, '_decode_dense_outputs_from_generation'):
                 gen_kwargs["return_masks"] = True
             outputs = model.generate(images, texts, **gen_kwargs)
 
@@ -586,6 +586,9 @@ for dataset in args.dataset:
         process_indiana_dataset()
 
     elif dataset == 'radvqa':
+        process_vqa_dataset()
+
+    elif dataset == 'slake_vqa':
         process_vqa_dataset()
 
     elif dataset == 'rsna':

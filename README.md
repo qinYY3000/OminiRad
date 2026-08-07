@@ -53,14 +53,14 @@ Download the following weights and place them under `weights/`:
 
 | Weight | Role | Source | Destination |
 |--------|------|--------|-------------|
-| LLaMA-2-7B-Chat | LLM backbone | [HuggingFace](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf) | `weights/llama-2-7b-chat-hf/` |
+| LLaMA-2-7B-Chat | LLM backbone | [modelscope](https://modelscope.cn/models/shakechen/Llama-2-7b-chat-hf) | `weights/llama-2-7b-chat-hf/` |
 | MiniGPT-Med checkpoint | language-vision initialization | [Google Drive](https://drive.google.com/file/d/1kjGLk6s9LsBmXfLWQFCdlwF3aul08Cl8/view) | `weights/minigpt_med_pretrained.pth` |
 | **MedSAM ViT-B (default)** | medical segmentation backbone | [Google Dirve](https://drive.google.com/file/d/1hu0cpKT96G9apYbTb85TREewpoDv-4Hb/view?usp=drive_link) | `weights/medsam_vit_b.pth` |
 | SAM ViT-B | raw SAM baseline (same backbone family as MedSAM) | [Meta](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_b_01ec64.pth) | `weights/sam_vit_b_01ec64.pth` |
 
 ```bash
 mkdir -p weights
-git clone https://huggingface.co/meta-llama/Llama-2-7b-chat-hf weights/llama-2-7b-chat-hf
+modelscope download --model shakechen/Llama-2-7b-chat-hf README.md --local_dir ./weights/llama-2-7b-chat-hf
 wget -O weights/minigpt_med_pretrained.pth "https://drive.google.com/uc?export=download&id=1kjGLk6s9LsBmXfLWQFCdlwF3aul08Cl8"
 # Default dense segmentation backbone
 # Download the MedSAM checkpoint to weights/medsam_vit_b.pth
@@ -251,7 +251,7 @@ Patient-level **76 / 4 / 20** split is used (same convention as Indiana CXR).
 
 ```bash
 # 1. Activate environment
-conda activate miniGPT-Med
+conda activate llama
 
 # 2. (Optional) Login to Weights & Biases
 wandb login
@@ -424,6 +424,13 @@ python demo_v2.py --cfg-path eval_configs/minigptv2_eval.yaml --gpu-id 0
 
 # OmniRad demo (requires trained checkpoint)
 python demo_v2.py --cfg-path eval_configs/omnirad_evaluation.yaml --gpu-id 0
+
+vllm serve /opt/atomgit/.cache/modelscope/hub/models/Qwen/Qwen3.5-4B \
+    --served-model-name Qwen3.5-4B \
+    --max-model-len 4096 \
+    --gpu-memory-utilization 0.9 \
+    --trust-remote-code \
+    --host 0.0.0.0 --port 8000
 ```
 
 ---

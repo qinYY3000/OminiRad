@@ -13,24 +13,29 @@ Supported baselines
 2. **minigpt_v2** — The original MiniGPT-v2 (stage-3, before medical FT).
    Uses the same architecture as minigpt_med but with the stage-3 checkpoint.
 
-3. **llava** (planned) — LLaVA-1.5 zero-shot.  Requires the ``llava`` package.
-   Not yet implemented; see ``_eval_llava`` stub.
+3. **chexagent** / **llava_med** / **med_flamingo** / **xraygpt** —
+   Third-party medical VLMs from the ``models/`` directory.  They expose a
+   ``BaseLM.generate(paths, prompt)`` interface (paths = list of image file
+   paths, prompt = plain text).  This script bypasses the tensor-based
+   DataLoader used by MiniGPT-v2 and calls each model directly on raw image
+   paths, then writes predictions in the JSON layout expected by the shared
+   metrics (``VQA_BERT_Sim`` / ``evaluate_report_generation``).
 
 Usage
 -----
     # MiniGPT-Med on all public datasets
+    # CheXagent 报告生成
     python eval_scripts/baseline_evaluation.py \
-        --model minigpt_med \
-        --cfg-path eval_configs/minigptv2_benchmark_evaluation.yaml \
-        --dataset indiana_cxr,radvqa,slake_vqa,rsna,SLAKE \
-        --output-dir eval_results/minigpt_med
+    --model chexagent \
+    --dataset indiana_cxr \
+    --output-dir eval_results/chexagent
 
-    # Single dataset
+    # LLaVA-Med 报告 + VQA 全跑
     python eval_scripts/baseline_evaluation.py \
-        --model minigpt_med \
-        --cfg-path eval_configs/minigptv2_benchmark_evaluation.yaml \
-        --dataset indiana_cxr \
-        --output-dir eval_results/minigpt_med
+    --model llava_med \
+    --dataset indiana_cxr,radvqa,slake_vqa \
+    --output-dir eval_results/llava_med
+
 
 Output
 ------
@@ -78,6 +83,10 @@ from eval_scripts.metrics import (
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
+BASELM_MODELS = {"chexagent", "llava_med", "med_flamingo", "xraygpt",
+                  "biomedclip"}
+
+
 def list_of_str(arg):
     return list(map(str, arg.split(',')))
 
@@ -278,13 +287,177 @@ TASK_DISPATCH = {
 }
 
 
+# --------------------------------------------------------------------------- #
+# BaseLM model integration (chexagent / llava_med / med_flamingo / xraygpt)
+# --------------------------------------------------------------------------- #
+_BASELM_IMPORT_MAP = {
+    "chexagent":    ("models.chexagent",    "CheXagent"),
+    "llava_med":    ("models.llavamed",     "LlavaMed"),
+    "med_flamingo": ("models.medflamingo",  "MedFlamingo"),
+    "xraygpt":      ("models.xraygpt",      "XrayGPT"),
+    "biomedclip":   ("models.biomedclip",   "BiomedCLIP"),
+}
+
+
+def _init_baselm_model(model_name: str):
+    """Lazy-import and instantiate a BaseLM model from the ``models/`` package."""
+    if model_name not in _BASELM_IMPORT_MAP:
+        raise ValueError(f"Unknown BaseLM model: {model_name}")
+    import importlib
+    module_path, class_name = _BASELM_IMPORT_MAP[model_name]
+    mod = importlib.import_module(module_path)
+    cls = getattr(mod, class_name)
+    print(f"\n=> Loading {class_name} ({model_name})")
+    return cls()
+
+
+def _load_baselm_cfg():
+    """Load the BaseLM benchmark YAML to obtain evaluation_datasets_cfg paths."""
+    cfg_args = argparse.Namespace(
+        cfg_path="eval_configs/baselm_benchmark_evaluation.yaml",
+        options=None,
+        gpu_id=0,
+    )
+    return Config(cfg_args)
+
+
+# Default report-generation prompt — mirrors ``INDIANA_INSTRUCTION_POOL`` first
+# entry so all baselines see the same instruction wording.
+_BASELM_REPORT_PROMPT = "Describe this image in detail"
+
+# VQA prompt prefix matching the OmniRad convention so the BERT-Sim metric
+# strips it consistently via ``clean_vqa_json``.
+_BASELM_VQA_PREFIX = "[vqa]"
+
+
+def _eval_baselm_dataset(model, model_name: str, dataset_name: str,
+                         cfg_block: dict, output_dir: str):
+    """Dispatch a BaseLM model on a single dataset.
+
+    Supports:
+      - ``indiana_cxr`` → report generation (BERT-Sim + BLEU + ROUGE + CheXbert)
+      - ``radvqa`` / ``slake_vqa`` → VQA (BERT-Sim)
+
+    Other dataset/task combinations (detection, grounding) are not supported
+    because the BaseLM interface only returns free-text — there is no dense
+    head to decode boxes from.  Callers should pass only text-task datasets.
+    """
+    eval_file_path = cfg_block["eval_file_path"]
+    img_path = cfg_block["img_path"]
+
+    # BiomedCLIP is a contrastive model (no generation).  It can only do VQA
+    # via zero-shot answer selection, not report generation.
+    if model_name == "biomedclip" and dataset_name == "indiana_cxr":
+        print(f"  [skip] BiomedCLIP has no generation capability; "
+              f"report generation is not supported.")
+        return
+
+    with open(eval_file_path, "r") as f:
+        data = json.load(f)
+
+    if dataset_name == "indiana_cxr":
+        _eval_baselm_report(model, model_name, data, img_path,
+                            eval_file_path, output_dir)
+    elif dataset_name in ("radvqa", "slake_vqa"):
+        _eval_baselm_vqa(model, model_name, data, img_path,
+                         dataset_name, eval_file_path, output_dir)
+    else:
+        print(f"  [skip] BaseLM models only support text tasks; "
+              f"'{dataset_name}' requires dense heads.")
+
+
+def _resolve_image_path(img_root: str, image_name: str) -> str:
+    """Resolve an image name to an absolute path, handling missing extensions."""
+    p = os.path.join(img_root, image_name)
+    if os.path.exists(p):
+        return p
+    # Indiana images have a .png suffix that JSON ``image_id`` omits.
+    for ext in (".png", ".jpg", ".jpeg"):
+        cand = p + ext
+        if os.path.exists(cand):
+            return cand
+    return p
+
+
+def _eval_baselm_report(model, model_name, data, img_path, gt_pth, output_dir):
+    """Run report generation on Indiana-style data and compute all metrics."""
+    predictions = []
+    for info in tqdm(data, desc=f"[{model_name}/indiana_cxr] report"):
+        img_id = info["image_id"]
+        image_path = _resolve_image_path(img_path, img_id)
+        try:
+            pred = model.generate([image_path], _BASELM_REPORT_PROMPT)
+        except Exception as e:
+            print(f"  [warn] generate failed for {img_id}: {e}")
+            pred = ""
+        predictions.append({"image_id": img_id, "caption": str(pred).strip()})
+
+    pred_path = os.path.join(output_dir, "inference_results.json")
+    with open(pred_path, "w") as f:
+        json.dump(predictions, f)
+    clean_report_json(pred_path, pred_path)
+
+    results = evaluate_report_generation(
+        gt_pth=gt_pth,
+        pred_pth=pred_path,
+        dataset_name=f"{model_name}_indiana_cxr",
+        output_dir=output_dir,
+    )
+    _write_summary(output_dir, model_name, "indiana_cxr", results, len(data))
+
+
+def _eval_baselm_vqa(model, model_name, data, img_path,
+                     dataset_name, gt_pth, output_dir):
+    """Run VQA on RadVQA / SLAKE-style data and compute BERT-Sim.
+
+    Each entry in ``data`` has ``image_name``/``img_name``, ``question`` and
+    ``answer``.  Predictions are grouped per image so multiple questions on the
+    same image reuse the (already-loaded) model state without re-encoding the
+    image — though each ``generate()`` call still processes the image once
+    because BaseLM does not expose a separate encode step.
+    """
+    predictions = defaultdict(list)
+    for info in tqdm(data, desc=f"[{model_name}/{dataset_name}] VQA"):
+        # RadVQA uses ``image_name``, SLAKE uses ``img_name``
+        img_name = info.get("image_name") or info.get("img_name") or ""
+        image_path = _resolve_image_path(img_path, img_name)
+        question = info.get("question", "")
+        prompt = f"{_BASELM_VQA_PREFIX} {question}"
+        try:
+            pred = model.generate([image_path], prompt)
+        except Exception as e:
+            print(f"  [warn] generate failed for {img_name}: {e}")
+            pred = ""
+        predictions[img_name].append({
+            "key": img_name,
+            "question": question,
+            "answer": str(pred).strip(),
+        })
+
+    pred_path = os.path.join(output_dir, "inference_results.json")
+    with open(pred_path, "w") as f:
+        json.dump(predictions, f)
+    clean_vqa_json(pred_path, pred_path)
+
+    csv_path = os.path.join(output_dir, "vqa_bert_sim.csv")
+    VQA_BERT_Sim(gt_pth, pred_path, csv_path)
+
+    df = pd.read_csv(csv_path)
+    avg_sim = df["BERT_score"].mean() if "BERT_score" in df.columns else 0.0
+    print(f"  Average VQA BERT-Sim: {avg_sim:.4f}")
+
+    _write_summary(output_dir, model_name, dataset_name,
+                   {"bert_sim": avg_sim}, len(data))
+
+
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 def main():
     parser = argparse.ArgumentParser(description="Baseline model evaluation")
     parser.add_argument("--model", type=str, required=True,
-                        choices=["minigpt_med", "minigpt_v2", "llava"],
+                        choices=["minigpt_med", "minigpt_v2", "llava"]
+                                + sorted(BASELM_MODELS),
                         help="Which baseline model to evaluate.")
     parser.add_argument("--cfg-path", type=str, default=None,
                         help="Path to eval YAML config (for minigpt_med/minigpt_v2).")
@@ -326,10 +499,18 @@ def main():
         conv_temp.system = ""
         save_path = args.output_dir
 
-    elif args.model == "llava":
-        print("[llava] LLaVA evaluation not yet implemented.")
-        print("  To add: install llava package, load model, implement _eval_llava().")
-        return
+    elif args.model in BASELM_MODELS:
+        # --- BaseLM models (chexagent / llava_med / med_flamingo / xraygpt) ---
+        # They expose a ``generate(paths, prompt)`` interface and manage their own
+        # image preprocessing internally, so we don't need vis_processor here.
+        model = _init_baselm_model(args.model)
+        vis_processor = None
+        conv_temp = None
+        save_path = args.output_dir
+
+        # Build a stub cfg so dataset dispatch works. BaseLM eval reads paths
+        # directly from JSON, so we use the benchmark config just for paths.
+        cfg = _load_baselm_cfg()
 
     # --- Run evaluations ---
     os.makedirs(save_path, exist_ok=True)
@@ -347,17 +528,28 @@ def main():
         output_dir = os.path.join(save_path, dataset_name)
         os.makedirs(output_dir, exist_ok=True)
 
-        eval_fn, task_category = TASK_DISPATCH[dataset_name]
         try:
-            eval_fn(
-                model=model,
-                vis_processor=vis_processor,
-                conv_temp=conv_temp,
-                cfg_block=cfg_block,
-                dataset_name=dataset_name,
-                model_name=args.model,
-                output_dir=output_dir,
-            )
+            if args.model in BASELM_MODELS:
+                # BaseLM models have their own image preprocessing and a
+                # path-based generate() interface — bypass tensor DataLoader.
+                _eval_baselm_dataset(
+                    model=model,
+                    model_name=args.model,
+                    dataset_name=dataset_name,
+                    cfg_block=cfg_block,
+                    output_dir=output_dir,
+                )
+            else:
+                eval_fn, task_category = TASK_DISPATCH[dataset_name]
+                eval_fn(
+                    model=model,
+                    vis_processor=vis_processor,
+                    conv_temp=conv_temp,
+                    cfg_block=cfg_block,
+                    dataset_name=dataset_name,
+                    model_name=args.model,
+                    output_dir=output_dir,
+                )
         except Exception as e:
             print(f"  [error] evaluation failed: {e}")
             import traceback
