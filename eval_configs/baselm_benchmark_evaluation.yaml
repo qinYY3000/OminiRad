@@ -1,0 +1,77 @@
+# Baseline model evaluation config — third-party medical VLMs.
+#
+# Supported models (weights under weights/{model_name}/):
+#   biomedclip (VQA only), chexagent, llava_med, med_flamingo, xraygpt
+#
+# Usage:
+#   python eval_scripts/baseline_evaluation.py \
+#     --model biomedclip \
+#     --dataset radvqa,slake_vqa \
+#     --output-dir eval_results/biomedclip
+#
+#   python eval_scripts/baseline_evaluation.py \
+#     --model chexagent \
+#     --dataset indiana_cxr \
+#     --output-dir eval_results/chexagent
+#
+#   python eval_scripts/baseline_evaluation.py \
+#     --model llava_med \
+#     --dataset indiana_cxr,radvqa,slake_vqa \
+#     --output-dir eval_results/llava_med
+
+model:
+  # Placeholder — the actual model is selected by --model on the CLI.
+  # The BaseLM loader ignores this section.
+  arch: minigpt_v2
+
+datasets:
+  cc_sbu_align:
+    vis_processor:
+      train:
+        name: "blip2_image_eval"
+        image_size: 448
+    text_processor:
+      train:
+        name: "blip_caption"
+
+evaluation_datasets:
+  # ---------- Chest X-ray report generation ----------
+  indiana_cxr:
+    eval_file_path: data/annotations/indiana_test.json
+    img_path: data/Chest X/images
+    max_new_tokens: 300
+    batch_size: 1           # BaseLM models process one image at a time
+
+  # ---------- Medical VQA ----------
+  radvqa:
+    eval_file_path: data/annotations/vqa_test.json
+    img_path: data/radvqa/imgs
+    max_new_tokens: 300
+    batch_size: 1
+
+  slake_vqa:
+    eval_file_path: data/annotations/VQA_test_SLAKE.json
+    img_path: data/slake/imgs
+    max_new_tokens: 300
+    batch_size: 1
+
+  # ---------- Detection / Grounding (not supported by BaseLM models) ----------
+  # These tasks require dense output heads (<BOX_*>/<SEG> tokens) that
+  # BaseLM models do not have.  They are listed here for reference but
+  # will be skipped at runtime with a warning.
+  rsna:
+    eval_file_path: data/annotations/RSNA_test.json
+    img_path: data/rsna/RSNA-bbox-1024
+    max_new_tokens: 100
+    batch_size: 1
+
+  SLAKE:
+    eval_file_path: data/annotations/grounding_test_SLAKE.json
+    img_path: data/slake/imgs
+    max_new_tokens: 100
+    batch_size: 1
+
+run:
+  task: image_text_pretrain
+  name: baselm_evaluation
+  save_path: experiments/eval_baselm

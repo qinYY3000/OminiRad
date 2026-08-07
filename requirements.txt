@@ -1,0 +1,16 @@
+# MiniGPT-Med ModelScope Studio Deployment (AMD GPU / ROCm)
+# Base image: ubuntu22.04-rocm7.2.1-py312-torch2.10.0-modelscope1.36.3
+# Gradio SDK: 6.17.3 (provided by Studio runtime)
+
+omegaconf>=2.3.0
+transformers<4.50
+peft>=0.2.0
+pyyaml>=6.0
+tqdm>=4.64.1
+numpy>=1.21.0
+Pillow>=9.0.0
+sentence-transformers>=2.2.0
+modelscope>=1.10.0
+huggingface-hub
+iopath>=0.1.10
+timm>=0.6.13
