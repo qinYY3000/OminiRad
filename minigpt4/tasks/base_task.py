@@ -223,6 +223,10 @@ class BaseTask:
             # ★ Skip step entirely if loss is NaN/Inf
             if torch.isnan(loss) or torch.isinf(loss):
                 logging.warning("NaN/Inf loss detected at epoch %d step %d, skipping batch", epoch, i)
+                if use_amp:
+                    # ★ CRITICAL: still update scaler so AMP scale decreases;
+                    # otherwise successive NaN batches keep the same high scale.
+                    scaler.update()
                 continue
 
             # after_train_step()
@@ -255,8 +259,9 @@ class BaseTask:
                     if use_amp:
                         scaler.update()  # still update scaler to adjust scale
                 else:
-                    # Free cached memory before optimizer step (helps with fragmentation)
-                    torch.cuda.empty_cache()
+                    # Free cached memory periodically (every 10 steps — avoids ~2% overhead)
+                    if i % 10 == 0:
+                        torch.cuda.empty_cache()
 
                     if use_amp:
                         scaler.step(optimizer)
