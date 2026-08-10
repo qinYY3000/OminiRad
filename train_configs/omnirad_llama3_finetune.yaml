@@ -71,19 +71,19 @@ model:
   # P1: Increased structured loss weights
   loss_weights:
     text:    1.0
-    det:     5.0
-    loc:     5.0
-    seg:     3.0
-    seg_bce: 2.0
-    seg_dice: 1.0
-    cardinality: 1.0
-    text_bbox_penalty: 3.0
-    cons_mb:   0.3
-    cons_rd:   0.2
-    cons_gs:   0.2
-    align_anat: 0.5
-    scale_w_s: 3.0
-    scale_w_m: 1.5
+    det:     1.0
+    loc:     1.0
+    seg:     0.5
+    seg_bce: 1.0
+    seg_dice: 0.5
+    cardinality: 0.5
+    text_bbox_penalty: 1.0
+    cons_mb:   0.1
+    cons_rd:   0.1
+    cons_gs:   0.1
+    align_anat: 0.3
+    scale_w_s: 2.0
+    scale_w_m: 1.2
     scale_w_l: 1.0
 
 

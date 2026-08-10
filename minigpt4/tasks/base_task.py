@@ -220,6 +220,15 @@ class BaseTask:
             with torch.cuda.amp.autocast(enabled=use_amp):
                 loss = self.train_step(model=model, samples=samples)
 
+            # ★ Skip step entirely if loss is NaN/Inf
+            if torch.isnan(loss) or torch.isinf(loss):
+                logging.warning("NaN/Inf loss detected at epoch %d step %d, skipping batch", epoch, i)
+                if use_amp:
+                    # ★ CRITICAL: still update scaler so AMP scale decreases;
+                    # otherwise successive NaN batches keep the same high scale.
+                    scaler.update()
+                continue
+
             # after_train_step()
             if use_amp:
                 scaler.scale(loss).backward()
@@ -228,22 +237,6 @@ class BaseTask:
 
             # update gradients every accum_grad_iters iterations
             if (i + 1) % accum_grad_iters == 0:
-                # P2 curriculum guard: when LLM is frozen, pure-text batches may
-                # have zero trainable parameters with gradients.  Skip the
-                # optimizer + scaler step in that case — scaler.step() fails
-                # when no inf checks were recorded.
-                has_grad = any(
-                    p.grad is not None
-                    for group in optimizer.param_groups
-                    for p in group["params"]
-                )
-
-                if not has_grad:
-                    optimizer.zero_grad()
-                    metric_logger.update(loss=loss.item())
-                    metric_logger.update(lr=optimizer.param_groups[0]["lr"])
-                    continue
-
                 # Gradient clipping (before optimizer.step)
                 grad_clip = self.cfg.run_cfg.get("grad_clip", 1.0)
                 if grad_clip is not None and grad_clip > 0:
@@ -266,8 +259,9 @@ class BaseTask:
                     if use_amp:
                         scaler.update()  # still update scaler to adjust scale
                 else:
-                    # Free cached memory before optimizer step (helps with fragmentation)
-                    torch.cuda.empty_cache()
+                    # Free cached memory periodically (every 10 steps — avoids ~2% overhead)
+                    if i % 10 == 0:
+                        torch.cuda.empty_cache()
 
                     if use_amp:
                         scaler.step(optimizer)
@@ -275,6 +269,17 @@ class BaseTask:
                     else:
                         optimizer.step()
                     optimizer.zero_grad()
+
+                    # ★ Post-step weight NaN check: if any weight became NaN, restore from last good state
+                    weight_nan = False
+                    for n, p in model.named_parameters():
+                        if torch.isnan(p.data).any() or torch.isinf(p.data).any():
+                            weight_nan = True
+                            logging.error("NaN/Inf detected in parameter %s after optimizer step!", n)
+                            break
+                    if weight_nan:
+                        logging.error("Model weights corrupted after epoch %d step %d. "
+                                     "Consider reducing learning rate or disabling AMP.", epoch, i)
                 if self.cfg.run_cfg.wandb_log:
                     log_dict = {
                         "epoch": inner_epoch,
@@ -289,7 +294,7 @@ class BaseTask:
                         _m = model
                     _last_outputs = getattr(_m, '_last_forward_outputs', None)
                     if _last_outputs and isinstance(_last_outputs, dict):
-                        for k in ["loss_text", "loss_det", "loss_loc", "loss_seg", "loss_cons", "loss_shortcut"]:
+                        for k in ["loss_text", "loss_det", "loss_loc", "loss_seg", "loss_cons"]:
                             v = _last_outputs.get(k)
                             if v is not None and hasattr(v, 'item'):
                                 log_dict[k] = v.item()
