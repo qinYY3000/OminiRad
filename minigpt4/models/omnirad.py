@@ -392,6 +392,7 @@ class OmniRad(MiniGPTv2):
             device_8bit=device_8bit,
         )
 
+        self.img_size = img_size
         self.loss_weights = {**self.DEFAULT_LOSS_WEIGHTS, **(loss_weights or {})}
         self.special_tokens = tuple(expand_vocab or [])
         self.special_token_ids: dict[str, int] = {}
@@ -564,6 +565,7 @@ class OmniRad(MiniGPTv2):
         do_sample=False,
         stop_words_ids=None,
         return_masks: bool = False,
+        return_boxes: bool = False,
     ):
         """OmniRad generate — preserves special tokens in output.
 
@@ -576,6 +578,11 @@ class OmniRad(MiniGPTv2):
                 Each tensor has shape ``(H, W)`` in [0, 1] (sigmoid probability).
                 If a sample emits K ``<SEG>`` tokens, K masks are returned in
                 emission order.  Empty list when K = 0.
+            "boxes": list[dict]  — only when ``return_boxes=True``
+                One dict per emitted ``<BOX_S/M/L>`` token, in emission order:
+                {"scale": "<BOX_M>", "bbox": [x1, y1, x2, y2] (pixel coords),
+                 "class_id": int, "class_score": float} — ``class_*`` present
+                only when the box head has a class branch.
         """
         if stop_words_ids is None:
             # Auto-detect the eos token id for the current tokenizer.
@@ -627,8 +634,16 @@ class OmniRad(MiniGPTv2):
         # a binary mask per emission.
         # ------------------------------------------------------------------
         per_sample_masks: list[list[torch.Tensor]] = [[] for _ in range(batch_size)]
+        per_sample_boxes: list[list[dict]] = [[] for _ in range(batch_size)]
         if return_masks:
             per_sample_masks = self._decode_masks_from_outputs(
+                outputs=outputs,
+                prompt_embs=embs,
+                prompt_attn_mask=attn_mask,
+                images=images,
+            )
+        if return_boxes:
+            per_sample_boxes = self._decode_boxes_from_outputs(
                 outputs=outputs,
                 prompt_embs=embs,
                 prompt_attn_mask=attn_mask,
@@ -684,6 +699,8 @@ class OmniRad(MiniGPTv2):
             }
             if return_masks:
                 entry["masks"] = per_sample_masks[b_idx]
+            if return_boxes:
+                entry["boxes"] = per_sample_boxes[b_idx]
             results.append(entry)
 
         return results
@@ -719,28 +736,12 @@ class OmniRad(MiniGPTv2):
             return per_sample_masks
 
         # ---- Re-embed the generated tokens & concat to the prompt ----
-        # Strip leading 0 / pad if present, but keep batch alignment via right-pad.
-        gen_ids = outputs.clone()
-        # Replace any pad (-1 or pad_token_id) with eos for safe embedding lookup.
-        pad_id = getattr(self.llama_tokenizer, "pad_token_id", None) or 0
-        gen_ids = gen_ids.masked_fill(gen_ids < 0, pad_id)
-        gen_embeds = self.llama_model.get_input_embeddings()(gen_ids)
-        gen_attn = (outputs != pad_id).to(prompt_attn_mask.dtype)
-
-        full_embeds = torch.cat([prompt_embs, gen_embeds], dim=1)
-        full_attn = torch.cat([prompt_attn_mask, gen_attn], dim=1)
-
-        with self.maybe_autocast():
-            llm_out = self.llama_model(
-                inputs_embeds=full_embeds,
-                attention_mask=full_attn,
-                output_hidden_states=True,
-                return_dict=True,
-            )
-        hidden_states = llm_out.hidden_states[-1]  # (B, S_full, hidden)
+        # Shared second pass: one forward with output_hidden_states=True.
+        hidden_states, prompt_len = self._run_second_pass(
+            outputs, prompt_embs, prompt_attn_mask
+        )
 
         # SEG positions are in the *generated* segment; map them to full-seq offset.
-        prompt_len = prompt_embs.shape[1]
         seg_positions_per_sample = []
         for b in range(batch_size):
             # boolean mask over gen tokens
@@ -777,6 +778,107 @@ class OmniRad(MiniGPTv2):
                     )
 
         return per_sample_masks
+
+    @torch.no_grad()
+    def _run_second_pass(
+        self,
+        outputs: torch.Tensor,
+        prompt_embs: torch.Tensor,
+        prompt_attn_mask: torch.Tensor,
+    ) -> tuple[torch.Tensor, int]:
+        """Shared second LLM forward for special-token decoding.
+
+        Re-embeds the *generated* tokens, concatenates them after the prompt
+        embeddings, and runs the LLM once more with
+        ``output_hidden_states=True`` so the hidden state at every
+        ``<SEG>`` / ``<BOX_*>`` / ``<LOC>`` position can be recovered.
+
+        Returns
+        -------
+        ``(hidden_states, prompt_len)``
+            hidden_states : ``(B, S_full, hidden)`` last-layer hidden states
+            prompt_len    : int — prompt length (offset of the generated part)
+        """
+        gen_ids = outputs.clone()
+        # Replace any pad (-1 or pad_token_id) with eos for safe embedding lookup.
+        pad_id = getattr(self.llama_tokenizer, "pad_token_id", None) or 0
+        gen_ids = gen_ids.masked_fill(gen_ids < 0, pad_id)
+        gen_embeds = self.llama_model.get_input_embeddings()(gen_ids)
+        gen_attn = (outputs != pad_id).to(prompt_attn_mask.dtype)
+
+        full_embeds = torch.cat([prompt_embs, gen_embeds], dim=1)
+        full_attn = torch.cat([prompt_attn_mask, gen_attn], dim=1)
+
+        with self.maybe_autocast():
+            llm_out = self.llama_model(
+                inputs_embeds=full_embeds,
+                attention_mask=full_attn,
+                output_hidden_states=True,
+                return_dict=True,
+            )
+        return llm_out.hidden_states[-1], prompt_embs.shape[1]
+
+    @torch.no_grad()
+    def _decode_boxes_from_outputs(
+        self,
+        outputs: torch.Tensor,
+        prompt_embs: torch.Tensor,
+        prompt_attn_mask: torch.Tensor,
+        images: torch.Tensor | None = None,
+    ) -> list[list[dict]]:
+        """Second-pass box decoding from a finished ``generate`` call.
+
+        For every sample, locate every ``<BOX_S/M/L>`` token in the generated
+        sequence, take its last-layer hidden state, route it through the
+        matching ``BoxRegressionHead`` and recover a pixel-space bbox.
+
+        Returns
+        -------
+        list[list[dict]]
+            ``out[b]`` is a list of dicts in emission order:
+            {"scale": "<BOX_M>", "bbox": [x1, y1, x2, y2] (pixel coords),
+             "class_id": int, "class_score": float} — ``class_*`` are present
+            only when the head has a class branch.
+        """
+        box_tokens = ["<BOX_S>", "<BOX_M>", "<BOX_L>"]
+        scale_keys = {"<BOX_S>": "box_s", "<BOX_M>": "box_m", "<BOX_L>": "box_l"}
+        token_ids = {t: self.special_token_ids.get(t, -1) for t in box_tokens}
+
+        batch_size = outputs.shape[0]
+        per_sample_boxes: list[list[dict]] = [[] for _ in range(batch_size)]
+
+        if all(v < 0 for v in token_ids.values()):
+            return per_sample_boxes
+        if not any((outputs == v).any() for v in token_ids.values() if v >= 0):
+            return per_sample_boxes
+
+        hidden_states, prompt_len = self._run_second_pass(
+            outputs, prompt_embs, prompt_attn_mask
+        )
+        img_w = img_h = self.img_size
+
+        for b in range(batch_size):
+            for token_name in box_tokens:
+                tid = token_ids[token_name]
+                if tid < 0:
+                    continue
+                positions = (outputs[b] == tid).nonzero(as_tuple=True)[0]
+                for pos in positions:
+                    h = hidden_states[b, pos + prompt_len, :]      # (hidden,)
+                    head = self.box_heads[scale_keys[token_name]]
+                    out = head(h.unsqueeze(0))
+                    bbox01 = torch.sigmoid(out["bbox"].squeeze(0))  # (4,) in [0, 1]
+                    scale = torch.tensor([img_w, img_h, img_w, img_h],
+                                         device=bbox01.device, dtype=bbox01.dtype)
+                    x1, y1, x2, y2 = (bbox01 * scale).tolist()
+                    entry: dict = {"scale": token_name, "bbox": [x1, y1, x2, y2]}
+                    if "class_logits" in out:
+                        logits = out["class_logits"].squeeze(0)
+                        entry["class_id"] = int(logits.argmax().item())
+                        entry["class_score"] = float(logits.softmax(-1).max().item())
+                    per_sample_boxes[b].append(entry)
+
+        return per_sample_boxes
 
 
 
@@ -1234,13 +1336,29 @@ class OmniRad(MiniGPTv2):
             )
         # Manually compute cross-entropy in FP32 to prevent NaN
         logits = outputs.logits.float()  # (B, seq_len, vocab_size)
+        # Guard against fp16 overflow propagating NaN/Inf into logits
+        logits = torch.nan_to_num(logits, nan=0.0, posinf=1e4, neginf=-1e4)
         shift_logits = logits[..., :-1, :].contiguous()
         shift_labels = targets[..., 1:].contiguous()
         shift_logits = shift_logits.view(-1, shift_logits.size(-1))
         shift_labels = shift_labels.view(-1)
         shift_labels = shift_labels.to(shift_logits.device)
-        loss_fct = torch.nn.CrossEntropyLoss(ignore_index=-100, reduction=reduction)
-        text_loss = loss_fct(shift_logits, shift_labels)
+
+        # ---- 防御：清洗非法 label id（越界 / 负数且非 -100） ----
+        # 非法 id 会导致 CUDA gather 越界产生 NaN，这里一律降级为 ignore_index=-100。
+        vocab_size = shift_logits.size(-1)
+        invalid = (shift_labels >= vocab_size) | ((shift_labels < 0) & (shift_labels != -100))
+        if invalid.any():
+            shift_labels = shift_labels.clone()
+            shift_labels[invalid] = -100
+
+        valid = (shift_labels != -100).sum()
+        if valid > 0:
+            loss_fct = torch.nn.CrossEntropyLoss(ignore_index=-100, reduction=reduction)
+            text_loss = loss_fct(shift_logits, shift_labels)
+        else:
+            # 整个 batch 无有效 label（answer 全空），返回 0 而非 NaN，避免梯度污染/卡死
+            text_loss = shift_logits.new_zeros(())
 
         # ---- Step 3: Extract special token hidden states ----
         special_hidden_states: dict[str, list[torch.Tensor]] = {}

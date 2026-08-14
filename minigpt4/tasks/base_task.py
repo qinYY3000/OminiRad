@@ -220,6 +220,12 @@ class BaseTask:
             with torch.cuda.amp.autocast(enabled=use_amp):
                 loss = self.train_step(model=model, samples=samples)
 
+            # 防御：loss 为 NaN/Inf 时直接跳过本 batch，不做 backward，
+            # 避免 NaN 梯度累积进 .grad 或污染权重导致后续持续 NaN（卡死）。
+            if torch.isnan(loss) or torch.isinf(loss):
+                logging.warning("NaN/Inf loss at epoch %d step %d, skipping batch", epoch, i)
+                continue
+
             # after_train_step()
             if use_amp:
                 scaler.scale(loss).backward()
