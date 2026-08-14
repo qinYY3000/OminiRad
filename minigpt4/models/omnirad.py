@@ -1646,6 +1646,12 @@ class OmniRad(MiniGPTv2):
         vocab_size = shift_logits.size(-1)
         invalid = (shift_labels >= vocab_size) | ((shift_labels < 0) & (shift_labels != -100))
         if invalid.any():
+            bad_ids = shift_labels[invalid].unique().tolist()
+            logging.warning(
+                "[DIAG] Illegal label ids: vocab_size=%d, bad_ids=%s, n=%d. "
+                "Clamping to ignore to prevent NaN in CE loss.",
+                vocab_size, bad_ids, int(invalid.sum()),
+            )
             shift_labels = shift_labels.clone()
             shift_labels[invalid] = -100
 
@@ -1655,6 +1661,9 @@ class OmniRad(MiniGPTv2):
             text_loss = loss_fct(shift_logits, shift_labels)
         else:
             # 整个 batch 无有效 label（answer 全空），返回 0 而非 NaN，避免梯度污染/卡死
+            logging.warning(
+                "[DIAG] Empty answer batch: all labels are -100 (valid=0). Returning zero loss."
+            )
             text_loss = shift_logits.new_zeros(())
 
         # ---- Step 3: Extract special token hidden states ----
