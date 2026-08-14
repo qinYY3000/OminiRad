@@ -234,6 +234,22 @@ class BaseTask:
 
             # update gradients every accum_grad_iters iterations
             if (i + 1) % accum_grad_iters == 0:
+                # P2 curriculum guard: when LLM is frozen, pure-text batches may
+                # have zero trainable parameters with gradients.  Skip the
+                # optimizer + scaler step in that case — scaler.step() fails
+                # when no inf checks were recorded.
+                has_grad = any(
+                    p.grad is not None
+                    for group in optimizer.param_groups
+                    for p in group["params"]
+                )
+
+                if not has_grad:
+                    optimizer.zero_grad()
+                    metric_logger.update(loss=loss.item())
+                    metric_logger.update(lr=optimizer.param_groups[0]["lr"])
+                    continue
+
                 # Gradient clipping (before optimizer.step)
                 grad_clip = self.cfg.run_cfg.get("grad_clip", 1.0)
                 if grad_clip is not None and grad_clip > 0:
@@ -279,7 +295,7 @@ class BaseTask:
                         _m = model
                     _last_outputs = getattr(_m, '_last_forward_outputs', None)
                     if _last_outputs and isinstance(_last_outputs, dict):
-                        for k in ["loss_text", "loss_det", "loss_loc", "loss_seg", "loss_cons"]:
+                        for k in ["loss_text", "loss_det", "loss_loc", "loss_seg", "loss_cons", "loss_shortcut"]:
                             v = _last_outputs.get(k)
                             if v is not None and hasattr(v, 'item'):
                                 log_dict[k] = v.item()

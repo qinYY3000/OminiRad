@@ -10,7 +10,34 @@ from sentence_transformers import SentenceTransformer, util
 from minigpt4.common.eval_utils import computeIoU
 
 # Load pre-trained BERT model
-model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
+# Priority: 1) BERT_MODEL_PATH env var  2) default local path
+_BERT_PATH = os.environ.get("BERT_MODEL_PATH") or os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), "..", "weights", "bert_model"
+)
+_BERT_PATH = os.path.abspath(_BERT_PATH)
+
+if not os.path.exists(os.path.join(_BERT_PATH, "modules.json")):
+    print(f"[metrics] BERT model not found at {_BERT_PATH}")
+    print(f"[metrics] Please download paraphrase-MiniLM-L6-v2 and place it at:")
+    print(f"[metrics]   {_BERT_PATH}")
+    print(f"[metrics] Or set BERT_MODEL_PATH env var to the correct path.")
+    raise FileNotFoundError(f"BERT model not found at {_BERT_PATH}")
+
+model = SentenceTransformer(str(_BERT_PATH))
+
+
+# --------------------------------------------------------------------------- #
+#  Helper: normalise image_ids so matching is robust to file extensions
+# --------------------------------------------------------------------------- #
+def _norm_id(image_id: str) -> str:
+    """Strip **all** file extensions so both ``foo.dcm.png`` and ``foo.dcm``
+    become ``"foo"``, making ID matching independent of how extensions are
+    handled by upstream cleaning steps."""
+    while True:
+        root, ext = os.path.splitext(image_id)
+        if not ext:
+            return root
+        image_id = root
 
 
 # BERT similarity function will be utilized in the two following functions
@@ -33,43 +60,58 @@ def report_bert_sim(gt_pth, pred_pth, output_csv):
     # Read the ground truth and prediction JSON files
     with open(gt_pth, 'r') as f:
         ground_truth_data = json.load(f)
-    
+
     with open(pred_pth, 'r') as f:
         prediction_data = json.load(f)
-    
+
+    # Build a lookup keyed by normalised image_id (no extensions) for robust
+    # matching regardless of whether IDs carry .dcm, .png, both, or neither.
+    gt_by_id = {}
+    for gt_item in ground_truth_data:
+        # Accept "caption" (report-gen datasets) or "answer" (multi-task unified)
+        gt_text = gt_item.get("caption") or gt_item.get("answer") or ""
+        gt_by_id[_norm_id(gt_item["image_id"])] = gt_text
+
     # Create a list to store BERT similarity data
     bert_similarity_data = []
-    
+
     # Initialize variables to calculate the average
     total_similarity = 0
     total_count = 0
-    
+
     # Iterate over each item in the prediction_data list
     for item in prediction_data:
         # Extract the image_id and corresponding prediction caption
         image_id = item["image_id"]
-        prediction_caption = item["caption"]
-        
-        # Search for the matching ground truth caption based on image_id
-        ground_truth_caption = None
-        for gt_item in ground_truth_data:
-            if gt_item["image_id"] == image_id:
-                ground_truth_caption = gt_item["caption"]
-                break
-        
+        prediction_caption = item.get("caption") or item.get("answer") or ""
+
+        # Match by normalised id (strip .dcm / .png / both)
+        ground_truth_caption = gt_by_id.get(_norm_id(image_id))
+
         if ground_truth_caption is not None:
             bert_similarity = compute_bert_similarity(prediction_caption, ground_truth_caption)
             bert_similarity_data.append({"image_id": image_id, "BERT_score": bert_similarity})
-            
+
             total_similarity += bert_similarity
             total_count += 1
     
     average_similarity = total_similarity / total_count if total_count > 0 else 0
-    
+
+    if not bert_similarity_data:
+        print(f"[report_bert_sim] WARNING: No matching image_ids found!")
+        print(f"  Prediction has {len(prediction_data)} items, "
+              f"ground truth has {len(ground_truth_data)} items.")
+        print(f"  First 3 pred image_ids: "
+              f"{[item.get('image_id', '?') for item in prediction_data[:3]]}")
+        print(f"  First 3 GT   image_ids: "
+              f"{[item.get('image_id', '?') for item in ground_truth_data[:3]]}")
+        pd.DataFrame(columns=["image_id", "BERT_score"]).to_csv(output_csv, index=False)
+        return average_similarity
+
     df = pd.DataFrame(bert_similarity_data)
     df_sorted = df.sort_values(by="BERT_score", ascending=True)
     df_sorted.to_csv(output_csv, index=False)
-    
+
     return average_similarity
 
 def VQA_BERT_Sim(gt_pth, pred_pth, output_csv):
@@ -81,7 +123,14 @@ def VQA_BERT_Sim(gt_pth, pred_pth, output_csv):
     with open(pred_pth, 'r') as file:
         prediction_data = json.load(file)
 
-    gt_qa_pairs = {(entry['image_name'], entry['question']): entry['answer'] for entry in gt_data}
+    # RadVQA uses "image_name", SLAKE-VQA uses "img_name" — auto-detect
+    img_key = "image_name"  # default
+    if gt_data and isinstance(gt_data, list):
+        first = gt_data[0]
+        if "img_name" in first:
+            img_key = "img_name"
+
+    gt_qa_pairs = {(entry[img_key], entry['question']): entry['answer'] for entry in gt_data}
 
     def convert_to_dict(data):
         qa_dict = {}
@@ -114,10 +163,54 @@ def VQA_BERT_Sim(gt_pth, pred_pth, output_csv):
             })
 
     average_similarity = sum(entry["BERT_score"] for entry in results) / len(results) if results else 0
-    df = pd.DataFrame(results)
-    df_sorted = df.sort_values(by="BERT_score", ascending=True)
-    df_sorted.to_csv(output_csv, index=False)
+
+    if not results:
+        print(f"[VQA_BERT_Sim] WARNING: No matching QA pairs found!")
+        print(f"  GT has {len(gt_qa_pairs)} QA pairs, "
+              f"pred has {len(pred_qa_dict)} QA pairs.")
+        pd.DataFrame(columns=["img_name", "question", "answer", "BERT_score"]
+                     ).to_csv(output_csv, index=False)
+    else:
+        df = pd.DataFrame(results)
+        df_sorted = df.sort_values(by="BERT_score", ascending=True)
+        df_sorted.to_csv(output_csv, index=False)
+
     print(f"Average BERT similarity score: {average_similarity}")
+    return average_similarity
+
+
+def _get_gt_key(gt_item):
+    """Return the image identifier from a ground-truth item, regardless of schema."""
+    return gt_item.get("key") or gt_item.get("folder_name") or gt_item.get("image_id") or ""
+
+
+def _get_gt_bboxes(gt_item):
+    """Return a list of [x1,y1,x2,y2] bboxes from a ground-truth item.
+
+    Handles RSNA flat ``bbox`` field and SLAKE nested ``detection`` field.
+    """
+    # RSNA / unified schema: flat list of bboxes
+    if "bbox" in gt_item:
+        return gt_item["bbox"]
+
+    # SLAKE schema: detection = [{"Disease": [x1,y1,x2,y2]}, ...]
+    detection = gt_item.get("detection", [])
+    if detection:
+        bboxes = []
+        for d in detection:
+            for disease_name, coords in d.items():
+                bboxes.append(coords)
+        return bboxes
+
+    return []
+
+
+def _get_gt_size(gt_item):
+    """Return (height, width) from a ground-truth item."""
+    if "image_size" in gt_item:
+        sz = gt_item["image_size"]
+        return sz.get("height", 0), sz.get("width", 0)
+    return gt_item.get("height", 0), gt_item.get("width", 0)
 
 
 #################################
@@ -140,6 +233,12 @@ def average_iou(gt_pth, pred_pth, original_size, image_size, dataset_name, csv_f
     with open(pred_pth, 'r') as file:
         predictions = json.load(file)
 
+    # Index predictions by normalised key (no extensions)
+    pred_by_key = {}
+    for pred_item in predictions:
+        raw_key = pred_item.get("key", "")
+        pred_by_key[_norm_id(raw_key)] = pred_item.get("bbox", [])
+
     iou_list = []
 
     with open(csv_filename, 'w', newline='') as csvfile:
@@ -148,27 +247,27 @@ def average_iou(gt_pth, pred_pth, original_size, image_size, dataset_name, csv_f
         writer.writeheader()
 
         for gt_item in ground_truth:
-            gt_key = gt_item['key']
-            gt_bboxes = gt_item['bbox']
-            original_size = gt_item['height']
-            gt_processed_bboxes = [preprocess_bbox(bbox, original_size, image_size) for bbox in gt_bboxes]
+            gt_key = _get_gt_key(gt_item)
+            gt_norm = _norm_id(gt_key)
+            gt_bboxes = _get_gt_bboxes(gt_item)
+            gt_h, gt_w = _get_gt_size(gt_item)
+            orig_h = gt_h or original_size
+            gt_processed_bboxes = [preprocess_bbox(bbox, orig_h, image_size)
+                                   for bbox in gt_bboxes]
 
-            for pred_item in predictions:
-                pred_key = pred_item['key'].replace(".png", "")
+            pred_bboxes = pred_by_key.get(gt_norm, [])
+            if not pred_bboxes:
+                continue
 
-                if gt_key == pred_key:
-                    pred_bboxes = pred_item['bbox']
-                    try:
-                        for gt_bbox in gt_processed_bboxes:
-                            for pred_bbox in pred_bboxes:
-                                iou = computeIoU(gt_bbox, pred_bbox)
-                                iou_list.append(iou)
-                                writer.writerow({'image_name': gt_key, 'IoU': iou})
-                                print(gt_key)
-                                print(iou)
-                    except Exception as e:
-                        print("gt_bbox: ", gt_bbox)
-                        print("gt_bbox: ", pred_bboxes)
+            try:
+                for gt_bbox in gt_processed_bboxes:
+                    for pred_bbox in pred_bboxes:
+                        iou = computeIoU(gt_bbox, pred_bbox)
+                        iou_list.append(iou)
+                        writer.writerow({'image_name': gt_key, 'IoU': iou})
+            except Exception as e:
+                print(f"[average_iou] error for {gt_key}: {e}")
+                print(f"  gt_bbox: {gt_processed_bboxes}, pred_bboxes: {pred_bboxes}")
 
     average_iou_val = sum(iou_list) / len(iou_list) if iou_list else 0
     print(f"Average IoU for dataset {dataset_name}: {average_iou_val:.4f}")
@@ -466,10 +565,11 @@ def chexbert_f1(gt_pth: str, pred_pth: str, dataset_name: str,
             data = json.load(f)
         if isinstance(data, dict):
             # {image_id: [caption]}  (after clean_report_json)
-            return [(k, " ".join(v) if isinstance(v, list) else str(v))
+            return [(_norm_id(k), " ".join(v) if isinstance(v, list) else str(v))
                     for k, v in data.items()]
         elif isinstance(data, list) and data and isinstance(data[0], dict):
-            return [(item.get("image_id", ""), item.get("caption", item.get("answer", "")))
+            return [(_norm_id(item.get("image_id", "")),
+                     item.get("caption", item.get("answer", "")))
                     for item in data]
         return []
 
@@ -600,10 +700,11 @@ def average_bleu4(gt_pth: str, pred_pth: str, dataset_name: str,
         with open(path, "r") as f:
             data = json.load(f)
         if isinstance(data, dict):
-            return [(k, " ".join(v) if isinstance(v, list) else str(v))
+            return [(_norm_id(k), " ".join(v) if isinstance(v, list) else str(v))
                     for k, v in data.items()]
         elif isinstance(data, list) and data and isinstance(data[0], dict):
-            return [(item.get("image_id", ""), item.get("caption", item.get("answer", "")))
+            return [(_norm_id(item.get("image_id", "")),
+                     item.get("caption", item.get("answer", "")))
                     for item in data]
         return []
 
@@ -664,10 +765,11 @@ def average_rouge_l(gt_pth: str, pred_pth: str, dataset_name: str,
         with open(path, "r") as f:
             data = json.load(f)
         if isinstance(data, dict):
-            return [(k, " ".join(v) if isinstance(v, list) else str(v))
+            return [(_norm_id(k), " ".join(v) if isinstance(v, list) else str(v))
                     for k, v in data.items()]
         elif isinstance(data, list) and data and isinstance(data[0], dict):
-            return [(item.get("image_id", ""), item.get("caption", item.get("answer", "")))
+            return [(_norm_id(item.get("image_id", "")),
+                     item.get("caption", item.get("answer", "")))
                     for item in data]
         return []
 

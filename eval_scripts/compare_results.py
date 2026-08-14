@@ -30,8 +30,8 @@ import pandas as pd
 
 TABLES = {
     "table1_report_generation": {
-        "title": "Table 1: Report Generation (Indiana CXR)",
-        "datasets": ["indiana_cxr"],
+        "title": "Table 1: Report Generation (Indiana CXR / Group-Breast US)",
+        "datasets": ["indiana_cxr", "group_breast_us_report"],
         "metrics": ["bert_sim", "bleu4", "rouge_l", "chexbert_micro_f1", "chexbert_macro_f1"],
         "metric_labels": {
             "bert_sim": "BERT-Sim",
@@ -43,7 +43,7 @@ TABLES = {
     },
     "table2_vqa": {
         "title": "Table 2: Visual Question Answering",
-        "datasets": ["radvqa", "slake_vqa"],
+        "datasets": ["radvqa", "slake_vqa", "kvasir_vqa"],
         "metrics": ["bert_sim"],
         "metric_labels": {"bert_sim": "BERT-Sim"},
     },

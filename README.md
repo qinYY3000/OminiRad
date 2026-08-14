@@ -259,8 +259,10 @@ conda activate miniGPT-Med
 wandb login
 
 # 3. Launch distributed training (3 × RTX 3090)
-torchrun --nproc-per-node 3 --master-port 8889 \
+CUDA_VISIBLE_DEVICES=1,2 torchrun --nproc-per-node 2 --master-port 8889 \
     train.py --cfg-path train_configs/omnirad_finetune.yaml
+    
+
 ```
 
 ### Training Configuration
@@ -325,6 +327,9 @@ OmniRad follows a four-stage progressive training strategy:
 
 ```bash
 # Evaluate on all public + private datasets
+modelscope download --model Xenova/paraphrase-MiniLM-L6-v2 --local_dir /home/cwq/MedicalDP/OminiRad/weights/bert_model
+export BERT_MODEL_PATH=weights/bert_model
+
 python eval_scripts/model_evaluation.py \
     --cfg-path eval_configs/omnirad_evaluation.yaml \
     --dataset indiana_cxr,radvqa,slake_vqa,rsna,SLAKE,group_breast_us,kvasir

@@ -64,6 +64,12 @@ class UnifiedUSDataset(Dataset):
 
         instruction, answer = self._build_instruction_answer(info, tasks, K, box_scales, anatomy_regions)
 
+        image_size = info.get("image_size", [256, 256])
+        if isinstance(image_size, (list, tuple)) and len(image_size) == 2:
+            image_size = [int(image_size[0]), int(image_size[1])]
+        else:
+            image_size = [256, 256]
+
         return {
             "image": image,
             "instruction_input": instruction,
@@ -78,6 +84,7 @@ class UnifiedUSDataset(Dataset):
             "masks": masks,
             "K": torch.tensor(K, dtype=torch.long),
             "has_structured_supervision": torch.tensor(True, dtype=torch.bool),
+            "image_size": torch.tensor(image_size, dtype=torch.float32),
             "raw_tasks": tasks,
         }
 
@@ -314,6 +321,7 @@ class UnifiedUSDataset(Dataset):
             "has_structured_supervision": default_collate([
                 sample["has_structured_supervision"] for sample in samples
             ]),
+            "image_size": torch.stack([sample["image_size"] for sample in samples], dim=0),
             "raw_tasks": [sample["raw_tasks"] for sample in samples],
         }
 

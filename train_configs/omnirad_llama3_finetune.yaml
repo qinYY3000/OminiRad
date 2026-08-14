@@ -65,13 +65,19 @@ model:
     box_l: { in_dim: 4096, hidden_dim: 512, n_class: 64 }
     loc:   { in_dim: 4096, hidden_dim: 512, n_anatomy: 30 }
 
+  # P2: Curriculum learning
+  curriculum_epochs: 8
+
+  # P1: Increased structured loss weights
   loss_weights:
     text:    1.0
-    det:     1.0
-    loc:     1.0
+    det:     5.0
+    loc:     5.0
+    seg:     3.0
     seg_bce: 2.0
-    seg_dice: 0.5
-    cardinality: 0.5
+    seg_dice: 1.0
+    cardinality: 1.0
+    text_bbox_penalty: 3.0
     cons_mb:   0.3
     cons_rd:   0.2
     cons_gs:   0.2

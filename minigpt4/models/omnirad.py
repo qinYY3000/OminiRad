@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import logging
 import os
+import re
+from collections import defaultdict
 from typing import Any
 
 import torch
@@ -394,6 +396,11 @@ class OmniRad(MiniGPTv2):
 
         self.img_size = img_size
         self.loss_weights = {**self.DEFAULT_LOSS_WEIGHTS, **(loss_weights or {})}
+        # Canonical square resolution used to normalize/denormalize box coordinates.
+        # Training GT boxes are divided by this value in _compute_det_loss/_compute_loc_loss;
+        # generate()-time box decoding multiplies predicted [0,1] sigmoid output by the
+        # same constant, keeping the two paths consistent.
+        self.img_size = img_size
         self.special_tokens = tuple(expand_vocab or [])
         self.special_token_ids: dict[str, int] = {}
         self._expand_output_vocabulary(self.special_tokens)
@@ -583,6 +590,17 @@ class OmniRad(MiniGPTv2):
                 {"scale": "<BOX_M>", "bbox": [x1, y1, x2, y2] (pixel coords),
                  "class_id": int, "class_score": float} — ``class_*`` present
                 only when the box head has a class branch.
+
+        Detection / refer decode
+        -------------------------
+        ``raw_text`` additionally has every ``<BOX_S>``/``<BOX_M>``/``<BOX_L>``/
+        ``<LOC>`` token immediately followed by its decoded pixel bbox in the
+        MiniGPT-v2-style ``{<x1><y1><x2><y2>}`` form (e.g. ``<BOX_S>{<10><20><80><90>}``),
+        so that downstream IoU regexes (``\\{<(\\d+)><(\\d+)><(\\d+)><(\\d+)>\\}``)
+        used by ``eval_scripts``/``model_evaluation.py`` can parse the prediction.
+        The coordinates come from ``box_heads``/``loc_head`` applied to the
+        hidden state at each token's position, sigmoid-normalized to [0, 1]
+        and denormalized by ``self.img_size``.
         """
         if stop_words_ids is None:
             # Auto-detect the eos token id for the current tokenizer.
@@ -626,15 +644,18 @@ class OmniRad(MiniGPTv2):
             )
 
         # ------------------------------------------------------------------
-        # Optional second pass: recover <SEG> hidden states & decode masks.
+        # Second pass: recover <SEG>/<BOX_S/M/L>/<LOC> hidden states.
         # We append the *generated* token embeddings to the original prompt
         # embeddings and run the LLM once more with output_hidden_states=True.
-        # The last-layer hidden state at every <SEG> position is then fed
-        # through ``seg_projector`` + ``mask_decoder`` (or stub) to produce
-        # a binary mask per emission.
+        # The last-layer hidden state at every special-token position is then
+        # fed through the corresponding head:
+        #   <SEG>              -> seg_projector + mask_decoder -> binary mask
+        #   <BOX_S/M/L>        -> box_heads[scale]              -> pixel bbox
+        #   <LOC>               -> loc_head                      -> pixel bbox
+        # Any special token present in the generated sequence triggers this
+        # pass (not just <SEG>), so detection/refer decoding also benefits.
         # ------------------------------------------------------------------
         per_sample_masks: list[list[torch.Tensor]] = [[] for _ in range(batch_size)]
-        per_sample_boxes: list[list[dict]] = [[] for _ in range(batch_size)]
         if return_masks:
             per_sample_masks = self._decode_masks_from_outputs(
                 outputs=outputs,
@@ -671,6 +692,14 @@ class OmniRad(MiniGPTv2):
                 parts = raw_text.split("<|end_header_id|>")
                 raw_text = parts[-1].strip() if parts else raw_text
 
+            # Inject decoded {<x1><y1><x2><y2>} bbox strings right after each
+            # <BOX_S>/<BOX_M>/<BOX_L>/<LOC> token, in emission order, so that
+            # evaluation regexes (e.g. average_iou / _us_bbox_iou) can parse
+            # detection & refer predictions directly from raw_text.
+            for token_name, bbox_strs in per_sample_box_strings[b_idx].items():
+                if bbox_strs:
+                    raw_text = self._inject_bbox_strings(raw_text, token_name, bbox_strs)
+
             # Also produce a clean text version (without special tokens) for backward compat
             clean_text = self.llama_tokenizer.decode(output_token, skip_special_tokens=True)
             for _eos in ["</s>", "<|eot_id|>", "<|end_of_text|>"]:
@@ -683,11 +712,12 @@ class OmniRad(MiniGPTv2):
                 parts = clean_text.split("<|end_header_id|>")
                 clean_text = parts[-1].strip() if parts else clean_text
 
-            # Parse special token counts
-            seg_count = raw_text.count("<SEG>")
+            # Parse special token counts (computed on the pre-injection token stream)
+            seg_count = output_token.tolist().count(self.special_token_ids.get("<SEG>", -999))
             box_tokens = []
             for token in ["<BOX_S>", "<BOX_M>", "<BOX_L>"]:
-                box_tokens.extend([token] * raw_text.count(token))
+                tid = self.special_token_ids.get(token, -999)
+                box_tokens.extend([token] * output_token.tolist().count(tid))
             has_loc = "<LOC>" in raw_text
 
             entry = {
@@ -705,35 +735,71 @@ class OmniRad(MiniGPTv2):
 
         return results
 
+    @staticmethod
+    def _inject_bbox_strings(text: str, token: str, bbox_strs: list[str]) -> str:
+        """Insert decoded bbox strings right after each occurrence of ``token``.
+
+        Occurrences beyond ``len(bbox_strs)`` are left untouched (defensive:
+        should not normally happen since decode runs on the exact same
+        generated sequence used to count occurrences).
+        """
+        it = iter(bbox_strs)
+
+        def _sub(match: re.Match) -> str:
+            try:
+                bbox_str = next(it)
+            except StopIteration:
+                return match.group(0)
+            return f"{token}{bbox_str}"
+
+        return re.sub(re.escape(token), _sub, text)
+
     @torch.no_grad()
-    def _decode_masks_from_outputs(
+    def _decode_dense_outputs_from_generation(
         self,
         outputs: torch.Tensor,
         prompt_embs: torch.Tensor,
         prompt_attn_mask: torch.Tensor,
         images: torch.Tensor,
-    ) -> list[list[torch.Tensor]]:
-        """Second-pass mask decoding from a finished ``generate`` call.
+    ) -> tuple[list[list[torch.Tensor]], list[dict[str, list[str]]]]:
+        """Second-pass dense decoding from a finished ``generate`` call.
 
-        For every sample in the batch, locate every ``<SEG>`` token in the
-        generated sequence and run the mask decoder once per occurrence.
+        For every sample in the batch, locate every ``<SEG>``/``<BOX_S>``/
+        ``<BOX_M>``/``<BOX_L>``/``<LOC>`` token in the generated sequence and
+        run the corresponding head once per occurrence:
+          - ``<SEG>``                -> ``seg_projector`` + ``mask_decoder``  -> mask
+          - ``<BOX_S>``/``<BOX_M>``/``<BOX_L>`` -> ``box_heads[scale]``       -> bbox
+          - ``<LOC>``                 -> ``loc_head``                          -> bbox
 
         Returns
         -------
-        list[list[Tensor]]
-            ``out[b]`` is a list of ``(H, W)`` sigmoid-probability tensors,
-            one per ``<SEG>`` emission for sample ``b``.  Empty list if the
-            sample emitted no ``<SEG>``.
+        (per_sample_masks, per_sample_box_strings)
+            ``per_sample_masks[b]`` — list of ``(H, W)`` sigmoid-probability
+            tensors, one per ``<SEG>`` emission, in emission order.
+
+            ``per_sample_box_strings[b][token]`` — list of ``"{<x1><y1><x2><y2>}"``
+            pixel-coordinate strings, one per emission of ``token``
+            (``"<BOX_S>"``/``"<BOX_M>"``/``"<BOX_L>"``/``"<LOC>"``), in
+            emission order, ready to be spliced back into ``raw_text``.
         """
-        seg_id = self.special_token_ids.get("<SEG>", -1)
         batch_size = outputs.shape[0]
         per_sample_masks: list[list[torch.Tensor]] = [[] for _ in range(batch_size)]
+        per_sample_box_strings: list[dict[str, list[str]]] = [
+            {"<BOX_S>": [], "<BOX_M>": [], "<BOX_L>": [], "<LOC>": []}
+            for _ in range(batch_size)
+        ]
 
-        if seg_id < 0:
-            return per_sample_masks
-        # Quick exit: no SEG anywhere.
-        if not (outputs == seg_id).any():
-            return per_sample_masks
+        token_to_head_key = {"<BOX_S>": "box_s", "<BOX_M>": "box_m", "<BOX_L>": "box_l"}
+        dense_tokens = ["<SEG>", "<BOX_S>", "<BOX_M>", "<BOX_L>", "<LOC>"]
+        token_ids = {t: self.special_token_ids.get(t, -1) for t in dense_tokens}
+
+        if all(v < 0 for v in token_ids.values()):
+            return per_sample_masks, per_sample_box_strings
+
+        valid_ids = [v for v in token_ids.values() if v >= 0]
+        ids_tensor = torch.tensor(valid_ids, device=outputs.device)
+        if not torch.isin(outputs, ids_tensor).any():
+            return per_sample_masks, per_sample_box_strings
 
         # ---- Re-embed the generated tokens & concat to the prompt ----
         # Shared second pass: one forward with output_hidden_states=True.
@@ -748,6 +814,25 @@ class OmniRad(MiniGPTv2):
             seg_mask = (outputs[b] == seg_id)
             positions = seg_mask.nonzero(as_tuple=True)[0] + prompt_len
             seg_positions_per_sample.append(positions)
+        gen_ids = outputs.clone()
+        # Replace any pad (-1 or pad_token_id) with eos for safe embedding lookup.
+        pad_id = getattr(self.llama_tokenizer, "pad_token_id", None) or 0
+        gen_ids = gen_ids.masked_fill(gen_ids < 0, pad_id)
+        gen_embeds = self.llama_model.get_input_embeddings()(gen_ids)
+        gen_attn = (outputs != pad_id).to(prompt_attn_mask.dtype)
+
+        full_embeds = torch.cat([prompt_embs, gen_embeds], dim=1)
+        full_attn = torch.cat([prompt_attn_mask, gen_attn], dim=1)
+
+        with self.maybe_autocast():
+            llm_out = self.llama_model(
+                inputs_embeds=full_embeds,
+                attention_mask=full_attn,
+                output_hidden_states=True,
+                return_dict=True,
+            )
+        hidden_states = llm_out.hidden_states[-1]  # (B, S_full, hidden)
+        prompt_len = prompt_embs.shape[1]
 
         # Optionally compute dense image embedding once (SAM path)
         image_embedding = None
@@ -756,28 +841,165 @@ class OmniRad(MiniGPTv2):
             # encode_dense_image expects 1024-resolution input; SamDenseEncoder
             # internally resizes — so this matches forward-pass behavior.
 
-        # ---- Decode mask per <SEG> emission ----
-        for b, positions in enumerate(seg_positions_per_sample):
-            if positions.numel() == 0:
-                continue
-            for pos in positions:
-                seg_hidden = hidden_states[b, pos, :]            # (hidden,)
-                sparse = self.seg_projector(seg_hidden.unsqueeze(0))  # (1, 256)
-                if self._use_real_sam and image_embedding is not None:
-                    img_emb_b = image_embedding[b:b + 1]        # (1, 256, 64, 64)
-                    decoder_out = self.mask_decoder(sparse, img_emb_b)
-                    mask_logits = decoder_out["mask"]            # (1,1,H,W)
-                    mask_prob = torch.sigmoid(mask_logits.float())
-                    per_sample_masks[b].append(
-                        mask_prob.squeeze(0).squeeze(0).detach().cpu()
-                    )
-                else:
-                    # Stub fallback: no real geometry; emit a tiny placeholder.
-                    per_sample_masks[b].append(
-                        torch.zeros(64, 64, dtype=torch.float32)
+        img_size = float(self.img_size)
+
+        for b in range(batch_size):
+            # ---- <SEG> -> mask decoding ----
+            seg_id = token_ids.get("<SEG>", -1)
+            if seg_id >= 0:
+                positions = (outputs[b] == seg_id).nonzero(as_tuple=True)[0] + prompt_len
+                for pos in positions:
+                    seg_hidden = hidden_states[b, pos, :]                    # (hidden,)
+                    sparse = self.seg_projector(seg_hidden.unsqueeze(0))     # (1, 256)
+                    if self._use_real_sam and image_embedding is not None:
+                        img_emb_b = image_embedding[b:b + 1]                # (1, 256, 64, 64)
+                        decoder_out = self.mask_decoder(sparse, img_emb_b)
+                        mask_logits = decoder_out["mask"]                   # (1,1,H,W)
+                        mask_prob = torch.sigmoid(mask_logits.float())
+                        per_sample_masks[b].append(
+                            mask_prob.squeeze(0).squeeze(0).detach().cpu()
+                        )
+                    else:
+                        # Stub fallback: no real geometry; emit a tiny placeholder.
+                        per_sample_masks[b].append(
+                            torch.zeros(64, 64, dtype=torch.float32)
+                        )
+
+            # ---- <BOX_S>/<BOX_M>/<BOX_L> -> box_heads decoding ----
+            for token_name, head_key in token_to_head_key.items():
+                tid = token_ids.get(token_name, -1)
+                if tid < 0:
+                    continue
+                positions = (outputs[b] == tid).nonzero(as_tuple=True)[0] + prompt_len
+                if positions.numel() == 0:
+                    continue
+                head = self.box_heads[head_key]
+                for pos in positions:
+                    tok_hidden = hidden_states[b, pos, :]
+                    out = head(tok_hidden.unsqueeze(0))
+                    pred_bbox = torch.sigmoid(out["bbox"].squeeze(0).float())  # (4,) in [0,1]
+                    pred_bbox = (pred_bbox * img_size).round().to(torch.long).clamp(0, int(img_size))
+                    x1, y1, x2, y2 = pred_bbox.tolist()
+                    per_sample_box_strings[b][token_name].append(
+                        f"{{<{x1}><{y1}><{x2}><{y2}>}}"
                     )
 
-        return per_sample_masks
+            # ---- <LOC> -> loc_head decoding ----
+            loc_id = token_ids.get("<LOC>", -1)
+            if loc_id >= 0:
+                positions = (outputs[b] == loc_id).nonzero(as_tuple=True)[0] + prompt_len
+                for pos in positions:
+                    tok_hidden = hidden_states[b, pos, :]
+                    out = self.loc_head(tok_hidden.unsqueeze(0))
+                    pred_bbox = torch.sigmoid(out["bbox"].squeeze(0).float())
+                    pred_bbox = (pred_bbox * img_size).round().to(torch.long).clamp(0, int(img_size))
+                    x1, y1, x2, y2 = pred_bbox.tolist()
+                    per_sample_box_strings[b]["<LOC>"].append(
+                        f"{{<{x1}><{y1}><{x2}><{y2}>}}"
+                    )
+
+        return per_sample_masks, per_sample_box_strings
+
+    @torch.no_grad()
+    def _run_second_pass(
+        self,
+        outputs: torch.Tensor,
+        prompt_embs: torch.Tensor,
+        prompt_attn_mask: torch.Tensor,
+    ) -> tuple[torch.Tensor, int]:
+        """Shared second LLM forward for special-token decoding.
+
+        Re-embeds the *generated* tokens, concatenates them after the prompt
+        embeddings, and runs the LLM once more with
+        ``output_hidden_states=True`` so the hidden state at every
+        ``<SEG>`` / ``<BOX_*>`` / ``<LOC>`` position can be recovered.
+
+        Returns
+        -------
+        ``(hidden_states, prompt_len)``
+            hidden_states : ``(B, S_full, hidden)`` last-layer hidden states
+            prompt_len    : int — prompt length (offset of the generated part)
+        """
+        gen_ids = outputs.clone()
+        # Replace any pad (-1 or pad_token_id) with eos for safe embedding lookup.
+        pad_id = getattr(self.llama_tokenizer, "pad_token_id", None) or 0
+        gen_ids = gen_ids.masked_fill(gen_ids < 0, pad_id)
+        gen_embeds = self.llama_model.get_input_embeddings()(gen_ids)
+        gen_attn = (outputs != pad_id).to(prompt_attn_mask.dtype)
+
+        full_embeds = torch.cat([prompt_embs, gen_embeds], dim=1)
+        full_attn = torch.cat([prompt_attn_mask, gen_attn], dim=1)
+
+        with self.maybe_autocast():
+            llm_out = self.llama_model(
+                inputs_embeds=full_embeds,
+                attention_mask=full_attn,
+                output_hidden_states=True,
+                return_dict=True,
+            )
+        return llm_out.hidden_states[-1], prompt_embs.shape[1]
+
+    @torch.no_grad()
+    def _decode_boxes_from_outputs(
+        self,
+        outputs: torch.Tensor,
+        prompt_embs: torch.Tensor,
+        prompt_attn_mask: torch.Tensor,
+        images: torch.Tensor | None = None,
+    ) -> list[list[dict]]:
+        """Second-pass box decoding from a finished ``generate`` call.
+
+        For every sample, locate every ``<BOX_S/M/L>`` token in the generated
+        sequence, take its last-layer hidden state, route it through the
+        matching ``BoxRegressionHead`` and recover a pixel-space bbox.
+
+        Returns
+        -------
+        list[list[dict]]
+            ``out[b]`` is a list of dicts in emission order:
+            {"scale": "<BOX_M>", "bbox": [x1, y1, x2, y2] (pixel coords),
+             "class_id": int, "class_score": float} — ``class_*`` are present
+            only when the head has a class branch.
+        """
+        box_tokens = ["<BOX_S>", "<BOX_M>", "<BOX_L>"]
+        scale_keys = {"<BOX_S>": "box_s", "<BOX_M>": "box_m", "<BOX_L>": "box_l"}
+        token_ids = {t: self.special_token_ids.get(t, -1) for t in box_tokens}
+
+        batch_size = outputs.shape[0]
+        per_sample_boxes: list[list[dict]] = [[] for _ in range(batch_size)]
+
+        if all(v < 0 for v in token_ids.values()):
+            return per_sample_boxes
+        if not any((outputs == v).any() for v in token_ids.values() if v >= 0):
+            return per_sample_boxes
+
+        hidden_states, prompt_len = self._run_second_pass(
+            outputs, prompt_embs, prompt_attn_mask
+        )
+        img_w = img_h = self.img_size
+
+        for b in range(batch_size):
+            for token_name in box_tokens:
+                tid = token_ids[token_name]
+                if tid < 0:
+                    continue
+                positions = (outputs[b] == tid).nonzero(as_tuple=True)[0]
+                for pos in positions:
+                    h = hidden_states[b, pos + prompt_len, :]      # (hidden,)
+                    head = self.box_heads[scale_keys[token_name]]
+                    out = head(h.unsqueeze(0))
+                    bbox01 = torch.sigmoid(out["bbox"].squeeze(0))  # (4,) in [0, 1]
+                    scale = torch.tensor([img_w, img_h, img_w, img_h],
+                                         device=bbox01.device, dtype=bbox01.dtype)
+                    x1, y1, x2, y2 = (bbox01 * scale).tolist()
+                    entry: dict = {"scale": token_name, "bbox": [x1, y1, x2, y2]}
+                    if "class_logits" in out:
+                        logits = out["class_logits"].squeeze(0)
+                        entry["class_id"] = int(logits.argmax().item())
+                        entry["class_score"] = float(logits.softmax(-1).max().item())
+                    per_sample_boxes[b].append(entry)
+
+        return per_sample_boxes
 
     @torch.no_grad()
     def _run_second_pass(
@@ -891,6 +1113,7 @@ class OmniRad(MiniGPTv2):
         """
         has_structured = samples.get("has_structured_supervision")
         boxes = samples.get("boxes")
+        box_padding_mask = samples.get("box_padding_mask")
         mask_paths = samples.get("mask_paths")
         k_targets = samples.get("K")
         anatomy_regions = samples.get("anatomy_regions")
@@ -900,6 +1123,16 @@ class OmniRad(MiniGPTv2):
             batch_size = len(samples.get("answer", []))
             device = self.device
             has_structured = torch.zeros(batch_size, dtype=torch.bool, device=device)
+
+        # ``boxes`` may be right-padded to the batch-max K by the collater
+        # (see UnifiedUSDataset.collater / KvasirDataset.collater), while
+        # ``box_scales``/``anatomy_regions`` retain each sample's true
+        # (unpadded) length. Without filtering, zero-valued padding rows get
+        # silently treated as real GT boxes (defaulting to scale "M") by the
+        # det/loc loss functions below. Strip padding here once, so every
+        # downstream consumer sees only real boxes.
+        if torch.is_tensor(boxes) and torch.is_tensor(box_padding_mask):
+            boxes = [boxes[b][box_padding_mask[b]] for b in range(boxes.shape[0])]
 
         return {
             "has_structured_supervision": has_structured,
@@ -914,7 +1147,7 @@ class OmniRad(MiniGPTv2):
         self,
         hidden_states: torch.Tensor,
         targets: torch.Tensor,
-    ) -> dict[str, list[torch.Tensor]]:
+    ) -> dict[str, list[tuple[int, torch.Tensor]]]:
         """Extract last-layer hidden states at special-token positions.
 
         Parameters
@@ -924,28 +1157,45 @@ class OmniRad(MiniGPTv2):
 
         Returns
         -------
-        dict mapping token-name → list of ``(hidden_dim,)`` tensors, one per occurrence,
-        batched across the batch dimension.  E.g. ``{"<SEG>": [h1, h2, ...]}``.
+        dict mapping token-name → list of ``(batch_idx, hidden)`` tuples, one per
+        occurrence.  ``batch_idx`` is preserved (rather than dropped) so that
+        downstream loss functions can align each prediction with the correct
+        per-sample GT (boxes/masks/image embedding) instead of relying on a
+        globally-flattened positional index that silently misaligns whenever
+        different samples in the batch have different cardinalities.
+        Occurrences for a given ``batch_idx`` are listed in emission order
+        (ascending sequence position).  E.g. ``{"<SEG>": [(0, h0), (0, h1), (2, h2)]}``.
         """
-        result: dict[str, list[torch.Tensor]] = {}
+        result: dict[str, list[tuple[int, torch.Tensor]]] = {}
         for token_name, token_id in self.special_token_ids.items():
             if token_id < 0:
                 continue
             mask = (targets == token_id)  # (batch, seq_len)
-            collected = []
+            collected: list[tuple[int, torch.Tensor]] = []
             for b in range(mask.shape[0]):
                 positions = mask[b].nonzero(as_tuple=True)[0]
                 for pos in positions:
-                    collected.append(hidden_states[b, pos, :])
+                    collected.append((b, hidden_states[b, pos, :]))
             result[token_name] = collected
         return result
+
+    @staticmethod
+    def _group_hidden_states_by_batch(
+        preds: list[tuple[int, torch.Tensor]],
+    ) -> dict[int, list[torch.Tensor]]:
+        """Group ``(batch_idx, hidden)`` tuples into ``{batch_idx: [hidden, ...]}``,
+        preserving within-batch emission order."""
+        grouped: dict[int, list[torch.Tensor]] = defaultdict(list)
+        for b, h in preds:
+            grouped[b].append(h)
+        return grouped
 
     def compute_auxiliary_losses(
         self,
         samples: dict,
         text_loss: torch.Tensor,
         structured_targets: dict[str, Any],
-        special_hidden_states: dict[str, list[torch.Tensor]] | None = None,
+        special_hidden_states: dict[str, list[tuple[int, torch.Tensor]]] | None = None,
     ) -> dict[str, torch.Tensor]:
         """Compute detection / localization / segmentation / consistency losses.
 
@@ -991,7 +1241,7 @@ class OmniRad(MiniGPTv2):
 
     def _compute_cons_loss(
         self,
-        special_hidden_states: dict[str, list[torch.Tensor]],
+        special_hidden_states: dict[str, list[tuple[int, torch.Tensor]]],
         structured_targets: dict[str, Any],
         samples: dict,
         ref_loss: torch.Tensor,
@@ -1002,10 +1252,13 @@ class OmniRad(MiniGPTv2):
         L_cons = ||phi(M_pred) - b_pred||_1
 
         where phi extracts the tight enclosing box from a binary mask.
-        Only computed when both <SEG> and <BOX> tokens are present in the same batch.
+        Only computed when both <SEG> and <BOX> tokens are present for the
+        *same* sample in the batch. Predictions are paired within each
+        sample's own emission order (not globally flattened), and each
+        predicted mask uses that sample's own image embedding.
         """
         seg_preds = special_hidden_states.get("<SEG>", [])
-        box_preds = []
+        box_preds: list[tuple[int, torch.Tensor]] = []
         for token_name in ["<BOX_S>", "<BOX_M>", "<BOX_L>"]:
             box_preds.extend(special_hidden_states.get(token_name, []))
 
@@ -1020,53 +1273,65 @@ class OmniRad(MiniGPTv2):
         if images is None:
             return ref_loss.new_zeros(())
 
-        image_embedding = self.encode_dense_image(images)
+        image_embedding = self.encode_dense_image(images)  # (B, 256, 64, 64)
         if image_embedding is None:
             return ref_loss.new_zeros(())
+
+        seg_by_batch = self._group_hidden_states_by_batch(seg_preds)
+        box_by_batch = self._group_hidden_states_by_batch(box_preds)
 
         total_loss = ref_loss.new_zeros(())
         n_pairs = 0
 
-        n_pairs_to_check = min(len(seg_preds), len(box_preds))
-        for idx in range(n_pairs_to_check):
-            seg_hidden = seg_preds[idx]
-            box_hidden = box_preds[idx]
+        # Only samples that emitted BOTH <SEG> and <BOX_*> contribute.
+        common_batches = set(seg_by_batch.keys()) & set(box_by_batch.keys())
+        for b in common_batches:
+            seg_hiddens = seg_by_batch[b]
+            box_hiddens = box_by_batch[b]
+            img_emb = image_embedding[b:b + 1]  # this sample's own embedding
 
-            # Get mask prediction
-            sparse_prompt = self.seg_projector(seg_hidden.unsqueeze(0))
-            img_emb = image_embedding[0:1]
-            decoder_out = self.mask_decoder(sparse_prompt, img_emb)
-            pred_mask = decoder_out["mask"].squeeze()  # (H, W)
-            pred_prob = torch.sigmoid(pred_mask)
+            n_pairs_to_check = min(len(seg_hiddens), len(box_hiddens))
+            for idx in range(n_pairs_to_check):
+                seg_hidden = seg_hiddens[idx]
+                box_hidden = box_hiddens[idx]
 
-            # Extract tight bbox from mask (soft version for differentiability)
-            H, W = pred_prob.shape
-            grid_y = torch.arange(H, device=pred_prob.device, dtype=pred_prob.dtype) / H
-            grid_x = torch.arange(W, device=pred_prob.device, dtype=pred_prob.dtype) / W
+                # Get mask prediction
+                sparse_prompt = self.seg_projector(seg_hidden.unsqueeze(0))
+                decoder_out = self.mask_decoder(sparse_prompt, img_emb)
+                pred_mask = decoder_out["mask"].squeeze()  # (H, W)
+                pred_prob = torch.sigmoid(pred_mask)
 
-            # Weighted mean → center
-            weight = pred_prob + 1e-8
-            cx = (grid_x.unsqueeze(0) * weight.sum(dim=0)).sum() / weight.sum()
-            cy = (grid_y.unsqueeze(1) * weight.sum(dim=1)).sum() / weight.sum()
+                # Extract tight bbox from mask (soft version for differentiability)
+                H, W = pred_prob.shape
+                grid_y = torch.arange(H, device=pred_prob.device, dtype=pred_prob.dtype) / H
+                grid_x = torch.arange(W, device=pred_prob.device, dtype=pred_prob.dtype) / W
 
-            # Weighted extent (approximate tight box)
-            x_min = (pred_prob.sum(dim=0) > 0.1).float().argmax().float() / W
-            x_max = 1.0 - (pred_prob.sum(dim=0).flip(0) > 0.1).float().argmax().float() / W
-            y_min = (pred_prob.sum(dim=1) > 0.1).float().argmax().float() / H
-            y_max = 1.0 - (pred_prob.sum(dim=1).flip(0) > 0.1).float().argmax().float() / H
+                # Weighted mean → center
+                weight = pred_prob + 1e-6
+                weight_sum_x = weight.sum(dim=0)  # (W,)
+                weight_sum_y = weight.sum(dim=1)  # (H,)
+                total_weight = weight.sum() + 1e-6
+                cx = (grid_x.unsqueeze(0) * weight_sum_x).sum() / total_weight
+                cy = (grid_y.unsqueeze(1) * weight_sum_y).sum() / total_weight
 
-            mask_bbox = torch.stack([x_min, y_min, x_max, y_max])
+                # Weighted extent (approximate tight box)
+                x_min = (pred_prob.sum(dim=0) > 0.1).float().argmax().float() / W
+                x_max = 1.0 - (pred_prob.sum(dim=0).flip(0) > 0.1).float().argmax().float() / W
+                y_min = (pred_prob.sum(dim=1) > 0.1).float().argmax().float() / H
+                y_max = 1.0 - (pred_prob.sum(dim=1).flip(0) > 0.1).float().argmax().float() / H
 
-            # Get box prediction
-            scale_key = {"<BOX_S>": "box_s", "<BOX_M>": "box_m", "<BOX_L>": "box_l"}
-            # Find which scale this box prediction came from
-            head = self.box_heads["box_m"]  # default
-            box_out = head(box_hidden.unsqueeze(0))
-            pred_bbox = torch.sigmoid(box_out["bbox"].squeeze(0))  # (4,) in [0,1]
+                mask_bbox = torch.stack([x_min, y_min, x_max, y_max])
 
-            l1 = torch.nn.functional.l1_loss(mask_bbox, pred_bbox)
-            total_loss = total_loss + l1
-            n_pairs += 1
+                # Get box prediction (default to box_m head; scale-specific
+                # head lookup would require carrying the token name alongside
+                # the hidden state, deferred as a minor refinement)
+                head = self.box_heads["box_m"]
+                box_out = head(box_hidden.unsqueeze(0))
+                pred_bbox = torch.sigmoid(box_out["bbox"].squeeze(0))  # (4,) in [0,1]
+
+                l1 = torch.nn.functional.l1_loss(mask_bbox, pred_bbox)
+                total_loss = total_loss + l1
+                n_pairs += 1
 
         if n_pairs == 0:
             return ref_loss.new_zeros(())
@@ -1074,12 +1339,23 @@ class OmniRad(MiniGPTv2):
 
     def _compute_det_loss(
         self,
-        special_hidden_states: dict[str, list[torch.Tensor]],
+        special_hidden_states: dict[str, list[tuple[int, torch.Tensor]]],
         structured_targets: dict[str, Any],
         ref_loss: torch.Tensor,
     ) -> torch.Tensor:
-        """Scale-aware detection loss for <BOX_S/M/L> tokens."""
+        """Scale-aware detection loss for <BOX_S/M/L> tokens.
+
+        Alignment: for each sample ``b`` in the batch, GT boxes are bucketed
+        by their own ``scale`` label (S/M/L) in original annotation order.
+        Predicted ``<BOX_S/M/L>`` emissions for that *same sample* are, by
+        construction of the dataset's ``_detection_answer``, emitted in the
+        same relative order as their matching scale bucket. Pairing is done
+        per-(batch_idx, scale) rather than via a single global flattened
+        index, so cardinality mismatches in one sample never shift the
+        pairing for other samples.
+        """
         scale_tokens = {"<BOX_S>": "box_s", "<BOX_M>": "box_m", "<BOX_L>": "box_l"}
+        scale_letter = {"box_s": "S", "box_m": "M", "box_l": "L"}
         scale_weights = {"box_s": self.loss_weights.get("scale_w_s", 3.0),
                          "box_m": self.loss_weights.get("scale_w_m", 1.5),
                          "box_l": self.loss_weights.get("scale_w_l", 1.0)}
@@ -1092,41 +1368,46 @@ class OmniRad(MiniGPTv2):
         total_loss = ref_loss.new_zeros(())
         n_valid = 0
 
-        # Flatten GT boxes across batch with scale labels
-        gt_boxes_flat = []
-        gt_scales_flat = []
-        for b, (boxes_b, scales_b) in enumerate(zip(boxes_gt, box_scales_gt or [])):
-            if not torch.is_tensor(boxes_b) or boxes_b.shape[0] == 0:
-                continue
-            for idx in range(boxes_b.shape[0]):
-                gt_boxes_flat.append(boxes_b[idx])
-                gt_scales_flat.append(scales_b[idx] if idx < len(scales_b) else "M")
-
-        # Match predictions to GT by order
-        pred_idx = 0
         for token_name, head_key in scale_tokens.items():
             preds = special_hidden_states.get(token_name, [])
+            if not preds:
+                continue
             head = self.box_heads[head_key]
-            for pred_hidden in preds:
-                if pred_idx >= len(gt_boxes_flat):
-                    break
-                out = head(pred_hidden.unsqueeze(0))
-                pred_bbox = out["bbox"].squeeze(0)  # (4,)
-                gt_bbox = gt_boxes_flat[pred_idx].to(pred_bbox.device).float()
-                # Normalize GT bbox to [0,1] if it looks like pixel coords
-                # (dataset returns pixel coords; we normalize by image size 448)
-                gt_bbox = gt_bbox / 448.0
-                gt_bbox = gt_bbox.clamp(0.0, 1.0)
+            preds_by_batch = self._group_hidden_states_by_batch(preds)
+            target_letter = scale_letter[head_key]
 
-                l1 = torch.nn.functional.l1_loss(pred_bbox, gt_bbox)
-                # Simple GIoU approximation (1D since we don't have full 2D GIoU here)
-                giou = 1.0 - l1  # simplified
-                scale_w = scale_weights[head_key]
-                total_loss = total_loss + scale_w * (
-                    self.loss_weights.get("l1_det", 1.0) * l1
-                )
-                pred_idx += 1
-                n_valid += 1
+            for b, hiddens in preds_by_batch.items():
+                if b >= len(boxes_gt):
+                    continue
+                boxes_b = boxes_gt[b]
+                if not torch.is_tensor(boxes_b) or boxes_b.shape[0] == 0:
+                    continue
+                scales_b = box_scales_gt[b] if box_scales_gt and b < len(box_scales_gt) else []
+
+                # GT boxes for this sample whose scale label matches this head,
+                # kept in original annotation order (matches emission order).
+                gt_for_scale = [
+                    boxes_b[idx] for idx in range(boxes_b.shape[0])
+                    if (scales_b[idx] if idx < len(scales_b) else "M") == target_letter
+                ]
+                n_pairs = min(len(hiddens), len(gt_for_scale))
+                for i in range(n_pairs):
+                    out = head(hiddens[i].unsqueeze(0))
+                    # Sigmoid to [0,1] — must match generate()'s decoding convention.
+                    pred_bbox = torch.sigmoid(out["bbox"].squeeze(0))  # (4,)
+                    gt_bbox = gt_for_scale[i].to(pred_bbox.device).float()
+                    # Normalize GT bbox to [0,1] (dataset returns pixel coords in
+                    # ``self.img_size``-resolution space, matching generate()'s
+                    # denormalization so training/inference stay consistent).
+                    gt_bbox = gt_bbox / float(self.img_size)
+                    gt_bbox = gt_bbox.clamp(0.0, 1.0)
+
+                    l1 = torch.nn.functional.l1_loss(pred_bbox, gt_bbox)
+                    scale_w = scale_weights[head_key]
+                    total_loss = total_loss + scale_w * (
+                        self.loss_weights.get("l1_det", 1.0) * l1
+                    )
+                    n_valid += 1
 
         if n_valid == 0:
             return ref_loss.new_zeros(())
@@ -1134,11 +1415,16 @@ class OmniRad(MiniGPTv2):
 
     def _compute_loc_loss(
         self,
-        special_hidden_states: dict[str, list[torch.Tensor]],
+        special_hidden_states: dict[str, list[tuple[int, torch.Tensor]]],
         structured_targets: dict[str, Any],
         ref_loss: torch.Tensor,
     ) -> torch.Tensor:
-        """Localization loss for <LOC> token (pixel bbox + anatomy)."""
+        """Localization loss for <LOC> token (pixel bbox + anatomy).
+
+        Alignment: GT boxes/anatomy for each sample ``b`` are consumed in
+        annotation order and paired against that *same sample*'s ``<LOC>``
+        emissions in emission order — no cross-sample index leakage.
+        """
         loc_preds = special_hidden_states.get("<LOC>", [])
         if not loc_preds:
             return ref_loss.new_zeros(())
@@ -1151,35 +1437,35 @@ class OmniRad(MiniGPTv2):
         total_loss = ref_loss.new_zeros(())
         n_valid = 0
 
-        # Flatten GT
-        gt_boxes_flat = []
-        gt_anatomy_flat = []
-        for b, boxes_b in enumerate(boxes_gt):
+        preds_by_batch = self._group_hidden_states_by_batch(loc_preds)
+
+        for b, hiddens in preds_by_batch.items():
+            if b >= len(boxes_gt):
+                continue
+            boxes_b = boxes_gt[b]
             if not torch.is_tensor(boxes_b) or boxes_b.shape[0] == 0:
                 continue
             anatomy_b = (anatomy_regions_gt[b] if anatomy_regions_gt and b < len(anatomy_regions_gt) else [])
-            for idx in range(boxes_b.shape[0]):
-                gt_boxes_flat.append(boxes_b[idx])
-                gt_anatomy_flat.append(anatomy_b[idx] if idx < len(anatomy_b) else None)
 
-        for pred_idx, pred_hidden in enumerate(loc_preds):
-            if pred_idx >= len(gt_boxes_flat):
-                break
-            out = self.loc_head(pred_hidden.unsqueeze(0))
-            pred_bbox = out["bbox"].squeeze(0)
-            gt_bbox = gt_boxes_flat[pred_idx].to(pred_bbox.device).float() / 448.0
-            gt_bbox = gt_bbox.clamp(0.0, 1.0)
+            n_pairs = min(len(hiddens), boxes_b.shape[0])
+            for i in range(n_pairs):
+                out = self.loc_head(hiddens[i].unsqueeze(0))
+                # Sigmoid to [0,1] — must match generate()'s decoding convention.
+                pred_bbox = torch.sigmoid(out["bbox"].squeeze(0))
+                gt_bbox = boxes_b[i].to(pred_bbox.device).float() / float(self.img_size)
+                gt_bbox = gt_bbox.clamp(0.0, 1.0)
 
-            l1 = torch.nn.functional.l1_loss(pred_bbox, gt_bbox)
-            total_loss = total_loss + l1
+                l1 = torch.nn.functional.l1_loss(pred_bbox, gt_bbox)
+                total_loss = total_loss + l1
 
-            # Anatomy CE if head supports it and GT region is available
-            if "anatomy_logits" in out and gt_anatomy_flat[pred_idx] is not None:
-                # Simple: treat anatomy region string as a class index via hash
-                # (proper anatomy label mapping will be added later)
-                pass
+                # Anatomy CE if head supports it and GT region is available
+                gt_anatomy = anatomy_b[i] if i < len(anatomy_b) else None
+                if "anatomy_logits" in out and gt_anatomy is not None:
+                    # Simple: treat anatomy region string as a class index via hash
+                    # (proper anatomy label mapping will be added later)
+                    pass
 
-            n_valid += 1
+                n_valid += 1
 
         if n_valid == 0:
             return ref_loss.new_zeros(())
@@ -1187,7 +1473,7 @@ class OmniRad(MiniGPTv2):
 
     def _compute_seg_loss(
         self,
-        special_hidden_states: dict[str, list[torch.Tensor]],
+        special_hidden_states: dict[str, list[tuple[int, torch.Tensor]]],
         structured_targets: dict[str, Any],
         samples: dict,
         ref_loss: torch.Tensor,
@@ -1199,6 +1485,13 @@ class OmniRad(MiniGPTv2):
             → BCE + Dice against GT mask
 
         When SAM is not available, only cardinality penalty is computed.
+
+        Alignment: each ``<SEG>`` emission uses *its own sample's* image
+        embedding (``image_embedding[b:b+1]``, previously hard-coded to
+        ``image_embedding[0:1]`` for every emission regardless of batch
+        index — silently corrupting supervision whenever ``batch_size > 1``)
+        and is paired against that same sample's GT masks in annotation
+        order, rather than a batch-flattened global index.
         """
         seg_preds = special_hidden_states.get("<SEG>", [])
         masks_gt = samples.get("masks")  # list[list[Tensor]] from UnifiedUSDataset
@@ -1206,90 +1499,94 @@ class OmniRad(MiniGPTv2):
 
         total_loss = ref_loss.new_zeros(())
         n_valid = 0
+        preds_by_batch = self._group_hidden_states_by_batch(seg_preds) if seg_preds else {}
 
         if seg_preds:
-            # Flatten GT masks across batch
-            gt_masks_flat = []
-            if masks_gt:
-                for masks_b in masks_gt:
-                    if masks_b:
-                        gt_masks_flat.extend(masks_b)
-
-            # Get dense image embedding if SAM is available
+            # Get dense image embedding once for the whole batch if SAM is available
             image_embedding = None
             if self._use_real_sam:
                 images = samples.get("image")
                 if images is not None:
-                    image_embedding = self.encode_dense_image(images)
+                    image_embedding = self.encode_dense_image(images)  # (B, 256, 64, 64)
 
-            for pred_idx, pred_hidden in enumerate(seg_preds):
-                if pred_idx >= len(gt_masks_flat):
-                    break
+            for b, hiddens in preds_by_batch.items():
+                gt_masks_b = masks_gt[b] if masks_gt and b < len(masks_gt) else []
+                n_pairs = min(len(hiddens), len(gt_masks_b))
 
-                gt_mask = gt_masks_flat[pred_idx].to(pred_hidden.device).float()
+                for i in range(n_pairs):
+                    pred_hidden = hiddens[i]
+                    gt_mask = gt_masks_b[i].to(pred_hidden.device).float()
 
-                if self._use_real_sam and image_embedding is not None:
-                    # ---- Real SAM path ----
-                    # Project SEG hidden → 256-d sparse prompt
-                    sparse_prompt = self.seg_projector(pred_hidden.unsqueeze(0))  # (1, 256)
+                    if self._use_real_sam and image_embedding is not None:
+                        # ---- Real SAM path ----
+                        sparse_prompt = self.seg_projector(pred_hidden.unsqueeze(0))  # (1, 256)
+                        # Use THIS sample's own image embedding (fixes batch-index bug).
+                        img_emb = image_embedding[b:b + 1]  # (1, 256, 64, 64)
 
-                    # Determine which batch sample this mask belongs to
-                    # (simplified: use first image embedding)
-                    img_emb = image_embedding[0:1]  # (1, 256, 64, 64)
+                        decoder_out = self.mask_decoder(sparse_prompt, img_emb)
+                        pred_mask = decoder_out["mask"]  # (1, 1, H, W)
 
-                    decoder_out = self.mask_decoder(sparse_prompt, img_emb)
-                    pred_mask = decoder_out["mask"]  # (1, 1, H, W) or (1, 1, 256, 256)
+                        # Resize prediction to match GT mask size
+                        if pred_mask.shape[-2:] != gt_mask.shape[-2:]:
+                            pred_mask = F.interpolate(
+                                pred_mask, size=gt_mask.shape[-2:],
+                                mode="bilinear", align_corners=False,
+                            )
+                        pred_mask = pred_mask.squeeze()  # (H, W)
+                        gt_mask = gt_mask.squeeze()
 
-                    # Resize prediction to match GT mask size
-                    if pred_mask.shape[-2:] != gt_mask.shape[-2:]:
-                        pred_mask = F.interpolate(
-                            pred_mask, size=gt_mask.shape[-2:],
-                            mode="bilinear", align_corners=False,
+                        # BCE loss
+                        bce_loss = F.binary_cross_entropy_with_logits(pred_mask, gt_mask)
+                        # Dice loss
+                        pred_prob = torch.sigmoid(pred_mask)
+                        intersection = (pred_prob * gt_mask).sum()
+                        dice_loss = 1.0 - (2.0 * intersection + 1.0) / (
+                            pred_prob.sum() + gt_mask.sum() + 1.0
                         )
-                    pred_mask = pred_mask.squeeze()  # (H, W)
-                    gt_mask = gt_mask.squeeze()
 
-                    # BCE loss
-                    bce_loss = F.binary_cross_entropy_with_logits(pred_mask, gt_mask)
-                    # Dice loss
-                    pred_prob = torch.sigmoid(pred_mask)
-                    intersection = (pred_prob * gt_mask).sum()
-                    dice_loss = 1.0 - (2.0 * intersection + 1.0) / (
-                        pred_prob.sum() + gt_mask.sum() + 1.0
-                    )
+                        seg_loss = (
+                            self.loss_weights.get("seg_bce", 2.0) * bce_loss
+                            + self.loss_weights.get("seg_dice", 0.5) * dice_loss
+                        )
 
-                    seg_loss = (
-                        self.loss_weights.get("seg_bce", 2.0) * bce_loss
-                        + self.loss_weights.get("seg_dice", 0.5) * dice_loss
-                    )
+                        # Uncertainty / heteroscedastic loss (AMU-Seg Innovation II)
+                        if "uncertainty" in decoder_out:
+                            log_variance = decoder_out["uncertainty"].squeeze()
+                            # Heteroscedastic BCE: down-weight uncertain pixels
+                            # L = (1 / 2σ²) × BCE + (1/2) × log(σ²)
+                            # ★ Clamp more aggressively to prevent numerical explosion
+                            log_variance = log_variance.clamp(-4, 4)
+                            variance = torch.exp(log_variance)  # σ² range: [0.018, 54.6]
+                            inv_variance = 1.0 / (2.0 * variance + 1.0)  # stable: range [0.009, 0.53]
+                            weighted_bce = (bce_loss * inv_variance).mean()
+                            reg_term = 0.5 * log_variance.mean()
+                            unc_loss = weighted_bce + reg_term
+                            seg_loss = seg_loss + 0.1 * unc_loss  # small weight for uncertainty
+                    else:
+                        # ---- Stub path: no real mask, use cardinality only ----
+                        seg_loss = ref_loss.new_zeros(())
 
-                    # Uncertainty / heteroscedastic loss (AMU-Seg Innovation II)
-                    if "uncertainty" in decoder_out:
-                        log_variance = decoder_out["uncertainty"].squeeze()
-                        # Heteroscedastic BCE: down-weight uncertain pixels
-                        # L = (1 / 2σ²) × BCE + (1/2) × log(σ²)
-                        variance = torch.exp(log_variance.clamp(-10, 10))  # σ² = exp(log_var)
-                        weighted_bce = (bce_loss * (1.0 / (2.0 * variance + 1e-6))).mean()
-                        reg_term = 0.5 * log_variance.mean()
-                        unc_loss = weighted_bce + reg_term
-                        seg_loss = seg_loss + 0.1 * unc_loss  # small weight for uncertainty
-                else:
-                    # ---- Stub path: no real mask, use cardinality only ----
-                    seg_loss = ref_loss.new_zeros(())
-
-                total_loss = total_loss + seg_loss
-                n_valid += 1
+                    total_loss = total_loss + seg_loss
+                    n_valid += 1
 
             if n_valid > 0:
                 total_loss = total_loss / n_valid
 
-        # Cardinality loss: penalize K mismatch
-        if torch.is_tensor(k_gt):
-            n_emitted = len(seg_preds)
-            expected_k = k_gt.sum().item() if k_gt.numel() > 0 else 0
-            if n_emitted != expected_k:
-                card_penalty = abs(n_emitted - expected_k) / max(expected_k, 1)
-                total_loss = total_loss + self.loss_weights.get("cardinality", 0.5) * card_penalty
+        # Cardinality loss: penalize K mismatch, computed per-sample then
+        # averaged (previously compared batch-summed emitted count against
+        # batch-summed expected K, which could cancel out per-sample errors
+        # of opposite sign across a batch).
+        if torch.is_tensor(k_gt) and k_gt.numel() > 0:
+            batch_size = k_gt.numel()
+            card_penalties = []
+            for b in range(batch_size):
+                expected_k = k_gt[b].item()
+                n_emitted = len(preds_by_batch.get(b, []))
+                if n_emitted != expected_k:
+                    card_penalties.append(abs(n_emitted - expected_k) / max(expected_k, 1))
+            if card_penalties:
+                avg_card_penalty = sum(card_penalties) / len(card_penalties)
+                total_loss = total_loss + self.loss_weights.get("cardinality", 0.5) * avg_card_penalty
 
         return total_loss
 
@@ -1361,7 +1658,7 @@ class OmniRad(MiniGPTv2):
             text_loss = shift_logits.new_zeros(())
 
         # ---- Step 3: Extract special token hidden states ----
-        special_hidden_states: dict[str, list[torch.Tensor]] = {}
+        special_hidden_states: dict[str, list[tuple[int, torch.Tensor]]] = {}
         if self.special_token_ids and outputs.hidden_states is not None:
             last_hidden = outputs.hidden_states[-1]  # (batch, seq_len, hidden_dim)
             special_hidden_states = self._extract_special_token_hidden_states(
@@ -1379,12 +1676,37 @@ class OmniRad(MiniGPTv2):
         total_loss = total_loss + aux_losses["seg"]
         total_loss = total_loss + aux_losses["cons"] * self.loss_weights.get("cons_mb", 0.3)
 
+        # ★ Guard: if text_loss itself is NaN (corrupted weights), return zero loss
+        if torch.isnan(text_loss) or torch.isinf(text_loss):
+            logging.error("text_loss is NaN/Inf — model weights may be corrupted. Returning zero loss.")
+            zero_t = text_loss.new_zeros(()).requires_grad_(True)
+            result = {
+                "loss": zero_t,
+                "loss_text": text_loss.detach() if torch.is_tensor(text_loss) else zero_t,
+                "loss_det": zero_t, "loss_loc": zero_t, "loss_seg": zero_t, "loss_cons": zero_t,
+                "structured_targets": structured_targets,
+                "special_token_ids": self.special_token_ids,
+                "n_seg_tokens": len(special_hidden_states.get("<SEG>", [])),
+                "n_box_tokens": sum(
+                    len(special_hidden_states.get(t, []))
+                    for t in ["<BOX_S>", "<BOX_M>", "<BOX_L>"]
+                ),
+                "n_loc_tokens": len(special_hidden_states.get("<LOC>", [])),
+            }
+            self._last_forward_outputs = result
+            return result
+
         # Fallback: if total loss is NaN, use text_loss only
         if torch.isnan(total_loss) or torch.isinf(total_loss):
             logging.warning("Total loss is NaN/Inf, falling back to text_loss only")
             total_loss = text_loss * self.loss_weights.get("text", 1.0)
             zero_t = text_loss.new_zeros(())
             aux_losses = {"det": zero_t, "loc": zero_t, "seg": zero_t, "cons": zero_t}
+
+        # ★ Clamp total loss to prevent gradient explosion (max 50.0)
+        if total_loss > 50.0:
+            logging.warning("total_loss=%.4f exceeds 50.0, clamping", total_loss.item())
+            total_loss = total_loss.clamp(max=50.0)
 
         result = {
             "loss": total_loss,

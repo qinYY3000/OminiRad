@@ -2,9 +2,9 @@
 
 Example usage (single GPU)::
 
-    torchrun --master-port 8888 --nproc_per_node 1 \\
-        eval_scripts/model_evaluation.py \\
-        --cfg-path eval_configs/omnirad_evaluation.yaml \\
+    torchrun --master-port 8888 --nproc_per_node 1 \
+        eval_scripts/model_evaluation.py \
+        --cfg-path eval_configs/omnirad_evaluation.yaml \
         --dataset indiana_cxr,radvqa,slake_vqa,rsna,SLAKE,group_breast_us,kvasir
 """
 
@@ -27,7 +27,7 @@ from minigpt4.conversation.conversation import CONV_VISION_minigptv2
 
 from minigpt4.datasets.datasets.radvqa_dataset import evalRadVQADataset
 from minigpt4.datasets.datasets.rsna_dataset import evalRSNADataset
-from minigpt4.datasets.datasets.SLAKE_dataset import evalSLAKEDataset
+from minigpt4.datasets.datasets.SLAKE_dataset import evalSLAKEDataset, evalSlakeVQADataset
 from minigpt4.datasets.datasets.unified_us_dataset import evalGroupUSDataset
 from minigpt4.datasets.datasets.kvasir_dataset import evalKvasirDataset
 from minigpt4.datasets.datasets.indiana_dataset import evalIndianaCXRDataset
@@ -58,7 +58,11 @@ model.eval()
 CONV_VISION = CONV_VISION_minigptv2
 conv_temp = CONV_VISION.copy()
 conv_temp.system = ""
+RESULTS_BASE = f"eval_results/{cfg.model_cfg.arch}"
+# Fallback save_path used for legacy compatibility; per-dataset paths are
+# set in the dispatch loop below.
 save_path = cfg.run_cfg.save_path
+os.makedirs(save_path, exist_ok=True)
 
 
 # ---------------------------------------------------------------------------
@@ -70,6 +74,34 @@ def _decode_answer(ans):
     if isinstance(ans, dict):
         return ans.get("text", "")
     return ans
+
+
+# Shared counter for debug prints (one-shot per evaluation run).
+_debug_counters: dict[str, int] = {}
+
+
+def _debug_structured_outputs(outputs, questions, task, max_samples: int = 3):
+    """Print first N model outputs for structured tasks to diagnose Dice/IoU=0."""
+    key = f"{task}_{id(questions)}"  # coarse per-call key
+    cnt = _debug_counters.get(key, 0)
+    if cnt >= max_samples:
+        return
+    for i, out in enumerate(outputs):
+        if cnt >= max_samples:
+            break
+        if not isinstance(out, dict):
+            continue
+        print(f"\n[DEBUG {task} sample #{cnt + 1}]")
+        q = questions[i] if i < len(questions) else "?"
+        print(f"  question:    {str(q)[:150]}")
+        print(f"  clean_text:  {out.get('text', '')[:200]}")
+        print(f"  raw_text:    {out.get('raw_text', '')[:300]}")
+        print(f"  seg_count:   {out.get('seg_count', '?')}")
+        print(f"  box_tokens:  {out.get('box_tokens', '?')}")
+        print(f"  has_loc:     {out.get('has_loc', '?')}")
+        cnt += 1
+    _debug_counters[key] = cnt
+    _debug_counters.clear()  # keep it small
 
 
 # ---------------------------------------------------------------------------
@@ -101,12 +133,13 @@ def process_indiana_dataset():
     clean_report_json(file_save_path, file_save_path)
 
     # Run all report-generation metrics: BERT-Sim + BLEU-4 + ROUGE-L + CheXbert-F1
-    evaluate_report_generation(
+    metrics = evaluate_report_generation(
         gt_pth=eval_file_path,
         pred_pth=file_save_path,
         dataset_name="indiana_cxr",
         output_dir=save_path,
     )
+    return metrics
 
 
 # ---------------------------------------------------------------------------
@@ -143,7 +176,45 @@ def process_vqa_dataset():
         json.dump(minigpt4_predict, f)
 
     clean_vqa_json(file_save_path, file_save_path)
-    VQA_BERT_Sim(eval_file_path, file_save_path, output_csv_path)
+    vqa_score = VQA_BERT_Sim(eval_file_path, file_save_path, output_csv_path)
+    return {"vqa_bert_sim": vqa_score}
+
+
+# ---------------------------------------------------------------------------
+# SLAKE VQA — visual question answering (uses "img_name" schema)
+# ---------------------------------------------------------------------------
+def process_slake_vqa_dataset():
+    eval_file_path = cfg.evaluation_datasets_cfg[dataset]["eval_file_path"]
+    img_path = cfg.evaluation_datasets_cfg[dataset]["img_path"]
+    batch_size = cfg.evaluation_datasets_cfg[dataset]["batch_size"]
+    max_new_tokens = cfg.evaluation_datasets_cfg[dataset]["max_new_tokens"]
+
+    with open(eval_file_path, "r") as f:
+        slake = json.load(f)
+
+    data = evalSlakeVQADataset(slake, vis_processor, img_path)
+    eval_dataloader = DataLoader(data, batch_size=batch_size, shuffle=False)
+    minigpt4_predict = defaultdict(list)
+
+    for images, questions, img_ids in tqdm(eval_dataloader):
+        texts = prepare_texts(questions, conv_temp)
+        answers = model.generate(images, texts,
+                                 max_new_tokens=max_new_tokens, do_sample=False)
+        for answer, img_id, question in zip(answers, img_ids, questions):
+            minigpt4_predict[img_id].append({
+                "question": question.replace("[vqa]", "").strip(),
+                "answer": _decode_answer(answer),
+            })
+
+    file_save_path = os.path.join(save_path, "SLAKE_VQA_inference_results.json")
+    output_csv_path = os.path.join(save_path, "slake_vqa_bert_similarity_scores.csv")
+
+    with open(file_save_path, "w") as f:
+        json.dump(minigpt4_predict, f)
+
+    clean_vqa_json(file_save_path, file_save_path)
+    vqa_score = VQA_BERT_Sim(eval_file_path, file_save_path, output_csv_path)
+    return {"vqa_bert_sim": vqa_score}
 
 
 # ---------------------------------------------------------------------------
@@ -175,7 +246,8 @@ def process_rsna_dataset():
 
     csv_pth = os.path.join(save_path, "RSNA_IoU_results.csv")
     clean_detection_json(file_save_path, file_save_path)
-    average_iou(eval_file_path, file_save_path, 1024, 100, "rsna", csv_pth)
+    iou_score = average_iou(eval_file_path, file_save_path, 1024, 100, "rsna", csv_pth)
+    return {"iou": iou_score}
 
 
 # ---------------------------------------------------------------------------
@@ -207,7 +279,8 @@ def process_SLAKE_dataset():
 
     csv_pth = os.path.join(save_path, "SLAKE_IoU_results.csv")
     clean_detection_json(file_save_path, file_save_path)
-    average_iou(eval_file_path, file_save_path, 100, 100, "SLAKE", csv_pth)
+    iou_score = average_iou(eval_file_path, file_save_path, 100, 100, "SLAKE", csv_pth)
+    return {"iou": iou_score}
 
 
 # ----------------------------------------------------------------------------
@@ -268,6 +341,8 @@ def process_group_us_dataset():
         ann = json.load(f)
     if isinstance(ann, dict):
         ann = ann.get("annotations", ann.get("data", []))
+    # Build image-size lookup for coordinate normalisation in IoU metrics.
+    ann_by_id = {item["image_id"]: item for item in ann}
 
     summary = {}
     for task in tasks_to_run:
@@ -299,6 +374,10 @@ def process_group_us_dataset():
                 gen_kwargs["return_masks"] = True
             outputs = model.generate(images, texts, **gen_kwargs)
 
+            # DEBUG: print first few structured-task outputs
+            if task in ("segmentation", "detection", "refer"):
+                _debug_structured_outputs(outputs, questions, task)
+
             for out, iid, q, gt in zip(outputs, img_ids, questions, gts):
                 if isinstance(out, dict):
                     ans_text = out.get("text", "")
@@ -323,7 +402,9 @@ def process_group_us_dataset():
                                  "tasks": {"masks": [{"mask_path": p}
                                                      for p in gt]}}
                 else:
-                    gt_record = {"image_id": iid, "answer": gt}
+                    img_sz = ann_by_id.get(iid, {}).get("image_size", [256, 256])
+                    gt_record = {"image_id": iid, "answer": gt,
+                                 "image_size": list(img_sz)}
 
                 predictions.append(pred_record)
                 gts_compact.append(gt_record)
@@ -376,6 +457,7 @@ def process_group_us_dataset():
                 print(f"    {mk:<20}: {mv:.4f}" if isinstance(mv, float) else f"    {mk:<20}: {mv}")
         else:
             print(f"  {k:<14}: {v}")
+    return summary
 
 
 def _us_report_bert(gts, preds, csv_path):
@@ -403,7 +485,14 @@ def _us_report_bert(gts, preds, csv_path):
 
 
 def _us_bbox_iou(gts, preds, csv_path, dataset_name):
-    """Parse {<x1><y1><x2><y2>} tokens from predictions, IoU vs gold bboxes."""
+    """Parse {<x1><y1><x2><y2>} tokens from predictions, IoU vs gold bboxes.
+
+    Model outputs bbox coordinates in **0–100 normalised space** (the quantised
+    box heads discretise each axis into 64/100 bins), while ground-truth boxes
+    are stored in **pixel coordinates** of the original image.  We therefore
+    scale the predicted boxes back to the pixel grid using the per-sample
+    ``image_size`` before computing IoU.
+    """
     import pandas as _pd
 
     bbox_pat = re.compile(r"\{<(\d+)><(\d+)><(\d+)><(\d+)>\}")
@@ -414,7 +503,19 @@ def _us_bbox_iou(gts, preds, csv_path, dataset_name):
         iid = gt["image_id"]
         gt_boxes = gt.get("answer") or []
         pred_text = pred_index.get(iid, "") or ""
-        pred_boxes = [list(map(int, m)) for m in bbox_pat.findall(pred_text)]
+        pred_boxes_100 = [list(map(int, m)) for m in bbox_pat.findall(pred_text)]
+
+        # Normalise predicted boxes from 0–100 → pixel coordinates.
+        w, h = gt.get("image_size", [256, 256])
+        pred_boxes = []
+        for pb in pred_boxes_100:
+            pred_boxes.append([
+                int(round(pb[0] * w / 100.0)),
+                int(round(pb[1] * h / 100.0)),
+                int(round(pb[2] * w / 100.0)),
+                int(round(pb[3] * h / 100.0)),
+            ])
+
         if not gt_boxes or not pred_boxes:
             rows.append({"image_id": iid, "IoU": 0.0})
             ious.append(0.0)
@@ -451,6 +552,8 @@ def process_kvasir_dataset():
         ann = json.load(f)
     if isinstance(ann, dict):
         ann = ann.get("annotations", ann.get("data", []))
+    # Build image-size lookup for coordinate normalisation in IoU metrics.
+    ann_by_id = {item["image_id"]: item for item in ann}
 
     summary = {}
     for task in tasks_to_run:
@@ -482,6 +585,10 @@ def process_kvasir_dataset():
                 gen_kwargs["return_masks"] = True
             outputs = model.generate(images, texts, **gen_kwargs)
 
+            # DEBUG: print first few structured-task outputs
+            if task in ("segmentation", "detection", "refer"):
+                _debug_structured_outputs(outputs, questions, task)
+
             for out, iid, q, gt in zip(outputs, img_ids, questions, gts):
                 if isinstance(out, dict):
                     ans_text = out.get("text", "")
@@ -502,7 +609,9 @@ def process_kvasir_dataset():
                                  "tasks": {"masks": [{"mask_path": p}
                                                      for p in gt]}}
                 else:
-                    gt_record = {"image_id": iid, "answer": gt}
+                    img_sz = ann_by_id.get(iid, {}).get("image_size", [256, 256])
+                    gt_record = {"image_id": iid, "answer": gt,
+                                 "image_size": list(img_sz)}
 
                 predictions.append(pred_record)
                 gts_compact.append(gt_record)
@@ -576,29 +685,50 @@ def process_kvasir_dataset():
     print(f"\n========== [{dataset}] summary ==========")
     for k, v in summary.items():
         print(f"  {k:<14}: {v}")
+    return summary
 
 
 ############################################################################
 # Dispatch
 ############################################################################
 for dataset in args.dataset:
+    # ── free VRAM between datasets ──
+    torch.cuda.empty_cache()
+
+    # ── per-dataset output directory ──
+    save_path = os.path.join(RESULTS_BASE, dataset)
+    os.makedirs(save_path, exist_ok=True)
+
+    metrics = None
+
     if dataset == 'indiana_cxr':
-        process_indiana_dataset()
+        metrics = process_indiana_dataset()
 
     elif dataset == 'radvqa':
-        process_vqa_dataset()
+        metrics = process_vqa_dataset()
+
+    elif dataset == 'slake_vqa':
+        metrics = process_slake_vqa_dataset()
 
     elif dataset == 'rsna':
-        process_rsna_dataset()
+        metrics = process_rsna_dataset()
 
     elif dataset == 'SLAKE':
-        process_SLAKE_dataset()
+        metrics = process_SLAKE_dataset()
 
     elif dataset == 'group_breast_us':
-        process_group_us_dataset()
+        metrics = process_group_us_dataset()
 
     elif dataset == 'kvasir':
-        process_kvasir_dataset()
+        metrics = process_kvasir_dataset()
 
     else:
         print(f"Dataset '{dataset}' is not supported.")
+        continue
+
+    # ── write metrics summary ──
+    if metrics is not None:
+        results_file = os.path.join(save_path, "results.json")
+        with open(results_file, "w") as f:
+            json.dump(metrics, f, indent=2, ensure_ascii=False)
+        print(f"\n✓ Metrics saved to: {results_file}")

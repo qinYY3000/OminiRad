@@ -1,4 +1,5 @@
 import json
+import os
 import re
 
 
@@ -18,7 +19,9 @@ def clean_report_json(messy_json, cleaned_output):
 
     clean_data = []
     for image_id, captions in messy_data.items():
-        image_id_clean = image_id.split(".")[0]
+        # Use splitext to strip only the LAST extension (e.g. ".png"),
+        # preserving compound IDs like "patient123.dcm.png" → "patient123.dcm"
+        image_id_clean = os.path.splitext(image_id)[0]
         caption_clean = " ".join(captions)
         clean_data.append({
             "image_id": image_id_clean,
@@ -67,7 +70,7 @@ def clean_detection_json(messy_json, cleaned_output):
             bbox_match = re.findall(r'<(\d+)>', caption)
             
             if object_part and bbox_match and len(bbox_match) == 4:
-                key_part = key.split(".png")[0]
+                key_part = os.path.splitext(key)[0]
                 bbox_values = [float(val) for val in bbox_match]
 
                 organized_item = {
