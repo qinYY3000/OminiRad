@@ -249,7 +249,22 @@ class MiniGPTBase(BaseModel):
 
             ### prepare target tokens
             self.llama_tokenizer.padding_side = "right"
-            text = [t + self.end_sym for t in samples["answer"]]
+            # ★ Guard: empty/whitespace answers tokenize to zero target tokens,
+            #   which makes CrossEntropyLoss(reduction="mean") return 0/0 = NaN
+            #   and derails training. Substitute a minimal valid answer so every
+            #   sample keeps non-empty supervision.
+            answers = samples["answer"]
+            if isinstance(answers, str):
+                answers = [answers]
+            text = []
+            for t in answers:
+                if t is None or not str(t).strip():
+                    logging.warning(
+                        "Empty answer detected (image_id=%s) — substituting "
+                        "fallback '.' so the batch has a valid target.",
+                        samples.get("image_id", "unknown"))
+                    t = "."
+                text.append(str(t) + self.end_sym)
 
             regress_tokens = self.llama_tokenizer(
                 text,

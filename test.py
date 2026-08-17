@@ -31,36 +31,6 @@ import random
 #         # Finish the run and upload any remaining data.
 #         run.finish()
 
-def main():
-        from openai import OpenAI
-        client = OpenAI(
-        base_url='https://api-inference.modelscope.cn/v1',
-        api_key='ms-7df9fd49-9a59-495d-bf50-f2922001f367', # ModelScope Token
-        )
-
-        response = client.chat.completions.create(
-        model='ZhipuAI/GLM-5.2', # ModelScope Model-Id, required
-        messages=[
-                {
-                'role': 'user',
-                'content': '你好'
-                }
-        ],
-        stream=True
-        )
-        done_reasoning = False
-        for chunk in response:
-                if chunk.choices:
-                        reasoning_chunk = chunk.choices[0].delta.reasoning_content
-                        answer_chunk = chunk.choices[0].delta.content
-                        if reasoning_chunk != '':
-                                print(reasoning_chunk, end='', flush=True)
-                        elif answer_chunk != '':
-                                if not done_reasoning:
-                                        print('\n\n === Final Answer ===\n')
-                                        done_reasoning = True
-                                print(answer_chunk, end='', flush=True)
-
 """
  CUDA_VISIBLE_DEVICES=1   torchrun --master-port 8888 --nproc_per_node 1 \
         eval_scripts/model_evaluation.py \

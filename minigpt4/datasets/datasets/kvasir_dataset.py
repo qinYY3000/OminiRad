@@ -61,6 +61,12 @@ class KvasirDataset(Dataset):
         if K <= 0:
             available = [t for t in available if t not in ("refer", "identify")]
         vqa_pairs = tasks.get("vqa") or []
+        # Drop VQA pairs with empty/missing answers — they tokenize to zero
+        # target tokens and produce a NaN text_loss during training.
+        vqa_pairs = [
+            qa for qa in vqa_pairs
+            if isinstance(qa, dict) and qa.get("question") and str(qa.get("answer", "")).strip()
+        ]
         if vqa_pairs:
             available.append("vqa")
         task = random.choice(available) if available else "detection"
@@ -165,6 +171,9 @@ class KvasirDataset(Dataset):
             qa = random.choice(vqa_pairs)
             prompt = qa.get("question", "[vqa] Describe this colonoscopy image.")
             answer = qa.get("answer", "")
+            if not str(answer).strip():
+                # Defensive: should be unreachable after the vqa_pairs filter above.
+                answer = self._detection_answer(K, box_scales)
             if not prompt.startswith("[vqa]"):
                 prompt = f"[vqa] {prompt}"
 

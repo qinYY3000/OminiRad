@@ -220,13 +220,14 @@ class BaseTask:
             with torch.cuda.amp.autocast(enabled=use_amp):
                 loss = self.train_step(model=model, samples=samples)
 
-            # ★ Skip step entirely if loss is NaN/Inf
+            # ★ Skip step entirely if loss is NaN/Inf.
+            # We cannot call scaler.update() here — it requires a prior
+            # unscale_() call (which happens after backward).  Since we skip
+            # backward, there are no inf checks to report.  The scaler keeps
+            # its current scale; if it's too high, the grad-NaN check below
+            # (for the next good batch) will handle the scale decrease.
             if torch.isnan(loss) or torch.isinf(loss):
                 logging.warning("NaN/Inf loss detected at epoch %d step %d, skipping batch", epoch, i)
-                if use_amp:
-                    # ★ CRITICAL: still update scaler so AMP scale decreases;
-                    # otherwise successive NaN batches keep the same high scale.
-                    scaler.update()
                 continue
 
             # after_train_step()
@@ -248,13 +249,20 @@ class BaseTask:
 
                 # Check for NaN/Inf gradients — skip optimizer step if found
                 grad_nan = False
+                has_grad = False
                 for n, p in model.named_parameters():
-                    if p.grad is not None and (torch.isnan(p.grad).any() or torch.isinf(p.grad).any()):
-                        grad_nan = True
-                        logging.warning("NaN/Inf gradient in %s, skipping optimizer step", n)
-                        break
+                    if p.grad is not None:
+                        has_grad = True
+                        if torch.isnan(p.grad).any() or torch.isinf(p.grad).any():
+                            grad_nan = True
+                            logging.warning("NaN/Inf gradient in %s, skipping optimizer step", n)
+                            break
 
-                if grad_nan:
+                if grad_nan or not has_grad:
+                    if not has_grad:
+                        logging.warning("No parameter gradients at epoch %d step %d "
+                                        "(loss was likely detached from the graph), "
+                                        "skipping optimizer step.", epoch, i)
                     optimizer.zero_grad()
                     if use_amp:
                         scaler.update()  # still update scaler to adjust scale

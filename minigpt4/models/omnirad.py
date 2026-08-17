@@ -1422,8 +1422,20 @@ class OmniRad(MiniGPTv2):
         shift_logits = shift_logits.view(-1, shift_logits.size(-1))
         shift_labels = shift_labels.view(-1)
         shift_labels = shift_labels.to(shift_logits.device)
-        loss_fct = torch.nn.CrossEntropyLoss(ignore_index=-100, reduction=reduction)
-        text_loss = loss_fct(shift_logits, shift_labels)
+        # ★ Guard against "0/0 = NaN": with reduction="mean" and ignore_index=-100,
+        #   a batch with zero non-ignored labels (empty/fully-truncated answers)
+        #   makes CrossEntropyLoss return NaN even though the logits are finite.
+        n_valid = (shift_labels != -100).sum().item()
+        if n_valid == 0:
+            logging.error(
+                "No valid target tokens in batch (all labels == -100). "
+                "Per-sample answer token counts: %s. Skipping gradient update.",
+                [int(c) for c in (part_targets != -100).sum(dim=1).tolist()],
+            )
+            text_loss = shift_logits.new_zeros(()) + float("nan")
+        else:
+            loss_fct = torch.nn.CrossEntropyLoss(ignore_index=-100, reduction=reduction)
+            text_loss = loss_fct(shift_logits, shift_labels)
 
         # ---- Step 3: Extract special token hidden states ----
         special_hidden_states: dict[str, list[tuple[int, torch.Tensor]]] = {}
@@ -1449,15 +1461,18 @@ class OmniRad(MiniGPTv2):
             logging.error("text_loss is NaN/Inf — batch discarded. "
                           "(logits max=%.1f min=%.1f). Skipping gradient update.",
                           shift_logits.max().item(), shift_logits.min().item())
-            # Return a zero loss (leaf tensor with no grad_fn).  backward()
-            # will set its .grad to 1.0 without triggering NaN checks on
-            # the rest of the graph.  The key fix is the logits clamp above,
-            # which prevents NaN text_loss from arising in the first place.
-            zero_t = text_loss.new_zeros(()).requires_grad_(True)
+            # Return NaN loss so the training loop's NaN check catches it,
+            # properly calling scaler.update() + continue (skipping backward + optimizer step).
+            # A detached zero-tensor would bypass the NaN check and cause
+            # "No inf checks were recorded" in GradScaler.step().
+            nan_loss = text_loss.detach()  # NaN/Inf → will be caught by torch.isnan() in train loop
             result = {
-                "loss": zero_t,
+                "loss": nan_loss,
                 "loss_text": text_loss.detach() if torch.is_tensor(text_loss) else torch.tensor(float('nan')),
-                "loss_det": zero_t, "loss_loc": zero_t, "loss_seg": zero_t, "loss_cons": zero_t,
+                "loss_det": nan_loss.new_zeros(()),
+                "loss_loc": nan_loss.new_zeros(()),
+                "loss_seg": nan_loss.new_zeros(()),
+                "loss_cons": nan_loss.new_zeros(()),
                 "structured_targets": structured_targets,
                 "special_token_ids": self.special_token_ids,
                 "n_seg_tokens": len(special_hidden_states.get("<SEG>", [])),
