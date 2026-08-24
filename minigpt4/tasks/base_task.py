@@ -220,14 +220,23 @@ class BaseTask:
             with torch.cuda.amp.autocast(enabled=use_amp):
                 loss = self.train_step(model=model, samples=samples)
 
-            # ★ Skip step entirely if loss is NaN/Inf.
-            # We cannot call scaler.update() here — it requires a prior
-            # unscale_() call (which happens after backward).  Since we skip
-            # backward, there are no inf checks to report.  The scaler keeps
-            # its current scale; if it's too high, the grad-NaN check below
-            # (for the next good batch) will handle the scale decrease.
-            if torch.isnan(loss) or torch.isinf(loss):
-                logging.warning("NaN/Inf loss detected at epoch %d step %d, skipping batch", epoch, i)
+            # ★ Skip step entirely if loss is NaN/Inf, OR if it is a detached
+            #   tensor with no grad_fn (e.g. a fallback "zero loss" returned by
+            #   the model for a degenerate batch).  Calling backward() on such a
+            #   tensor raises "element 0 of tensors does not require grad".
+            #   We cannot call scaler.update() here — it requires a prior
+            #   unscale_() call (which happens after backward).  Since we skip
+            #   backward, there are no inf checks to report.  The scaler keeps
+            #   its current scale; the grad-NaN check below (for the next good
+            #   batch) will handle the scale decrease.
+            loss_is_bad = bool(torch.isnan(loss) or torch.isinf(loss))
+            loss_detached = not bool(loss.requires_grad) and loss.grad_fn is None
+            if loss_is_bad or loss_detached:
+                logging.warning(
+                    "Skipping batch at epoch %d step %d: loss is %s",
+                    epoch, i,
+                    "NaN/Inf" if loss_is_bad else "detached (no grad_fn)",
+                )
                 continue
 
             # after_train_step()

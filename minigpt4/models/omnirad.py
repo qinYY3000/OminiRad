@@ -1427,12 +1427,18 @@ class OmniRad(MiniGPTv2):
         #   makes CrossEntropyLoss return NaN even though the logits are finite.
         n_valid = (shift_labels != -100).sum().item()
         if n_valid == 0:
-            logging.error(
+            logging.warning(
                 "No valid target tokens in batch (all labels == -100). "
-                "Per-sample answer token counts: %s. Skipping gradient update.",
+                "Per-sample answer token counts: %s. Using zero text loss.",
                 [int(c) for c in (part_targets != -100).sum(dim=1).tolist()],
             )
-            text_loss = shift_logits.new_zeros(()) + float("nan")
+            # Zero loss that stays connected to the compute graph (via the
+            # sum → mul chain), so backward() succeeds with zero gradients
+            # instead of crashing on a detached scalar
+            # ("element 0 of tensors does not require grad"). If the logits
+            # themselves are NaN (corrupted weights), NaN * 0 == NaN still
+            # surfaces here and is caught by the NaN guard below.
+            text_loss = shift_logits.sum() * 0.0
         else:
             loss_fct = torch.nn.CrossEntropyLoss(ignore_index=-100, reduction=reduction)
             text_loss = loss_fct(shift_logits, shift_labels)
