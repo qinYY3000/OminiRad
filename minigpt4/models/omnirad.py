@@ -365,6 +365,7 @@ class OmniRad(MiniGPTv2):
         max_context_len: int = 3800,
         low_resource: bool = False,
         device_8bit: int = 0,
+        llm_family: str = "auto",
         expand_vocab: list[str] | None = None,
         dense_encoder: dict | None = None,
         mask_decoder: dict | None = None,
@@ -394,6 +395,17 @@ class OmniRad(MiniGPTv2):
             device_8bit=device_8bit,
         )
 
+        self.img_size = img_size
+        # Explicit LLM family from config ("llama2" | "llama3" | "auto").
+        # Drives prompt-format rewriting (_to_chat_format) and eval-side
+        # conversation template selection; "auto" falls back to runtime
+        # tokenizer-vocab detection so legacy configs keep working.
+        self.llm_family = (llm_family or "auto").strip().lower()
+        if self.llm_family not in ("auto", "llama2", "llama3"):
+            logging.warning(
+                "Unknown llm_family=%r; falling back to 'auto' detection.", llm_family
+            )
+            self.llm_family = "auto"
         self.loss_weights = {**self.DEFAULT_LOSS_WEIGHTS, **(loss_weights or {})}
         # Canonical square resolution used to normalize/denormalize box coordinates.
         # Training GT boxes are divided by this value in _compute_det_loss/_compute_loc_loss;
@@ -571,6 +583,7 @@ class OmniRad(MiniGPTv2):
         do_sample=False,
         stop_words_ids=None,
         return_masks: bool = False,
+        return_boxes: bool = False,
     ):
         """OmniRad generate — preserves special tokens in output.
 
@@ -583,6 +596,11 @@ class OmniRad(MiniGPTv2):
                 Each tensor has shape ``(H, W)`` in [0, 1] (sigmoid probability).
                 If a sample emits K ``<SEG>`` tokens, K masks are returned in
                 emission order.  Empty list when K = 0.
+            "boxes": list[dict]  — only when ``return_boxes=True``
+                One dict per emitted ``<BOX_S/M/L>`` token, in emission order:
+                {"scale": "<BOX_M>", "bbox": [x1, y1, x2, y2] (pixel coords),
+                 "class_id": int, "class_score": float} — ``class_*`` present
+                only when the box head has a class branch.
 
         Detection / refer decode
         -------------------------
@@ -649,24 +667,25 @@ class OmniRad(MiniGPTv2):
         # pass (not just <SEG>), so detection/refer decoding also benefits.
         # ------------------------------------------------------------------
         per_sample_masks: list[list[torch.Tensor]] = [[] for _ in range(batch_size)]
-        per_sample_box_strings: list[dict[str, list[str]]] = [
-            {"<BOX_S>": [], "<BOX_M>": [], "<BOX_L>": [], "<LOC>": []}
-            for _ in range(batch_size)
-        ]
-        # Quick check: does *any* special token id appear anywhere in outputs?
-        special_ids = [v for v in self.special_token_ids.values() if v >= 0]
-        has_any_special = False
-        if special_ids:
-            special_ids_tensor = torch.tensor(special_ids, device=outputs.device)
-            has_any_special = torch.isin(outputs, special_ids_tensor).any().item()
+        per_sample_boxes: list[list[dict]] = [[] for _ in range(batch_size)]
 
-        if has_any_special or return_masks:
-            per_sample_masks, per_sample_box_strings = self._decode_dense_outputs_from_generation(
-                outputs=outputs,
-                prompt_embs=embs,
-                prompt_attn_mask=attn_mask,
-                images=images,
-            )
+        # 单次二次前向，同时解码 mask + bbox strings + 结构化 box dicts。
+        # bbox strings 无条件需要（注入 raw_text 供评估正则解析）；mask / boxes
+        # 按 return_masks / return_boxes 决定是否保留在结果里。
+        (
+            decoded_masks,
+            per_sample_box_strings,
+            decoded_boxes,
+        ) = self._decode_dense_outputs_from_generation(
+            outputs=outputs,
+            prompt_embs=embs,
+            prompt_attn_mask=attn_mask,
+            images=images,
+        )
+        if return_masks:
+            per_sample_masks = decoded_masks
+        if return_boxes:
+            per_sample_boxes = decoded_boxes
 
         results = []
         for b_idx, output_token in enumerate(outputs):
@@ -726,6 +745,8 @@ class OmniRad(MiniGPTv2):
             }
             if return_masks:
                 entry["masks"] = per_sample_masks[b_idx]
+            if return_boxes:
+                entry["boxes"] = per_sample_boxes[b_idx]
             results.append(entry)
 
         return results
@@ -755,8 +776,8 @@ class OmniRad(MiniGPTv2):
         outputs: torch.Tensor,
         prompt_embs: torch.Tensor,
         prompt_attn_mask: torch.Tensor,
-        images: torch.Tensor,
-    ) -> tuple[list[list[torch.Tensor]], list[dict[str, list[str]]]]:
+        images: torch.Tensor | None = None,
+    ) -> tuple[list[list[torch.Tensor]], list[dict[str, list[str]]], list[list[dict]]]:
         """Second-pass dense decoding from a finished ``generate`` call.
 
         For every sample in the batch, locate every ``<SEG>``/``<BOX_S>``/
@@ -766,9 +787,13 @@ class OmniRad(MiniGPTv2):
           - ``<BOX_S>``/``<BOX_M>``/``<BOX_L>`` -> ``box_heads[scale]``       -> bbox
           - ``<LOC>``                 -> ``loc_head``                          -> bbox
 
+        A single second forward pass is shared across all dense heads, so one
+        call yields masks + bbox strings + structured box dicts without
+        duplicating the LLM re-forward.
+
         Returns
         -------
-        (per_sample_masks, per_sample_box_strings)
+        (per_sample_masks, per_sample_box_strings, per_sample_boxes)
             ``per_sample_masks[b]`` — list of ``(H, W)`` sigmoid-probability
             tensors, one per ``<SEG>`` emission, in emission order.
 
@@ -776,6 +801,12 @@ class OmniRad(MiniGPTv2):
             pixel-coordinate strings, one per emission of ``token``
             (``"<BOX_S>"``/``"<BOX_M>"``/``"<BOX_L>"``/``"<LOC>"``), in
             emission order, ready to be spliced back into ``raw_text``.
+
+            ``per_sample_boxes[b]`` — list of dicts, one per emitted
+            ``<BOX_S>/<BOX_M>/<BOX_L>`` token in emission order:
+            {"scale": "<BOX_M>", "bbox": [x1, y1, x2, y2] (pixel ints),
+             "class_id": int, "class_score": float}. Coordinates are the same
+            integer values encoded in the corresponding bbox string.
         """
         batch_size = outputs.shape[0]
         per_sample_masks: list[list[torch.Tensor]] = [[] for _ in range(batch_size)]
@@ -783,43 +814,31 @@ class OmniRad(MiniGPTv2):
             {"<BOX_S>": [], "<BOX_M>": [], "<BOX_L>": [], "<LOC>": []}
             for _ in range(batch_size)
         ]
+        per_sample_boxes: list[list[dict]] = [[] for _ in range(batch_size)]
 
         token_to_head_key = {"<BOX_S>": "box_s", "<BOX_M>": "box_m", "<BOX_L>": "box_l"}
         dense_tokens = ["<SEG>", "<BOX_S>", "<BOX_M>", "<BOX_L>", "<LOC>"]
         token_ids = {t: self.special_token_ids.get(t, -1) for t in dense_tokens}
 
         if all(v < 0 for v in token_ids.values()):
-            return per_sample_masks, per_sample_box_strings
+            return per_sample_masks, per_sample_box_strings, per_sample_boxes
 
         valid_ids = [v for v in token_ids.values() if v >= 0]
         ids_tensor = torch.tensor(valid_ids, device=outputs.device)
         if not torch.isin(outputs, ids_tensor).any():
-            return per_sample_masks, per_sample_box_strings
+            return per_sample_masks, per_sample_box_strings, per_sample_boxes
 
         # ---- Re-embed the generated tokens & concat to the prompt ----
-        gen_ids = outputs.clone()
-        # Replace any pad (-1 or pad_token_id) with eos for safe embedding lookup.
-        pad_id = getattr(self.llama_tokenizer, "pad_token_id", None) or 0
-        gen_ids = gen_ids.masked_fill(gen_ids < 0, pad_id)
-        gen_embeds = self.llama_model.get_input_embeddings()(gen_ids)
-        gen_attn = (outputs != pad_id).to(prompt_attn_mask.dtype)
+        # Shared second pass: one forward with output_hidden_states=True.
+        hidden_states, prompt_len = self._run_second_pass(
+            outputs, prompt_embs, prompt_attn_mask
+        )
 
-        full_embeds = torch.cat([prompt_embs, gen_embeds], dim=1)
-        full_attn = torch.cat([prompt_attn_mask, gen_attn], dim=1)
-
-        with self.maybe_autocast():
-            llm_out = self.llama_model(
-                inputs_embeds=full_embeds,
-                attention_mask=full_attn,
-                output_hidden_states=True,
-                return_dict=True,
-            )
-        hidden_states = llm_out.hidden_states[-1]  # (B, S_full, hidden)
-        prompt_len = prompt_embs.shape[1]
+        # (hidden_states, prompt_len) already obtained from _run_second_pass above.
 
         # Optionally compute dense image embedding once (SAM path)
         image_embedding = None
-        if self._use_real_sam:
+        if self._use_real_sam and images is not None:
             image_embedding = self.encode_dense_image(images.to(self.device))
             # encode_dense_image expects 1024-resolution input; SamDenseEncoder
             # internally resizes — so this matches forward-pass behavior.
@@ -866,6 +885,13 @@ class OmniRad(MiniGPTv2):
                     per_sample_box_strings[b][token_name].append(
                         f"{{<{x1}><{y1}><{x2}><{y2}>}}"
                     )
+                    # Same integer coords, also exposed as a structured dict.
+                    entry: dict = {"scale": token_name, "bbox": [x1, y1, x2, y2]}
+                    if "class_logits" in out:
+                        logits = out["class_logits"].squeeze(0).float()
+                        entry["class_id"] = int(logits.argmax().item())
+                        entry["class_score"] = float(logits.softmax(-1).max().item())
+                    per_sample_boxes[b].append(entry)
 
             # ---- <LOC> -> loc_head decoding ----
             loc_id = token_ids.get("<LOC>", -1)
@@ -881,9 +907,83 @@ class OmniRad(MiniGPTv2):
                         f"{{<{x1}><{y1}><{x2}><{y2}>}}"
                     )
 
-        return per_sample_masks, per_sample_box_strings
+        return per_sample_masks, per_sample_box_strings, per_sample_boxes
 
+    @torch.no_grad()
+    def _decode_masks_from_outputs(
+        self,
+        outputs: torch.Tensor,
+        prompt_embs: torch.Tensor,
+        prompt_attn_mask: torch.Tensor,
+        images: torch.Tensor,
+    ) -> list[list[torch.Tensor]]:
+        """Backward-compatible mask decoding: returns only the mask list.
 
+        Thin wrapper over :meth:`_decode_dense_outputs_from_generation` that
+        keeps the original ``generate(return_masks=True)`` contract intact.
+        """
+        masks, _, _ = self._decode_dense_outputs_from_generation(
+            outputs, prompt_embs, prompt_attn_mask, images
+        )
+        return masks
+
+    @torch.no_grad()
+    def _run_second_pass(
+        self,
+        outputs: torch.Tensor,
+        prompt_embs: torch.Tensor,
+        prompt_attn_mask: torch.Tensor,
+    ) -> tuple[torch.Tensor, int]:
+        """Shared second LLM forward for special-token decoding.
+
+        Re-embeds the *generated* tokens, concatenates them after the prompt
+        embeddings, and runs the LLM once more with
+        ``output_hidden_states=True`` so the hidden state at every
+        ``<SEG>`` / ``<BOX_*>`` / ``<LOC>`` position can be recovered.
+
+        Returns
+        -------
+        ``(hidden_states, prompt_len)``
+            hidden_states : ``(B, S_full, hidden)`` last-layer hidden states
+            prompt_len    : int — prompt length (offset of the generated part)
+        """
+        gen_ids = outputs.clone()
+        # Replace any pad (-1 or pad_token_id) with eos for safe embedding lookup.
+        pad_id = getattr(self.llama_tokenizer, "pad_token_id", None) or 0
+        gen_ids = gen_ids.masked_fill(gen_ids < 0, pad_id)
+        gen_embeds = self.llama_model.get_input_embeddings()(gen_ids)
+        gen_attn = (outputs != pad_id).to(prompt_attn_mask.dtype)
+
+        full_embeds = torch.cat([prompt_embs, gen_embeds], dim=1)
+        full_attn = torch.cat([prompt_attn_mask, gen_attn], dim=1)
+
+        with self.maybe_autocast():
+            llm_out = self.llama_model(
+                inputs_embeds=full_embeds,
+                attention_mask=full_attn,
+                output_hidden_states=True,
+                return_dict=True,
+            )
+        return llm_out.hidden_states[-1], prompt_embs.shape[1]
+
+    @torch.no_grad()
+    def _decode_boxes_from_outputs(
+        self,
+        outputs: torch.Tensor,
+        prompt_embs: torch.Tensor,
+        prompt_attn_mask: torch.Tensor,
+        images: torch.Tensor | None = None,
+    ) -> list[list[dict]]:
+        """Backward-compatible box decoding: returns only the box dict list.
+
+        Thin wrapper over :meth:`_decode_dense_outputs_from_generation` so the
+        ``generate(return_boxes=True)`` contract stays intact while reusing the
+        single shared second forward pass.
+        """
+        _, _, boxes = self._decode_dense_outputs_from_generation(
+            outputs, prompt_embs, prompt_attn_mask, images
+        )
+        return boxes
 
     def extract_structured_targets(self, samples: dict) -> dict[str, Any]:
         """Normalize optional structured supervision fields from the dataloader.
@@ -1414,34 +1514,38 @@ class OmniRad(MiniGPTv2):
             )
         # Manually compute cross-entropy in FP32 to prevent NaN
         logits = outputs.logits.float()  # (B, seq_len, vocab_size)
-        # ★ Clip logits to prevent Inf→NaN in softmax (FP16 overflow can
-        #   produce Inf which survives the .float() cast above).
-        logits = torch.clamp(logits, min=-1e4, max=1e4)
+        # Guard against fp16 overflow propagating NaN/Inf into logits
+        logits = torch.nan_to_num(logits, nan=0.0, posinf=1e4, neginf=-1e4)
         shift_logits = logits[..., :-1, :].contiguous()
         shift_labels = targets[..., 1:].contiguous()
         shift_logits = shift_logits.view(-1, shift_logits.size(-1))
         shift_labels = shift_labels.view(-1)
         shift_labels = shift_labels.to(shift_logits.device)
-        # ★ Guard against "0/0 = NaN": with reduction="mean" and ignore_index=-100,
-        #   a batch with zero non-ignored labels (empty/fully-truncated answers)
-        #   makes CrossEntropyLoss return NaN even though the logits are finite.
-        n_valid = (shift_labels != -100).sum().item()
-        if n_valid == 0:
+
+        # ---- 防御：清洗非法 label id（越界 / 负数且非 -100） ----
+        # 非法 id 会导致 CUDA gather 越界产生 NaN，这里一律降级为 ignore_index=-100。
+        vocab_size = shift_logits.size(-1)
+        invalid = (shift_labels >= vocab_size) | ((shift_labels < 0) & (shift_labels != -100))
+        if invalid.any():
+            bad_ids = shift_labels[invalid].unique().tolist()
             logging.warning(
-                "No valid target tokens in batch (all labels == -100). "
-                "Per-sample answer token counts: %s. Using zero text loss.",
-                [int(c) for c in (part_targets != -100).sum(dim=1).tolist()],
+                "[DIAG] Illegal label ids: vocab_size=%d, bad_ids=%s, n=%d. "
+                "Clamping to ignore to prevent NaN in CE loss.",
+                vocab_size, bad_ids, int(invalid.sum()),
             )
-            # Zero loss that stays connected to the compute graph (via the
-            # sum → mul chain), so backward() succeeds with zero gradients
-            # instead of crashing on a detached scalar
-            # ("element 0 of tensors does not require grad"). If the logits
-            # themselves are NaN (corrupted weights), NaN * 0 == NaN still
-            # surfaces here and is caught by the NaN guard below.
-            text_loss = shift_logits.sum() * 0.0
-        else:
+            shift_labels = shift_labels.clone()
+            shift_labels[invalid] = -100
+
+        valid = (shift_labels != -100).sum()
+        if valid > 0:
             loss_fct = torch.nn.CrossEntropyLoss(ignore_index=-100, reduction=reduction)
             text_loss = loss_fct(shift_logits, shift_labels)
+        else:
+            # 整个 batch 无有效 label（answer 全空），返回 0 而非 NaN，避免梯度污染/卡死
+            logging.warning(
+                "[DIAG] Empty answer batch: all labels are -100 (valid=0). Returning zero loss."
+            )
+            text_loss = shift_logits.new_zeros(())
 
         # ---- Step 3: Extract special token hidden states ----
         special_hidden_states: dict[str, list[tuple[int, torch.Tensor]]] = {}
@@ -1554,6 +1658,7 @@ class OmniRad(MiniGPTv2):
             vit_precision=cfg.get("vit_precision", "fp16"),
             freeze_vit=cfg.get("freeze_vit", True),
             llama_model=_resolve(cfg.get("llama_model", "")),
+            llm_family=cfg.get("llm_family", "auto"),
             prompt_template=cfg.get("prompt_template", "[INST] {} [/INST]"),
             max_txt_len=cfg.get("max_txt_len", 300),
             end_sym=cfg.get("end_sym", "\n"),

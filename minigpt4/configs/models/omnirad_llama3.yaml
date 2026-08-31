@@ -12,7 +12,13 @@ model:
 
   # language model — LLaMA-3-8B variant
   llama_model: "weights/llama-3-8b"
-  prompt_template: '[INST] {} [/INST]'   # LLaMA-2-style template still works
+  llm_family: "llama3"                   # explicit family: drives prompt-format & eval template
+  # NOTE: ``prompt_template`` is NOT applied on the OmniRad training path —
+  #       datasets hard-code "[INST] <Img>... [/INST]" in __getitem__ and
+  #       MiniGPTBase._to_chat_format rewrites it to the LLaMA-3 header
+  #       format at runtime (train + inference).  This line is kept as
+  #       declarative documentation for third-party callers only.
+  prompt_template: '<|start_header_id|>user<|end_header_id|>\n\n{}<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
   max_txt_len: 512
   max_context_len: 7800                  # LLaMA-3 has 8K context (up from 3800)
   end_sym: "<|eot_id|>"                   # LLaMA-3 end-of-turn token
@@ -20,6 +26,8 @@ model:
   device_8bit: 0
 
   # MiniGPT-Med / LoRA defaults (LLaMA-3 has same q_proj/v_proj modules)
+  # ``chat_template`` is unused by OmniRad (MiniGPT4-only flag, not an
+  # __init__ arg); kept only for legacy config compatibility.
   chat_template: True
   lora_r: 64
   lora_alpha: 16

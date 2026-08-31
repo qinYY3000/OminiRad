@@ -138,11 +138,14 @@ CONV_VISION_minigptv2 = Conversation(
 
 
 # LLaMA-3 conversation template.
-# LLaMA-3 uses <|begin_of_text|> + header tokens instead of <s>[INST].
-# The prompt is wrapped as: <|begin_of_text|><|start_header_id|>user<|end_header_id|>\n\n{instruction}<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n
+# LLaMA-3 uses header tokens instead of <s>[INST].  NOTE: ``<|begin_of_text|>``
+# is NOT part of roles[0] — get_context_emb() already prepends a BOS via
+# add_special_tokens=True on the first prompt segment; keeping it here would
+# produce a double BOS.
+# The prompt is wrapped as: <|start_header_id|>user<|end_header_id|>\n\n{instruction}<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n
 CONV_VISION_llama3 = Conversation(
     system="",
-    roles=("<|begin_of_text|><|start_header_id|>user<|end_header_id|>\n\n", " <|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"),
+    roles=("<|start_header_id|>user<|end_header_id|>\n\n", " <|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"),
     messages=[],
     offset=2,
     sep_style=SeparatorStyle.SINGLE,
