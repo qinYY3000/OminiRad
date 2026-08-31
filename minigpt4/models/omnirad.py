@@ -1566,14 +1566,23 @@ class OmniRad(MiniGPTv2):
         total_loss = total_loss + aux_losses["seg"]
         total_loss = total_loss + aux_losses["cons"] * self.loss_weights.get("cons_mb", 0.3)
 
-        # ★ Guard: if text_loss itself is NaN (corrupted weights), return zero loss
+        # ★ Guard: if text_loss itself is NaN (corrupted weights), skip this batch
         if torch.isnan(text_loss) or torch.isinf(text_loss):
-            logging.error("text_loss is NaN/Inf — model weights may be corrupted. Returning zero loss.")
-            zero_t = text_loss.new_zeros(()).requires_grad_(True)
+            logging.error("text_loss is NaN/Inf — batch discarded. "
+                          "(logits max=%.1f min=%.1f). Skipping gradient update.",
+                          shift_logits.max().item(), shift_logits.min().item())
+            # Return NaN loss so the training loop's NaN check catches it,
+            # properly calling scaler.update() + continue (skipping backward + optimizer step).
+            # A detached zero-tensor would bypass the NaN check and cause
+            # "No inf checks were recorded" in GradScaler.step().
+            nan_loss = text_loss.detach()  # NaN/Inf → will be caught by torch.isnan() in train loop
             result = {
-                "loss": zero_t,
-                "loss_text": text_loss.detach() if torch.is_tensor(text_loss) else zero_t,
-                "loss_det": zero_t, "loss_loc": zero_t, "loss_seg": zero_t, "loss_cons": zero_t,
+                "loss": nan_loss,
+                "loss_text": text_loss.detach() if torch.is_tensor(text_loss) else torch.tensor(float('nan')),
+                "loss_det": nan_loss.new_zeros(()),
+                "loss_loc": nan_loss.new_zeros(()),
+                "loss_seg": nan_loss.new_zeros(()),
+                "loss_cons": nan_loss.new_zeros(()),
                 "structured_targets": structured_targets,
                 "special_token_ids": self.special_token_ids,
                 "n_seg_tokens": len(special_hidden_states.get("<SEG>", [])),
@@ -1588,9 +1597,13 @@ class OmniRad(MiniGPTv2):
 
         # Fallback: if total loss is NaN, use text_loss only
         if torch.isnan(total_loss) or torch.isinf(total_loss):
-            logging.warning("Total loss is NaN/Inf, falling back to text_loss only")
+            logging.warning("Total loss is NaN/Inf, falling back to text_loss only "
+                            "(logits range: [%.1f, %.1f])",
+                            shift_logits.min().item(), shift_logits.max().item())
             total_loss = text_loss * self.loss_weights.get("text", 1.0)
-            zero_t = text_loss.new_zeros(())
+            if torch.isnan(total_loss) or torch.isinf(total_loss):
+                total_loss = total_loss.new_zeros(()).requires_grad_(True)
+            zero_t = total_loss.new_zeros(())
             aux_losses = {"det": zero_t, "loc": zero_t, "seg": zero_t, "cons": zero_t}
 
         # ★ Clamp total loss to prevent gradient explosion (max 50.0)

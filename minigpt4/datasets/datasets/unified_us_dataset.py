@@ -162,6 +162,12 @@ class UnifiedUSDataset(Dataset):
             available_tasks = [t for t in available_tasks if t != "refer"]
 
         vqa_pairs = tasks.get("vqa") or []
+        # Drop VQA pairs with empty/missing answers — they tokenize to zero
+        # target tokens and produce a NaN text_loss during training.
+        vqa_pairs = [
+            qa for qa in vqa_pairs
+            if isinstance(qa, dict) and qa.get("question") and str(qa.get("answer", "")).strip()
+        ]
         if vqa_pairs:
             available_tasks.append("vqa")
         task = random.choice(available_tasks) if available_tasks else "report"
@@ -188,6 +194,9 @@ class UnifiedUSDataset(Dataset):
             qa = random.choice(vqa_pairs)
             prompt = qa.get("question", "[vqa] Answer the question about this ultrasound image.")
             answer = qa.get("answer", "")
+            if not str(answer).strip():
+                # Defensive: should be unreachable after the vqa_pairs filter above.
+                answer = self._fallback_report(info, K)
             if not prompt.startswith("[vqa]"):
                 prompt = f"[vqa] {prompt}"
 

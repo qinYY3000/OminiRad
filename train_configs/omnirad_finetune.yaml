@@ -38,19 +38,21 @@ model:
   # Set to 0 to disable.  Recommended: 5–10 epochs when training from MiniGPT-Med weights.
   curriculum_epochs: 8
 
-  # P1: Increased structured loss weights to counteract text shortcut.
+  # P1: Structured loss weights — kept moderate to avoid gradient explosion
+  # when text_loss is very small (0.001).  Higher weights can cause FP16
+  # overflow in the LLM backward pass, corrupting weights → NaN/Inf.
   # The text_bbox_penalty penalises batches that emit zero special tokens
   # despite having structured supervision.
   loss_weights:
     text: 1.0
-    det: 5.0
-    loc: 5.0
-    seg: 3.0
-    seg_bce: 2.0
-    seg_dice: 1.0
-    cardinality: 1.0
-    text_bbox_penalty: 3.0
-    cons_mb: 0.3
+    det: 1.0
+    loc: 1.0
+    seg: 0.5
+    seg_bce: 1.0
+    seg_dice: 0.5
+    cardinality: 0.5
+    text_bbox_penalty: 1.0
+    cons_mb: 0.1
 
 # ============================================================================
 # Training datasets
@@ -242,11 +244,11 @@ run:
 
   # Checkpointing ★★★ 这里就是保存权重的关键配置 ★★★
   output_dir: "experiments/omnirad"
-  resume_ckpt_path: null
   evaluate: False
   train_splits: ["train"]
   valid_splits: ["val"]
   max_keep_ckpts: 3
+  # resume_ckpt_path: "experiments/omnirad/20260807223/checkpoint_1.pth"
 
   # Logging
   wandb_log: False
