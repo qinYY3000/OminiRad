@@ -365,6 +365,7 @@ class OmniRad(MiniGPTv2):
         max_context_len: int = 3800,
         low_resource: bool = False,
         device_8bit: int = 0,
+        llm_family: str = "auto",
         expand_vocab: list[str] | None = None,
         dense_encoder: dict | None = None,
         mask_decoder: dict | None = None,
@@ -395,6 +396,16 @@ class OmniRad(MiniGPTv2):
         )
 
         self.img_size = img_size
+        # Explicit LLM family from config ("llama2" | "llama3" | "auto").
+        # Drives prompt-format rewriting (_to_chat_format) and eval-side
+        # conversation template selection; "auto" falls back to runtime
+        # tokenizer-vocab detection so legacy configs keep working.
+        self.llm_family = (llm_family or "auto").strip().lower()
+        if self.llm_family not in ("auto", "llama2", "llama3"):
+            logging.warning(
+                "Unknown llm_family=%r; falling back to 'auto' detection.", llm_family
+            )
+            self.llm_family = "auto"
         self.loss_weights = {**self.DEFAULT_LOSS_WEIGHTS, **(loss_weights or {})}
         # Canonical square resolution used to normalize/denormalize box coordinates.
         # Training GT boxes are divided by this value in _compute_det_loss/_compute_loc_loss;
@@ -1634,6 +1645,7 @@ class OmniRad(MiniGPTv2):
             vit_precision=cfg.get("vit_precision", "fp16"),
             freeze_vit=cfg.get("freeze_vit", True),
             llama_model=_resolve(cfg.get("llama_model", "")),
+            llm_family=cfg.get("llm_family", "auto"),
             prompt_template=cfg.get("prompt_template", "[INST] {} [/INST]"),
             max_txt_len=cfg.get("max_txt_len", 300),
             end_sym=cfg.get("end_sym", "\n"),

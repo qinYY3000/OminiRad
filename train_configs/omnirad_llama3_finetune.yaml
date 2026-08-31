@@ -14,8 +14,10 @@
 # LLaMA-3 — the projection layer must be retrained from scratch (Stage 1-2).
 # Leave ``ckpt: ""`` below for a fresh run.
 #
-# Estimated training time: ~40-50 hours for 100 epochs (LLaMA-3 is slightly
-# slower than LLaMA-2 due to larger vocab and context).
+# Estimated training time: ~60-80 hours for 100 epochs on 3 × 3090 (budget
+# generously: LLaMA-3's 4x vocab makes logits/CE slower than LLaMA-2, and
+# from-scratch llama_proj alignment adds ~30-40 epochs the paper got for free
+# from MiniGPT-v2 stage-3 weights).
 # ============================================================================
 
 model:
@@ -190,23 +192,31 @@ datasets:
 
 # ============================================================================
 # Training schedule
+# ----------------------------------------------------------------------------
+# Two-phase budget (LLaMA-3 trains from scratch — no aligned llama_proj):
+#   Phase A (alignment)  : ~30-40 epochs, watch text_loss plateau
+#   Phase B (fine-tune)  : ~40-60 epochs, watch seg-Dice / det-IoU / cardinality
+#   (or a single 100-epoch run with the higher init_lr below — cosine decays
+#    naturally across both phases; checkpoints are kept for phase splitting)
 # ============================================================================
 run:
-  task: image_text_pretrain
+  task: omnirad_eval              # ★ OmniRadTask: runs valid_step with seg/det metrics
   runner: runner_base
 
   # Optimization
   lr_sched: "linear_warmup_cosine_lr"
-  init_lr:    1e-5                # Same as MiniGPT-Med
-  min_lr:     1e-6                # ★ Fixed: original config had 8e-5 which was likely a typo
+  init_lr:    2e-5                # ★ 1e-5 → 2e-5: llama_proj starts RANDOM for LLaMA-3,
+                                  #   alignment needs a larger LR than the paper's
+                                  #   (paper's 1e-5 assumed MiniGPT-v2-aligned weights)
+  min_lr:     1e-6
   warmup_lr:  1e-6
-  warmup_steps: 1000
+  warmup_steps: 2000              # ★ 1000 → 2000: longer warmup for from-scratch training
   weight_decay: 0.05
   grad_clip: 1.0                  # ★ P1-13: gradient clipping for multi-task loss stability
 
   # Schedule
   max_epoch: 100                  # Can be reduced to 50 if compute-limited
-  iters_per_epoch: null             # null = auto-derive from dataloader length
+  iters_per_epoch: null           # null = auto-derive from dataloader length
 
   # Memory / speed
   amp: True                       # Mixed precision — critical for 3090
@@ -226,7 +236,6 @@ run:
   train_splits: ["train"]
   valid_splits: ["val"]
   max_keep_ckpts: 3
-  iters_per_epoch: null
 
   # Logging
   wandb_log: True

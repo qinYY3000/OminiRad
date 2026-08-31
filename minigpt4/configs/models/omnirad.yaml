@@ -12,6 +12,7 @@ model:
 
   # language model
   llama_model: "weights/llama-2-7b-chat-hf"
+  llm_family: "llama2"                   # explicit family: drives prompt-format & eval template
   prompt_template: '[INST] {} [/INST]'
   max_txt_len: 512
   max_context_len: 3800

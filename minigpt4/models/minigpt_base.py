@@ -65,8 +65,85 @@ class MiniGPTBase(BaseModel):
         self.visual_encoder.to("cpu")
         self.visual_encoder.float()
 
+    def _detect_llm_family(self) -> str:
+        """Auto-detect ``"llama2"`` vs ``"llama3"`` from the tokenizer vocab.
+
+        LLaMA-3 tokenizers carry the header special tokens in their vocab;
+        LLaMA-2 tokenizers do not.  Used as fallback when the yaml does not
+        declare ``llm_family`` explicitly.
+        """
+        try:
+            if "<|start_header_id|>" in self.llama_tokenizer.get_vocab():
+                return "llama3"
+        except Exception:
+            pass
+        return "llama2"
+
+    def _llm_family(self) -> str:
+        """Effective LLM family: yaml ``llm_family`` first, auto-detect second.
+
+        Resolution order (first match wins):
+          1. ``self.llm_family`` set by the model config — ``"llama2"`` or
+             ``"llama3"`` is used verbatim (explicit config wins).
+          2. ``"auto"`` (or unset, e.g. legacy MiniGPT-v2 checkpoints) —
+             detected once from the tokenizer vocab and cached.
+        """
+        family = (getattr(self, "llm_family", "auto") or "auto").strip().lower()
+        if family == "llama2":
+            return "llama2"
+        if family == "llama3":
+            return "llama3"
+        # auto: detect once, cache on the instance.
+        if not hasattr(self, "_auto_llm_family"):
+            self._auto_llm_family = self._detect_llm_family()
+            if self._auto_llm_family == "llama3":
+                logging.info(
+                    "LLaMA-3 tokenizer detected (auto): rewriting legacy [INST] "
+                    "prompts to the official header chat format."
+                )
+        return self._auto_llm_family
+
+    def _to_chat_format(self, prompt):
+        """Rewrite legacy ``[INST] ... [/INST]`` prompts into the tokenizer's
+        native chat format.
+
+        The OmniRad datasets hard-code the LLaMA-2 ``[INST]`` wrapper inside
+        their ``__getitem__``.  When a LLaMA-3 tokenizer is active we
+        transparently rewrite the wrapper into the official LLaMA-3 header
+        format so the model sees the structure it was pre-trained on::
+
+            [INST] <Img><ImageHere></Img> text [/INST]
+            -> <|start_header_id|>user<|end_header_id|>\\n\\n
+               <Img><ImageHere></Img> text
+               <|eot_id|><|start_header_id|>assistant<|end_header_id|>\\n\\n
+
+        Family resolution: the yaml ``llm_family`` setting wins when declared;
+        otherwise the tokenizer vocab is probed once and cached (see
+        :meth:`_llm_family`).
+
+        ``<|begin_of_text|>`` (BOS) is deliberately NOT inserted here: the
+        training path prepends a BOS embedding in ``forward`` and the
+        inference path relies on ``add_special_tokens=True`` for the first
+        prompt segment in :meth:`get_context_emb`.
+
+        No-op for LLaMA-2 tokenizers and for prompts without ``[INST]``.
+        """
+        if not prompt or "[INST]" not in prompt:
+            return prompt
+        if self._llm_family() != "llama3":
+            return prompt
+        prompt = prompt.replace(
+            "[INST]", "<|start_header_id|>user<|end_header_id|>\n\n"
+        )
+        prompt = prompt.replace(
+            "[/INST]",
+            "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+        )
+        return prompt
+
     def get_context_emb(self, prompt, img_list):
         device = img_list[0].device
+        prompt = self._to_chat_format(prompt)
         prompt_segs = prompt.split('<ImageHere>')
         assert len(prompt_segs) == len(img_list) + 1, "Unmatched numbers of image placeholders and images."
         seg_tokens = [
@@ -235,6 +312,16 @@ class MiniGPTBase(BaseModel):
                 instruction = random.choice(self.prompt_list)
             else:
                 instruction = None
+
+            # Rewrite legacy [INST] wrappers to the active tokenizer's chat
+            # format (LLaMA-3 header format when a LLaMA-3 tokenizer is set).
+            if isinstance(instruction, str):
+                instruction = self._to_chat_format(instruction)
+            elif isinstance(instruction, (list, tuple)):
+                instruction = [
+                    self._to_chat_format(i) if isinstance(i, str) else i
+                    for i in instruction
+                ]
 
             if hasattr(self, 'chat_template') and self.chat_template:
                 instruction = [self.prompt_template.format(instruct) for instruct in instruction]

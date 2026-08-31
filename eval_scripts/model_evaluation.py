@@ -23,7 +23,7 @@ import torch
 from torch.utils.data import DataLoader
 from minigpt4.common.config import Config
 from minigpt4.common.eval_utils import prepare_texts, init_model, eval_parser, computeIoU
-from minigpt4.conversation.conversation import CONV_VISION_minigptv2
+from minigpt4.conversation.conversation import CONV_VISION_minigptv2, CONV_VISION_llama3
 
 from minigpt4.datasets.datasets.radvqa_dataset import evalRadVQADataset
 from minigpt4.datasets.datasets.rsna_dataset import evalRSNADataset
@@ -55,7 +55,23 @@ cfg = Config(args)
 
 model, vis_processor = init_model(args)
 model.eval()
-CONV_VISION = CONV_VISION_minigptv2
+# Select the conversation template matching the active LLM: LLaMA-3 uses
+# header tokens, LLaMA-2 uses [INST].  Resolution order:
+#   1. yaml ``llm_family`` (explicit config — preferred)
+#   2. legacy heuristic: string-match "llama3" in arch / llama_model path
+_llm_family = str(cfg.model_cfg.get("llm_family", "auto")).strip().lower()
+if _llm_family not in ("llama2", "llama3"):
+    _arch = str(cfg.model_cfg.get("arch", ""))
+    _llm = str(cfg.model_cfg.get("llama_model", ""))
+    _llm_family = (
+        "llama3"
+        if ("llama3" in _arch or "llama-3" in _llm or "llama3" in _llm)
+        else "llama2"
+    )
+if _llm_family == "llama3":
+    CONV_VISION = CONV_VISION_llama3
+else:
+    CONV_VISION = CONV_VISION_minigptv2
 conv_temp = CONV_VISION.copy()
 conv_temp.system = ""
 RESULTS_BASE = f"eval_results/{cfg.model_cfg.arch}"
