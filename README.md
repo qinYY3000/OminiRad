@@ -57,7 +57,6 @@ Download the following weights and place them under `weights/`:
 | MiniGPT-Med checkpoint | language-vision initialization | [Google Drive](https://drive.google.com/file/d/1kjGLk6s9LsBmXfLWQFCdlwF3aul08Cl8/view) | `weights/minigpt_med_pretrained.pth` |
 | **MedSAM ViT-B (default)** | medical segmentation backbone | Official MedSAM pretrained release | `weights/medsam_vit_b.pth` |
 | SAM ViT-B | raw SAM baseline (same backbone family as MedSAM) | [Meta](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_b_01ec64.pth) | `weights/sam_vit_b_01ec64.pth` |
-| SAM ViT-H | larger raw SAM baseline | [Meta](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth) | `weights/sam_vit_h_4b8939.pth` |
 
 ```bash
 mkdir -p weights
