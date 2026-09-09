@@ -501,36 +501,55 @@ def _us_report_bert(gts, preds, csv_path):
 
 
 def _us_bbox_iou(gts, preds, csv_path, dataset_name):
-    """Parse {<x1><y1><x2><y2>} tokens from predictions, IoU vs gold bboxes.
+    """Parse decoded bboxes from predictions and compute IoU vs gold bboxes.
 
-    Model outputs bbox coordinates in **0–100 normalised space** (the quantised
-    box heads discretise each axis into 64/100 bins), while ground-truth boxes
-    are stored in **pixel coordinates** of the original image.  We therefore
-    scale the predicted boxes back to the pixel grid using the per-sample
-    ``image_size`` before computing IoU.
+    OmniRad's dense heads (``<LOC>`` for refer, ``<BOX_S/M/L>`` for detection)
+    emit a regression box that ``generate()`` injects into the ``raw`` text
+    field as ``<LOC>{<x1><y1><x2><y2>}``.  Those coordinates are denormalised
+    by ``img_size`` — the same constant the training loss divides GT boxes by —
+    so the round-trip yields **pixel coordinates** of the original image.  We
+    therefore read the ``raw`` field (the ``answer`` field is the
+    special-token-stripped text and drops the injected boxes) and use the
+    coordinates as pixel coords directly.
+
+    A fallback handles models that still emit the MiniGPT-v2-style literal
+    ``{<x1><y1><x2><y2>}`` tokens, which are in **0–100 normalised space** and
+    must be scaled by ``image_size``.
     """
     import pandas as _pd
 
-    bbox_pat = re.compile(r"\{<(\d+)><(\d+)><(\d+)><(\d+)>\}")
-    pred_index = {p["image_id"]: p["answer"] for p in preds}
+    # Dense-head boxes are injected by generate() right after the routing token
+    # (<LOC>{<x1><y1><x2><y2>}) and are already in pixel coordinates.
+    injected_pat = re.compile(
+        r"<(?:LOC|BOX_[SML])>\{<(\d+)><(\d+)><(\d+)><(\d+)>\}"
+    )
+    # Literal MiniGPT-v2-style {<x1><y1><x2><y2>} tokens (0–100 normalised space).
+    literal_pat = re.compile(r"\{<(\d+)><(\d+)><(\d+)><(\d+)>\}")
+
+    pred_index = {p["image_id"]: p for p in preds}
     rows = []
     ious = []
     for gt in gts:
         iid = gt["image_id"]
         gt_boxes = gt.get("answer") or []
-        pred_text = pred_index.get(iid, "") or ""
-        pred_boxes_100 = [list(map(int, m)) for m in bbox_pat.findall(pred_text)]
+        pred = pred_index.get(iid, {})
+        raw_text = pred.get("raw", "") or ""
+        answer_text = pred.get("answer", "") or ""
 
-        # Normalise predicted boxes from 0–100 → pixel coordinates.
-        w, h = gt.get("image_size", [256, 256])
-        pred_boxes = []
-        for pb in pred_boxes_100:
-            pred_boxes.append([
-                int(round(pb[0] * w / 100.0)),
-                int(round(pb[1] * h / 100.0)),
-                int(round(pb[2] * w / 100.0)),
-                int(round(pb[3] * h / 100.0)),
-            ])
+        # Primary: dense-head boxes (pixel coords) anchored to <LOC>/<BOX_*>.
+        pred_boxes = [list(map(int, m)) for m in injected_pat.findall(raw_text)]
+
+        # Fallback: literal {<x1><y1><x2><y2>} tokens in 0–100 space.
+        if not pred_boxes:
+            w, h = gt.get("image_size", [256, 256])
+            for m in literal_pat.findall(raw_text or answer_text):
+                pb = list(map(int, m))
+                pred_boxes.append([
+                    int(round(pb[0] * w / 100.0)),
+                    int(round(pb[1] * h / 100.0)),
+                    int(round(pb[2] * w / 100.0)),
+                    int(round(pb[3] * h / 100.0)),
+                ])
 
         if not gt_boxes or not pred_boxes:
             rows.append({"image_id": iid, "IoU": 0.0})
